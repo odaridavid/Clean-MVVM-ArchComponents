@@ -1,0 +1,21 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+
+dependencies {
+
+    def dataDependencies = rootProject.ext.dataDependencies
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation dataDependencies.kotlin
+
+    implementation project(':domain')
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+}

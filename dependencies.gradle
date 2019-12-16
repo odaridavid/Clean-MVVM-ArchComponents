@@ -1,0 +1,46 @@
+ext {
+    //Android Core
+    compileSdkVersion = 29
+    targetSdkVersion = 29
+    minSdkVersion = 21
+
+    //App Versioning
+    versionCode = 1
+    versionName = "1.0"
+
+    //Dependencies Version
+    appcompatVersion = '1.1.0'
+    androidxCoreKtxVersion = '1.1.0'
+    constraintLayoutVersion = '1.1.3'
+    supportV4Version = '1.0.0'
+    junitVersion = '4.12'
+    espressoCoreVersion = '3.2.0'
+    androidxJunitVersion = '1.1.1'
+    navVersion = '2.1.0'
+
+
+    //App/Presentation Layer
+    appDependencies = [
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat       : "androidx.appcompat:appcompat:$appcompatVersion",
+            androidxKtx     : "androidx.core:core-ktx:$androidxCoreKtxVersion",
+            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            supportV4       : "androidx.legacy:legacy-support-v4:$supportV4Version",
+            navFragmentKtx  : "androidx.navigation:navigation-fragment-ktx:$navVersion",
+            navUi           : "androidx.navigation:navigation-ui-ktx:$navVersion"
+    ]
+
+    dataDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+    ]
+
+    domainDependencies = [
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+    ]
+
+    testDependencies = [
+            junit        : "junit:junit:$junitVersion",
+            androidxJunit: "androidx.test.ext:junit:$androidxJunitVersion",
+            espressoCore : "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    ]
+}
