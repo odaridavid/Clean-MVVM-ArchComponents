@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -22,10 +24,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    dataBinding {
+        enabled true
     }
 }
 
@@ -46,6 +53,8 @@ dependencies {
     implementation appDependencies.supportV4
     implementation appDependencies.navFragmentKtx
     implementation appDependencies.navUi
+    implementation appDependencies.material
+    implementation appDependencies.firebaseAnalytics
 
     debugImplementation appDependencies.leakCanary
 

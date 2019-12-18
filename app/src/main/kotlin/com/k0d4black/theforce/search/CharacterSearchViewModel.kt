@@ -1,10 +1,8 @@
 package com.k0d4black.theforce.search
 
 import androidx.lifecycle.ViewModel
+import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
 
-/**
- * Created By David Odari
- * On 16/12/19
- *
- **/
-class CharacterSearchViewModel : ViewModel()
+class CharacterSearchViewModel(val characterSearchUseCase: CharacterSearchUseCase) : ViewModel() {
+
+}

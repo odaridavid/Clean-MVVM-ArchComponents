@@ -14,6 +14,8 @@ ext {
     constraintLayoutVersion = '1.1.3'
     supportV4Version = '1.0.0'
     navVersion = '2.1.0'
+    materialVersion = '1.1.0-beta02'
+    analyticsVersion = '17.2.0'
 
     //Data
     retrofitVersion = '2.7.0'
@@ -35,14 +37,16 @@ ext {
 
     //App/Presentation Layer
     appDependencies = [
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
-            appCompat       : "androidx.appcompat:appcompat:$appcompatVersion",
-            androidxKtx     : "androidx.core:core-ktx:$androidxCoreKtxVersion",
-            constraintLayout: "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            supportV4       : "androidx.legacy:legacy-support-v4:$supportV4Version",
-            navFragmentKtx  : "androidx.navigation:navigation-fragment-ktx:$navVersion",
-            navUi           : "androidx.navigation:navigation-ui-ktx:$navVersion",
-            leakCanary      : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
+            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
+            appCompat        : "androidx.appcompat:appcompat:$appcompatVersion",
+            androidxKtx      : "androidx.core:core-ktx:$androidxCoreKtxVersion",
+            constraintLayout : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            supportV4        : "androidx.legacy:legacy-support-v4:$supportV4Version",
+            navFragmentKtx   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
+            navUi            : "androidx.navigation:navigation-ui-ktx:$navVersion",
+            leakCanary       : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+            material         : "com.google.android.material:material:$materialVersion",
+            firebaseAnalytics: "com.google.firebase:firebase-analytics:$analyticsVersion"
     ]
 
     dataDependencies = [
