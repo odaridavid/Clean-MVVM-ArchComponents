@@ -1,11 +1,14 @@
 # The-Force
 
+|[![Build Status](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop)](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![codecov](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ)](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|
+|:---:|:---:|
+
 An Android app consuming [a Star Wars API](https://swapi.co/documentation) to display Movie Characters
 it has been built with Clean Architecture, Repository Pattern and MVVM
 pattern as well as Architecture Components.
 
-Its Minimum API level is currently at 21 and supports over 87% of 
-Android Devices.
+Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/about/dashboards)
+Build System : Gradle
 
 ## Prerequisite
 
@@ -137,13 +140,14 @@ responses are received from remote source.
 
 ## Design
 
- ```TODO```
+ With the current min api level set to 21 we have access to material libraries and can build awesome UIs.
+ 
 
 ## Libraries
 
 Libraries used in the whole application are:
 
-- [Jetpack](https://developer.android.com/jetpack)
+- [Jetpack](https://developer.android.com/jetpack)🚀
   - [Navigation](https://developer.android.com/guide/navigation/) - 
   Caters for in app navigation with the NavController.
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way 
@@ -185,10 +189,6 @@ in the suspended function.
 [Travis CI](https://travis-ci.com/) is used for development pipeline to automatically build and test
 the project every time you push updates to version control.
 
-#### Debugging
-
-```TODO```
-
 #### Code Analysis
 
  ```TODO```
@@ -198,7 +198,6 @@ the project every time you push updates to version control.
 | <img src="art/search_screen.png" alt="home" width="200"/> |
 |:----:|
 | 🔍Search Screen |
-
 
 
 ## License
