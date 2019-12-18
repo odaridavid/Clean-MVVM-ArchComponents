@@ -11,6 +11,8 @@ android:
     - build-tools-29.0.2
     - android-29
     - extra
+    - $ANDROID_TARGET
+    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:
     - 'android-sdk-preview-license-52d11cd2'
     - 'android-sdk-license-.+'
