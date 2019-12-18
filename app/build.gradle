@@ -9,6 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
