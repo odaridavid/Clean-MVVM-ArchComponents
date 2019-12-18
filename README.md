@@ -7,6 +7,15 @@ pattern as well as Architecture Components.
 Its Minimum API level is currently at 21 and supports over 87% of 
 Android Devices.
 
+## Prerequisite
+
+Before running the project create a [firebase project](https://firebase.google.com/) 
+and replace the **google-services.json** with yours in the `app` directory for a successful build and 
+enable crashylitics.
+```
+package-name: com.k0d4black.theforce
+```
+
 ## Table of Contents
 
 - [Architecture](#architecture)
@@ -24,8 +33,12 @@ The Application is split into a three layer architecture:
 - Domain
 - Data
 
+![Architecture Flow Diagram](art/arch_flow.png)
+
 This provides better abstractions between concrete framework implementations 
-and the underlying business logic.
+and the underlying business logic.It requires a number of classes to get 
+things running but the pros outweigh the cons in terms of building an app 
+that should scale.
 
 The 3 layered architectural approach is majorly guided by clean architecture which provides
 a clear separation of concerns with its Abstraction Principle.
@@ -37,13 +50,18 @@ This will also help with build performance with a smaller Task Dependency Graph.
 #### Presentation
 
 The application presentation layer contains the Activity,Fragments and 
-Viewmodels and is represented by the `app` module.
+Viewmodels.
 
-It utilises the navigation architecture components and has a Single 
-Activity Architecture serving as the applications entry point and
-[NavHost](https://developer.android.com/guide/navigation/navigation-getting-started) 
-The fragments are mapped to the available use cases.
+The UI layer packages `detail` and `search` contain a fragment and 
+corresponding viewmodel as well as other UI related classes.
 
+The `Main Activity` acts as a [NavHost](https://developer.android.com/guide/navigation/navigation-getting-started) 
+to the fragments in the UI layer.This utilises the navigation architecture 
+components and has a Single Activity Architecture,this serves as the apps
+entry point and navigation across the fragments is handled by the
+[navigation component](https://developer.android.com/guide/navigation)
+
+The fragment viewmodels are mapped to the corresponding use cases.
 This makes it easier to test fragments in isolation, simple provision of 
 transition animations to destinations and also removes the need of
 working with fragment transactions as its been abstracted with the 
@@ -115,6 +133,8 @@ responses are received from remote source.
 
 3. Presentation
 
+
+
 ## Design
 
  ```TODO```
@@ -128,17 +148,23 @@ Libraries used in the whole application are:
   Caters for in app navigation with the NavController.
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way 
   and act as a channel between use cases and ui
+  - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in your layouts to data sources,binds character details to UI
 - [Retrofit](https://square.github.io/retrofit/) - type safe http client 
 and supports coroutines out of the box.  
 - [Moshi](https://github.com/square/moshi) - JSON Parser,used to parse 
 requests on the data layer for Entities and understands Kotlin non-nullable 
 and default parameters
--[okhttp-logging-interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - logs HTTP request and response data.
--[Mockito](https://site.mockito.org/) - Mocking framework used to provide mocks of my classes in unit tests.
--[kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides `runBlocking` coroutine builder used in tests
--[Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned
--[MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - web server for testing HTTP clients ,verify requests and responses on the star wars api with the retrofit client.
--[Leak Canary](https://square.github.io/leakcanary/) - Leak Detection Library
+- [okhttp-logging-interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - logs HTTP request and response data.
+- [Mockito](https://site.mockito.org/) - Mocking framework used to provide mocks of my classes in unit tests.
+- [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides `runBlocking` coroutine builder used in tests
+- [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned
+- [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - web server for testing HTTP clients ,verify requests and responses on the star wars api with the retrofit client.
+- [Leak Canary](https://square.github.io/leakcanary/) - Leak Detection Library
+- [Material Design](https://material.io/develop/android/docs/getting-started/) - build awesome beautiful UIs.🔥🔥
+- [Firebase](https://firebase.google.com/) - Backend As A Service for faster mobile development.
+  - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
+
+
 ## Extras
 
 #### Gradle Dependencies
@@ -149,31 +175,30 @@ maintain dependency versioning for different modules as well as improve
 dependency organisation and readability by providing a clear separation
 of which dependencies go where.
 
-### Error Handling With Coroutines
+#### Error Handling With Coroutines
 
 When an exception is thrown a null value is returned from the try catch block 
 in the suspended function.
 
-### CI-Pipeline
+#### CI-Pipeline
 
 [Travis CI](https://travis-ci.com/) is used for development pipeline to automatically build and test
 the project every time you push updates to version control.
 
-### Debugging
+#### Debugging
 
 ```TODO```
 
-### Memory Leaks
-
-```TODO```
-
-### Code Analysis
+#### Code Analysis
 
  ```TODO```
 
 ## Screenshots
 
- ```TODO```
+| <img src="art/search_screen.png" alt="home" width="200"/> |
+|:----:|
+| 🔍Search Screen |
+
 
 
 ## License
