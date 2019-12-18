@@ -35,7 +35,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    implementation project(':data')
+    implementation project(':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
@@ -47,6 +47,7 @@ dependencies {
     implementation appDependencies.navFragmentKtx
     implementation appDependencies.navUi
 
+    debugImplementation appDependencies.leakCanary
 
     //Test Libs
     testImplementation testDependencies.junit

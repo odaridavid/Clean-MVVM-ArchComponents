@@ -5,15 +5,26 @@ apply plugin: 'kotlin'
 dependencies {
 
     def dataDependencies = rootProject.ext.dataDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dataDependencies.kotlin
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.moshiConverter
+    implementation dataDependencies.loggingInterceptor
+    implementation dataDependencies.coroutinesCore
 
     implementation project(':domain')
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoInline
+    testImplementation testDependencies.googleTruth
+    testImplementation testDependencies.mockWebServer
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'

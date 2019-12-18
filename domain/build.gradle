@@ -4,13 +4,20 @@ apply plugin: 'kotlin'
 dependencies {
     
     def domainDependencies = rootProject.ext.domainDependencies
+    def testDependencies = rootProject.ext.testDependencies
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutinesCore
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoInline
+    testImplementation testDependencies.googleTruth
 }
 
-sourceCompatibility = "7"
-targetCompatibility = "7"
+sourceCompatibility = "8"
+targetCompatibility = "8"
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
