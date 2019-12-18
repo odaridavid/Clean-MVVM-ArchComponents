@@ -6,3 +6,8 @@ android:
     - platform-tools
     - build-tools-29.0.2
     - android-29
+    - extra
+  licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
