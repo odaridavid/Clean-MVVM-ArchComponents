@@ -4,9 +4,12 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
@@ -22,10 +25,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    dataBinding {
+        enabled true
     }
 }
 
@@ -35,7 +43,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    implementation project(':data')
+    implementation project(':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
@@ -46,7 +54,10 @@ dependencies {
     implementation appDependencies.supportV4
     implementation appDependencies.navFragmentKtx
     implementation appDependencies.navUi
+    implementation appDependencies.material
+    implementation appDependencies.firebaseAnalytics
 
+    debugImplementation appDependencies.leakCanary
 
     //Test Libs
     testImplementation testDependencies.junit

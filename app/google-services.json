@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "564324081859",
+    "firebase_url": "https://the-force-b9484.firebaseio.com",
+    "project_id": "the-force-b9484",
+    "storage_bucket": "the-force-b9484.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564324081859:android:85e07b296b4841632c0276",
+        "android_client_info": {
+          "package_name": "com.k0d4black.theforce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkLJkxrsNwL0pbQvhrBsDe6H8_DCKDQww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
