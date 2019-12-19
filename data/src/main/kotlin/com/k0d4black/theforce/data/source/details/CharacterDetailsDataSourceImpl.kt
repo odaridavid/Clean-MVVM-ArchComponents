@@ -8,11 +8,21 @@ import com.k0d4black.theforce.data.models.entities.SpeciesDataModel
 import com.k0d4black.theforce.data.models.response.CharacterDetailsResponse
 import com.k0d4black.theforce.data.source.utils.populateSpeciesList
 import com.k0d4black.theforce.domain.utils.id
+import retrofit2.HttpException
 
-class CharacterDetailsDataSourceImpl(private val apiService: StarWarsApiService) :
+internal class CharacterDetailsDataSourceImpl(private val apiService: StarWarsApiService) :
     CharacterDetailsDataSource {
 
-    //TODO Better Exception Handling
+    /**
+     * This function requires improved exception handling by catching them
+     * as opposed to using null values.
+     *
+     * Takes a [characterId]
+     * @return a characters details
+     *
+     * In the event value returned is null it should
+     * @throws HttpException
+     */
     override suspend fun getCharacter(characterId: Int): CharacterDetailsDataModel? {
         return try {
             val characterDetailsResponse = apiService.getCharacterDetails(characterId)
@@ -30,7 +40,7 @@ class CharacterDetailsDataSourceImpl(private val apiService: StarWarsApiService)
             processPlanet(characterDetailsResponse, characterDataModel)
 
             characterDataModel
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             null
         }
     }

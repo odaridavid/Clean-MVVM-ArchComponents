@@ -20,7 +20,7 @@ class ApiClient {
             .build()
     }
 
-    fun <T> getInstance(baseUrl: String, apiService: Class<T>): T {
+    internal fun <T> getInstance(baseUrl: String, apiService: Class<T>): T {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(setupOkhttpClient())

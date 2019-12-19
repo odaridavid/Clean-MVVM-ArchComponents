@@ -1,7 +1,7 @@
 # The-Force
 
-|[![Build Status](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop)](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![codecov](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ)](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|
-|:---:|:---:|
+|[![Build Status](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop)](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![codecov](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ)](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4347e606b8f64d568aba90e00655a9f4)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Davidodari/The-Force-Clean-MVVM-ArchComponents-&amp;utm_campaign=Badge_Grade)|
+|:---:|:---:|:---:|
 
 An Android app consuming [a Star Wars API](https://swapi.co/documentation) to display Movie Characters
 it has been built with Clean Architecture, Repository Pattern and MVVM
@@ -168,7 +168,6 @@ and default parameters
 - [Firebase](https://firebase.google.com/) - Backend As A Service for faster mobile development.
   - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
 
-
 ## Extras
 
 #### Gradle Dependencies
@@ -186,12 +185,22 @@ in the suspended function.
 
 #### CI-Pipeline
 
-[Travis CI](https://travis-ci.com/) is used for development pipeline to automatically build and test
-the project every time you push updates to version control.
+[Travis CI](https://travis-ci.com/) is used for development pipeline to
+automatically build and test the project every time you push updates to 
+version control.
 
 #### Code Analysis
 
- ```TODO```
+With static code analysis you can enforce a consistent style guide on 
+the project.This is possible by defining constraints with Detekt.
+
+This Project is integrated with [Codacy](https://www.codacy.com/) that 
+makes use of Detekt for static code analysis on Kotlin files.You can
+either configure rules from their dashboard or enforce a Detekt 
+configuration locally and port it to codacy.
+
+The rules can be configured to be checked for each pull request,commit 
+or merge made.
 
 ## Screenshots
 
