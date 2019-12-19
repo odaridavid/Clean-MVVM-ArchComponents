@@ -7,7 +7,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class SearchedCharacterDomainModelTest {
+internal class SearchedCharacterDomainModelTest {
 
     lateinit var searchedCharacterDomainModel: SearchedCharacterDomainModel
 

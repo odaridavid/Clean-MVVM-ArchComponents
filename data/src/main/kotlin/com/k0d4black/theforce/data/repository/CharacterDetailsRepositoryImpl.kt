@@ -6,8 +6,8 @@ import com.k0d4black.theforce.domain.models.CharacterDetailsDomainModel
 import com.k0d4black.theforce.domain.repository.CharacterDetailsRepository
 
 
-private class CharacterDetailsRepositoryImpl(
-     val characterDetailsDataSource: CharacterDetailsDataSource
+internal class CharacterDetailsRepositoryImpl(
+    private val characterDetailsDataSource: CharacterDetailsDataSource
 ) : CharacterDetailsRepository {
 
     override suspend fun getCharacterDetails(characterId: Int): CharacterDetailsDomainModel? =

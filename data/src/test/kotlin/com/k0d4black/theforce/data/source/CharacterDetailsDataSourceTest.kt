@@ -10,9 +10,9 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class CharacterDetailsDataSourceTest : BaseTest() {
+internal class CharacterDetailsDataSourceTest : BaseTest() {
 
-    lateinit var characterDetailsDataSource: CharacterDetailsDataSource
+    private lateinit var characterDetailsDataSource: CharacterDetailsDataSource
 
     @Before
     override fun setup() {

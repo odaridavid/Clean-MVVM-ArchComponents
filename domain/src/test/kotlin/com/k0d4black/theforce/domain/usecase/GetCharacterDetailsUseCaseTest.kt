@@ -11,7 +11,7 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class GetCharacterDetailsUseCaseTest {
+internal class GetCharacterDetailsUseCaseTest {
     @Mock
     private lateinit var characterDetailsRepositoryMock: CharacterDetailsRepository
 

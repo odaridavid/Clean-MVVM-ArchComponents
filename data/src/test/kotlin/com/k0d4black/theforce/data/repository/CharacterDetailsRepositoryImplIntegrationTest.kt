@@ -10,7 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class CharacterDetailsRepositoryImplIntegrationTest : BaseTest() {
+internal class CharacterDetailsRepositoryImplIntegrationTest : BaseTest() {
 
     lateinit var characterDetailsRepository: CharacterDetailsRepository
 

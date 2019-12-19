@@ -11,7 +11,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class CharacterSearchRepositoryImplIntegrationTest : BaseTest() {
+internal class CharacterSearchRepositoryImplIntegrationTest : BaseTest() {
 
     lateinit var characterSearchRepository: CharacterSearchRepository
 

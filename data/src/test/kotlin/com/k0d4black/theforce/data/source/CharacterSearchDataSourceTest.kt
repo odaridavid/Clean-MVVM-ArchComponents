@@ -11,8 +11,8 @@ import org.junit.Before
 import org.junit.Test
 
 
-class CharacterSearchDataSourceTest : BaseTest() {
-    lateinit var characterSearchDataSource: CharacterSearchDataSource
+internal class CharacterSearchDataSourceTest : BaseTest() {
+    private lateinit var characterSearchDataSource: CharacterSearchDataSource
 
     @Before
     override fun setup() {
