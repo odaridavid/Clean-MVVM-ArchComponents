@@ -10,14 +10,14 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class BaseTest {
+internal open class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
 
     lateinit var starWarsApiService: StarWarsApiService
 
     @Before
-    fun setup() {
+    open fun setup() {
         mockWebServer = MockWebServer()
         mockWebServer.dispatcher = StarWarsRequestDispatcher()
         mockWebServer.start()
@@ -30,7 +30,7 @@ internal class BaseTest {
     }
 
     @After
-    fun tearDown() {
+    open fun tearDown() {
         mockWebServer.shutdown()
     }
 }
