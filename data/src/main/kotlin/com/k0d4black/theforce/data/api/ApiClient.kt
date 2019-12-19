@@ -20,6 +20,12 @@ class ApiClient {
             .build()
     }
 
+    /**
+     * @param baseUrl
+     * @param apiService
+     *
+     * @return T
+     */
     internal fun <T> getInstance(baseUrl: String, apiService: Class<T>): T {
         return Retrofit.Builder()
             .baseUrl(baseUrl)

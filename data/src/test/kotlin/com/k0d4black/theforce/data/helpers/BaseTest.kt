@@ -1,8 +1,8 @@
 package com.k0d4black.theforce.data.helpers
 
-import com.k0d4black.theforce.data.source.utils.ApiUtils.BASE_URL
 import com.k0d4black.theforce.data.api.ApiClient
 import com.k0d4black.theforce.data.api.StarWarsApiService
+import com.k0d4black.theforce.data.source.utils.ApiUtils.BASE_URL
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
@@ -10,14 +10,14 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal abstract class BaseTest {
+internal class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
 
     lateinit var starWarsApiService: StarWarsApiService
 
     @Before
-    open fun setup() {
+    fun setup() {
         mockWebServer = MockWebServer()
         mockWebServer.dispatcher = StarWarsRequestDispatcher()
         mockWebServer.start()
@@ -30,7 +30,7 @@ internal abstract class BaseTest {
     }
 
     @After
-    open fun tearDown() {
+    fun tearDown() {
         mockWebServer.shutdown()
     }
 }
