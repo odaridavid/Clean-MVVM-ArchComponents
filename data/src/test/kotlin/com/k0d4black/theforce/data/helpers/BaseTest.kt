@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
+
 internal open class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
