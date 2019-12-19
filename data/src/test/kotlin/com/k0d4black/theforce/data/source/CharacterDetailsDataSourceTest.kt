@@ -21,7 +21,7 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     }
 
     @Test
-    fun `given character of interest when executed then get character details`() {
+    fun `given a valid character id when executed then return character details`() {
         runBlocking {
             val response = characterDetailsDataSource.getCharacter(EXISTING_CHARACTER_ID)
             Truth.assertThat(response?.name).matches("Luke Skywalker")
@@ -32,7 +32,7 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     }
 
     @Test
-    fun `given invalid character when executed then return null value`() {
+    fun `given invalid character id when executed then return null value`() {
         runBlocking {
             val characterDetailsDataModel =
                 characterDetailsDataSource.getCharacter(NON_EXISTANT_CHARACTER_ID)

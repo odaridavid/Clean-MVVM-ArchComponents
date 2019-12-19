@@ -22,7 +22,7 @@ internal class CharacterDetailsRepositoryImplIntegrationTest : BaseTest() {
     }
 
     @Test
-    fun `given character of interest id  when executed then return character details`() {
+    fun `given a character id when executed then return character details`() {
         runBlocking {
             val characterDetailsDomainModel = characterDetailsRepository.getCharacterDetails(EXISTING_CHARACTER_ID)
             Truth.assertThat(characterDetailsDomainModel?.films).isNotEmpty()
@@ -32,7 +32,7 @@ internal class CharacterDetailsRepositoryImplIntegrationTest : BaseTest() {
     }
 
     @Test
-    fun `given invalid character id when executed then return no results`() {
+    fun `given an invalid character id when executed then return no results`() {
         runBlocking {
             val characterDetailsDomainModel = characterDetailsRepository.getCharacterDetails(NON_EXISTANT_CHARACTER_ID)
             Truth.assertThat(characterDetailsDomainModel).isNull()

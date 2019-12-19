@@ -24,7 +24,7 @@ internal class CharacterSearchRepositoryImplIntegrationTest : BaseTest() {
     }
 
     @Test
-    fun `given existing search parameters when executed then return list of search domain elements`() {
+    fun `given existing search parameters when executed then return list of search results`() {
         runBlocking {
             val results = characterSearchRepository.searchCharacters(EXISTING_SEARCH_PARAMS)
             Truth.assertThat(results).isNotEmpty()
