@@ -4,10 +4,15 @@ import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.models.entities.SearchedCharacterDataModel
 import com.k0d4black.theforce.data.models.entities.SpeciesDataModel
 import com.k0d4black.theforce.data.source.utils.populateSpeciesList
+import retrofit2.HttpException
 
-class CharacterSearchDataSourceImpl(private val apiService: StarWarsApiService) :
+internal class CharacterSearchDataSourceImpl(private val apiService: StarWarsApiService) :
     CharacterSearchDataSource {
 
+    /**
+     * Takes in [params] to be used for the search
+     * @return list of search results
+     */
     override suspend fun query(params: String): List<SearchedCharacterDataModel> {
         return try {
             val searchResponse = apiService.searchCharacters(params)
@@ -28,7 +33,7 @@ class CharacterSearchDataSourceImpl(private val apiService: StarWarsApiService) 
 
             searchDataModels
 
-        } catch (e: Exception) {
+        } catch (e: HttpException) {
             emptyList()
         }
     }

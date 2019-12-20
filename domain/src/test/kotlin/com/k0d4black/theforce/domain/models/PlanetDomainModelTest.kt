@@ -3,7 +3,7 @@ package com.k0d4black.theforce.domain.models
 import com.google.common.truth.Truth
 import org.junit.Test
 
-class PlanetDomainModelTest {
+internal class PlanetDomainModelTest {
 
     lateinit var planetDomainModel: PlanetDomainModel
 

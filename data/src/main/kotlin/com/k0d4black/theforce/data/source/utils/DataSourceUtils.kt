@@ -4,7 +4,7 @@ import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.models.entities.SpeciesDataModel
 import com.k0d4black.theforce.domain.utils.id
 
-suspend fun populateSpeciesList(
+internal suspend fun populateSpeciesList(
     species: MutableList<SpeciesDataModel>,
     speciesUrls: List<String>,
     apiService: StarWarsApiService

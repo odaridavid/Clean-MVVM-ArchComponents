@@ -11,8 +11,8 @@ import org.junit.Before
 import org.junit.Test
 
 
-class CharacterSearchDataSourceTest : BaseTest() {
-    lateinit var characterSearchDataSource: CharacterSearchDataSource
+internal class CharacterSearchDataSourceTest : BaseTest() {
+    private lateinit var characterSearchDataSource: CharacterSearchDataSource
 
     @Before
     override fun setup() {
@@ -21,7 +21,7 @@ class CharacterSearchDataSourceTest : BaseTest() {
     }
 
     @Test
-    fun `given existing parameters when character search is executed then get available matching characters`() {
+    fun `given search parameters when parameters exist then get available matching characters`() {
         runBlocking {
             val response = characterSearchDataSource.query(EXISTING_SEARCH_PARAMS)
             Truth.assertThat(response).isNotEmpty()
@@ -29,7 +29,7 @@ class CharacterSearchDataSourceTest : BaseTest() {
     }
 
     @Test
-    fun `given non-existing parameters when character search executed then get no matching characters`() {
+    fun `given search parameters when parameters dont exist then get no matching characters`() {
         runBlocking {
             val response = characterSearchDataSource.query(NON_EXISTENT_SEARCH_PARAMS)
             Truth.assertThat(response).isEmpty()

@@ -3,7 +3,7 @@ package com.k0d4black.theforce.domain
 import com.k0d4black.theforce.domain.utils.id
 import org.junit.Test
 
-class IdFromStringTest {
+internal class IdFromStringTest {
 
     @Test
     fun `should extract numbers when called on string`() {

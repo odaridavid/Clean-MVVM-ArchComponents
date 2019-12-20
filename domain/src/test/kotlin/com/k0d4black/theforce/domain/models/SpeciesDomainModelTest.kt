@@ -3,7 +3,7 @@ package com.k0d4black.theforce.domain.models
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class SpeciesDomainModelTest {
+internal class SpeciesDomainModelTest {
 
     lateinit var speciesDomainModel: SpeciesDomainModel
 

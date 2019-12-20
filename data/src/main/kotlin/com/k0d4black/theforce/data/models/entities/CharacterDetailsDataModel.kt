@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.models.entities
 
 
-data class CharacterDetailsDataModel(
+internal data class CharacterDetailsDataModel(
     var name: String = "",
     var birthYear: String = "",
     var height: String = "",

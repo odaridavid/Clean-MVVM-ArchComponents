@@ -4,7 +4,7 @@ import com.k0d4black.theforce.data.models.entities.*
 import com.k0d4black.theforce.domain.models.*
 
 
-fun SearchedCharacterDataModel.toDomain(): SearchedCharacterDomainModel {
+internal fun SearchedCharacterDataModel.toDomain(): SearchedCharacterDomainModel {
     return SearchedCharacterDomainModel(
         this.name,
         this.species?.map { it.toDomain() } ?: emptyList(),
@@ -12,7 +12,7 @@ fun SearchedCharacterDataModel.toDomain(): SearchedCharacterDomainModel {
     )
 }
 
-fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
+internal fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
     return CharacterDetailsDomainModel(
         this.name,
         this.birthYear,
@@ -23,11 +23,11 @@ fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
     )
 }
 
-fun FilmDataModel.toDomain(): FilmDomainModel = FilmDomainModel(this.openingCrawl)
+internal fun FilmDataModel.toDomain(): FilmDomainModel = FilmDomainModel(this.openingCrawl)
 
 
-fun PlanetDataModel.toDomain(): PlanetDomainModel = PlanetDomainModel(this.name, this.population)
+internal fun PlanetDataModel.toDomain(): PlanetDomainModel = PlanetDomainModel(this.name, this.population)
 
 
-fun SpeciesDataModel.toDomain(): SpeciesDomainModel = SpeciesDomainModel(this.language)
+internal fun SpeciesDataModel.toDomain(): SpeciesDomainModel = SpeciesDomainModel(this.language)
 

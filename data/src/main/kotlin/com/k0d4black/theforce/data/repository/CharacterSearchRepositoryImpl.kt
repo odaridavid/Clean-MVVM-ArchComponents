@@ -5,7 +5,7 @@ import com.k0d4black.theforce.data.source.search.CharacterSearchDataSource
 import com.k0d4black.theforce.domain.models.SearchedCharacterDomainModel
 import com.k0d4black.theforce.domain.repository.CharacterSearchRepository
 
-class CharacterSearchRepositoryImpl(private val characterSearchDataSource: CharacterSearchDataSource) :
+internal class CharacterSearchRepositoryImpl(private val characterSearchDataSource: CharacterSearchDataSource) :
     CharacterSearchRepository {
 
     override suspend fun searchCharacters(params: String): List<SearchedCharacterDomainModel> =

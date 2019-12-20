@@ -6,7 +6,7 @@ import com.k0d4black.theforce.domain.models.CharacterDetailsDomainModel
 import com.k0d4black.theforce.domain.repository.CharacterDetailsRepository
 
 
-class CharacterDetailsRepositoryImpl(
+internal class CharacterDetailsRepositoryImpl(
     private val characterDetailsDataSource: CharacterDetailsDataSource
 ) : CharacterDetailsRepository {
 
