@@ -17,4 +17,6 @@
     <color name="colorBackground">#ffffff</color>
     <color name="colorError">#d32f2f</color>
 
+    <color name="colorGrey">#808080</color>
+
 </resources>

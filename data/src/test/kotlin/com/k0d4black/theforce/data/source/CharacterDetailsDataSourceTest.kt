@@ -5,7 +5,8 @@ import com.k0d4black.theforce.data.helpers.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
 import com.k0d4black.theforce.data.source.details.CharacterDetailsDataSource
-import com.k0d4black.theforce.data.source.details.CharacterDetailsDataSourceImpl
+import com.k0d4black.theforce.domain.utils.Error
+import com.k0d4black.theforce.domain.utils.Success
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -17,27 +18,25 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     @Before
     override fun setup() {
         super.setup()
-        characterDetailsDataSource = CharacterDetailsDataSourceImpl(starWarsApiService)
+        characterDetailsDataSource = CharacterDetailsDataSource(starWarsApiService)
     }
 
     @Test
     fun `given a valid character id when executed then return character details`() {
         runBlocking {
-            val response = characterDetailsDataSource.getCharacter(EXISTING_CHARACTER_ID)
-            Truth.assertThat(response?.name).matches("Luke Skywalker")
-            Truth.assertThat(response?.films).isNotEmpty()
-            Truth.assertThat(response?.species).isNotEmpty()
-            Truth.assertThat(response?.homeworld).isNotNull()
+            val characterDetailsDataModel =
+                characterDetailsDataSource.getCharacter(EXISTING_CHARACTER_ID)
+            Truth.assertThat(characterDetailsDataModel).isInstanceOf(Success::class.java)
         }
     }
 
     @Test
-    fun `given invalid character id when executed then return null value`() {
+    fun `given invalid character id when executed then return error response `() {
         runBlocking {
             val characterDetailsDataModel =
                 characterDetailsDataSource.getCharacter(NON_EXISTANT_CHARACTER_ID)
 
-            Truth.assertThat(characterDetailsDataModel).isNull()
+            Truth.assertThat(characterDetailsDataModel).isInstanceOf(Error::class.java)
         }
     }
 }

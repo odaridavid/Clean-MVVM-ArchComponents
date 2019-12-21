@@ -7,5 +7,5 @@ data class CharacterDetailsDomainModel(
     val height: String,
     val species: List<SpeciesDomainModel>,
     val films: List<FilmDomainModel>,
-    val homeworld: PlanetDomainModel?
+    val homeworld: PlanetDomainModel
 )
