@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Search Fragment-->
+    <string name="info_no_matching_results">No matching results</string>
+    <string name="info_search_tip">Search for your favourite StarWars characters by clicking on the search icon.</string>
+    <string name="title_explore">Explore</string>
+    <string name="menu_title_search">Search</string>
+    <string name="content_description_more_info_arrow">View Character Details</string>
+    <string name="title_explore_activity">Explore</string>
+    <string name="info_no_results">No Matching Search Results</string>
+
 </resources>

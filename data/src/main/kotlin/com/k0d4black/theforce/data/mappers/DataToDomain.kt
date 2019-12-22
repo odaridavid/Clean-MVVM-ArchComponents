@@ -1,13 +1,13 @@
 package com.k0d4black.theforce.data.mappers
 
-import com.k0d4black.theforce.data.models.entities.*
-import com.k0d4black.theforce.domain.models.*
+import com.k0d4black.theforce.data.models.*
+import com.k0d4black.theforce.domain.*
 
 
 internal fun SearchedCharacterDataModel.toDomain(): SearchedCharacterDomainModel {
     return SearchedCharacterDomainModel(
         this.name,
-        this.species?.map { it.toDomain() } ?: emptyList(),
+        this.birthYear,
         this.url
     )
 }
@@ -17,17 +17,23 @@ internal fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
         this.name,
         this.birthYear,
         this.height,
-        this.species?.map { it.toDomain() } ?: emptyList(),
-        this.films?.map { it.toDomain() } ?: emptyList(),
-        this.homeworld?.toDomain()
+        this.species!!.map { it.toDomain() },
+        this.films!!.map { it.toDomain() },
+        this.homeworld!!.toDomain()
     )
 }
 
-internal fun FilmDataModel.toDomain(): FilmDomainModel = FilmDomainModel(this.openingCrawl)
+internal fun FilmDataModel.toDomain(): FilmDomainModel =
+    FilmDomainModel(this.openingCrawl)
 
 
-internal fun PlanetDataModel.toDomain(): PlanetDomainModel = PlanetDomainModel(this.name, this.population)
+internal fun PlanetDataModel.toDomain(): PlanetDomainModel =
+    PlanetDomainModel(
+        this.name,
+        this.population
+    )
 
 
-internal fun SpeciesDataModel.toDomain(): SpeciesDomainModel = SpeciesDomainModel(this.language)
+internal fun SpeciesDataModel.toDomain(): SpeciesDomainModel =
+    SpeciesDomainModel(this.language)
 

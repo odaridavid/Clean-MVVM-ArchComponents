@@ -1,6 +1,10 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth
+import com.k0d4black.theforce.domain.CharacterDetailsDomainModel
+import com.k0d4black.theforce.domain.FilmDomainModel
+import com.k0d4black.theforce.domain.PlanetDomainModel
+import com.k0d4black.theforce.domain.SpeciesDomainModel
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock

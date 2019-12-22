@@ -1,6 +1,7 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth.assertThat
+import com.k0d4black.theforce.domain.SpeciesDomainModel
 import org.junit.Test
 
 internal class SpeciesDomainModelTest {
@@ -12,7 +13,10 @@ internal class SpeciesDomainModelTest {
         //Given
         val language = "Shyriiwook"
 
-        speciesDomainModel = SpeciesDomainModel(language)
+        speciesDomainModel =
+            SpeciesDomainModel(
+                language
+            )
 
         //Then
         assertThat(speciesDomainModel.language).contains(language)

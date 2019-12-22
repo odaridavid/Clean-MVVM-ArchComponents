@@ -8,6 +8,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'jacoco-android'
 
+apply plugin: 'io.fabric'
+
 jacoco {
     toolVersion = "0.8.4"
 }
@@ -38,7 +40,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             testCoverageEnabled true
         }
     }
@@ -52,6 +54,15 @@ android {
     dataBinding {
         enabled true
     }
+
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -60,7 +71,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    implementation project(':domain')
+    implementation project(':data')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
@@ -69,15 +80,45 @@ dependencies {
     implementation appDependencies.androidxKtx
     implementation appDependencies.constraintLayout
     implementation appDependencies.supportV4
-    implementation appDependencies.navFragmentKtx
-    implementation appDependencies.navUi
-    implementation appDependencies.material
-    implementation appDependencies.firebaseAnalytics
 
+    //Jetpack
+    implementation appDependencies.fragmentKtx
+    implementation appDependencies.lifecycleExtensions
+
+    //Material
+    implementation appDependencies.material
+
+    //Firebase
+    implementation appDependencies.firebaseAnalytics
+    implementation appDependencies.crashlytics
+
+    //Memory leaks
     debugImplementation appDependencies.leakCanary
+
+    //DI
+    implementation appDependencies.dagger2
+    implementation appDependencies.dagger2Android
+    kapt appDependencies.dagger2AndroidProcessor
+    kapt appDependencies.dagger2Processor
 
     //Test Libs
     testImplementation testDependencies.junit
-    androidTestImplementation testDependencies.androidxJunit
+    testImplementation testDependencies.robolectric
+    testImplementation testDependencies.androidxJunit
+    testImplementation testDependencies.espressoCore
+    testImplementation testDependencies.runner
+    testImplementation testDependencies.rules
     androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.runner
+    androidTestImplementation testDependencies.rules
+    androidTestImplementation testDependencies.androidxJunit
+    androidTestImplementation testDependencies.androidxCoreTest
+    androidTestImplementation('com.schibsted.spain:barista:3.2.0') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    androidTestImplementation testDependencies.mockWebServer
+    testImplementation testDependencies.googleTruth
+
+
 }
+apply plugin: 'com.google.gms.google-services'

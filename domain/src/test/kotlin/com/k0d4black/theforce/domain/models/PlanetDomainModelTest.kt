@@ -1,6 +1,7 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth
+import com.k0d4black.theforce.domain.PlanetDomainModel
 import org.junit.Test
 
 internal class PlanetDomainModelTest {
@@ -13,7 +14,11 @@ internal class PlanetDomainModelTest {
         val name = "Tatooine"
         val population = "23444499"
 
-        planetDomainModel = PlanetDomainModel(name, population)
+        planetDomainModel =
+            PlanetDomainModel(
+                name,
+                population
+            )
 
         //Then
         Truth.assertThat(planetDomainModel.name).matches(name)

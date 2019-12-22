@@ -17,6 +17,11 @@ ext {
     navVersion = '2.1.0'
     materialVersion = '1.1.0-beta02'
     analyticsVersion = '17.2.0'
+    fragmentKtxVersion = '1.1.0'
+    leakCanaryVersion = '2.0'
+    dagger2Version = '2.25.3'
+    crashlyticsVersion = '2.10.1'
+    lifecycleExtensionsVersion = '2.1.0'
 
     //Data
     retrofitVersion = '2.7.0'
@@ -32,22 +37,29 @@ ext {
     mockitoInlineVersion = '2.13.0'
     mockWebServerVersion = '4.2.1'
     coroutinesCoreVersion = '1.3.3'
-
-    leakCanaryVersion = '2.0'
+    robolectricVersion = '4.3'
+    androidxTestCoreVersion = '1.0.0'
+    runnerVersion = '1.2.0'
+    rulesVersion ='1.2.0'
 
 
     //App/Presentation Layer
     appDependencies = [
-            kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
-            appCompat        : "androidx.appcompat:appcompat:$appcompatVersion",
-            androidxKtx      : "androidx.core:core-ktx:$androidxCoreKtxVersion",
-            constraintLayout : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            supportV4        : "androidx.legacy:legacy-support-v4:$supportV4Version",
-            navFragmentKtx   : "androidx.navigation:navigation-fragment-ktx:$navVersion",
-            navUi            : "androidx.navigation:navigation-ui-ktx:$navVersion",
-            leakCanary       : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
-            material         : "com.google.android.material:material:$materialVersion",
-            firebaseAnalytics: "com.google.firebase:firebase-analytics:$analyticsVersion"
+            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
+            appCompat              : "androidx.appcompat:appcompat:$appcompatVersion",
+            androidxKtx            : "androidx.core:core-ktx:$androidxCoreKtxVersion",
+            constraintLayout       : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            supportV4              : "androidx.legacy:legacy-support-v4:$supportV4Version",
+            leakCanary             : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+            material               : "com.google.android.material:material:$materialVersion",
+            firebaseAnalytics      : "com.google.firebase:firebase-analytics:$analyticsVersion",
+            fragmentKtx            : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            crashlytics            : "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
+            dagger2Processor       : "com.google.dagger:dagger-compiler:$dagger2Version",
+            dagger2                : "com.google.dagger:dagger:$dagger2Version",
+            dagger2Android         : "com.google.dagger:dagger-android:$dagger2Version",
+            dagger2AndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger2Version",
+            lifecycleExtensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
     ]
 
     dataDependencies = [
@@ -56,20 +68,25 @@ ext {
             moshiConverter    : "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
             coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
+            dagger2Processor  : "com.google.dagger:dagger-compiler:$dagger2Version",
+            dagger2           : "com.google.dagger:dagger:$dagger2Version"
     ]
 
     domainDependencies = [
-            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
+            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     ]
 
     testDependencies = [
-            junit        : "junit:junit:$junitVersion",
-            androidxJunit: "androidx.test.ext:junit:$androidxJunitVersion",
-            espressoCore : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
-            mockito      : "org.mockito:mockito-core:$mockitoVersion",
-            googleTruth  : "com.google.truth:truth:$truthVersion",
-            mockitoInline: "org.mockito:mockito-inline:$mockitoInlineVersion",
-            mockWebServer: "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
+            junit           : "junit:junit:$junitVersion",
+            androidxJunit   : "androidx.test.ext:junit:$androidxJunitVersion",
+            espressoCore    : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            mockito         : "org.mockito:mockito-core:$mockitoVersion",
+            googleTruth     : "com.google.truth:truth:$truthVersion",
+            mockitoInline   : "org.mockito:mockito-inline:$mockitoInlineVersion",
+            mockWebServer   : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
+            robolectric     : "org.robolectric:robolectric:$robolectricVersion",
+            androidxCoreTest: "androidx.test:core:$androidxTestCoreVersion",
+            runner          : "androidx.test:runner:$runnerVersion",
+            rules           : "androidx.test:rules:$rulesVersion"
     ]
 }

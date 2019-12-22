@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-internal interface StarWarsApiService {
+interface StarWarsApiService {
 
     @GET("people")
     suspend fun searchCharacters(@Query("search") params: String): CharacterSearchResponse

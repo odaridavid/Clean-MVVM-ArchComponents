@@ -8,7 +8,8 @@ it has been built with Clean Architecture, Repository Pattern and MVVM
 pattern as well as Architecture Components.
 
 Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/about/dashboards)
-Build System : Gradle
+
+Build System : [Gradle](https://gradle.org/)
 
 ## Prerequisite
 
@@ -22,7 +23,6 @@ package-name: com.k0d4black.theforce
 ## Table of Contents
 
 - [Architecture](#architecture)
-- [Persistence](#persistence)
 - [Testing](#testing)
 - [Design](#design)
 - [Libraries](#libraries)
@@ -99,11 +99,9 @@ interest either local data source or a remote data source.
 This layer also handles mapping of data entities to their domain 
 representations.
 
-## Persistence
-
- ```TODO``` 
-
 ## Testing
+
+**Naming Conventions**
 
 Testing has been layered out differently based on the architectural layers
 
@@ -167,6 +165,8 @@ and default parameters
 - [Material Design](https://material.io/develop/android/docs/getting-started/) - build awesome beautiful UIs.🔥🔥
 - [Firebase](https://firebase.google.com/) - Backend As A Service for faster mobile development.
   - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
+- [Dagger2](https://github.com/google/dagger) - Dependency Injection lib built with scaling in mind and has large community support.
+- [Robolectric](http://robolectric.org/) - Unit test on android framework.
 
 ## Extras
 
@@ -202,12 +202,42 @@ configuration locally and port it to codacy.
 The rules can be configured to be checked for each pull request,commit 
 or merge made.
 
+#### Resource Values
+
+**Fonts**
+
+The app makes use of downloadable fonts which reduces APK size compared to
+having the font files within the app.
+
+**Colors**
+
+**Dimension & String Values**
+
+String values are stored in the strings value file this will make it 
+easier for app localization and internationalization and enhance user 
+experience.
+
+Dimensions have also been stored in a dimensions value file making it 
+easy to reuse dimension values across the app.
+
+**Themes & Styles**
+
+Theming is guided by the material design specifications with a ```DayNight```
+theme which can later be used to provide Night variant for the app and 
+enhance user experience.
+
 ## Screenshots
 
-| <img src="art/search_screen.png" alt="home" width="200"/> |
+| <img src="art/search_screen_default.png" alt="home" width="200"/> |
 |:----:|
 | 🔍Search Screen |
 
+## TODO
+
+- Persistence/Caching Strategy
+- Search Query Suggestions
+- Animations
+- Screen Adaptability - Currently locked to portrait mode
 
 ## License
 
