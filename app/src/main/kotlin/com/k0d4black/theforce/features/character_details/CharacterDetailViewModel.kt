@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.detail
+package com.k0d4black.theforce.features.character_details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

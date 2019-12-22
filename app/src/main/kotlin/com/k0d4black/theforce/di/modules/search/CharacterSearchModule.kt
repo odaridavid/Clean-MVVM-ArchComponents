@@ -4,9 +4,9 @@ import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.repository.CharacterSearchRepository
 import com.k0d4black.theforce.data.source.CharacterSearchDataSource
 import com.k0d4black.theforce.data.usecases.CharacterSearchUseCase
-import com.k0d4black.theforce.search.CharacterSearchViewModel
-import com.k0d4black.theforce.search.SearchQueryListener
-import com.k0d4black.theforce.search.SearchResultAdapter
+import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
+import com.k0d4black.theforce.features.character_search.SearchQueryListener
+import com.k0d4black.theforce.features.character_search.SearchResultAdapter
 import dagger.Module
 import dagger.Provides
 
@@ -14,11 +14,14 @@ import dagger.Provides
 class CharacterSearchModule {
 
     @Provides
-    fun provideSearchResultsAdapter(): SearchResultAdapter = SearchResultAdapter()
+    fun provideSearchResultsAdapter(): SearchResultAdapter =
+        SearchResultAdapter()
 
     @Provides
     fun provideSearchQueryListener(viewModel: CharacterSearchViewModel): SearchQueryListener {
-        return SearchQueryListener(viewModel)
+        return SearchQueryListener(
+            viewModel
+        )
     }
 
     @Provides

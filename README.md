@@ -101,6 +101,8 @@ representations.
 
 ## Testing
 
+**Naming Conventions**
+
 Testing has been layered out differently based on the architectural layers
 
 1. Domain
@@ -234,6 +236,8 @@ enhance user experience.
 
 - Persistence/Caching Strategy
 - Search Query Suggestions
+- Animations
+- Screen Adaptability - Currently locked to portrait mode
 
 ## License
 

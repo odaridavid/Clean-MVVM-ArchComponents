@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.di.ViewModelKey
 import com.k0d4black.theforce.di.factory.ViewModelFactory
-import com.k0d4black.theforce.search.CharacterSearchViewModel
+import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

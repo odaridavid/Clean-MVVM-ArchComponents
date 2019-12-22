@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".search.SearchActivity"
+            android:name=".features.character_search.SearchActivity"
             android:label="@string/title_explore_activity"
             android:screenOrientation="portrait">
             <intent-filter>

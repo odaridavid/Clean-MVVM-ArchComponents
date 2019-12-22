@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.search
+package com.k0d4black.theforce.features.character_search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

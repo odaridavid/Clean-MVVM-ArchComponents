@@ -71,7 +71,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    api project(':data')
+    implementation project(':data')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
@@ -98,15 +98,27 @@ dependencies {
     //DI
     implementation appDependencies.dagger2
     implementation appDependencies.dagger2Android
-    implementation appDependencies.dagger2SupportAndroid
     kapt appDependencies.dagger2AndroidProcessor
     kapt appDependencies.dagger2Processor
 
     //Test Libs
     testImplementation testDependencies.junit
     testImplementation testDependencies.robolectric
-    androidTestImplementation testDependencies.androidxJunit
+    testImplementation testDependencies.androidxJunit
+    testImplementation testDependencies.espressoCore
+    testImplementation testDependencies.runner
+    testImplementation testDependencies.rules
     androidTestImplementation testDependencies.espressoCore
+    androidTestImplementation testDependencies.runner
+    androidTestImplementation testDependencies.rules
+    androidTestImplementation testDependencies.androidxJunit
+    androidTestImplementation testDependencies.androidxCoreTest
+    androidTestImplementation('com.schibsted.spain:barista:3.2.0') {
+        exclude group: 'org.jetbrains.kotlin'
+    }
+    androidTestImplementation testDependencies.mockWebServer
+    testImplementation testDependencies.googleTruth
+
 
 }
 apply plugin: 'com.google.gms.google-services'

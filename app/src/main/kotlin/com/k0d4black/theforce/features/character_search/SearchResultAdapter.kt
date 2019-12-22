@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.search;
+package com.k0d4black.theforce.features.character_search;
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
