@@ -1,7 +1,9 @@
-package com.k0d4black.theforce.search.models
+package com.k0d4black.theforce.mappers
 
-import com.k0d4black.theforce.domain.models.PlanetDomainModel
-import com.k0d4black.theforce.domain.models.SearchedCharacterDomainModel
+import com.k0d4black.theforce.models.PlanetPresentationModel
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.domain.PlanetDomainModel
+import com.k0d4black.theforce.domain.SearchedCharacterDomainModel
 
 
 fun PlanetDomainModel.toDomain(): PlanetPresentationModel {

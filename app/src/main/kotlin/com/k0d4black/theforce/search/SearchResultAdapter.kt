@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.SearchResultLayoutItemBinding
-import com.k0d4black.theforce.search.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import javax.inject.Inject
 
 

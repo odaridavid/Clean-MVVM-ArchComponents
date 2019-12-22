@@ -1,12 +1,11 @@
-package com.k0d4black.theforce.data.source.details
+package com.k0d4black.theforce.data.source
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.models.entities.CharacterDetailsDataModel
-import com.k0d4black.theforce.data.models.entities.FilmDataModel
-import com.k0d4black.theforce.data.models.entities.PlanetDataModel
-import com.k0d4black.theforce.data.models.entities.SpeciesDataModel
+import com.k0d4black.theforce.data.models.CharacterDetailsDataModel
+import com.k0d4black.theforce.data.models.FilmDataModel
+import com.k0d4black.theforce.data.models.PlanetDataModel
+import com.k0d4black.theforce.data.models.SpeciesDataModel
 import com.k0d4black.theforce.data.models.response.CharacterDetailsResponse
-import com.k0d4black.theforce.data.source.utils.populateSpeciesList
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success
@@ -58,7 +57,11 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
         characterDataModel: CharacterDetailsDataModel
     ) {
         val planetResponse = apiService.getPlanet(characterDetailsResponse.homeWorld.id)
-        val planetDataModel = PlanetDataModel(planetResponse.name, planetResponse.population)
+        val planetDataModel =
+            PlanetDataModel(
+                planetResponse.name,
+                planetResponse.population
+            )
         characterDataModel.homeworld = planetDataModel
     }
 
@@ -80,10 +83,28 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
         val characterFilms = mutableListOf<FilmDataModel>()
         for (film in characterDetailsResponse.films) {
             val filmResponse = apiService.getFilms(film.id)
-            val filmDataModel = FilmDataModel(filmResponse.openingCrawl)
+            val filmDataModel =
+                FilmDataModel(
+                    filmResponse.openingCrawl
+                )
             characterFilms.add(filmDataModel)
         }
         characterDataModel.films = characterFilms
+    }
+
+    private suspend fun populateSpeciesList(
+        species: MutableList<SpeciesDataModel>,
+        speciesUrls: List<String>,
+        apiService: StarWarsApiService
+    ) {
+        for (specie in speciesUrls) {
+            val specieResponse = apiService.getSpecies(specie.id)
+            val speciesDataModel =
+                SpeciesDataModel(
+                    specieResponse.language
+                )
+            species.add(speciesDataModel)
+        }
     }
 
 

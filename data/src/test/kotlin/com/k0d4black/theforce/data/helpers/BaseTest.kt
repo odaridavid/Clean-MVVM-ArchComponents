@@ -1,9 +1,9 @@
 package com.k0d4black.theforce.data.helpers
 
+import com.k0d4black.theforce.data.api.ApiUtils
 import com.k0d4black.theforce.data.api.HttpClient
 import com.k0d4black.theforce.data.api.LoggingInterceptor
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.source.utils.ApiUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockWebServer
@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-internal open class BaseTest {
+open class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
 

@@ -4,7 +4,6 @@ import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.helpers.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
-import com.k0d4black.theforce.data.source.details.CharacterDetailsDataSource
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Success
 import kotlinx.coroutines.runBlocking
@@ -18,7 +17,10 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     @Before
     override fun setup() {
         super.setup()
-        characterDetailsDataSource = CharacterDetailsDataSource(starWarsApiService)
+        characterDetailsDataSource =
+            CharacterDetailsDataSource(
+                starWarsApiService
+            )
     }
 
     @Test

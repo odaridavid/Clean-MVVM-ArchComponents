@@ -1,6 +1,8 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth
+import com.k0d4black.theforce.domain.PlanetDomainModel
+import com.k0d4black.theforce.domain.SearchedCharacterDomainModel
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -22,7 +24,12 @@ internal class SearchedCharacterDomainModelTest {
         val birthYear = "BBY 12"
 
         searchedCharacterDomainModel =
-            SearchedCharacterDomainModel(name, birthYear, planetDomainModel, url)
+            SearchedCharacterDomainModel(
+                name,
+                birthYear,
+                planetDomainModel,
+                url
+            )
 
         //Then
         Truth.assertThat(searchedCharacterDomainModel.name).matches(name)

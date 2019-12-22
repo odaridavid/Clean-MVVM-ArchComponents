@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.domain.models
+package com.k0d4black.theforce.domain
 
 data class SearchedCharacterDomainModel(
     val name: String,

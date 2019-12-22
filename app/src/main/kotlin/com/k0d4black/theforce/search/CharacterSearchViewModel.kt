@@ -1,6 +1,5 @@
 package com.k0d4black.theforce.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,8 +9,8 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success
-import com.k0d4black.theforce.search.models.SearchedCharacterPresentationModel
-import com.k0d4black.theforce.search.models.toPresentation
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.mappers.toPresentation
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

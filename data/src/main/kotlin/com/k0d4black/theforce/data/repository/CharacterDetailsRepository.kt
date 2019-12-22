@@ -1,8 +1,8 @@
 package com.k0d4black.theforce.data.repository
 
 import com.k0d4black.theforce.data.mappers.toDomain
-import com.k0d4black.theforce.data.source.details.CharacterDetailsDataSource
-import com.k0d4black.theforce.domain.models.CharacterDetailsDomainModel
+import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
+import com.k0d4black.theforce.domain.CharacterDetailsDomainModel
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success

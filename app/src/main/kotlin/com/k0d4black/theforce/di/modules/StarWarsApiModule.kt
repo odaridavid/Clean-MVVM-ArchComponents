@@ -3,7 +3,7 @@ package com.k0d4black.theforce.di.modules
 import com.k0d4black.theforce.data.api.HttpClient
 import com.k0d4black.theforce.data.api.LoggingInterceptor
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.source.utils.ApiUtils
+import com.k0d4black.theforce.data.api.ApiUtils
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -25,7 +25,7 @@ open class StarWarsApiModule {
 
     @Singleton
     @Provides
-     fun provideStarWarsApi(retrofit: Retrofit): StarWarsApiService {
+    fun provideStarWarsApi(retrofit: Retrofit): StarWarsApiService {
         return retrofit.create(StarWarsApiService::class.java)
     }
 

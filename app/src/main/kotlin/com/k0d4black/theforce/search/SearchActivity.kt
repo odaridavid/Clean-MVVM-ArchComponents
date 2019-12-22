@@ -15,7 +15,7 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.hide
-import com.k0d4black.theforce.search.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.show
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
