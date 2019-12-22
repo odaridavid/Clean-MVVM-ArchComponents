@@ -113,9 +113,6 @@ dependencies {
     androidTestImplementation testDependencies.rules
     androidTestImplementation testDependencies.androidxJunit
     androidTestImplementation testDependencies.androidxCoreTest
-    androidTestImplementation('com.schibsted.spain:barista:3.2.0') {
-        exclude group: 'org.jetbrains.kotlin'
-    }
     androidTestImplementation testDependencies.mockWebServer
     testImplementation testDependencies.googleTruth
 

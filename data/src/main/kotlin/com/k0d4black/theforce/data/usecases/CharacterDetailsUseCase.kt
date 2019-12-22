@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Acts as a proxy between the presentation layer requesting character details and data layer
  * providing the character details
  */
-class GetCharacterDetailsUseCase @Inject constructor(
+class CharacterDetailsUseCase @Inject constructor(
     private val characterDetailsRepository: CharacterDetailsRepository
 ) {
 

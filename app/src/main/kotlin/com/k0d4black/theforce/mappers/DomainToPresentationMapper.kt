@@ -1,17 +1,8 @@
 package com.k0d4black.theforce.mappers
 
-import com.k0d4black.theforce.models.PlanetPresentationModel
-import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
-import com.k0d4black.theforce.domain.PlanetDomainModel
-import com.k0d4black.theforce.domain.SearchedCharacterDomainModel
+import com.k0d4black.theforce.domain.*
+import com.k0d4black.theforce.models.*
 
-
-fun PlanetDomainModel.toDomain(): PlanetPresentationModel {
-    return PlanetPresentationModel(
-        this.name,
-        this.population
-    )
-}
 
 fun SearchedCharacterDomainModel.toPresentation(): SearchedCharacterPresentationModel {
     return SearchedCharacterPresentationModel(
@@ -19,4 +10,27 @@ fun SearchedCharacterDomainModel.toPresentation(): SearchedCharacterPresentation
         this.birthYear,
         this.url
     )
+}
+
+fun CharacterDetailsDomainModel.toPresentation(): CharacterDetailsPresentationModel {
+    return CharacterDetailsPresentationModel(
+        this.name,
+        this.birthYear,
+        this.height,
+        this.films.map { it?.toPresentation() },
+        this.species.map { it?.toPresentation() },
+        this.homeworld.toPresentation()
+    )
+}
+
+fun PlanetDomainModel.toPresentation(): PlanetPresentationModel {
+    return PlanetPresentationModel(this.name, this.population)
+}
+
+fun FilmDomainModel.toPresentation(): FilmPresentationModel {
+    return FilmPresentationModel(this.title, this.openingCrawl)
+}
+
+fun SpeciesDomainModel.toPresentation(): SpeciesPresentationModel {
+    return SpeciesPresentationModel(this.name, this.language)
 }

@@ -1,11 +1,7 @@
 package com.k0d4black.theforce
 
 import android.content.Intent
-import android.widget.EditText
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.ViewAssertion
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -13,7 +9,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.data.api.ApiUtils
 import com.k0d4black.theforce.features.character_search.SearchActivity
-import com.schibsted.spain.barista.interaction.BaristaSleepInteractions.sleep
+import com.k0d4black.theforce.utils.StarWarsRequestDispatcher
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
@@ -23,7 +19,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class SearchActivityAndroidTest {
+class SearchActivityIntegrationTest {
 
     private lateinit var server: MockWebServer
 
@@ -35,7 +31,9 @@ class SearchActivityAndroidTest {
     fun setup() {
         server = MockWebServer()
         server.dispatcher =
-            StarWarsRequestDispatcher(InstrumentationRegistry.getInstrumentation().context)
+            StarWarsRequestDispatcher(
+                InstrumentationRegistry.getInstrumentation().context
+            )
         ApiUtils.BASE_URL = server.url("/").toString()
     }
 

@@ -12,11 +12,10 @@ internal class SpeciesDomainModelTest {
     fun `model instantiated has given values`() {
         //Given
         val language = "Shyriiwook"
+        val name = "Human"
 
         speciesDomainModel =
-            SpeciesDomainModel(
-                language
-            )
+            SpeciesDomainModel(name, language)
 
         //Then
         assertThat(speciesDomainModel.language).contains(language)
