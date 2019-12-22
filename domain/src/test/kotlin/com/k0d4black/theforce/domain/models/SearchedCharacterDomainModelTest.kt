@@ -27,14 +27,12 @@ internal class SearchedCharacterDomainModelTest {
             SearchedCharacterDomainModel(
                 name,
                 birthYear,
-                planetDomainModel,
                 url
             )
 
         //Then
         Truth.assertThat(searchedCharacterDomainModel.name).matches(name)
         Truth.assertThat(searchedCharacterDomainModel.url).matches(url)
-        Truth.assertThat(searchedCharacterDomainModel.homeWorld).isNotNull()
     }
 
 }
