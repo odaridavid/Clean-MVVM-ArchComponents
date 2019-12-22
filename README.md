@@ -38,7 +38,7 @@ The Application is split into a three layer architecture:
 
 ![Architecture Flow Diagram](art/arch_flow.png)
 
-This provides better abstractions between concrete framework implementations 
+This provides better abstractions between framework implementations 
 and the underlying business logic.It requires a number of classes to get 
 things running but the pros outweigh the cons in terms of building an app 
 that should scale.
@@ -53,41 +53,49 @@ This will also help with build performance with a smaller Task Dependency Graph.
 #### Presentation
 
 The application presentation layer contains the Activity,Fragments and 
-Viewmodels.
+Viewmodels and handles Dependency Injection.
 
-The UI layer packages `detail` and `search` contain a fragment and 
-corresponding viewmodel as well as other UI related classes.
+The UI layer `feature` package contains `character_detail` and `character_search` 
+which contain an activity and corresponding viewmodel as well as other UI 
+related classes.
 
-The `Main Activity` acts as a [NavHost](https://developer.android.com/guide/navigation/navigation-getting-started) 
-to the fragments in the UI layer.This utilises the navigation architecture 
-components and has a Single Activity Architecture,this serves as the apps
-entry point and navigation across the fragments is handled by the
-[navigation component](https://developer.android.com/guide/navigation)
+The viewmodels are provided by the ViewModelFactory using Dagger2 it 
+utilises the **Factory Pattern** by providing an annotation that maps the
+respective viewmodel requested for instantiation with the `ViewModelProvider.Factory`
 
-The fragment viewmodels are mapped to the corresponding use cases.
-This makes it easier to test fragments in isolation, simple provision of 
-transition animations to destinations and also removes the need of
-working with fragment transactions as its been abstracted with the 
-NavController ,saving dev time.
+The ViewModel then receives data from the use case and updates the 
+LiveData being watched by the activity,the Activity then makes updates 
+to the UI as need be depending on the type of value received by the LiveData.
+This results in the **Observer Pattern** and binding of list data with the
+Recycler Views **Adapter Pattern**.
+
+This pattern makes the Activities "dumb" by delegating data and logic 
+operations to the Viewmodel,hence decoupling the UI layer and makes testing
+components in isolation easier.
 
 #### Domain
 
-Contains Business Logic Abstractions which consitutes models 
-representative of searched character and character details as well as 
-repository contracts to be implemented in data layer and use case 
-implementations.
+The domain layer contains domain model classes which represent the
+data we will be handling across presentation and data layer.
+The domain model data classes are used as a proxy communicating from the 
+data layer to the presentation and vice versa this makes refactoring 
+easy as their is separation of concerns allowing you to focus on a
+particular layer in isolation.
 
-The contract interfaces will come in handy during faking of implementations
-when testing they also follow interface segregation as well as Liskov 
-substitution as far as SOLID principles are concerned. 
-
+The domain module also exposes a `ResultWrapper` class which utilises the 
+**State Pattern**.This pattern makes it easier propagating changes to 
+data state across layers and proves useful especially with coroutines 
+which unlike RxJava do not contain an `onError()` method to emit errors.
+Once a coroutine throws an exception the Result Wrapper will wrap the 
+Excpetion and propagate necessary changes.
 
 #### Data
 
-The Data layer satisfies the repository contracts and using the repository
-pattern we will be able to provide data to the defined use cases which 
-in this case is searching for characters and viewing details of selected 
-characters.The use cases are inline with the single responsibility rule.
+The Data layer using the **Repository Pattern**  will be able to 
+provide data to the defined use cases which in this case is searching
+for characters and viewing details of selected characters.The use-cases
+are based on the single responsibility rule as they serve only one particular 
+purpose.
 
 This provides a more decoupled system,as it is isolated from changes to the 
 db by abstracting low level implementation details of data sources and
@@ -97,28 +105,19 @@ The repository classes delegate access of data to the data source of
 interest either local data source or a remote data source.
 
 This layer also handles mapping of data entities to their domain 
-representations.
+representations which when eventually passed to the presentation layer the
+domain will be mapped to the presentation model.
 
 ## Testing
 
 **Naming Conventions**
 
-Testing has been layered out differently based on the architectural layers
+Testing has been layered out differently based on the architectural layers.
 
 1. Domain
 
-In the Domain Layer we test the Use Cases are executed and collaborators 
-behave as expected,the repositories in this case.
-
-We mock the repositories and verify the expected behavior once a use case
-has been called to action.
-
-The Domain Layer Models are also tested to verify instance was created 
-successfully with expected parameters and will also be of help in the event
-the model structure needs to change when mapping data.
-
-Utilities and Extension functions have also been fully tested for edge cases.
-
+In the Domain Layer the Domain Data Classes are tested since they act as 
+the proxy to other layers a breaking change will propagate to other layers.
 
 2. Data
 
@@ -132,19 +131,50 @@ and mappers to the domain models.
 Currently the data source tests serve as unit tests verifying the appropriate
 responses are received from remote source.
 
+We mock the repositories and verify the expected behavior once a use case
+has been called to action.
+
+The Domain Layer Models are also tested to verify instance was created 
+successfully with expected parameters and will also be of help in the event
+the model structure needs to change when mapping data.
+
+Utilities and Extension functions have also been fully tested for edge cases.
+
 3. Presentation
 
-
+**TODO**
 
 ## Design
 
- With the current min api level set to 21 we have access to material libraries and can build awesome UIs.
+ With the current min api level set to 21 we have access to material
+ libraries and can build awesome UIs.
  
  **Search Screen**
  
+ The Search screen contains a default text view that will hint user on 
+ how to search and on search they will be presented with a list of characters.
+ The characters on the search result only contain a name ,birth year and url 
+ that will be used to load more content if need be,this saves on loading time 
+ and results in a faster search experience.
+ 
+ The list results are bound by a recycler view,which recycles views and 
+ provides a tonne of flexibility including things such as custom item layout,
+ item decoration,custom headers and much more as compared to its List View 
+ Counterpart.
+ 
+ Each List item contains a button when on clicked navigates to 
+ `CharacterDetailsActivity` screen with an Intent Extra of character id.
+ 
  **Details Screen**
  
-  Constraint Layout to avoid deep nesting
+ The details Screen displays character information after viewmodel receives 
+ data from the usecase.The data is bound through Data binding ,which 
+ proves useful to binding model data removing need for boilerplate
+ findViewById.
+ 
+ The Character Details are displayed by satisfying constraints to various 
+ views using the constraint layout which flattens our view hierarchy and 
+ avoids nesting of multiple layouts for displaying complex objects.
 
 ## Libraries
 
@@ -153,7 +183,7 @@ Libraries used in the whole application are:
 - [Jetpack](https://developer.android.com/jetpack)🚀
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way 
   and act as a channel between use cases and ui
-  - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in your layouts to data sources,binds character details to UI
+  - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in  layouts to data sources,binds character details and search results to UI
 - [Retrofit](https://square.github.io/retrofit/) - type safe http client 
 and supports coroutines out of the box.  
 - [Moshi](https://github.com/square/moshi) - JSON Parser,used to parse 
@@ -180,11 +210,6 @@ Centralized versioning of gradle dependencies in a global file,
 maintain dependency versioning for different modules as well as improve
 dependency organisation and readability by providing a clear separation
 of which dependencies go where.
-
-#### Error Handling With Coroutines
-
-When an exception is thrown a null value is returned from the try catch block 
-in the suspended function.
 
 #### CI-Pipeline
 
@@ -214,11 +239,13 @@ having the font files within the app.
 
 **Colors**
 
+The App colors follow the material design guidelines to theming.
+
 **Dimension & String Values**
 
 String values are stored in the strings value file this will make it 
-easier for app localization and internationalization and enhance user 
-experience.
+easier for app localization and internationalization as well as string
+templating currently utilised by data binding.
 
 Dimensions have also been stored in a dimensions value file making it 
 easy to reuse dimension values across the app.
@@ -231,9 +258,9 @@ enhance user experience.
 
 ## Screenshots
 
-| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|
-|:----:|:----:|
-| 🔍Search Screen - Default|Search Screen - Results|
+| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/Details.png" alt="home" width="200"/>|
+|:----:|:----:|:----:|
+| 🔍Search Screen - Default|Search Screen - Results|Character Details|
 
 ## TODO
 
