@@ -12,11 +12,10 @@ internal class FilmDomainModelTest {
     fun `model instantiated has given values`() {
         //Given
         val openingCrawl = "Mwaha ha this is the opening crawl for this film mwa ha ha."
+        val title = "Film Title"
 
         filmDomainModel =
-            FilmDomainModel(
-                openingCrawl
-            )
+            FilmDomainModel(title, openingCrawl)
 
         //Then
         Truth.assertThat(filmDomainModel.openingCrawl).matches(openingCrawl)
