@@ -6,30 +6,35 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.SearchResultLayoutItemBinding
+import com.k0d4black.theforce.domain.utils.id
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
-import javax.inject.Inject
+import kotlinx.android.synthetic.main.search_result_layout_item.view.*
 
 
-class SearchResultAdapter @Inject constructor() :
-    ListAdapter<SearchedCharacterPresentationModel, SearchResultAdapter.SearchedCharacterViewModel>(
+class SearchResultAdapter(val onClick: (Int) -> Unit) :
+    ListAdapter<SearchedCharacterPresentationModel, SearchResultAdapter.SearchedCharacterViewHolder>(
         SearchedCharacterDiffUtil
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchedCharacterViewModel {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchedCharacterViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        return SearchedCharacterViewModel(SearchResultLayoutItemBinding.inflate(inflater))
+        return SearchedCharacterViewHolder(SearchResultLayoutItemBinding.inflate(inflater))
     }
 
-    override fun onBindViewHolder(holder: SearchedCharacterViewModel, position: Int): Unit =
+    override fun onBindViewHolder(holder: SearchedCharacterViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class SearchedCharacterViewModel(private val binding: SearchResultLayoutItemBinding) :
+    inner class SearchedCharacterViewHolder(private val binding: SearchResultLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(model: SearchedCharacterPresentationModel) {
             binding.searchedCharacter = model
             binding.executePendingBindings()
+
+            binding.root.more_info_arrow_image_button.setOnClickListener {
+                onClick(model.url.id)
+            }
         }
     }
 

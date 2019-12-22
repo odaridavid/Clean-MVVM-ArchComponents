@@ -17,14 +17,14 @@ internal fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
         this.name,
         this.birthYear,
         this.height,
-        this.species!!.map { it.toDomain() },
-        this.films!!.map { it.toDomain() },
+        this.species!!.map { it?.toDomain() },
+        this.films!!.map { it?.toDomain() },
         this.homeworld!!.toDomain()
     )
 }
 
 internal fun FilmDataModel.toDomain(): FilmDomainModel =
-    FilmDomainModel(this.openingCrawl)
+    FilmDomainModel(this.title, this.openingCrawl)
 
 
 internal fun PlanetDataModel.toDomain(): PlanetDomainModel =
@@ -35,5 +35,5 @@ internal fun PlanetDataModel.toDomain(): PlanetDomainModel =
 
 
 internal fun SpeciesDataModel.toDomain(): SpeciesDomainModel =
-    SpeciesDomainModel(this.language)
+    SpeciesDomainModel(this.name, this.language)
 

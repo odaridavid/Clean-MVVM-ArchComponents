@@ -10,7 +10,6 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.domain.utils.id
-import retrofit2.HttpException
 import javax.inject.Inject
 
 class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
@@ -20,10 +19,10 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
      * as opposed to using null values.
      *
      * Takes a [characterId]
-     * @return a characters details
+     * @return result wrrapper on characters details
      *
      * In the event value returned is null it should
-     * @throws HttpException
+     * @throws an Exception
      */
     suspend fun getCharacter(characterId: Int): ResultWrapper<CharacterDetailsDataModel>? {
         return try {
@@ -51,59 +50,89 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
         }
     }
 
-    //TODO Refactor Dry Code
+    /**
+     * Gets data from planets endpoint and maps it to data model if errors occur a null reference will
+     * be added to the list.
+     */
     private suspend fun processPlanet(
         characterDetailsResponse: CharacterDetailsResponse,
         characterDataModel: CharacterDetailsDataModel
     ) {
-        val planetResponse = apiService.getPlanet(characterDetailsResponse.homeWorld.id)
-        val planetDataModel =
-            PlanetDataModel(
-                planetResponse.name,
-                planetResponse.population
-            )
-        characterDataModel.homeworld = planetDataModel
+        try {
+            val planetResponse = apiService.getPlanet(characterDetailsResponse.homeWorld.id)
+            val planetDataModel =
+                PlanetDataModel(
+                    planetResponse.name,
+                    planetResponse.population
+                )
+            characterDataModel.homeworld = planetDataModel
+        } catch (e: Exception) {
+            characterDataModel.homeworld = null
+        }
     }
 
+    /**
+     * Gets data from species endpoint and maps it to data model if errors occur a null reference will
+     * be added to the list.
+     */
     private suspend fun processSpecies(
         characterDetailsResponse: CharacterDetailsResponse,
         characterDataModel: CharacterDetailsDataModel
     ) {
-        val characterSpecies = mutableListOf<SpeciesDataModel>()
+
+        val characterSpecies = mutableListOf<SpeciesDataModel?>()
 
         populateSpeciesList(characterSpecies, characterDetailsResponse.species, apiService)
 
         characterDataModel.species = characterSpecies
+
     }
 
+    /**
+     * Gets data from films endpoint and maps it to data model if errors occur a null reference will
+     * be added to the list.
+     */
     private suspend fun processFilms(
         characterDetailsResponse: CharacterDetailsResponse,
         characterDataModel: CharacterDetailsDataModel
     ) {
-        val characterFilms = mutableListOf<FilmDataModel>()
+
+        val characterFilms = mutableListOf<FilmDataModel?>()
         for (film in characterDetailsResponse.films) {
-            val filmResponse = apiService.getFilms(film.id)
-            val filmDataModel =
-                FilmDataModel(
-                    filmResponse.openingCrawl
-                )
-            characterFilms.add(filmDataModel)
+            try {
+                val filmResponse = apiService.getFilms(film.id)
+                val filmDataModel =
+                    FilmDataModel(
+                        filmResponse.title,
+                        filmResponse.openingCrawl
+                    )
+                characterFilms.add(filmDataModel)
+            } catch (e: Exception) {
+                characterFilms.add(null)
+            }
         }
         characterDataModel.films = characterFilms
+
     }
 
     private suspend fun populateSpeciesList(
-        species: MutableList<SpeciesDataModel>,
+        species: MutableList<SpeciesDataModel?>,
         speciesUrls: List<String>,
         apiService: StarWarsApiService
     ) {
+
         for (specie in speciesUrls) {
-            val specieResponse = apiService.getSpecies(specie.id)
-            val speciesDataModel =
-                SpeciesDataModel(
-                    specieResponse.language
-                )
-            species.add(speciesDataModel)
+            try {
+                val specieResponse = apiService.getSpecies(specie.id)
+                val speciesDataModel =
+                    SpeciesDataModel(
+                        specieResponse.name,
+                        specieResponse.language
+                    )
+                species.add(speciesDataModel)
+            } catch (e: Exception) {
+                species.add(null)
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.di.ViewModelKey
 import com.k0d4black.theforce.di.factory.ViewModelFactory
+import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import dagger.Binds
 import dagger.Module
@@ -16,6 +17,11 @@ abstract class ViewModelModule {
     @Binds
     @ViewModelKey(CharacterSearchViewModel::class)
     abstract fun bindCharacterSearchViewModel(characterSearchViewModel: CharacterSearchViewModel): ViewModel
+
+    @IntoMap
+    @Binds
+    @ViewModelKey(CharacterDetailViewModel::class)
+    abstract fun bindCharacterDetailViewModel(characterDetailViewModel: CharacterDetailViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

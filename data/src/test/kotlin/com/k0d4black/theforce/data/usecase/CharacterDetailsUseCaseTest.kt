@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.usecase
 
 import com.k0d4black.theforce.data.repository.CharacterDetailsRepository
-import com.k0d4black.theforce.data.usecases.GetCharacterDetailsUseCase
+import com.k0d4black.theforce.data.usecases.CharacterDetailsUseCase
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -12,15 +12,15 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class GetCharacterDetailsUseCaseTest {
+internal class CharacterDetailsUseCaseTest {
     @Mock
     private lateinit var characterDetailsRepositoryMock: CharacterDetailsRepository
 
-    private lateinit var getCharacterDetailsUseCase: GetCharacterDetailsUseCase
+    private lateinit var characterDetailsUseCase: CharacterDetailsUseCase
 
     @Before
     fun setup() {
-        getCharacterDetailsUseCase = GetCharacterDetailsUseCase(characterDetailsRepositoryMock)
+        characterDetailsUseCase = CharacterDetailsUseCase(characterDetailsRepositoryMock)
     }
 
     @Test
@@ -30,7 +30,7 @@ internal class GetCharacterDetailsUseCaseTest {
             val characterId = 10
 
             //When
-            getCharacterDetailsUseCase.getCharacterDetails(characterId)
+            characterDetailsUseCase.getCharacterDetails(characterId)
 
             //Then
             verify(characterDetailsRepositoryMock).getCharacterDetails(characterId)

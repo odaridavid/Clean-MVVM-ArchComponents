@@ -140,14 +140,17 @@ responses are received from remote source.
 
  With the current min api level set to 21 we have access to material libraries and can build awesome UIs.
  
+ **Search Screen**
+ 
+ **Details Screen**
+ 
+  Constraint Layout to avoid deep nesting
 
 ## Libraries
 
 Libraries used in the whole application are:
 
 - [Jetpack](https://developer.android.com/jetpack)🚀
-  - [Navigation](https://developer.android.com/guide/navigation/) - 
-  Caters for in app navigation with the NavController.
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way 
   and act as a channel between use cases and ui
   - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in your layouts to data sources,binds character details to UI
@@ -228,9 +231,9 @@ enhance user experience.
 
 ## Screenshots
 
-| <img src="art/search_screen_default.png" alt="home" width="200"/> |
-|:----:|
-| 🔍Search Screen |
+| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|
+|:----:|:----:|
+| 🔍Search Screen - Default|Search Screen - Results|
 
 ## TODO
 

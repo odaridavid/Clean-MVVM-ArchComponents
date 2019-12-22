@@ -1,23 +1,20 @@
 package com.k0d4black.theforce.features.character_search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.viewModels
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.k0d4black.theforce.R
+import com.k0d4black.theforce.*
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.Success
-import com.k0d4black.theforce.hide
+import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
-import com.k0d4black.theforce.show
-import com.k0d4black.theforce.showSnackbar
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -30,8 +27,13 @@ class SearchActivity : AppCompatActivity() {
 
     private val characterSearchViewModel: CharacterSearchViewModel by viewModels { viewModelFactory }
 
-    @Inject
-    lateinit var searchResultAdapter: SearchResultAdapter
+    private val searchResultAdapter: SearchResultAdapter by lazy {
+        SearchResultAdapter { characterId ->
+            val intent = Intent(this, CharacterDetailActivity::class.java)
+            intent.putExtra(CHARACTER_ID_KEY, characterId)
+            startActivity(intent)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -55,16 +57,12 @@ class SearchActivity : AppCompatActivity() {
         search_tip_text_view.hide()
     }
 
-    private fun displayDataLoadedState(data: List<SearchedCharacterPresentationModel>) {
+    private fun displayDataLoadedState(searchResults: List<SearchedCharacterPresentationModel>) {
         loading_search_results_progress_bar.hide()
-        if (data.isNotEmpty()) {
-            val linearLayoutManager = LinearLayoutManager(this)
+        if (searchResults.isNotEmpty()) {
             search_results_recycler_view.apply {
-                adapter = searchResultAdapter.apply { submitList(data) }
-                layoutManager = linearLayoutManager
-                addItemDecoration(
-                    DividerItemDecoration(this@SearchActivity, linearLayoutManager.orientation)
-                )
+                adapter = searchResultAdapter.apply { submitList(searchResults) }
+                initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
         } else displayEmptyDataState()
     }

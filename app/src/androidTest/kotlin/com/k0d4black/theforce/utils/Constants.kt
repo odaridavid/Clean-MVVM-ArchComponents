@@ -1,4 +1,4 @@
-package com.k0d4black.theforce
+package com.k0d4black.theforce.utils
 
 //Maintains url path parameters for consistency across tests
 const val SPECIES_ID = 1
