@@ -21,6 +21,7 @@ class CharacterDetailActivityIntegrationTest {
 
     @Test
     fun shouldDisplayLoadingOnLaunch() {
+        SystemClock.sleep(1000)
         val intent = Intent()
         activityRule.launchActivity(intent)
         onView(withId(R.id.loading_character_progress_bar))
@@ -30,6 +31,7 @@ class CharacterDetailActivityIntegrationTest {
 
     @Test
     fun shouldLoadDataOnIntentExtraReceived() {
+        SystemClock.sleep(1000)
         val intent = Intent().putExtra(CHARACTER_ID_KEY, 2)
         activityRule.launchActivity(intent)
         SystemClock.sleep(8000)
