@@ -102,6 +102,7 @@ dependencies {
     kapt appDependencies.dagger2Processor
 
     //Test Libs
+    implementation testDependencies.espressoIdlingResource
     testImplementation testDependencies.junit
     testImplementation testDependencies.robolectric
     testImplementation testDependencies.androidxJunit
@@ -115,6 +116,8 @@ dependencies {
     androidTestImplementation testDependencies.androidxCoreTest
     androidTestImplementation testDependencies.mockWebServer
     testImplementation testDependencies.googleTruth
+    androidTestImplementation testDependencies.espressoContrib
+    kaptAndroidTest 'com.google.dagger:dagger-compiler:' + rootProject.dagger2Version
 
 
 }

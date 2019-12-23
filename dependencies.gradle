@@ -40,7 +40,7 @@ ext {
     robolectricVersion = '4.3'
     androidxTestCoreVersion = '1.0.0'
     runnerVersion = '1.2.0'
-    rulesVersion ='1.2.0'
+    rulesVersion = '1.2.0'
 
 
     //App/Presentation Layer
@@ -77,16 +77,18 @@ ext {
     ]
 
     testDependencies = [
-            junit           : "junit:junit:$junitVersion",
-            androidxJunit   : "androidx.test.ext:junit:$androidxJunitVersion",
-            espressoCore    : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
-            mockito         : "org.mockito:mockito-core:$mockitoVersion",
-            googleTruth     : "com.google.truth:truth:$truthVersion",
-            mockitoInline   : "org.mockito:mockito-inline:$mockitoInlineVersion",
-            mockWebServer   : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
-            robolectric     : "org.robolectric:robolectric:$robolectricVersion",
-            androidxCoreTest: "androidx.test:core:$androidxTestCoreVersion",
-            runner          : "androidx.test:runner:$runnerVersion",
-            rules           : "androidx.test:rules:$rulesVersion"
+            junit                 : "junit:junit:$junitVersion",
+            androidxJunit         : "androidx.test.ext:junit:$androidxJunitVersion",
+            espressoCore          : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            mockito               : "org.mockito:mockito-core:$mockitoVersion",
+            googleTruth           : "com.google.truth:truth:$truthVersion",
+            mockitoInline         : "org.mockito:mockito-inline:$mockitoInlineVersion",
+            mockWebServer         : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
+            robolectric           : "org.robolectric:robolectric:$robolectricVersion",
+            androidxCoreTest      : "androidx.test:core:$androidxTestCoreVersion",
+            runner                : "androidx.test:runner:$runnerVersion",
+            rules                 : "androidx.test:rules:$rulesVersion",
+            espressoIdlingResource: "androidx.test.espresso:espresso-idling-resource:$espressoCoreVersion",
+            espressoContrib       : "androidx.test.espresso:espresso-contrib:3.1.0"
     ]
 }

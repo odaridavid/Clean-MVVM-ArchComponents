@@ -200,6 +200,7 @@ and default parameters
   - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
 - [Dagger2](https://github.com/google/dagger) - Dependency Injection lib built with scaling in mind and has large community support.
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
+- [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 
 ## Extras
 
@@ -268,6 +269,7 @@ enhance user experience.
 - Search Query Suggestions
 - Animations
 - Screen Adaptability - Currently locked to portrait mode
+- Use Dagger for tests
 
 ## License
 
