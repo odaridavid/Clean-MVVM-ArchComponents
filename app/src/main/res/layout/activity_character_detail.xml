@@ -53,15 +53,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/character_details_height_text_view"
+                android:id="@+id/character_details_height_in_cm_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:fontFamily="@font/roboto_light"
-                android:text="@{String.format(@string/template_height_cm,character.height)}"
+                android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
-                tools:text="123 cm , 5.6 Feet" />
+                tools:text="123 cm" />
+
+            <TextView
+                android:id="@+id/character_details_height_in_inches_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default"
+                android:fontFamily="@font/roboto_light"
+                android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
+                tools:text="123 cm" />
 
             <TextView
                 android:id="@+id/character_details_planet_title_text_view"
@@ -71,7 +82,7 @@
                 android:text="@string/title_planet_info"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_text_view" />
+                app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />
 
             <TextView
                 android:id="@+id/character_details_planet_name_text_view"
@@ -138,14 +149,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="character_details_height_text_view,character_details_height_title_text_view,character_details_birth_year_text_view,character_details_planet_name_text_view,character_details_planet_title_text_view,character_details_planet_population_text_view,character_details_films_title_text_view,character_details_films_recycler_view,character_details_species_title_text_view,character_details_birth_year_title_text_view,character_details_species_recycler_view" />
+                app:constraint_referenced_ids="character_details_height_in_cm_text_view,character_details_height_in_inches_text_view,character_details_height_title_text_view,character_details_birth_year_text_view,character_details_planet_name_text_view,character_details_planet_title_text_view,character_details_planet_population_text_view,character_details_films_title_text_view,character_details_films_recycler_view,character_details_species_title_text_view,character_details_birth_year_title_text_view,character_details_species_recycler_view" />
 
             <ProgressBar
                 android:id="@+id/loading_character_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_margin="@dimen/margin_default"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

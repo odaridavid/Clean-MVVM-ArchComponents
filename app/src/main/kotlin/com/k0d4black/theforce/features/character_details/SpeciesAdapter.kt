@@ -43,7 +43,6 @@ class SpeciesAdapter : ListAdapter<SpeciesPresentationModel, SpeciesAdapter.Spec
                     oldItem: SpeciesPresentationModel,
                     newItem: SpeciesPresentationModel
                 ): Boolean = oldItem == newItem
-
             }
     }
 }

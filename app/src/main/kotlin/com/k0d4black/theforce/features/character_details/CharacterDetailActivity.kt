@@ -9,12 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.k0d4black.theforce.*
+import com.k0d4black.theforce.R
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.models.CharacterDetailsPresentationModel
+import com.k0d4black.theforce.utils.CHARACTER_ID_KEY
+import com.k0d4black.theforce.utils.hide
+import com.k0d4black.theforce.utils.initRecyclerViewWithLineDecoration
+import com.k0d4black.theforce.utils.showSnackbar
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import javax.inject.Inject
@@ -32,13 +36,17 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
 
+    companion object {
+        const val CHARACTER_ID_DEFAULT_VALUE = -1
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
 
-        val characterId = intent.getIntExtra(CHARACTER_ID_KEY, -1)
+        val characterId = intent.getIntExtra(CHARACTER_ID_KEY, CHARACTER_ID_DEFAULT_VALUE)
 
         characterDetailViewModel.getCharacterDetails(characterId)
 
@@ -66,6 +74,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun displayDataLoadedState(character: CharacterDetailsPresentationModel) {
         supportActionBar?.title = character.name
+
         binding.character = character
 
         binding.loadingCharacterProgressBar.hide()
