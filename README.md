@@ -110,8 +110,6 @@ domain will be mapped to the presentation model.
 
 ## Testing
 
-**Naming Conventions**
-
 Testing has been layered out differently based on the architectural layers.
 
 1. Domain
