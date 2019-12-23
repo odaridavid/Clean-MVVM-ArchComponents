@@ -26,6 +26,4 @@ fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     addItemDecoration(itemDecoration)
 }
 
-fun getHeightInFeet(): String = TODO("")
-
 const val CHARACTER_ID_KEY = "character_id"
