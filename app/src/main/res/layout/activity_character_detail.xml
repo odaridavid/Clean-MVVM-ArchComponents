@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:fontFamily="@font/roboto_light"
-                android:text="@{character.height}"
+                android:text="@{String.format(@string/template_height_cm,character.height)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
                 tools:text="123 cm , 5.6 Feet" />

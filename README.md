@@ -122,8 +122,9 @@ the proxy to other layers a breaking change will propagate to other layers.
 2. Data
 
 Tests in the data inherit from a base test that provides a mock web server 
-with the api interface to request paths the routing of paths to responses is handled
-by a custom mock web server dispatcher.
+with the api interface to request paths the routing of paths to responses 
+is handled by a custom mock web server dispatcher.
+
 Json responses have also been provided in the test resource folder they 
 are similar to the response that will be received from the api
 The repository tests serve as integration tests between the data sources
@@ -142,7 +143,10 @@ Utilities and Extension functions have also been fully tested for edge cases.
 
 3. Presentation
 
-**TODO**
+The Presentation layer contains robolectric jvm tests on for menu items 
+and instrumentation tests checking on system behaviour as per user expectation.
+The instrumentation tests are currently flaky as they rely on internet 
+connection and suspension of thread execution.
 
 ## Design
 

@@ -35,7 +35,7 @@ class CharacterDetailActivityIntegrationTest {
     fun shouldLoadDataOnIntentExtraReceived() {
         val intent = Intent().putExtra(CHARACTER_ID_KEY, 2)
         activityRule.launchActivity(intent)
-        SystemClock.sleep(7000)
+        SystemClock.sleep(8000)
         onView(withId(R.id.character_details_birth_year_title_text_view)).check(matches(isDisplayed()))
         activityRule.finishActivity()
     }
