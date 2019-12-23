@@ -261,7 +261,7 @@ enhance user experience.
 
 ## Screenshots
 
-| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/Details.png" alt="home" width="200"/>|
+| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/character_details.png" alt="home" width="200"/>|
 |:----:|:----:|:----:|
 | 🔍Search Screen - Default|Search Screen - Results|Character Details|
 
