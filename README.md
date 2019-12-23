@@ -110,8 +110,6 @@ domain will be mapped to the presentation model.
 
 ## Testing
 
-**Naming Conventions**
-
 Testing has been layered out differently based on the architectural layers.
 
 1. Domain
@@ -122,8 +120,9 @@ the proxy to other layers a breaking change will propagate to other layers.
 2. Data
 
 Tests in the data inherit from a base test that provides a mock web server 
-with the api interface to request paths the routing of paths to responses is handled
-by a custom mock web server dispatcher.
+with the api interface to request paths the routing of paths to responses 
+is handled by a custom mock web server dispatcher.
+
 Json responses have also been provided in the test resource folder they 
 are similar to the response that will be received from the api
 The repository tests serve as integration tests between the data sources
@@ -142,7 +141,10 @@ Utilities and Extension functions have also been fully tested for edge cases.
 
 3. Presentation
 
-**TODO**
+The Presentation layer contains robolectric jvm tests on for menu items 
+and instrumentation tests checking on system behaviour as per user expectation.
+The instrumentation tests are currently flaky as they rely on internet 
+connection and suspension of thread execution.
 
 ## Design
 
@@ -200,6 +202,7 @@ and default parameters
   - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
 - [Dagger2](https://github.com/google/dagger) - Dependency Injection lib built with scaling in mind and has large community support.
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
+- [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 
 ## Extras
 
@@ -258,7 +261,7 @@ enhance user experience.
 
 ## Screenshots
 
-| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/Details.png" alt="home" width="200"/>|
+| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/character_details.png" alt="home" width="200"/>|
 |:----:|:----:|:----:|
 | 🔍Search Screen - Default|Search Screen - Results|Character Details|
 
@@ -268,6 +271,7 @@ enhance user experience.
 - Search Query Suggestions
 - Animations
 - Screen Adaptability - Currently locked to portrait mode
+- Use Dagger for tests
 
 ## License
 

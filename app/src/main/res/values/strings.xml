@@ -20,6 +20,7 @@
     <string name="template_planet_name">Name : %s</string>
     <string name="template_planet_population">Population : %s</string>
     <string name="template_species_name">Name : %s</string>
+    <string name="template_height_cm">%s cm</string>
     <string name="template_species_language">Language : %s</string>
     <string name="info_loading_status">Loading Character</string>
 
