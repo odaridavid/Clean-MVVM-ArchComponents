@@ -16,7 +16,6 @@ import org.junit.Test
 
 class CharacterDetailActivityIntegrationTest {
 
-    private lateinit var server: MockWebServer
 
     @get:Rule
     var activityRule: ActivityTestRule<CharacterDetailActivity> =

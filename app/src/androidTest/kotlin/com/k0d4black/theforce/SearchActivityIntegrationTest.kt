@@ -10,7 +10,6 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_search.SearchActivity
-import com.k0d4black.theforce.utils.IdlingTest
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Before
 import org.junit.Rule
@@ -19,7 +18,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class SearchActivityIntegrationTest : IdlingTest() {
+class SearchActivityIntegrationTest {
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =
@@ -38,7 +37,7 @@ class SearchActivityIntegrationTest : IdlingTest() {
     }
 
     @Test
-    fun testDisplaysDefaultViewOnLaunch() {
+    fun shouldDisplaysDefaultViewOnLaunch() {
         val intent = Intent()
         activityRule.launchActivity(intent)
         onView(withId(R.id.search_tip_text_view)).check(matches(withText(R.string.info_search_tip)))
@@ -47,19 +46,19 @@ class SearchActivityIntegrationTest : IdlingTest() {
 
     //TODO Fix flaky test
     @Test
-    fun testDisplaysProgressBarOnSearch() {
+    fun shouldDisplayProgressBarOnSearch() {
         val intent = Intent()
         activityRule.launchActivity(intent)
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText("Darth"))
-        Thread.sleep(2500)
+        Thread.sleep(2600)
         onView(withId(R.id.loading_search_results_progress_bar)).check(matches(isDisplayed()))
         activityRule.finishActivity()
     }
 
 //
 //    @Test
-//    fun testDisplaysDataOnSearch() {
+//    fun shouldDisplaysDataOnSearchSuccess() {
 //
 //        val intent = Intent()
 //        activityRule.launchActivity(intent)
@@ -73,11 +72,11 @@ class SearchActivityIntegrationTest : IdlingTest() {
 
 
 //    @Test
-//    fun testDisplaysErrorSnackbarOnError() {
+//    fun shouldDisplayErrorSnackbarOnSearchError() {
 //    }
 //
 //    @Test
-//    fun testDisplaysNoDataSnackbarOnEmptyDataLoaded() {
+//    fun shouldDisplaysNoDataSnackbarOnEmptyDataLoaded() {
 //    }
 
 
