@@ -1,6 +1,6 @@
 package com.k0d4black.theforce.data.helpers
 
-import com.k0d4black.theforce.data.api.ApiUtils
+
 import com.k0d4black.theforce.data.api.HttpClient
 import com.k0d4black.theforce.data.api.LoggingInterceptor
 import com.k0d4black.theforce.data.api.StarWarsApiService
@@ -31,9 +31,8 @@ open class BaseTest {
         loggingInterceptor = LoggingInterceptor.create()
         okHttpClient = HttpClient.setupOkhttpClient(loggingInterceptor)
 
-        ApiUtils.BASE_URL = "/"
         starWarsApiService = Retrofit.Builder()
-            .baseUrl(mockWebServer.url(ApiUtils.BASE_URL))
+            .baseUrl(mockWebServer.url("/"))
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
