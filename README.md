@@ -177,7 +177,11 @@ connection and suspension of thread execution.
  The Character Details are displayed by satisfying constraints to various 
  views using the constraint layout which flattens our view hierarchy and 
  avoids nesting of multiple layouts for displaying complex objects.
-
+ 
+ The views displaying character data are logically  grouped by 
+ constraint layout Group widget making it simpler to enable and disable 
+ a large set of views.
+ 
 ## Libraries
 
 Libraries used in the whole application are:
@@ -258,6 +262,13 @@ easy to reuse dimension values across the app.
 Theming is guided by the material design specifications with a ```DayNight```
 theme which can later be used to provide Night variant for the app and 
 enhance user experience.
+
+#### Converting centimeters to inches
+
+There is a utility,`convertToInches` method which takes in a centimeter 
+value from the domain model and on mapping to the presentation layer 
+model it takes in both centimeters and assigns a converted value to 
+height in inches property.
 
 ## Screenshots
 

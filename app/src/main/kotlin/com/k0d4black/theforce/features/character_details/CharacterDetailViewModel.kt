@@ -19,6 +19,7 @@ class CharacterDetailViewModel @Inject constructor(private val characterDetailsU
 
     val characterDetail: LiveData<ResultWrapper<CharacterDetailsPresentationModel>>
         get() = _characterDetail
+
     private var _characterDetail =
         MutableLiveData<ResultWrapper<CharacterDetailsPresentationModel>>()
 

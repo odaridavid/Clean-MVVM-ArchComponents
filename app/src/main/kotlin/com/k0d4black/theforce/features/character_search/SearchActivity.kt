@@ -6,15 +6,16 @@ import android.view.Menu
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.k0d4black.theforce.*
+import com.k0d4black.theforce.R
 import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -29,9 +30,9 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { characterId ->
-            val intent = Intent(this, CharacterDetailActivity::class.java)
-            intent.putExtra(CHARACTER_ID_KEY, characterId)
-            startActivity(intent)
+            Intent(this, CharacterDetailActivity::class.java).apply {
+                putExtra(CHARACTER_ID_KEY, characterId)
+            }.also { startActivity(it) }
         }
     }
 
@@ -60,6 +61,8 @@ class SearchActivity : AppCompatActivity() {
     private fun displayDataLoadedState(searchResults: List<SearchedCharacterPresentationModel>) {
         loading_search_results_progress_bar.hide()
         if (searchResults.isNotEmpty()) {
+            if (search_tip_text_view.isVisible) search_tip_text_view.hide()
+            search_results_recycler_view.show()
             search_results_recycler_view.apply {
                 adapter = searchResultAdapter.apply { submitList(searchResults) }
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
@@ -69,10 +72,15 @@ class SearchActivity : AppCompatActivity() {
 
     private fun displayEmptyDataState() {
         search_tip_text_view.show()
-        showSnackbar(search_results_recycler_view, getString(R.string.info_no_results))
+        search_results_recycler_view.hide()
+        showSnackbar(
+            search_results_recycler_view,
+            getString(R.string.info_no_results)
+        )
     }
 
     private fun displayErrorState(e: Exception) {
+        search_results_recycler_view.hide()
         loading_search_results_progress_bar.hide()
         search_tip_text_view.show()
         showSnackbar(search_results_recycler_view, "$e")

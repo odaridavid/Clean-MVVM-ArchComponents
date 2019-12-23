@@ -11,7 +11,7 @@ class SearchQueryListener @Inject constructor(private val viewModel: CharacterSe
 
     private var searchJob: Job? = null
 
-    var debouncePeriod = 400L
+    private var debouncePeriod = 400L
 
     override fun onQueryTextSubmit(query: String?): Boolean = false
 

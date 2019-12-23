@@ -1,5 +1,6 @@
 package com.k0d4black.theforce.mappers
 
+import com.k0d4black.theforce.utils.convertToInches
 import com.k0d4black.theforce.domain.*
 import com.k0d4black.theforce.models.*
 
@@ -17,6 +18,7 @@ fun CharacterDetailsDomainModel.toPresentation(): CharacterDetailsPresentationMo
         this.name,
         this.birthYear,
         this.height,
+        convertToInches(this.height),
         this.films.map { it?.toPresentation() },
         this.species.map { it?.toPresentation() },
         this.homeworld.toPresentation()

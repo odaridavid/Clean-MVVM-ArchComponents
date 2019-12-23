@@ -2,15 +2,13 @@ package com.k0d4black.theforce
 
 import android.content.Intent
 import android.os.SystemClock
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import okhttp3.mockwebserver.MockWebServer
+import com.k0d4black.theforce.utils.CHARACTER_ID_KEY
 import org.junit.Rule
 import org.junit.Test
 

@@ -43,7 +43,6 @@ class FilmsAdapter : ListAdapter<FilmPresentationModel, FilmsAdapter.FilmViewHol
                     oldItem: FilmPresentationModel,
                     newItem: FilmPresentationModel
                 ): Boolean = oldItem == newItem
-
             }
     }
 }

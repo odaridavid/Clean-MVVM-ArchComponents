@@ -1,4 +1,4 @@
-package com.k0d4black.theforce
+package com.k0d4black.theforce.utils
 
 import android.content.Context
 import android.view.View
@@ -6,13 +6,15 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 fun View.show() {
     this.visibility = View.VISIBLE
 }
 
 fun View.hide() {
-    this.visibility = View.GONE
+    this.visibility = View.INVISIBLE
 }
 
 fun showSnackbar(view: View, message: String) {
@@ -26,4 +28,3 @@ fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     addItemDecoration(itemDecoration)
 }
 
-const val CHARACTER_ID_KEY = "character_id"
