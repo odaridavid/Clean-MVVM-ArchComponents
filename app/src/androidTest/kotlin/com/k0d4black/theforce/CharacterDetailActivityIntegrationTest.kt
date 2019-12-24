@@ -34,8 +34,6 @@ class CharacterDetailActivityIntegrationTest : BaseTest() {
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
         val intent = Intent().putExtra(CHARACTER_ID_KEY, 1)
         activityRule.launchActivity(intent)
-        onView(withId(R.id.loading_character_progress_bar))
-            .check(matches(isDisplayed()))
         SystemClock.sleep(2000)
         onView(withId(R.id.character_details_birth_year_title_text_view)).check(matches(isDisplayed()))
         activityRule.finishActivity()
