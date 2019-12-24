@@ -1,6 +1,7 @@
-package com.k0d4black.theforce.data.helpers
+package com.k0d4black.theforce.data
 
 
+import com.k0d4black.theforce.data.helpers.StarWarsRequestDispatcher
 import com.k0d4black.theforce.data.api.HttpClient
 import com.k0d4black.theforce.data.api.LoggingInterceptor
 import com.k0d4black.theforce.data.api.StarWarsApiService
@@ -26,7 +27,8 @@ open class BaseTest {
     @Before
     open fun setup() {
         mockWebServer = MockWebServer()
-        mockWebServer.dispatcher = StarWarsRequestDispatcher()
+        mockWebServer.dispatcher =
+            StarWarsRequestDispatcher()
         mockWebServer.start()
         loggingInterceptor = LoggingInterceptor.create()
         okHttpClient = HttpClient.setupOkhttpClient(loggingInterceptor)

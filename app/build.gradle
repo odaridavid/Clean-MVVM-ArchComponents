@@ -33,7 +33,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.k0d4black.theforce.runner.MockTestRunner"
     }
     buildTypes {
         release {
@@ -117,7 +117,8 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     testImplementation testDependencies.googleTruth
     androidTestImplementation testDependencies.espressoContrib
-    kaptAndroidTest 'com.google.dagger:dagger-compiler:' + rootProject.dagger2Version
+    kaptAndroidTest testDependencies.dagger2Processor
+    kaptAndroidTest appDependencies.dagger2AndroidProcessor
 
 
 }

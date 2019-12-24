@@ -11,61 +11,50 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_search.SearchActivity
+import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
+import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class SearchActivityIntegrationTest {
+class SearchActivityIntegrationTest : BaseTest() {
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =
-        ActivityTestRule(SearchActivity::class.java)
+        ActivityTestRule(SearchActivity::class.java, false, false)
 
     @Test
-    fun shouldDisplaysDefaultViewOnLaunch() {
-        SystemClock.sleep(1000)
+    fun shouldDisplayDefaultViewOnLaunch() {
         val intent = Intent()
         activityRule.launchActivity(intent)
         onView(withId(R.id.search_tip_text_view)).check(matches(withText(R.string.info_search_tip)))
         activityRule.finishActivity()
     }
 
-    //TODO Fix flaky test
+
     @Test
-    fun shouldDisplayProgressBarOnSearch() {
+    fun shouldDisplayDataOnSearch() {
         val intent = Intent()
         activityRule.launchActivity(intent)
         onView(withId(R.id.action_search)).perform(click())
-        onView(isAssignableFrom(EditText::class.java)).perform(typeText("Darth"))
+        onView(isAssignableFrom(EditText::class.java)).perform(typeText(EXISTING_SEARCH_PARAMS))
         SystemClock.sleep(2000)
-        onView(withId(R.id.loading_search_results_progress_bar)).check(matches(isDisplayed()))
+        onView(withId(R.id.search_results_recycler_view)).check(matches(isDisplayed()))
         activityRule.finishActivity()
     }
 
-//
-//    @Test
-//    fun shouldDisplaysDataOnSearchSuccess() {
-//
-//        val intent = Intent()
-//        activityRule.launchActivity(intent)
-//        onView(withId(R.id.action_search)).perform(click())
-//        onView(isAssignableFrom(EditText::class.java)).perform(typeText("Darth"))
-//        SystemClock.sleep(5000)
-//        onView(withId(R.id.loading_search_results_progress_bar)).check(matches(isDisplayed()))
-//        onView(withId(R.id.search_results_recycler_view)).check(matches(isDisplayed()))
-//        activityRule.finishActivity()
-//    }
-
-
-//    @Test
-//    fun shouldDisplayErrorSnackbarOnSearchError() {
-//    }
-//
-//    @Test
-//    fun shouldDisplaysNoDataSnackbarOnEmptyDataLoaded() {
-//    }
+    @Test
+    fun shouldDisplayDefaultTextWhenNoDataFoundOnSearch() {
+        val intent = Intent()
+        activityRule.launchActivity(intent)
+        onView(withId(R.id.action_search)).perform(click())
+        onView(isAssignableFrom(EditText::class.java)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))
+        SystemClock.sleep(2000)
+        onView(withId(R.id.search_tip_text_view)).check(matches(isDisplayed()))
+        activityRule.finishActivity()
+    }
 
 
 }

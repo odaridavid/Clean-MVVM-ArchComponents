@@ -1,2 +1,2 @@
-include ':app', ':data', ':domain'
+include ':app', ':data', ':domain', ':test-utils'
 rootProject.name='The Force'

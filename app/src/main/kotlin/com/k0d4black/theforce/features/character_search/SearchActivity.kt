@@ -83,7 +83,7 @@ class SearchActivity : AppCompatActivity() {
         search_results_recycler_view.hide()
         loading_search_results_progress_bar.hide()
         search_tip_text_view.show()
-        showSnackbar(search_results_recycler_view, "$e")
+        showSnackbar(search_results_recycler_view, "${e.message}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
