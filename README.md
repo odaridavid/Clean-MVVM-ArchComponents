@@ -1,3 +1,5 @@
+<img src="art/app_icon_no_bg.png" alt="home" width="100"/>
+
 # The-Force
 
 |[![Build Status](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop)](https://travis-ci.com/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![codecov](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ)](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4347e606b8f64d568aba90e00655a9f4)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Davidodari/The-Force-Clean-MVVM-ArchComponents-&amp;utm_campaign=Badge_Grade)|
