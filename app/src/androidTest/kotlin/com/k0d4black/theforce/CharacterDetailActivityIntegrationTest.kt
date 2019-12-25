@@ -25,6 +25,7 @@ class CharacterDetailActivityIntegrationTest : BaseTest() {
     fun shouldDisplayErrorOnLaunchWithDefaultId() {
         val intent = Intent()
         activityRule.launchActivity(intent)
+        SystemClock.sleep(1000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("HTTP 404 Client Error")))
         activityRule.finishActivity()
