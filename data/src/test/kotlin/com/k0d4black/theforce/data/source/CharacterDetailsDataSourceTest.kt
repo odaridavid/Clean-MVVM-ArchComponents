@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.source
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.data.helpers.BaseTest
+import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
 import com.k0d4black.theforce.domain.utils.Error

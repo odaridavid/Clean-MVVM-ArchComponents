@@ -5,7 +5,7 @@ import dagger.MapKey
 import kotlin.reflect.KClass
 
 /**
- * Annotations for having custom keys for viewmodel factory map
+ * Annotation for having custom keys for viewmodel factory map
  */
 @MapKey
 @Target(AnnotationTarget.FUNCTION)

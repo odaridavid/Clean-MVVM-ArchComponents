@@ -143,8 +143,14 @@ Utilities and Extension functions have also been fully tested for edge cases.
 
 The Presentation layer contains robolectric jvm tests on for menu items 
 and instrumentation tests checking on system behaviour as per user expectation.
-The instrumentation tests are currently flaky as they rely on internet 
-connection and suspension of thread execution.
+
+The UI tests display data served from a mock web server running from the
+devices localhost,this removes flakiness compared to relying on actual 
+data from the real server aspects such as internet connection or 
+network service might bring up issues.
+
+The tests are have been done per screen which is representative of the
+features available on the app.
 
 ## Design
 
@@ -282,7 +288,8 @@ height in inches property.
 - Search Query Suggestions
 - Animations
 - Screen Adaptability - Currently locked to portrait mode
-- Use Dagger for tests
+- Use Idling Resource for UI tests.
+- User Friendly Error Messages.
 
 ## License
 

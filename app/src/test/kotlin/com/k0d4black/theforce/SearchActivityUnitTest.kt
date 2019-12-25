@@ -20,7 +20,7 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
-class SearchActivityTest {
+class SearchActivityUnitTest {
 
     private lateinit var searchActivity: SearchActivity
 

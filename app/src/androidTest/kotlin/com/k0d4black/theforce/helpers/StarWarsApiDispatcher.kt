@@ -1,5 +1,6 @@
-package com.k0d4black.theforce.data.helpers
+package com.k0d4black.theforce.helpers
 
+import com.k0d4black.theforce.sample.*
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
@@ -9,44 +10,43 @@ import java.net.HttpURLConnection
  * Handles Requests from mock web server
  */
 class StarWarsRequestDispatcher : Dispatcher() {
+
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
             "/people?search=$EXISTING_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson("json/character_search.json"))
+                    .setBody(searchSuccess)
             }
             "/people?search=$NON_EXISTENT_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(
-                        getJson("json/character_search_no_match.json")
-                    )
+                    .setBody(searchNoMatch)
             }
             "/people/$NON_EXISTANT_CHARACTER_ID/" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
-                    .setBody(getJson("json/not_found.json"))
+                    .setBody(notFound)
             }
             "/people/$EXISTING_CHARACTER_ID/" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson("json/character_details.json"))
+                    .setBody(characterDetails)
             }
             "/species/$SPECIES_ID/" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson("json/characters_species.json"))
+                    .setBody(characterSpecies)
             }
             "/films/$FILM_ID/" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson("json/character_films.json"))
+                    .setBody(characterFilms)
             }
             "/planets/$PLANET_ID/" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
-                    .setBody(getJson("json/character_planet.json"))
+                    .setBody(characterPlanet)
             }
             else -> throw IllegalArgumentException("Unknown Request Path ${request.path.toString()}")
         }

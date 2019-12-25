@@ -1,9 +1,9 @@
-package com.k0d4black.theforce
+package com.k0d4black.theforce.di
 
-import com.k0d4black.theforce.di.AppComponent
+import android.content.Context
 import com.k0d4black.theforce.di.modules.ActivityBuilderModule
-import com.k0d4black.theforce.di.modules.StarWarsApiModule
 import com.k0d4black.theforce.di.modules.ViewModelModule
+import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
@@ -12,11 +12,16 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AndroidInjectionModule::class,
-        StarWarsApiModule::class,
+        FakeStarWarsApiModule::class,
         ActivityBuilderModule::class,
         ViewModelModule::class
     ]
 )
-interface TestAppComponent : AppComponent {
-    fun inject(searchActivityIntegrationTest: SearchActivityIntegrationTest)
+interface TestApplicationComponent : AppComponent {
+
+    @Component.Factory
+    interface Factory {
+        fun create(@BindsInstance context: Context): TestApplicationComponent
+    }
+
 }
