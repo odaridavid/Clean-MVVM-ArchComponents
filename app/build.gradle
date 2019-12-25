@@ -117,8 +117,10 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     testImplementation testDependencies.googleTruth
     androidTestImplementation testDependencies.espressoContrib
+    androidTestImplementation testDependencies.espressoIntents
     kaptAndroidTest testDependencies.dagger2Processor
     kaptAndroidTest appDependencies.dagger2AndroidProcessor
+
 
 
 }
