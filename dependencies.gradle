@@ -31,7 +31,7 @@ ext {
     //Testing
     mockitoVersion = '3.2.4'
     junitVersion = '4.12'
-    espressoCoreVersion = '3.2.0'
+    espressoVersion = '3.2.0'
     androidxJunitVersion = '1.1.1'
     truthVersion = '1.0'
     mockitoInlineVersion = '2.13.0'
@@ -41,7 +41,6 @@ ext {
     androidxTestCoreVersion = '1.0.0'
     runnerVersion = '1.2.0'
     rulesVersion = '1.2.0'
-    espressoContribVersion = '3.1.0'
 
 
     //App/Presentation Layer
@@ -80,7 +79,7 @@ ext {
     testDependencies = [
             junit                 : "junit:junit:$junitVersion",
             androidxJunit         : "androidx.test.ext:junit:$androidxJunitVersion",
-            espressoCore          : "androidx.test.espresso:espresso-core:$espressoCoreVersion",
+            espressoCore          : "androidx.test.espresso:espresso-core:$espressoVersion",
             mockito               : "org.mockito:mockito-core:$mockitoVersion",
             googleTruth           : "com.google.truth:truth:$truthVersion",
             mockitoInline         : "org.mockito:mockito-inline:$mockitoInlineVersion",
@@ -89,8 +88,9 @@ ext {
             androidxCoreTest      : "androidx.test:core:$androidxTestCoreVersion",
             runner                : "androidx.test:runner:$runnerVersion",
             rules                 : "androidx.test:rules:$rulesVersion",
-            espressoIdlingResource: "androidx.test.espresso:espresso-idling-resource:$espressoCoreVersion",
-            espressoContrib       : "androidx.test.espresso:espresso-contrib:$espressoContribVersion",
+            espressoIdlingResource: "androidx.test.espresso:espresso-idling-resource:$espressoVersion",
+            espressoIntents       : "androidx.test.espresso:espresso-intents:$espressoVersion",
+            espressoContrib       : "androidx.test.espresso:espresso-contrib:$espressoVersion",
             dagger2Processor      : "com.google.dagger:dagger-compiler:$dagger2Version",
     ]
 }
