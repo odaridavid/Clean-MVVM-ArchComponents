@@ -8,7 +8,9 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
+import com.k0d4black.theforce.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.utils.CHARACTER_ID_KEY
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,15 +30,19 @@ class CharacterDetailActivityIntegrationTest : BaseTest() {
         SystemClock.sleep(1000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText("HTTP 404 Client Error")))
-        activityRule.finishActivity()
     }
 
     @Test
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
-        val intent = Intent().putExtra(CHARACTER_ID_KEY, 1)
+        val intent = Intent().putExtra(CHARACTER_ID_KEY, EXISTING_CHARACTER_ID)
         activityRule.launchActivity(intent)
         SystemClock.sleep(2000)
         onView(withId(R.id.character_details_birth_year_title_text_view)).check(matches(isDisplayed()))
+    }
+
+    @After
+    override fun tearDown() {
+        super.tearDown()
         activityRule.finishActivity()
     }
 

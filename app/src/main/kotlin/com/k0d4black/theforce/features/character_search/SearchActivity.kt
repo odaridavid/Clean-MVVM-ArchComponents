@@ -17,7 +17,7 @@ import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
 
@@ -39,7 +39,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
         observeSearchResults()
     }
 
@@ -79,11 +79,11 @@ class SearchActivity : AppCompatActivity() {
         )
     }
 
-    private fun displayErrorState(e: Exception) {
+    private fun displayErrorState(error: Exception) {
         search_results_recycler_view.hide()
         loading_search_results_progress_bar.hide()
         search_tip_text_view.show()
-        showSnackbar(search_results_recycler_view, "${e.message}")
+        showSnackbar(search_results_recycler_view, "${error.message}")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

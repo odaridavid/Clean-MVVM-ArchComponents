@@ -9,8 +9,8 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success
-import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.mappers.toPresentation
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,8 +31,11 @@ class CharacterSearchViewModel @Inject constructor(
                 is Success -> {
                     _searchResults.postValue(Success(results.data.map { it.toPresentation() }))
                 }
-                is Error -> _searchResults.postValue(Error(results.exception))
+                is Error -> executeError(results.exception)
             }
         }
     }
+
+    private fun executeError(e: Exception) = _searchResults.postValue(Error(e))
+
 }

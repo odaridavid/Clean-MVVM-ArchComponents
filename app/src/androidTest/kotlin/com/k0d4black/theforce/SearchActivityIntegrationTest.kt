@@ -19,6 +19,8 @@ import com.k0d4black.theforce.features.character_search.SearchResultAdapter
 import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.ViewAction
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,41 +36,37 @@ class SearchActivityIntegrationTest : BaseTest() {
     @get:Rule
     val intentsTestRule = IntentsTestRule(SearchActivity::class.java)
 
-    @Test
-    fun shouldDisplayDefaultViewOnLaunch() {
+    @Before
+    override fun setup() {
+        super.setup()
         val intent = Intent()
         activityRule.launchActivity(intent)
+    }
+
+    @Test
+    fun shouldDisplayDefaultViewOnLaunch() {
         onView(withId(R.id.search_tip_text_view)).check(matches(withText(R.string.info_search_tip)))
-        activityRule.finishActivity()
     }
 
 
     @Test
     fun shouldDisplayDataOnSearch() {
-        val intent = Intent()
-        activityRule.launchActivity(intent)
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(EXISTING_SEARCH_PARAMS))
         SystemClock.sleep(2000)
         onView(withId(R.id.search_results_recycler_view)).check(matches(isDisplayed()))
-        activityRule.finishActivity()
     }
 
     @Test
     fun shouldDisplayDefaultTextWhenNoDataFoundOnSearch() {
-        val intent = Intent()
-        activityRule.launchActivity(intent)
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))
         SystemClock.sleep(2000)
         onView(withId(R.id.search_tip_text_view)).check(matches(isDisplayed()))
-        activityRule.finishActivity()
     }
 
     @Test
     fun shouldNavigateToCharacterDetailOnItemClick() {
-        val intent = Intent()
-        activityRule.launchActivity(intent)
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(EXISTING_SEARCH_PARAMS))
         SystemClock.sleep(2000)
@@ -79,8 +77,22 @@ class SearchActivityIntegrationTest : BaseTest() {
         )
         SystemClock.sleep(2000)
         intended(hasComponent("com.k0d4black.theforce.features.character_details.CharacterDetailActivity"))
-        activityRule.finishActivity()
     }
 
+
+    @Test
+    fun shouldDisplayErrorMessageOnSearchWithNoNetworkConnection() {
+        onView(withId(R.id.action_search)).perform(click())
+        onView(isAssignableFrom(EditText::class.java)).perform(typeText("Error"))
+        SystemClock.sleep(2000)
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(isDisplayed()))
+    }
+
+    @After
+    override fun tearDown() {
+        super.tearDown()
+        activityRule.finishActivity()
+    }
 
 }
