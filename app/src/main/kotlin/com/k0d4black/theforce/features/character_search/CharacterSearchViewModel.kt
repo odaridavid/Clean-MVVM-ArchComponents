@@ -31,11 +31,8 @@ class CharacterSearchViewModel @Inject constructor(
                 is Success -> {
                     _searchResults.postValue(Success(results.data.map { it.toPresentation() }))
                 }
-                is Error -> executeError(results.exception)
+                is Error -> _searchResults.postValue(Error(results.exception))
             }
         }
     }
-
-    private fun executeError(e: Exception) = _searchResults.postValue(Error(e))
-
 }

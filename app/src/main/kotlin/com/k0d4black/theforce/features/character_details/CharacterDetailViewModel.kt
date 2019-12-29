@@ -30,11 +30,8 @@ class CharacterDetailViewModel @Inject constructor(private val characterDetailsU
                 is Success -> {
                     _characterDetail.postValue(Success(results.data.toPresentation()))
                 }
-                is Error -> executeError(results.exception)
+                is Error -> _characterDetail.postValue(Error(results.exception))
             }
         }
     }
-
-    private fun executeError(e: Exception) = _characterDetail.postValue(Error(e))
-
 }
