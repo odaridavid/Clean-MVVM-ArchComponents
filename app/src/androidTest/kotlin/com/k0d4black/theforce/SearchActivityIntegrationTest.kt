@@ -81,7 +81,7 @@ class SearchActivityIntegrationTest : BaseTest() {
 
 
     @Test
-    fun shouldDisplayErrorMessageOnSearchWithNoNetworkConnection() {
+    fun shouldDisplayErrorMessageOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText("Error"))
         SystemClock.sleep(2000)

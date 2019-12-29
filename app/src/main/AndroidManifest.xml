@@ -16,7 +16,6 @@
             android:parentActivityName=".features.character_search.SearchActivity" />
         <activity
             android:name=".features.character_search.SearchActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
