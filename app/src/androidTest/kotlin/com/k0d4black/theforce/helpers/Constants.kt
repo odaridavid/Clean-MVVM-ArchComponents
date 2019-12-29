@@ -8,3 +8,4 @@ const val EXISTING_CHARACTER_ID = 1
 const val NON_EXISTANT_CHARACTER_ID = -1
 const val EXISTING_SEARCH_PARAMS = "Darth"
 const val NON_EXISTENT_SEARCH_PARAMS = "Zipa"
+const val EXCEPTION_THROWN_SEARCH_PARAMS = "NoConnection"

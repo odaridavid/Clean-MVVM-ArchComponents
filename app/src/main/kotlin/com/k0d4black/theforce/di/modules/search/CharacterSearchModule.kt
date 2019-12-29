@@ -13,8 +13,8 @@ import dagger.Provides
 class CharacterSearchModule {
 
     @Provides
-    fun provideSearchQueryListener(viewModel: CharacterSearchViewModel): SearchQueryListener {
-        return SearchQueryListener(viewModel)
+    fun provideSearchQueryListener(characterSearchViewModel: CharacterSearchViewModel): SearchQueryListener {
+        return SearchQueryListener(characterSearchViewModel)
     }
 
     @Provides

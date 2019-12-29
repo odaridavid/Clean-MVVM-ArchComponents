@@ -48,7 +48,10 @@ class StarWarsRequestDispatcher : Dispatcher() {
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(characterPlanet)
             }
-            else -> throw IllegalArgumentException("Unknown Request Path ${request.path.toString()}")
+            else -> {
+                MockResponse()
+                    .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
+            }
         }
     }
 

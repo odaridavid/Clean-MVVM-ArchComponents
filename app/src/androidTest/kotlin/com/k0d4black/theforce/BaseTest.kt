@@ -5,12 +5,13 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 
+
 open class BaseTest {
 
     lateinit var mockWebServer: MockWebServer
 
     @Before
-    fun setup() {
+    open fun setup() {
         mockWebServer = MockWebServer().apply {
             dispatcher = StarWarsRequestDispatcher()
             start(8080)
@@ -18,7 +19,7 @@ open class BaseTest {
     }
 
     @After
-    fun tearDown() {
+    open fun tearDown() {
         mockWebServer.shutdown()
     }
 }

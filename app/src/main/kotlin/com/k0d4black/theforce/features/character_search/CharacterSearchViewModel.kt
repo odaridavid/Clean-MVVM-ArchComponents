@@ -9,8 +9,8 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.ResultWrapper
 import com.k0d4black.theforce.domain.utils.Success
-import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.mappers.toPresentation
+import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

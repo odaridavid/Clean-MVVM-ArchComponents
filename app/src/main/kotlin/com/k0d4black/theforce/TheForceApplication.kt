@@ -1,6 +1,7 @@
 package com.k0d4black.theforce
 
 import android.app.Application
+import android.net.ConnectivityManager
 import com.k0d4black.theforce.di.AppComponent
 import com.k0d4black.theforce.di.DaggerAppComponent
 import dagger.android.AndroidInjector
@@ -14,7 +15,7 @@ open class TheForceApplication : Application(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    lateinit var appComponent: AppComponent
+    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
