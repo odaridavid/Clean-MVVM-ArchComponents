@@ -161,6 +161,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/loading_error_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_error_24dp"
+                android:text="@string/error_loading_character_details"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

@@ -15,14 +15,11 @@ import javax.inject.Inject
 class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
 
     /**
-     * This function requires improved exception handling by catching them
-     * as opposed to using null values.
      *
-     * Takes a [characterId]
-     * @return result wrrapper on characters details
+     * Takes a [characterId] and fetches the character details
      *
-     * In the event value returned is null it should
-     * @throws an Exception
+     * @return [ResultWrapper] on characters details
+     *
      */
     suspend fun getCharacter(characterId: Int): ResultWrapper<CharacterDetailsDataModel>? {
         return try {
@@ -33,8 +30,8 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
                     birthYear = characterDetailsResponse.birthYear,
                     name = characterDetailsResponse.name,
                     height = characterDetailsResponse.height,
-                    species = null,
-                    films = null,
+                    species = emptyList(),
+                    films = emptyList(),
                     homeworld = null
                 )
 
@@ -52,7 +49,7 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
 
     /**
      * Gets data from planets endpoint and maps it to data model if errors occur a null reference will
-     * be added to the list.
+     * be added to the data model.
      */
     private suspend fun processPlanet(
         characterDetailsResponse: CharacterDetailsResponse,
@@ -60,11 +57,7 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
     ) {
         try {
             val planetResponse = apiService.getPlanet(characterDetailsResponse.homeWorld.id)
-            val planetDataModel =
-                PlanetDataModel(
-                    planetResponse.name,
-                    planetResponse.population
-                )
+            val planetDataModel = PlanetDataModel(planetResponse.name, planetResponse.population)
             characterDataModel.homeworld = planetDataModel
         } catch (e: Exception) {
             characterDataModel.homeworld = null
@@ -79,11 +72,18 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
         characterDetailsResponse: CharacterDetailsResponse,
         characterDataModel: CharacterDetailsDataModel
     ) {
-
         val characterSpecies = mutableListOf<SpeciesDataModel?>()
 
-        populateSpeciesList(characterSpecies, characterDetailsResponse.species, apiService)
-
+        for (specie in characterDetailsResponse.species) {
+            try {
+                val specieResponse = apiService.getSpecies(specie.id)
+                val speciesDataModel =
+                    SpeciesDataModel(specieResponse.name, specieResponse.language)
+                characterSpecies.add(speciesDataModel)
+            } catch (e: Exception) {
+                characterSpecies.add(null)
+            }
+        }
         characterDataModel.species = characterSpecies
 
     }
@@ -96,45 +96,17 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
         characterDetailsResponse: CharacterDetailsResponse,
         characterDataModel: CharacterDetailsDataModel
     ) {
-
         val characterFilms = mutableListOf<FilmDataModel?>()
         for (film in characterDetailsResponse.films) {
             try {
                 val filmResponse = apiService.getFilms(film.id)
-                val filmDataModel =
-                    FilmDataModel(
-                        filmResponse.title,
-                        filmResponse.openingCrawl
-                    )
+                val filmDataModel = FilmDataModel(filmResponse.title, filmResponse.openingCrawl)
                 characterFilms.add(filmDataModel)
             } catch (e: Exception) {
                 characterFilms.add(null)
             }
         }
         characterDataModel.films = characterFilms
-
     }
-
-    private suspend fun populateSpeciesList(
-        species: MutableList<SpeciesDataModel?>,
-        speciesUrls: List<String>,
-        apiService: StarWarsApiService
-    ) {
-
-        for (specie in speciesUrls) {
-            try {
-                val specieResponse = apiService.getSpecies(specie.id)
-                val speciesDataModel =
-                    SpeciesDataModel(
-                        specieResponse.name,
-                        specieResponse.language
-                    )
-                species.add(speciesDataModel)
-            } catch (e: Exception) {
-                species.add(null)
-            }
-        }
-    }
-
 
 }

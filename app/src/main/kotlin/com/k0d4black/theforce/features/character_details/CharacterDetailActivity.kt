@@ -15,10 +15,7 @@ import com.k0d4black.theforce.domain.utils.Error
 import com.k0d4black.theforce.domain.utils.Loading
 import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.models.CharacterDetailsPresentationModel
-import com.k0d4black.theforce.utils.CHARACTER_ID_KEY
-import com.k0d4black.theforce.utils.hide
-import com.k0d4black.theforce.utils.initRecyclerViewWithLineDecoration
-import com.k0d4black.theforce.utils.showSnackbar
+import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import javax.inject.Inject
@@ -67,8 +64,9 @@ class CharacterDetailActivity : AppCompatActivity() {
         showSnackbar(character_details_layout, getString(R.string.info_loading_status))
     }
 
-    private fun displayErrorState(exception: Exception) {
+    private fun displayErrorState(exception: Throwable) {
         binding.loadingCharacterProgressBar.hide()
+        binding.loadingErrorTextView.show()
         showSnackbar(character_details_layout, "${exception.message}")
     }
 
