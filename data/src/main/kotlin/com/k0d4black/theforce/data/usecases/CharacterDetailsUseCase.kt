@@ -15,4 +15,13 @@ class CharacterDetailsUseCase @Inject constructor(
     suspend fun getCharacterDetails(characterId: Int) =
         characterDetailsRepository.getCharacterDetails(characterId)
 
+    suspend fun getCharacterFilms(characterId: Int) =
+        characterDetailsRepository.getCharacterFilms(characterId)
+
+    suspend fun getCharacterPlanet(characterId: Int) =
+        characterDetailsRepository.getCharacterPlanet(characterId)
+
+    suspend fun getCharacterSpecies(characterId: Int) =
+        characterDetailsRepository.getCharacterSpecies(characterId)
+
 }

@@ -8,173 +8,198 @@
         <variable
             name="character"
             type="com.k0d4black.theforce.models.CharacterDetailsPresentationModel" />
+
+        <variable
+            name="planet"
+            type="com.k0d4black.theforce.models.PlanetPresentationModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/character_details_layout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/margin_default"
-            tools:context=".features.character_details.CharacterDetailActivity">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/character_details_birth_year_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/title_birth_year"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/character_details_birth_year_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:fontFamily="@font/roboto_light"
-                android:text="@{character.birthYear}"
-                app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
-                app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
-                tools:text="BBY 13" />
-
-            <TextView
-                android:id="@+id/character_details_height_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/title_height"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/character_details_height_in_cm_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:fontFamily="@font/roboto_light"
-                android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
-                tools:text="123 cm" />
-
-            <TextView
-                android:id="@+id/character_details_height_in_inches_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:fontFamily="@font/roboto_light"
-                android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
-                tools:text="123 cm" />
-
-            <TextView
-                android:id="@+id/character_details_planet_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/title_planet_info"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />
-
-            <TextView
-                android:id="@+id/character_details_planet_name_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:fontFamily="@font/roboto_light"
-                android:text="@{String.format(@string/template_planet_name,character.homeworld.name)}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_planet_title_text_view"
-                tools:text="Language : Blaa Blaa" />
-
-            <TextView
-                android:id="@+id/character_details_planet_population_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:fontFamily="@font/roboto_light"
-                android:text="@{String.format(@string/template_planet_population,character.homeworld.population)}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_planet_name_text_view"
-                tools:text="Population : 2340000" />
-
-            <TextView
-                android:id="@+id/character_details_films_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/title_films"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_planet_population_text_view" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/character_details_films_recycler_view"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/character_details_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view"
-                tools:itemCount="2"
-                tools:listitem="@layout/film_item_layout" />
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/margin_default"
+                tools:context=".features.character_details.CharacterDetailActivity">
 
-            <TextView
-                android:id="@+id/character_details_species_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:text="@string/title_species"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/character_details_films_recycler_view" />
+                <TextView
+                    android:id="@+id/character_details_birth_year_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/title_birth_year"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/character_details_species_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                app:layout_constraintTop_toBottomOf="@id/character_details_species_title_text_view"
-                tools:itemCount="2"
-                tools:listitem="@layout/specie_item_layout" />
+                <TextView
+                    android:id="@+id/character_details_birth_year_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{character.birthYear}"
+                    app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
+                    tools:text="BBY 13" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/data_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="character_details_height_in_cm_text_view,character_details_height_in_inches_text_view,character_details_height_title_text_view,character_details_birth_year_text_view,character_details_planet_name_text_view,character_details_planet_title_text_view,character_details_planet_population_text_view,character_details_films_title_text_view,character_details_films_recycler_view,character_details_species_title_text_view,character_details_birth_year_title_text_view,character_details_species_recycler_view" />
+                <TextView
+                    android:id="@+id/character_details_height_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/title_height"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/character_details_height_in_cm_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
+                    tools:text="123 cm" />
+
+                <TextView
+                    android:id="@+id/character_details_height_in_inches_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
+                    tools:text="123 cm" />
+
+                <TextView
+                    android:id="@+id/character_details_planet_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/title_planet_info"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />
+
+                <TextView
+                    android:id="@+id/character_details_planet_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{String.format(@string/template_planet_name,planet.name)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_planet_title_text_view"
+                    tools:text="Language : Blaa Blaa" />
+
+                <TextView
+                    android:id="@+id/character_details_planet_population_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{String.format(@string/template_planet_population,planet.population)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_planet_name_text_view"
+                    tools:text="Population : 2340000" />
+
+                <TextView
+                    android:id="@+id/character_details_films_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/title_films"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_planet_population_text_view" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/character_details_films_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/film_item_layout" />
+
+                <TextView
+                    android:id="@+id/character_details_species_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:text="@string/title_species"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_films_recycler_view" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/character_details_species_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_species_title_text_view"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/specie_item_layout" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/character_details_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="character_details_birth_year_title_text_view,character_details_birth_year_text_view,character_details_height_title_text_view,character_details_height_in_cm_text_view,character_details_height_in_inches_text_view" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/character_planet_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="character_details_planet_title_text_view,character_details_planet_name_text_view,character_details_planet_population_text_view" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/character_film_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="character_details_films_title_text_view,character_details_films_recycler_view" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/character_species_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="character_details_species_title_text_view,character_details_species_recycler_view" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ProgressBar
                 android:id="@+id/loading_character_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_default" />
 
             <TextView
                 android:id="@+id/loading_error_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_default"
                 android:drawableTop="@drawable/ic_error_24dp"
                 android:text="@string/error_loading_character_details"
                 android:textAlignment="center"
-                android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:visibility="gone" />
+        </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
