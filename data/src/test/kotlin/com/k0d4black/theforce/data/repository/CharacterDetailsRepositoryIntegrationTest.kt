@@ -6,10 +6,11 @@ import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
 import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
 import com.k0d4black.theforce.domain.utils.Error
-import com.k0d4black.theforce.domain.utils.Success
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
+import retrofit2.HttpException
 
 internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
 
@@ -28,13 +29,31 @@ internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
     @Test
     fun `given a character id when executed then return character details`() {
         runBlocking {
-            val characterDetailsDomainModel =
+            val characterDetailsFlow =
                 characterDetailsRepository.getCharacterDetails(EXISTING_CHARACTER_ID)
-            Truth.assertThat(characterDetailsDomainModel).isInstanceOf(Success::class.java)
+            val characterFilmsFlow =
+                characterDetailsRepository.getCharacterFilms(EXISTING_CHARACTER_ID)
+            val characterSpeciesFlow =
+                characterDetailsRepository.getCharacterSpecies(EXISTING_CHARACTER_ID)
+            val characterPlanetFlow =
+                characterDetailsRepository.getCharacterPlanet(EXISTING_CHARACTER_ID)
+
+            characterDetailsFlow.collect {
+                Truth.assertThat(it.name).matches("Luke Skywalker")
+            }
+            characterFilmsFlow.collect {
+                Truth.assertThat(it.size).isAtLeast(1)
+            }
+            characterPlanetFlow.collect {
+                Truth.assertThat(it.name).matches("Tatooine")
+            }
+            characterSpeciesFlow.collect {
+                Truth.assertThat(it.size).isAtLeast(1)
+            }
         }
     }
 
-    @Test
+    @Test(expected = HttpException::class)
     fun `given an invalid character id when executed then return no results`() {
         runBlocking {
             val characterDetailsDomainModel =
