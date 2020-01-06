@@ -16,10 +16,7 @@ internal fun CharacterDetailsDataModel.toDomain(): CharacterDetailsDomainModel {
     return CharacterDetailsDomainModel(
         this.name,
         this.birthYear,
-        this.height,
-        this.species!!.map { it?.toDomain() },
-        this.films!!.map { it?.toDomain() },
-        this.homeworld!!.toDomain()
+        this.height
     )
 }
 

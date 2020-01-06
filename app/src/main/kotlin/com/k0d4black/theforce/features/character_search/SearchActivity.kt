@@ -79,7 +79,7 @@ class SearchActivity : AppCompatActivity() {
         )
     }
 
-    private fun displayErrorState(error: Exception) {
+    private fun displayErrorState(error: Throwable) {
         search_results_recycler_view.hide()
         loading_search_results_progress_bar.hide()
         search_tip_text_view.show()
