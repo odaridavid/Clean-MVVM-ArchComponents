@@ -58,7 +58,7 @@ class CharacterDetailViewModel @Inject constructor(private val characterDetailsU
     fun getCharacterDetails(characterId: Int) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            characterDetailsUseCase.getCharacterDetails(characterId).collect {
+            characterDetailsUseCase.getCharacterBasicDetails(characterId).collect {
                 _characterDetail.value = it.toPresentation()
             }
             characterDetailsUseCase.getCharacterPlanet(characterId).collect {

@@ -24,7 +24,7 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     fun `given a valid character id when executed then return character details`() {
         runBlocking {
             val characterDetailsFlow =
-                characterDetailsDataSource.getCharacterDetails(EXISTING_CHARACTER_ID)
+                characterDetailsDataSource.getCharacterBasicDetails(EXISTING_CHARACTER_ID)
             val characterFilmsFlow =
                 characterDetailsDataSource.getCharacterFilms(EXISTING_CHARACTER_ID)
             val characterSpeciesFlow =
@@ -50,7 +50,7 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     @Test(expected = HttpException::class)
     fun `given invalid character id when executed then return error response `() {
         runBlocking {
-            characterDetailsDataSource.getCharacterDetails(NON_EXISTANT_CHARACTER_ID)
+            characterDetailsDataSource.getCharacterBasicDetails(NON_EXISTANT_CHARACTER_ID)
         }
     }
 }

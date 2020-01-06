@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
 
-    suspend fun getCharacterDetails(characterId: Int): Flow<CharacterDetailsDomainModel> {
+    suspend fun getCharacterBasicDetails(characterId: Int): Flow<CharacterDetailsDomainModel> {
         val characterDetailsResponse = apiService.getCharacterDetails(characterId)
         val characterDataModel =
             CharacterDetailsDataModel(

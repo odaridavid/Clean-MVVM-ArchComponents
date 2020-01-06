@@ -12,7 +12,7 @@ class CharacterDetailsUseCase @Inject constructor(
     private val characterDetailsRepository: CharacterDetailsRepository
 ) {
 
-    suspend fun getCharacterDetails(characterId: Int) =
+    suspend fun getCharacterBasicDetails(characterId: Int) =
         characterDetailsRepository.getCharacterDetails(characterId)
 
     suspend fun getCharacterFilms(characterId: Int) =

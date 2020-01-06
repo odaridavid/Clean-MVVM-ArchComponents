@@ -47,7 +47,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         characterDetailViewModel.getCharacterDetails(characterId)
 
         observeUiState()
-        observeCharacterDetails()
+        observeCharacterBasicDetails()
         observeCharacterPlanet()
         observeCharacterFilms()
         observeCharacterSpecies()
@@ -85,7 +85,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun observeCharacterDetails() {
+    private fun observeCharacterBasicDetails() {
         characterDetailViewModel.characterDetail.observe(this, Observer { character ->
             supportActionBar?.title = character.name
             binding.character = character

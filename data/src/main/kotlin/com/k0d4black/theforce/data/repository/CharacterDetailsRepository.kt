@@ -13,7 +13,7 @@ class CharacterDetailsRepository @Inject constructor(
     private val characterDetailsDataSource: CharacterDetailsDataSource
 ) {
     suspend fun getCharacterDetails(characterId: Int): Flow<CharacterDetailsDomainModel> {
-        return characterDetailsDataSource.getCharacterDetails(characterId)
+        return characterDetailsDataSource.getCharacterBasicDetails(characterId)
     }
 
     suspend fun getCharacterPlanet(characterId: Int): Flow<PlanetDomainModel> {

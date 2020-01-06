@@ -30,7 +30,7 @@ internal class CharacterDetailsUseCaseTest {
             val characterId = 10
 
             //When
-            characterDetailsUseCase.getCharacterDetails(characterId)
+            characterDetailsUseCase.getCharacterBasicDetails(characterId)
 
             //Then
             verify(characterDetailsRepositoryMock).getCharacterDetails(characterId)
