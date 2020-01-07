@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.domain.utils.Error
-import com.k0d4black.theforce.domain.utils.Loading
-import com.k0d4black.theforce.domain.utils.Success
+import com.k0d4black.theforce.commons.Error
+import com.k0d4black.theforce.commons.Loading
+import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.utils.*
@@ -40,16 +40,27 @@ class SearchActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        observeUiState()
         observeSearchResults()
+    }
+
+    private fun observeUiState() {
+        characterSearchViewModel.uiState.observe(this, Observer {
+            when (it) {
+                is Success -> showSnackbar(
+                    search_results_recycler_view,
+                    getString(R.string.info_search_done)
+                )
+                is Error -> displayErrorState(it.error)
+                is Loading -> displayLoadingState()
+            }
+        })
     }
 
     private fun observeSearchResults() {
         characterSearchViewModel.searchResults.observe(this, Observer {
-            when (it) {
-                is Success -> displayDataLoadedState(it.data)
-                is Error -> displayErrorState(it.exception)
-                is Loading -> displayLoadingState()
-            }
+            displaySearchResults(it)
         })
     }
 
@@ -58,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
         search_tip_text_view.hide()
     }
 
-    private fun displayDataLoadedState(searchResults: List<SearchedCharacterPresentationModel>) {
+    private fun displaySearchResults(searchResults: List<SearchedCharacterPresentationModel>) {
         loading_search_results_progress_bar.hide()
         if (searchResults.isNotEmpty()) {
             if (search_tip_text_view.isVisible) search_tip_text_view.hide()
@@ -67,10 +78,10 @@ class SearchActivity : AppCompatActivity() {
                 adapter = searchResultAdapter.apply { submitList(searchResults) }
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
-        } else displayEmptyDataState()
+        } else displayNoSearchResults()
     }
 
-    private fun displayEmptyDataState() {
+    private fun displayNoSearchResults() {
         search_tip_text_view.show()
         search_results_recycler_view.hide()
         showSnackbar(

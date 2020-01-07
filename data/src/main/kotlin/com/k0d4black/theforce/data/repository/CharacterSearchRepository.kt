@@ -1,24 +1,19 @@
 package com.k0d4black.theforce.data.repository
 
-import com.k0d4black.theforce.data.mappers.toDomain
 import com.k0d4black.theforce.data.source.CharacterSearchDataSource
 import com.k0d4black.theforce.domain.SearchedCharacterDomainModel
-import com.k0d4black.theforce.domain.utils.Error
-import com.k0d4black.theforce.domain.utils.ResultWrapper
-import com.k0d4black.theforce.domain.utils.Success
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Co-ordinates data sources exposing search results
+ */
 class CharacterSearchRepository @Inject constructor(
     private val characterSearchDataSource: CharacterSearchDataSource
 ) {
 
-    suspend fun searchCharacters(params: String): ResultWrapper<List<SearchedCharacterDomainModel>> {
-        return when (val results = characterSearchDataSource.query(params)) {
-            is Success -> Success(results.data.map { it.toDomain() })
-            is Error -> Error(results.exception)
-            else -> throw IllegalStateException("Unknown Response")
-        }
-
+    suspend fun searchCharacters(params: String): Flow<List<SearchedCharacterDomainModel>> {
+        return characterSearchDataSource.query(params)
     }
 
 }

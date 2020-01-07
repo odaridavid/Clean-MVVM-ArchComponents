@@ -5,7 +5,6 @@ import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
 import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
-import com.k0d4black.theforce.domain.utils.Error
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -14,7 +13,7 @@ import retrofit2.HttpException
 
 internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
 
-    lateinit var characterDetailsRepository: CharacterDetailsRepository
+    private lateinit var characterDetailsRepository: CharacterDetailsRepository
 
     @Before
     override fun setup() {
@@ -56,9 +55,7 @@ internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
     @Test(expected = HttpException::class)
     fun `given an invalid character id when executed then return no results`() {
         runBlocking {
-            val characterDetailsDomainModel =
-                characterDetailsRepository.getCharacterDetails(NON_EXISTANT_CHARACTER_ID)
-            Truth.assertThat(characterDetailsDomainModel).isInstanceOf(Error::class.java)
+            characterDetailsRepository.getCharacterDetails(NON_EXISTANT_CHARACTER_ID)
         }
     }
 

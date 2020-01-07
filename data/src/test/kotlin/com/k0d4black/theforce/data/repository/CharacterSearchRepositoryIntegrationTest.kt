@@ -5,14 +5,14 @@ import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.data.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.data.source.CharacterSearchDataSource
-import com.k0d4black.theforce.domain.utils.Success
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
 internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
 
-    lateinit var characterSearchRepository: CharacterSearchRepository
+    private lateinit var characterSearchRepository: CharacterSearchRepository
 
     @Before
     override fun setup() {
@@ -29,7 +29,9 @@ internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
     fun `given existing search parameters when executed then return list of search results`() {
         runBlocking {
             val results = characterSearchRepository.searchCharacters(EXISTING_SEARCH_PARAMS)
-            Truth.assertThat(results).isInstanceOf(Success::class.java)
+            results.collect {
+                Truth.assertThat(it).isNotEmpty()
+            }
         }
     }
 
@@ -37,7 +39,9 @@ internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
     fun `given non-existing search parameters when executed then return no results`() {
         runBlocking {
             val results = characterSearchRepository.searchCharacters(NON_EXISTENT_SEARCH_PARAMS)
-            Truth.assertThat(results).isInstanceOf(Success::class.java)
+            results.collect {
+                Truth.assertThat(it).isEmpty()
+            }
         }
     }
 

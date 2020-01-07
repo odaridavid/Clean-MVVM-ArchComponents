@@ -10,10 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.commons.Error
+import com.k0d4black.theforce.commons.Loading
+import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
-import com.k0d4black.theforce.domain.utils.Error
-import com.k0d4black.theforce.domain.utils.Loading
-import com.k0d4black.theforce.domain.utils.Success
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
@@ -98,10 +98,10 @@ class CharacterDetailActivity : AppCompatActivity() {
             val anchor = character_details_layout
             when (it) {
                 is Success -> {
-                    showSnackbar(anchor, "${it.data}")
+                    showSnackbar(anchor, getString(R.string.info_loading_complete))
                     binding.loadingCharacterProgressBar.hide()
                 }
-                is Error -> displayErrorState(it.exception)
+                is Error -> displayErrorState(it.error)
                 is Loading -> showSnackbar(anchor, getString(R.string.info_loading_status))
             }
         })
