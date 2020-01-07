@@ -15,6 +15,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+/**
+ * Gets character details data from network resource
+ */
 class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
 
     suspend fun getCharacterBasicDetails(characterId: Int): Flow<CharacterDetailsDomainModel> {
