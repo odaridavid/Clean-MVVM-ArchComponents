@@ -25,5 +25,7 @@
     <string name="template_species_language">Language : %s</string>
     <string name="info_loading_status">Loading Character</string>
     <string name="error_loading_character_details">Couldn\'t load character details.</string>
+    <string name="info_loading_complete">Character Loaded Succesfully</string>
+    <string name="info_search_done">Search Done</string>
 
 </resources>
