@@ -102,26 +102,26 @@ dependencies {
     kapt appDependencies.dagger2Processor
 
     //Test Libs
-    implementation testDependencies.espressoIdlingResource
+//    implementation testDependencies.espressoIdlingResource
     testImplementation testDependencies.junit
     testImplementation testDependencies.robolectric
     testImplementation testDependencies.androidxJunit
     testImplementation testDependencies.espressoCore
     testImplementation testDependencies.runner
     testImplementation testDependencies.rules
+    testImplementation testDependencies.googleTruth
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.archComponentTest
+    testImplementation testDependencies.coroutinesTest
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.rules
     androidTestImplementation testDependencies.androidxJunit
     androidTestImplementation testDependencies.androidxCoreTest
     androidTestImplementation testDependencies.mockWebServer
-    testImplementation testDependencies.googleTruth
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
     kaptAndroidTest testDependencies.dagger2Processor
     kaptAndroidTest appDependencies.dagger2AndroidProcessor
-
-
-
 }
 apply plugin: 'com.google.gms.google-services'

@@ -1,15 +1,10 @@
-package com.k0d4black.theforce
+package com.k0d4black.theforce.activities
 
 import android.os.Build
-import android.widget.EditText
 import android.widget.TextView
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
-import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
+import com.k0d4black.theforce.R
 import com.k0d4black.theforce.features.character_search.SearchActivity
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +33,9 @@ class SearchActivityUnitTest {
     fun `validate default info text shown`() {
         val infoTextView = searchActivity.findViewById<TextView>(R.id.search_tip_text_view)
         assertThat(infoTextView).isNotNull()
-        assertThat(infoTextView.text.toString()).matches(searchActivity.resources.getString(R.string.info_search_tip))
+        assertThat(infoTextView.text.toString()).matches(searchActivity.resources.getString(
+            R.string.info_search_tip
+        ))
     }
 
     @Test

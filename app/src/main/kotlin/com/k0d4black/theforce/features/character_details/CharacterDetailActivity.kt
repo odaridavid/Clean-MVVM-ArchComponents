@@ -114,6 +114,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         showSnackbar(character_details_layout, "${exception.message}")
     }
 
+    //Synthetics upcasting to View , Define type explicitly
     private fun enableGroup(@IdRes groupId: Int) = findViewById<Group>(groupId).show()
 
 }
