@@ -89,7 +89,6 @@ ext {
             androidxCoreTest      : "androidx.test:core:$androidxTestCoreVersion",
             runner                : "androidx.test:runner:$runnerVersion",
             rules                 : "androidx.test:rules:$rulesVersion",
-            espressoIdlingResource: "androidx.test.espresso:espresso-idling-resource:$espressoVersion",
             espressoIntents       : "androidx.test.espresso:espresso-intents:$espressoVersion",
             espressoContrib       : "androidx.test.espresso:espresso-contrib:$espressoVersion",
             dagger2Processor      : "com.google.dagger:dagger-compiler:$dagger2Version",

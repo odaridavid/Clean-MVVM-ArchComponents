@@ -102,7 +102,6 @@ dependencies {
     kapt appDependencies.dagger2Processor
 
     //Test Libs
-//    implementation testDependencies.espressoIdlingResource
     testImplementation testDependencies.junit
     testImplementation testDependencies.robolectric
     testImplementation testDependencies.androidxJunit
@@ -113,6 +112,7 @@ dependencies {
     testImplementation testDependencies.mockito
     testImplementation testDependencies.archComponentTest
     testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.mockitoInline
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.rules

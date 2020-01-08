@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 /**
  * Custom observer that observes once and is cleared once done
  */
-class OneTimeObserver<T>(private val handler: (T) -> Unit) : Observer<T>, LifecycleOwner {
+internal class OneTimeObserver<T>(private val handler: (T) -> Unit) : Observer<T>, LifecycleOwner {
 
     private val lifecycle = LifecycleRegistry(this)
 

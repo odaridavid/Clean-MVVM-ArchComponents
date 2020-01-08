@@ -6,7 +6,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 
 
-open class BaseViewModelTest {
+internal open class BaseViewModelTest {
     /**
      * Swaps the background executor used by the Architecture Components with a different one which
      * executes each task synchronously.

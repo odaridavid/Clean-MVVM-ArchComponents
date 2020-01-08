@@ -18,7 +18,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class CharacterSearchViewModelTest : BaseViewModelTest() {
+internal class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @Mock
     lateinit var characterSearchUseCase: CharacterSearchUseCase
