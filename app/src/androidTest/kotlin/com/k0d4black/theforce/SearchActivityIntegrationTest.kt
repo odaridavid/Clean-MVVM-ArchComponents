@@ -61,7 +61,7 @@ class SearchActivityIntegrationTest : BaseTest() {
     fun shouldDisplayDefaultTextWhenNoDataFoundOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))
-        SystemClock.sleep(2000)
+        SystemClock.sleep(3000)
         onView(withId(R.id.search_tip_text_view)).check(matches(isDisplayed()))
     }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.commons.AnimatorListener
 import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
@@ -115,6 +116,10 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     //Synthetics upcasting to View , Define type explicitly
-    private fun enableGroup(@IdRes groupId: Int) = findViewById<Group>(groupId).show()
+    private fun enableGroup(@IdRes groupId: Int) = findViewById<Group>(groupId).animate()
+        .alpha(1f)
+        .setListener(AnimatorListener(onEnd = {
+            findViewById<Group>(groupId).show()
+        }))
 
 }

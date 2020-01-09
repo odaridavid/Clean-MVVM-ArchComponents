@@ -22,6 +22,7 @@ ext {
     dagger2Version = '2.25.3'
     crashlyticsVersion = '2.10.1'
     lifecycleExtensionsVersion = '2.1.0'
+    recyclerviewAnimationVersion = '3.0.0'
 
     //Data
     retrofitVersion = '2.7.0'
@@ -60,7 +61,8 @@ ext {
             dagger2                : "com.google.dagger:dagger:$dagger2Version",
             dagger2Android         : "com.google.dagger:dagger-android:$dagger2Version",
             dagger2AndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger2Version",
-            lifecycleExtensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion"
+            lifecycleExtensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
+            recyclerviewAnimations : "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion"
     ]
 
     dataDependencies = [
@@ -78,22 +80,22 @@ ext {
     ]
 
     testDependencies = [
-            junit                 : "junit:junit:$junitVersion",
-            androidxJunit         : "androidx.test.ext:junit:$androidxJunitVersion",
-            espressoCore          : "androidx.test.espresso:espresso-core:$espressoVersion",
-            mockito               : "org.mockito:mockito-core:$mockitoVersion",
-            googleTruth           : "com.google.truth:truth:$truthVersion",
-            mockitoInline         : "org.mockito:mockito-inline:$mockitoInlineVersion",
-            mockWebServer         : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
-            robolectric           : "org.robolectric:robolectric:$robolectricVersion",
-            androidxCoreTest      : "androidx.test:core:$androidxTestCoreVersion",
-            runner                : "androidx.test:runner:$runnerVersion",
-            rules                 : "androidx.test:rules:$rulesVersion",
-            espressoIntents       : "androidx.test.espresso:espresso-intents:$espressoVersion",
-            espressoContrib       : "androidx.test.espresso:espresso-contrib:$espressoVersion",
-            dagger2Processor      : "com.google.dagger:dagger-compiler:$dagger2Version",
-            archComponentTest     : "androidx.arch.core:core-testing:$archComponentTestVersion",
-            coroutinesTest        : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion"
+            junit            : "junit:junit:$junitVersion",
+            androidxJunit    : "androidx.test.ext:junit:$androidxJunitVersion",
+            espressoCore     : "androidx.test.espresso:espresso-core:$espressoVersion",
+            mockito          : "org.mockito:mockito-core:$mockitoVersion",
+            googleTruth      : "com.google.truth:truth:$truthVersion",
+            mockitoInline    : "org.mockito:mockito-inline:$mockitoInlineVersion",
+            mockWebServer    : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
+            robolectric      : "org.robolectric:robolectric:$robolectricVersion",
+            androidxCoreTest : "androidx.test:core:$androidxTestCoreVersion",
+            runner           : "androidx.test:runner:$runnerVersion",
+            rules            : "androidx.test:rules:$rulesVersion",
+            espressoIntents  : "androidx.test.espresso:espresso-intents:$espressoVersion",
+            espressoContrib  : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+            dagger2Processor : "com.google.dagger:dagger-compiler:$dagger2Version",
+            archComponentTest: "androidx.arch.core:core-testing:$archComponentTestVersion",
+            coroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion"
 
     ]
 }
