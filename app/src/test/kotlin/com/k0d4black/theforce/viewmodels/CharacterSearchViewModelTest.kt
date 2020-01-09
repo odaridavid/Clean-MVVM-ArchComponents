@@ -46,7 +46,7 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
     }
 
     private suspend fun setMockAnswer() {
-        given(characterSearchUseCase.searchCharacters(searchParams)).willReturn(flow {
+        given(characterSearchUseCase.execute(searchParams)).willReturn(flow {
             emit(SampleData.searchResults)
         })
     }

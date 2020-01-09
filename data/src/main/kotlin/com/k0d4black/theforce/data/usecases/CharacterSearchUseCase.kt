@@ -2,15 +2,15 @@ package com.k0d4black.theforce.data.usecases
 
 
 import com.k0d4black.theforce.data.repository.CharacterSearchRepository
+import com.k0d4black.theforce.domain.CharacterSearchDomainModel
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-/**
- * Interacts with the presentation layer to pass the search queries and retrieve results.
- */
+
 class CharacterSearchUseCase @Inject constructor(
     private val searchRepository: CharacterSearchRepository
-) {
+) : UseCase<String, Flow<List<CharacterSearchDomainModel>>> {
 
-    suspend fun searchCharacters(params: String) = searchRepository.searchCharacters(params)
+    override suspend fun execute(params: String) = searchRepository.searchCharacters(params)
 
 }

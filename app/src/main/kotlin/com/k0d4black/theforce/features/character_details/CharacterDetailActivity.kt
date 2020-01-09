@@ -55,7 +55,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterSpecies() {
-        characterDetailViewModel.characterSpecies.observe(this, Observer { species ->
+        characterDetailViewModel.characterCharacterSpecies.observe(this, Observer { species ->
             binding.characterDetailsSpeciesRecyclerView.apply {
                 adapter = speciesAdapter.apply { submitList(species) }
                 initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
@@ -80,7 +80,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterPlanet() {
-        characterDetailViewModel.characterPlanet.observe(this, Observer { planet ->
+        characterDetailViewModel.characterCharacterPlanet.observe(this, Observer { planet ->
             binding.planet = planet
             enableGroup(R.id.character_planet_group)
         })

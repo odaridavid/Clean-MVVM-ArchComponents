@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.FilmItemLayoutBinding
-import com.k0d4black.theforce.models.FilmPresentationModel
+import com.k0d4black.theforce.models.CharacterFilmPresentationModel
 
-class FilmsAdapter : ListAdapter<FilmPresentationModel, FilmsAdapter.FilmViewHolder>(
+class FilmsAdapter : ListAdapter<CharacterFilmPresentationModel, FilmsAdapter.FilmViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
@@ -24,24 +24,24 @@ class FilmsAdapter : ListAdapter<FilmPresentationModel, FilmsAdapter.FilmViewHol
     inner class FilmViewHolder(private val binding: FilmItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: FilmPresentationModel) {
-            binding.film = model
+        fun bind(modelCharacter: CharacterFilmPresentationModel) {
+            binding.film = modelCharacter
             binding.executePendingBindings()
         }
     }
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<FilmPresentationModel>() {
+            object : DiffUtil.ItemCallback<CharacterFilmPresentationModel>() {
                 override fun areItemsTheSame(
-                    oldItem: FilmPresentationModel,
-                    newItem: FilmPresentationModel
+                    oldItem: CharacterFilmPresentationModel,
+                    newItem: CharacterFilmPresentationModel
                 ): Boolean = oldItem.title == newItem.title
 
 
                 override fun areContentsTheSame(
-                    oldItem: FilmPresentationModel,
-                    newItem: FilmPresentationModel
+                    oldItem: CharacterFilmPresentationModel,
+                    newItem: CharacterFilmPresentationModel
                 ): Boolean = oldItem == newItem
             }
     }

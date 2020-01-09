@@ -8,7 +8,7 @@ import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
 import com.k0d4black.theforce.data.usecases.CharacterSearchUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.models.CharacterSearchPresentationModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,16 +17,16 @@ class CharacterSearchViewModel @Inject constructor(
     private val characterSearchUseCase: CharacterSearchUseCase
 ) : UiStateViewModel() {
 
-    val searchResults: LiveData<List<SearchedCharacterPresentationModel>>
+    val searchResults: LiveData<List<CharacterSearchPresentationModel>>
         get() = _searchResults
 
-    private var _searchResults: MutableLiveData<List<SearchedCharacterPresentationModel>> =
+    private var _searchResults: MutableLiveData<List<CharacterSearchPresentationModel>> =
         MutableLiveData()
 
     fun executeCharacterSearch(params: String) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            characterSearchUseCase.searchCharacters(params).collect { results ->
+            characterSearchUseCase.execute(params).collect { results ->
                 _searchResults.value = results.map { it.toPresentation() }
             }
             _uiState.value = Success

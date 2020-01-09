@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.repository
 
 import com.k0d4black.theforce.data.source.CharacterSearchDataSource
-import com.k0d4black.theforce.domain.SearchedCharacterDomainModel
+import com.k0d4black.theforce.domain.CharacterSearchDomainModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ class CharacterSearchRepository @Inject constructor(
     private val characterSearchDataSource: CharacterSearchDataSource
 ) {
 
-    suspend fun searchCharacters(params: String): Flow<List<SearchedCharacterDomainModel>> {
+    suspend fun searchCharacters(params: String): Flow<List<CharacterSearchDomainModel>> {
         return characterSearchDataSource.query(params)
     }
 
