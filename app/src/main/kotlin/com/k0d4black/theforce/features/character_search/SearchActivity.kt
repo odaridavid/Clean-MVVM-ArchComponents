@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.commons.AnimatorListener
 import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
@@ -17,6 +18,7 @@ import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
@@ -65,24 +67,30 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun displayLoadingState() {
-        loading_search_results_progress_bar.show()
-        search_tip_text_view.hide()
+        search_tip_text_view.animate()
+            .alpha(0f)
+            .setListener(AnimatorListener(onEnd = {
+                search_tip_text_view.hide()
+                loading_search_results_progress_bar.show()
+            }))
     }
 
     private fun displaySearchResults(searchResults: List<SearchedCharacterPresentationModel>) {
-        loading_search_results_progress_bar.hide()
+        loading_search_results_progress_bar.animate().alpha(0f)
+            .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
         if (searchResults.isNotEmpty()) {
             if (search_tip_text_view.isVisible) search_tip_text_view.hide()
-            search_results_recycler_view.show()
             search_results_recycler_view.apply {
-                adapter = searchResultAdapter.apply { submitList(searchResults) }
+                adapter =
+                    ScaleInAnimationAdapter(searchResultAdapter.apply { submitList(searchResults) })
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
+            search_results_recycler_view.show()
         } else displayNoSearchResults()
     }
 
     private fun displayNoSearchResults() {
-        search_tip_text_view.show()
+        showSearchTip()
         search_results_recycler_view.hide()
         showSnackbar(
             search_results_recycler_view,
@@ -92,9 +100,15 @@ class SearchActivity : AppCompatActivity() {
 
     private fun displayErrorState(error: Throwable) {
         search_results_recycler_view.hide()
-        loading_search_results_progress_bar.hide()
-        search_tip_text_view.show()
+        loading_search_results_progress_bar.animate().alpha(0f)
+            .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
+        showSearchTip()
         showSnackbar(search_results_recycler_view, "${error.message}")
+    }
+
+    private fun showSearchTip() {
+        search_tip_text_view.animate().alpha(1f)
+            .setListener(AnimatorListener(onEnd = { search_tip_text_view.show() }))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

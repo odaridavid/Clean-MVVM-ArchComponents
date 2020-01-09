@@ -92,6 +92,9 @@ dependencies {
     implementation appDependencies.firebaseAnalytics
     implementation appDependencies.crashlytics
 
+    //Animations
+    implementation appDependencies.recyclerviewAnimations
+
     //Memory leaks
     debugImplementation appDependencies.leakCanary
 

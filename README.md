@@ -154,6 +154,8 @@ network service might bring up issues.
 The tests are have been done per screen which is representative of the
 features available on the app.
 
+View models testing on live data guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
+
 ## Design
 
  With the current min api level set to 21 we have access to material
@@ -215,6 +217,7 @@ and default parameters
 - [Dagger2](https://github.com/google/dagger) - Dependency Injection lib built with scaling in mind and has large community support.
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
+- [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 
 ## Extras
 
