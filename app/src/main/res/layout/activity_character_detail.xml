@@ -11,7 +11,7 @@
 
         <variable
             name="planet"
-            type="com.k0d4black.theforce.models.PlanetPresentationModel" />
+            type="com.k0d4black.theforce.models.CharacterPlanetPresentationModel" />
     </data>
 
     <ScrollView

@@ -3,13 +3,13 @@ package com.k0d4black.theforce.data.source
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.mappers.toDomain
 import com.k0d4black.theforce.data.models.CharacterDetailsDataModel
-import com.k0d4black.theforce.data.models.FilmDataModel
-import com.k0d4black.theforce.data.models.PlanetDataModel
-import com.k0d4black.theforce.data.models.SpeciesDataModel
-import com.k0d4black.theforce.domain.CharacterDetailsDomainModel
-import com.k0d4black.theforce.domain.FilmDomainModel
-import com.k0d4black.theforce.domain.PlanetDomainModel
-import com.k0d4black.theforce.domain.SpeciesDomainModel
+import com.k0d4black.theforce.data.models.CharacterFilmDataModel
+import com.k0d4black.theforce.data.models.CharacterPlanetDataModel
+import com.k0d4black.theforce.data.models.CharacterSpeciesDataModel
+import com.k0d4black.theforce.domain.CharacterBasicInfoDomainModel
+import com.k0d4black.theforce.domain.CharacterFilmDomainModel
+import com.k0d4black.theforce.domain.CharacterPlanetDomainModel
+import com.k0d4black.theforce.domain.CharacterSpeciesDomainModel
 import com.k0d4black.theforce.domain.utils.id
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -20,7 +20,7 @@ import javax.inject.Inject
  */
 class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
 
-    suspend fun getCharacterBasicDetails(characterId: Int): Flow<CharacterDetailsDomainModel> {
+    suspend fun getCharacterBasicDetails(characterId: Int): Flow<CharacterBasicInfoDomainModel> {
         val characterDetailsResponse = apiService.getCharacterDetails(characterId)
         val characterDataModel =
             CharacterDetailsDataModel(
@@ -32,33 +32,33 @@ class CharacterDetailsDataSource @Inject constructor(private val apiService: Sta
     }
 
 
-    suspend fun getCharacterPlanet(characterId: Int): Flow<PlanetDomainModel> {
+    suspend fun getCharacterPlanet(characterId: Int): Flow<CharacterPlanetDomainModel> {
         val characterDetailsResponse = apiService.getCharacterDetails(characterId)
         val planetResponse = apiService.getPlanet(characterDetailsResponse.homeWorld.id)
-        val planetDataModel = PlanetDataModel(planetResponse.name, planetResponse.population)
+        val planetDataModel = CharacterPlanetDataModel(planetResponse.name, planetResponse.population)
         return flow { emit(planetDataModel.toDomain()) }
     }
 
 
-    suspend fun getCharacterSpecies(characterId: Int): Flow<List<SpeciesDomainModel>> {
+    suspend fun getCharacterSpecies(characterId: Int): Flow<List<CharacterSpeciesDomainModel>> {
         val characterDetailsResponse = apiService.getCharacterDetails(characterId)
-        val characterSpecies = mutableListOf<SpeciesDataModel>()
+        val characterSpecies = mutableListOf<CharacterSpeciesDataModel>()
         for (specie in characterDetailsResponse.species) {
             val specieResponse = apiService.getSpecies(specie.id)
             val speciesDataModel =
-                SpeciesDataModel(specieResponse.name, specieResponse.language)
+                CharacterSpeciesDataModel(specieResponse.name, specieResponse.language)
             characterSpecies.add(speciesDataModel)
         }
         return flow { emit(characterSpecies.map { it.toDomain() }) }
     }
 
 
-    suspend fun getCharacterFilms(characterId: Int): Flow<List<FilmDomainModel>> {
+    suspend fun getCharacterFilms(characterId: Int): Flow<List<CharacterFilmDomainModel>> {
         val characterDetailsResponse = apiService.getCharacterDetails(characterId)
-        val characterFilms = mutableListOf<FilmDataModel>()
+        val characterFilms = mutableListOf<CharacterFilmDataModel>()
         for (film in characterDetailsResponse.films) {
             val filmResponse = apiService.getFilms(film.id)
-            val filmDataModel = FilmDataModel(filmResponse.title, filmResponse.openingCrawl)
+            val filmDataModel = CharacterFilmDataModel(filmResponse.title, filmResponse.openingCrawl)
             characterFilms.add(filmDataModel)
         }
         return flow { emit(characterFilms.map { it.toDomain() }) }

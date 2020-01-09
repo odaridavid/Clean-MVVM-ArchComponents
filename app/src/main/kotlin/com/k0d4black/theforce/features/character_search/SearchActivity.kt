@@ -15,7 +15,7 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import com.k0d4black.theforce.models.SearchedCharacterPresentationModel
+import com.k0d4black.theforce.models.CharacterSearchPresentationModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
@@ -75,7 +75,7 @@ class SearchActivity : AppCompatActivity() {
             }))
     }
 
-    private fun displaySearchResults(searchResults: List<SearchedCharacterPresentationModel>) {
+    private fun displaySearchResults(searchResults: List<CharacterSearchPresentationModel>) {
         loading_search_results_progress_bar.animate().alpha(0f)
             .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
         if (searchResults.isNotEmpty()) {

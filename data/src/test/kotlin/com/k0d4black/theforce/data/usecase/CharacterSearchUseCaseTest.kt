@@ -30,7 +30,7 @@ internal class CharacterSearchUseCaseTest {
             val searchParameter = "Luke"
 
             //When
-            characterSearchUseCase.searchCharacters(searchParameter)
+            characterSearchUseCase.execute(searchParameter)
 
             //Then
             verify(searchRepositoryMock).searchCharacters(searchParameter)

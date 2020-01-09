@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.SpecieItemLayoutBinding
-import com.k0d4black.theforce.models.SpeciesPresentationModel
+import com.k0d4black.theforce.models.CharacterSpeciesPresentationModel
 
-class SpeciesAdapter : ListAdapter<SpeciesPresentationModel, SpeciesAdapter.SpecieViewHolder>(
+class SpeciesAdapter : ListAdapter<CharacterSpeciesPresentationModel, SpeciesAdapter.SpecieViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
@@ -24,24 +24,24 @@ class SpeciesAdapter : ListAdapter<SpeciesPresentationModel, SpeciesAdapter.Spec
     inner class SpecieViewHolder(private val binding: SpecieItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: SpeciesPresentationModel) {
-            binding.species = model
+        fun bind(modelCharacter: CharacterSpeciesPresentationModel) {
+            binding.species = modelCharacter
             binding.executePendingBindings()
         }
     }
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<SpeciesPresentationModel>() {
+            object : DiffUtil.ItemCallback<CharacterSpeciesPresentationModel>() {
                 override fun areItemsTheSame(
-                    oldItem: SpeciesPresentationModel,
-                    newItem: SpeciesPresentationModel
+                    oldItem: CharacterSpeciesPresentationModel,
+                    newItem: CharacterSpeciesPresentationModel
                 ): Boolean = oldItem.name == newItem.name
 
 
                 override fun areContentsTheSame(
-                    oldItem: SpeciesPresentationModel,
-                    newItem: SpeciesPresentationModel
+                    oldItem: CharacterSpeciesPresentationModel,
+                    newItem: CharacterSpeciesPresentationModel
                 ): Boolean = oldItem == newItem
             }
     }

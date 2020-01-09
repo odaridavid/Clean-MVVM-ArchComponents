@@ -2,7 +2,10 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.data.usecases.CharacterDetailsUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterFilmsUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterSpeciesUseCase
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
@@ -21,7 +24,13 @@ import org.mockito.junit.MockitoJUnitRunner
 internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     @Mock
-    lateinit var characterDetailsUseCase: CharacterDetailsUseCase
+    lateinit var getCharacterBasicInfoUseCase: GetCharacterBasicInfoUseCase
+    @Mock
+    lateinit var getCharacterFilmsUseCase: GetCharacterFilmsUseCase
+    @Mock
+    lateinit var getCharacterPlanetUseCase: GetCharacterPlanetUseCase
+    @Mock
+    lateinit var getCharacterSpeciesUseCase: GetCharacterSpeciesUseCase
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
@@ -29,7 +38,12 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     @Before
     fun setup() {
-        characterDetailViewModel = CharacterDetailViewModel(characterDetailsUseCase)
+        characterDetailViewModel = CharacterDetailViewModel(
+            getCharacterBasicInfoUseCase,
+            getCharacterSpeciesUseCase,
+            getCharacterPlanetUseCase,
+            getCharacterFilmsUseCase
+        )
     }
 
     @ExperimentalCoroutinesApi
@@ -43,7 +57,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
             characterDetailViewModel.characterDetail.observeOnce {
                 Truth.assertThat(it).isEqualTo(SampleData.characterDomainModel.toPresentation())
             }
-            characterDetailViewModel.characterSpecies.observeOnce {
+            characterDetailViewModel.characterCharacterSpecies.observeOnce {
                 Truth.assertThat(it)
                     .isEqualTo(SampleData.speciesDomainModel.map { it.toPresentation() })
             }
@@ -51,7 +65,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
                 Truth.assertThat(it)
                     .isEqualTo(SampleData.characterFilms.map { it.toPresentation() })
             }
-            characterDetailViewModel.characterPlanet.observeOnce {
+            characterDetailViewModel.characterCharacterPlanet.observeOnce {
                 Truth.assertThat(it).isEqualTo(SampleData.planetDomainModel.toPresentation())
             }
         }
@@ -60,16 +74,16 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
     }
 
     private suspend fun setMockAnswers() {
-        given(characterDetailsUseCase.getCharacterSpecies(characterIdParams)).willReturn(flow {
+        given(getCharacterSpeciesUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.speciesDomainModel)
         })
-        given(characterDetailsUseCase.getCharacterBasicDetails(characterIdParams)).willReturn(flow {
+        given(getCharacterBasicInfoUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.characterDomainModel)
         })
-        given(characterDetailsUseCase.getCharacterFilms(characterIdParams)).willReturn(flow {
+        given(getCharacterFilmsUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.characterFilms)
         })
-        given(characterDetailsUseCase.getCharacterPlanet(characterIdParams)).willReturn(flow {
+        given(getCharacterPlanetUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.planetDomainModel)
         })
     }

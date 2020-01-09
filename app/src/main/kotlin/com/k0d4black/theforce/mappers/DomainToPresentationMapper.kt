@@ -5,15 +5,15 @@ import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.utils.convertToInches
 
 
-fun SearchedCharacterDomainModel.toPresentation(): SearchedCharacterPresentationModel {
-    return SearchedCharacterPresentationModel(
+fun CharacterSearchDomainModel.toPresentation(): CharacterSearchPresentationModel {
+    return CharacterSearchPresentationModel(
         this.name,
         this.birthYear,
         this.url
     )
 }
 
-fun CharacterDetailsDomainModel.toPresentation(): CharacterDetailsPresentationModel {
+fun CharacterBasicInfoDomainModel.toPresentation(): CharacterDetailsPresentationModel {
     return CharacterDetailsPresentationModel(
         this.name,
         this.birthYear,
@@ -22,14 +22,14 @@ fun CharacterDetailsDomainModel.toPresentation(): CharacterDetailsPresentationMo
     )
 }
 
-fun PlanetDomainModel.toPresentation(): PlanetPresentationModel {
-    return PlanetPresentationModel(this.name, this.population)
+fun CharacterPlanetDomainModel.toPresentation(): CharacterPlanetPresentationModel {
+    return CharacterPlanetPresentationModel(this.name, this.population)
 }
 
-fun FilmDomainModel.toPresentation(): FilmPresentationModel {
-    return FilmPresentationModel(this.title, this.openingCrawl)
+fun CharacterFilmDomainModel.toPresentation(): CharacterFilmPresentationModel {
+    return CharacterFilmPresentationModel(this.title, this.openingCrawl)
 }
 
-fun SpeciesDomainModel.toPresentation(): SpeciesPresentationModel {
-    return SpeciesPresentationModel(this.name, this.language)
+fun CharacterSpeciesDomainModel.toPresentation(): CharacterSpeciesPresentationModel {
+    return CharacterSpeciesPresentationModel(this.name, this.language)
 }

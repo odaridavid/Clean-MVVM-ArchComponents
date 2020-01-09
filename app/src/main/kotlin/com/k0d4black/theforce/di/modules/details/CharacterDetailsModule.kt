@@ -3,10 +3,11 @@ package com.k0d4black.theforce.di.modules.details
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.repository.CharacterDetailsRepository
-import com.k0d4black.theforce.data.repository.CharacterSearchRepository
 import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
-import com.k0d4black.theforce.data.source.CharacterSearchDataSource
-import com.k0d4black.theforce.data.usecases.CharacterDetailsUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterFilmsUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.data.usecases.GetCharacterSpeciesUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -19,9 +20,24 @@ class CharacterDetailsModule {
     ): CharacterDetailsRepository = CharacterDetailsRepository(characterDetailsDataSource)
 
     @Provides
-    fun provideCharacterDetailsUseCase(
+    fun provideCharacterBasicInfoUseCase(
         characterDetailsRepository: CharacterDetailsRepository
-    ): CharacterDetailsUseCase = CharacterDetailsUseCase(characterDetailsRepository)
+    ): GetCharacterBasicInfoUseCase = GetCharacterBasicInfoUseCase(characterDetailsRepository)
+
+    @Provides
+    fun provideCharacterFilmsUseCase(
+        characterDetailsRepository: CharacterDetailsRepository
+    ): GetCharacterFilmsUseCase = GetCharacterFilmsUseCase(characterDetailsRepository)
+
+    @Provides
+    fun provideCharacterPlanetUseCase(
+        characterDetailsRepository: CharacterDetailsRepository
+    ): GetCharacterPlanetUseCase = GetCharacterPlanetUseCase(characterDetailsRepository)
+
+    @Provides
+    fun provideCharacterSpeciesUseCase(
+        characterDetailsRepository: CharacterDetailsRepository
+    ): GetCharacterSpeciesUseCase = GetCharacterSpeciesUseCase(characterDetailsRepository)
 
     @Provides
     fun provideCharacterDetailsDataSource(apiService: StarWarsApiService): CharacterDetailsDataSource =

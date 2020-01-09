@@ -17,7 +17,6 @@ open class UiStateViewModel : ViewModel() {
 
     protected val handler = CoroutineExceptionHandler { _, exception ->
         _uiState.value = Error(exception)
-        println(exception.printStackTrace())
     }
 
 }
