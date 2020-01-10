@@ -9,27 +9,20 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 internal class CharacterBasicInfoDomainModelTest {
 
-    lateinit var characterBasicInfoDomainModel: CharacterBasicInfoDomainModel
+    lateinit var expectedModel: CharacterBasicInfoDomainModel
 
 
     @Test
     fun `model instantiated has given values`() {
         //Given
-        val name = "Luke Skywalker"
-        val birthYear = "19 BBY"
-        val height = "172"
-       
-
-        characterBasicInfoDomainModel =
+        expectedModel =
             CharacterBasicInfoDomainModel(
-                name,
-                birthYear,
-                height
+                name = "Luke Skywalker",
+                birthYear = "19 BBY",
+                height = "172"
             )
-
+        val actualModel = expectedModel.copy()
         //Then
-        Truth.assertThat(characterBasicInfoDomainModel.name).matches(name)
-        Truth.assertThat(characterBasicInfoDomainModel.birthYear).matches(birthYear)
-        Truth.assertThat(characterBasicInfoDomainModel.height).matches(height)
+        Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 }
