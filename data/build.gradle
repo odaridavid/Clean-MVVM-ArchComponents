@@ -8,6 +8,7 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.testDependencies
 
+    api project(':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dataDependencies.kotlin
     api dataDependencies.retrofit
@@ -17,8 +18,6 @@ dependencies {
     api dataDependencies.dagger2
     kapt dataDependencies.dagger2Processor
 
-
-    api project(':domain')
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito

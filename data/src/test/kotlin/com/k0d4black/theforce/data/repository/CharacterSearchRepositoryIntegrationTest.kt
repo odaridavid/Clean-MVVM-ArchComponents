@@ -5,6 +5,7 @@ import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.data.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.data.source.CharacterSearchDataSource
+import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -12,16 +13,12 @@ import org.junit.Test
 
 internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
 
-    private lateinit var characterSearchRepository: CharacterSearchRepository
+    private lateinit var characterSearchRepository: ICharacterSearchRepository
 
     @Before
     override fun setup() {
         super.setup()
-        val characterSearchDataSourceMock =
-            CharacterSearchDataSource(
-                starWarsApiService
-            )
-
+        val characterSearchDataSourceMock = CharacterSearchDataSource(starWarsApiService)
         characterSearchRepository = CharacterSearchRepository(characterSearchDataSourceMock)
     }
 
@@ -29,9 +26,7 @@ internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
     fun `given existing search parameters when executed then return list of search results`() {
         runBlocking {
             val results = characterSearchRepository.searchCharacters(EXISTING_SEARCH_PARAMS)
-            results.collect {
-                Truth.assertThat(it).isNotEmpty()
-            }
+            results.collect { Truth.assertThat(it).isNotEmpty() }
         }
     }
 
@@ -39,9 +34,7 @@ internal class CharacterSearchRepositoryIntegrationTest : BaseTest() {
     fun `given non-existing search parameters when executed then return no results`() {
         runBlocking {
             val results = characterSearchRepository.searchCharacters(NON_EXISTENT_SEARCH_PARAMS)
-            results.collect {
-                Truth.assertThat(it).isEmpty()
-            }
+            results.collect { Truth.assertThat(it).isEmpty() }
         }
     }
 

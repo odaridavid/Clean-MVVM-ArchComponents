@@ -4,20 +4,17 @@ package com.k0d4black.theforce.di.modules.details
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.repository.CharacterDetailsRepository
 import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
-import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterFilmsUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
+import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterSpeciesUseCase
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module
 class CharacterDetailsModule {
-
-    @Provides
-    fun provideCharacteDetailsRepository(
-        characterDetailsDataSource: CharacterDetailsDataSource
-    ): CharacterDetailsRepository = CharacterDetailsRepository(characterDetailsDataSource)
 
     @Provides
     fun provideCharacterBasicInfoUseCase(

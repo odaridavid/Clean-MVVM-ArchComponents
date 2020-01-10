@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class SearchActivityIntegrationTest : BaseTest() {
+internal class SearchActivityIntegrationTest : BaseTest() {
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =
@@ -48,7 +48,6 @@ class SearchActivityIntegrationTest : BaseTest() {
         onView(withId(R.id.search_tip_text_view)).check(matches(withText(R.string.info_search_tip)))
     }
 
-
     @Test
     fun shouldDisplayDataOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
@@ -61,7 +60,7 @@ class SearchActivityIntegrationTest : BaseTest() {
     fun shouldDisplayDefaultTextWhenNoDataFoundOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))
-        SystemClock.sleep(3000)
+        SystemClock.sleep(2000)
         onView(withId(R.id.search_tip_text_view)).check(matches(isDisplayed()))
     }
 

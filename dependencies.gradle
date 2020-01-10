@@ -76,7 +76,10 @@ ext {
     ]
 
     domainDependencies = [
-            kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
+            dagger2Processor  : "com.google.dagger:dagger-compiler:$dagger2Version",
+            dagger2           : "com.google.dagger:dagger:$dagger2Version"
     ]
 
     testDependencies = [

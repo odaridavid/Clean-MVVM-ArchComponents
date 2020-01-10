@@ -6,10 +6,10 @@ import com.k0d4black.theforce.data.models.CharacterDetailsDataModel
 import com.k0d4black.theforce.data.models.CharacterFilmDataModel
 import com.k0d4black.theforce.data.models.CharacterPlanetDataModel
 import com.k0d4black.theforce.data.models.CharacterSpeciesDataModel
-import com.k0d4black.theforce.domain.CharacterBasicInfoDomainModel
-import com.k0d4black.theforce.domain.CharacterFilmDomainModel
-import com.k0d4black.theforce.domain.CharacterPlanetDomainModel
-import com.k0d4black.theforce.domain.CharacterSpeciesDomainModel
+import com.k0d4black.theforce.domain.models.CharacterBasicInfoDomainModel
+import com.k0d4black.theforce.domain.models.CharacterFilmDomainModel
+import com.k0d4black.theforce.domain.models.CharacterPlanetDomainModel
+import com.k0d4black.theforce.domain.models.CharacterSpeciesDomainModel
 import com.k0d4black.theforce.domain.utils.id
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

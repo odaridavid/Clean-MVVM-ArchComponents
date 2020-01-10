@@ -1,6 +1,6 @@
 package com.k0d4black.theforce.mappers
 
-import com.k0d4black.theforce.domain.*
+import com.k0d4black.theforce.domain.models.*
 import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.utils.convertToInches
 

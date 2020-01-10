@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.domain.CharacterBasicInfoDomainModel
 import org.junit.Test
 
 

@@ -9,7 +9,7 @@ import java.net.HttpURLConnection
 /**
  * Handles Requests from mock web server
  */
-class StarWarsRequestDispatcher : Dispatcher() {
+internal class StarWarsRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {

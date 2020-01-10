@@ -2,7 +2,7 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.data.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData

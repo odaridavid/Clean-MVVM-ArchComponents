@@ -1,8 +1,7 @@
-package com.k0d4black.theforce.data.usecase
+package com.k0d4black.theforce.domain.usecase
 
-import com.k0d4black.theforce.data.repository.CharacterDetailsRepository
-import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
+import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -15,7 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 internal class GetCharacterPlanetUseCaseTest {
     @Mock
-    private lateinit var characterDetailsRepositoryMock: CharacterDetailsRepository
+    private lateinit var characterDetailsRepositoryMock: ICharacterDetailsRepository
 
     private lateinit var getCharacterPlanetUseCase: GetCharacterPlanetUseCase
 

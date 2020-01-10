@@ -9,6 +9,9 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutinesCore
+    api domainDependencies.dagger2
+    kapt domainDependencies.dagger2Processor
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito

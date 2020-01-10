@@ -2,10 +2,10 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterFilmsUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterSpeciesUseCase
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
