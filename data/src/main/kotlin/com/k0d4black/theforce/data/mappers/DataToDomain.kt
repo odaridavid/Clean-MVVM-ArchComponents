@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.mappers
 
 import com.k0d4black.theforce.data.models.*
-import com.k0d4black.theforce.domain.*
+import com.k0d4black.theforce.domain.models.*
 
 
 internal fun CharacterSearchDataModel.toDomain(): CharacterSearchDomainModel {
@@ -21,7 +21,10 @@ internal fun CharacterDetailsDataModel.toDomain(): CharacterBasicInfoDomainModel
 }
 
 internal fun CharacterFilmDataModel.toDomain(): CharacterFilmDomainModel =
-    CharacterFilmDomainModel(this.title, this.openingCrawl)
+    CharacterFilmDomainModel(
+        this.title,
+        this.openingCrawl
+    )
 
 
 internal fun CharacterPlanetDataModel.toDomain(): CharacterPlanetDomainModel =
@@ -32,5 +35,8 @@ internal fun CharacterPlanetDataModel.toDomain(): CharacterPlanetDomainModel =
 
 
 internal fun CharacterSpeciesDataModel.toDomain(): CharacterSpeciesDomainModel =
-    CharacterSpeciesDomainModel(this.name, this.language)
+    CharacterSpeciesDomainModel(
+        this.name,
+        this.language
+    )
 

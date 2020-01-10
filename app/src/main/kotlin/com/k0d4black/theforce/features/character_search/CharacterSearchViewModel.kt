@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.data.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterSearchPresentationModel
 import kotlinx.coroutines.flow.collect
@@ -29,7 +29,8 @@ class CharacterSearchViewModel @Inject constructor(
             characterSearchUseCase.execute(params).collect { results ->
                 _searchResults.value = results.map { it.toPresentation() }
             }
-            _uiState.value = Success
         }
+        _uiState.value = Success
     }
 }
+

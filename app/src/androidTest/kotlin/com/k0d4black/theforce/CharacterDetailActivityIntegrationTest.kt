@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class CharacterDetailActivityIntegrationTest : BaseTest() {
+internal class CharacterDetailActivityIntegrationTest : BaseTest() {
 
     @get:Rule
     var activityRule: ActivityTestRule<CharacterDetailActivity> =

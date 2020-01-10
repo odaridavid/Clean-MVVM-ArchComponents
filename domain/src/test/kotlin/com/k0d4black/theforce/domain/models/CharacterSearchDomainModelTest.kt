@@ -1,10 +1,7 @@
 package com.k0d4black.theforce.domain.models
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.domain.CharacterSearchDomainModel
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
 
 internal class CharacterSearchDomainModelTest {

@@ -3,7 +3,7 @@ package com.k0d4black.theforce.data.source
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.mappers.toDomain
 import com.k0d4black.theforce.data.models.CharacterSearchDataModel
-import com.k0d4black.theforce.domain.CharacterSearchDomainModel
+import com.k0d4black.theforce.domain.models.CharacterSearchDomainModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

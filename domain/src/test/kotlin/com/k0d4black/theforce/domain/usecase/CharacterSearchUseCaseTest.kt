@@ -1,7 +1,8 @@
-package com.k0d4black.theforce.data.usecase
+package com.k0d4black.theforce.domain.usecase
 
-import com.k0d4black.theforce.data.repository.CharacterSearchRepository
-import com.k0d4black.theforce.data.usecases.CharacterSearchUseCase
+
+import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
+import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner
 internal class CharacterSearchUseCaseTest {
 
     @Mock
-    private lateinit var searchRepositoryMock: CharacterSearchRepository
+    private lateinit var searchRepositoryMock: ICharacterSearchRepository
 
     private lateinit var characterSearchUseCase: CharacterSearchUseCase
 

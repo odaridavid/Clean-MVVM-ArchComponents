@@ -6,10 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.data.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterFilmsUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterPlanetUseCase
-import com.k0d4black.theforce.data.usecases.GetCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetCharacterSpeciesUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterDetailsPresentationModel
 import com.k0d4black.theforce.models.CharacterFilmPresentationModel
