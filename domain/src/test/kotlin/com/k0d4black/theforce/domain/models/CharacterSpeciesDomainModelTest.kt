@@ -6,18 +6,14 @@ import org.junit.Test
 
 internal class CharacterSpeciesDomainModelTest {
 
-    lateinit var characterSpeciesDomainModel: CharacterSpeciesDomainModel
+    lateinit var expectedModel: CharacterSpeciesDomainModel
 
     @Test
     fun `model instantiated has given values`() {
         //Given
-        val language = "Shyriiwook"
-        val name = "Human"
-
-        characterSpeciesDomainModel =
-            CharacterSpeciesDomainModel(name, language)
-
+        expectedModel = CharacterSpeciesDomainModel(language = "Shyriiwook", name = "Human")
+        val actualModel = expectedModel.copy()
         //Then
-        assertThat(characterSpeciesDomainModel.language).contains(language)
+        assertThat(actualModel).isEqualTo(expectedModel)
     }
 }

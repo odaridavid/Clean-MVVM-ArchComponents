@@ -6,22 +6,14 @@ import org.junit.Test
 
 internal class CharacterPlanetDomainModelTest {
 
-    lateinit var characterPlanetDomainModel: CharacterPlanetDomainModel
+    lateinit var expectedModel: CharacterPlanetDomainModel
 
     @Test
     fun `model instantiated has given values`() {
         //Given
-        val name = "Tatooine"
-        val population = "23444499"
-
-        characterPlanetDomainModel =
-            CharacterPlanetDomainModel(
-                name,
-                population
-            )
-
+        expectedModel = CharacterPlanetDomainModel(name = "Tatooine", population = "23444499")
+        val actualModel = expectedModel.copy()
         //Then
-        Truth.assertThat(characterPlanetDomainModel.name).matches(name)
-        Truth.assertThat(characterPlanetDomainModel.population).matches(population)
+        Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 }
