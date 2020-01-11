@@ -8,7 +8,7 @@ internal class CharacterPlanetDomainModelTest {
     lateinit var expectedModel: CharacterPlanetDomainModel
 
     @Test
-    fun `model instantiated has given values`() {
+    fun `instantiate character planet domain model`() {
         //Given
         expectedModel =
             CharacterPlanetDomainModel(
@@ -17,6 +17,7 @@ internal class CharacterPlanetDomainModelTest {
             )
         val actualModel = expectedModel.copy()
         //Then
+        Truth.assertThat(actualModel).isInstanceOf(CharacterPlanetDomainModel::class.java)
         Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 }
