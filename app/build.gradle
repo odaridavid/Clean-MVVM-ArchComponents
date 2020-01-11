@@ -63,6 +63,18 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    bundle {
+        density {
+            enableSplit true
+        }
+        abi {
+            enableSplit true
+        }
+        language {
+            enableSplit false
+        }
+    }
 }
 
 dependencies {
