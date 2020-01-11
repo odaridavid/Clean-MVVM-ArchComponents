@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.k0d4black.theforce">
 
+    <!--Debug manifest uses clear text traffic to enable testing on localhost-->
     <application
         android:name=".TheForceApplication"
         android:allowBackup="true"
@@ -9,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".features.character_details.CharacterDetailActivity"
             android:parentActivityName=".features.character_search.SearchActivity" />
