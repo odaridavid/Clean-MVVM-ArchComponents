@@ -273,15 +273,6 @@ height in inches property.
 
 ![App Demo](../art/force_.gif)
 
-## TODO
-
-- Persistence/Caching Strategy
-- Search Query Suggestions
-- Animations
-- Screen Adaptability - Currently locked to portrait mode
-- Use Idling Resource for UI tests.
-- User Friendly Error Messages.
-
 ## License
 
  ```
