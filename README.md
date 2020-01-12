@@ -1,12 +1,18 @@
+<p align="center">
 <img src="art/app_icon_no_bg.png" alt="home" width="100"/>
+</p>
+<p align="center">
+<img  src="https://travis-ci.com/Davidodari/Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop">&nbsp;
+<a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
+  <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
+</a>&nbsp;
+<a href="https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Davidodari/The-Force-Clean-MVVM-ArchComponents-&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4347e606b8f64d568aba90e00655a9f4"/></a>
+</p>
 
 # The-Force
 
-|[![Build Status](https://travis-ci.com/Davidodari/Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop)](https://travis-ci.com/Davidodari/Clean-MVVM-ArchComponents-)|[![codecov](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ)](https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-)|[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4347e606b8f64d568aba90e00655a9f4)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Davidodari/The-Force-Clean-MVVM-ArchComponents-&amp;utm_campaign=Badge_Grade)|
-|:---:|:---:|:---:|
-
 An Android app consuming [a Star Wars API](https://swapi.co/documentation) to display Movie Characters
-it has been built with Clean Architecture, Repository Pattern and MVVM
+it has been built with clean architecture principles, Repository Pattern and MVVM
 pattern as well as Architecture Components.
 
 Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/about/dashboards)
@@ -26,7 +32,7 @@ package-name: com.k0d4black.theforce
 
 - [Architecture](#architecture)
 - [Testing](#testing)
-- [Design](#design)
+- [App Flow](#appflow)
 - [Libraries](#libraries)
 - [Extras](#extras)
 - [Screenshots](#screenshots)
@@ -57,19 +63,23 @@ This will also help with build performance with a smaller Task Dependency Graph.
 The application presentation layer contains the Activity,Fragments and 
 Viewmodels and handles Dependency Injection.
 
-The UI layer `feature` package contains `character_detail` and `character_search` 
-which contain an activity and corresponding viewmodel as well as other UI 
-related classes.
+The UI layer `feature` package contains `character_detail` and 
+`character_search` which contain an activity and corresponding 
+viewmodel as well as other UI related classes.
 
 The viewmodels are provided by the ViewModelFactory using Dagger2 it 
 utilises the **Factory Pattern** by providing an annotation that maps the
-respective viewmodel requested for instantiation with the `ViewModelProvider.Factory`
+respective viewmodel requested for instantiation with the
+`ViewModelProvider.Factory`
 
 The ViewModel then receives data from the use case and updates the 
 LiveData being watched by the activity,the Activity then makes updates 
-to the UI as need be depending on the type of value received by the LiveData.
-This results in the **Observer Pattern** and binding of list data with the
-Recycler Views **Adapter Pattern**.
+to the UI as need be depending on the type of value received by the 
+LiveData.This results in the **Observer Pattern** and binding of list 
+data with the Recycler Views **Adapter Pattern**.
+
+The ``UiStateViewModel`` also help coordinate the state of the UI,updating 
+current view as needed using the **State Pattern** 
 
 This pattern makes the Activities "dumb" by delegating data and logic 
 operations to the Viewmodel,hence decoupling the UI layer and makes testing
@@ -79,17 +89,10 @@ components in isolation easier.
 
 The domain layer contains domain model classes which represent the
 data we will be handling across presentation and data layer.
-The domain model data classes are used as a proxy communicating from the 
-data layer to the presentation and vice versa this makes refactoring 
-easy as their is separation of concerns allowing you to focus on a
-particular layer in isolation.
 
-The domain module also exposes a `ResultWrapper` class which utilises the 
-**State Pattern**.This pattern makes it easier propagating changes to 
-data state across layers and proves useful especially with coroutines 
-which unlike RxJava do not contain an `onError()` method to emit errors.
-Once a coroutine throws an exception the Result Wrapper will wrap the 
-Excpetion and propagate necessary changes.
+Use cases are also provided in the domain layer and orchestrate the flow 
+of data from the data layer onto the presentation layer and a split into
+modular pieces serving one particular purpose.
 
 #### Data
 
@@ -112,12 +115,12 @@ domain will be mapped to the presentation model.
 
 ## Testing
 
-Testing has been layered out differently based on the architectural layers.
+Testing has been done based on the architectural layers.
 
 1. Domain
 
-In the Domain Layer the Domain Data Classes are tested since they act as 
-the proxy to other layers a breaking change will propagate to other layers.
+Contains tests that encompass domain models and uses mockito to verify 
+use cases.
 
 2. Data
 
@@ -135,31 +138,24 @@ responses are received from remote source.
 We mock the repositories and verify the expected behavior once a use case
 has been called to action.
 
-The Domain Layer Models are also tested to verify instance was created 
-successfully with expected parameters and will also be of help in the event
-the model structure needs to change when mapping data.
-
-Utilities and Extension functions have also been fully tested for edge cases.
+Utilities and Extension functions have also been tested.
 
 3. Presentation
 
 The Presentation layer contains robolectric jvm tests on for menu items 
-and instrumentation tests checking on system behaviour as per user expectation.
+and instrumentation tests checking on system behaviour as per user
+expectation.
 
 The UI tests display data served from a mock web server running from the
 devices localhost,this removes flakiness compared to relying on actual 
 data from the real server aspects such as internet connection or 
 network service might bring up issues.
 
-The tests are have been done per screen which is representative of the
-features available on the app.
+The tests are have been done per activity.
 
-View models testing on live data guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
+View models testing on live data were guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
 
-## Design
-
- With the current min api level set to 21 we have access to material
- libraries and can build awesome UIs.
+## App Flow
  
  **Search Screen**
  
@@ -169,12 +165,8 @@ View models testing on live data guided by this [article](https://proandroiddev.
  that will be used to load more content if need be,this saves on loading time 
  and results in a faster search experience.
  
- The list results are bound by a recycler view,which recycles views and 
- provides a tonne of flexibility including things such as custom item layout,
- item decoration,custom headers and much more as compared to its List View 
- Counterpart.
- 
- Each List item contains a button when on clicked navigates to 
+ The list results are bound by a recycler view and 
+ each List item contains a button when on clicked navigates to 
  `CharacterDetailsActivity` screen with an Intent Extra of character id.
  
  **Details Screen**
@@ -255,10 +247,6 @@ or merge made.
 The app makes use of downloadable fonts which reduces APK size compared to
 having the font files within the app.
 
-**Colors**
-
-The App colors follow the material design guidelines to theming.
-
 **Dimension & String Values**
 
 String values are stored in the strings value file this will make it 
@@ -281,11 +269,9 @@ value from the domain model and on mapping to the presentation layer
 model it takes in both centimeters and assigns a converted value to 
 height in inches property.
 
-## Screenshots
+## Demo
 
-| <img src="art/search_screen_def.png" alt="home" width="200"/> |<img src="art/search_screen_results.png" alt="home" width="200"/>|<img src="art/character_details.png" alt="home" width="200"/>|
-|:----:|:----:|:----:|
-| 🔍Search Screen - Default|Search Screen - Results|Character Details|
+![App Demo](../art/force_.gif)
 
 ## TODO
 
