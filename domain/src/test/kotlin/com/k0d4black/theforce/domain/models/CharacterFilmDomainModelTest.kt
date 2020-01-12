@@ -8,7 +8,7 @@ internal class CharacterFilmDomainModelTest {
     lateinit var expectedModel: CharacterFilmDomainModel
 
     @Test
-    fun `model instantiated has given values`() {
+    fun `instantiate character film domain model`() {
         //Given
         expectedModel =
             CharacterFilmDomainModel(
@@ -17,6 +17,7 @@ internal class CharacterFilmDomainModelTest {
             )
         val actualModel = expectedModel.copy()
         //Then
+        Truth.assertThat(actualModel).isInstanceOf(CharacterFilmDomainModel::class.java)
         Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 }

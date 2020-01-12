@@ -9,7 +9,7 @@ internal class CharacterSearchDomainModelTest {
     private lateinit var expectedModel: CharacterSearchDomainModel
 
     @Test
-    fun `model instantiated has given values`() {
+    fun `instantiate character search domain model`() {
         //Given
         expectedModel =
             CharacterSearchDomainModel(
@@ -19,6 +19,7 @@ internal class CharacterSearchDomainModelTest {
             )
         val actualModel = expectedModel.copy()
         //Then
+        Truth.assertThat(actualModel).isInstanceOf(CharacterSearchDomainModel::class.java)
         Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 

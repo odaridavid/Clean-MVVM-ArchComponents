@@ -1,6 +1,7 @@
 package com.k0d4black.theforce.domain.models
 
-import com.google.common.truth.Truth.assertThat
+
+import com.google.common.truth.Truth
 import org.junit.Test
 
 internal class CharacterSpeciesDomainModelTest {
@@ -8,7 +9,7 @@ internal class CharacterSpeciesDomainModelTest {
     lateinit var expectedModel: CharacterSpeciesDomainModel
 
     @Test
-    fun `model instantiated has given values`() {
+    fun `instantiate character species domain model`() {
         //Given
         expectedModel =
             CharacterSpeciesDomainModel(
@@ -17,6 +18,7 @@ internal class CharacterSpeciesDomainModelTest {
             )
         val actualModel = expectedModel.copy()
         //Then
-        assertThat(actualModel).isEqualTo(expectedModel)
+        Truth.assertThat(actualModel).isInstanceOf(CharacterSpeciesDomainModel::class.java)
+        Truth.assertThat(actualModel).isEqualTo(expectedModel)
     }
 }

@@ -9,7 +9,7 @@ internal class CharacterBasicInfoDomainModelTest {
     lateinit var expectedModel: CharacterBasicInfoDomainModel
 
     @Test
-    fun `model instantiated has given values`() {
+    fun `instantiate character basic info domain model`() {
         //Given
         expectedModel =
             CharacterBasicInfoDomainModel(
@@ -19,6 +19,7 @@ internal class CharacterBasicInfoDomainModelTest {
             )
         val actualModel = expectedModel.copy()
         //Then
-        Truth.assertThat(actualModel).isEqualTo(expectedModel)
+        Truth.assertThat(actualModel).isInstanceOf(CharacterBasicInfoDomainModel::class.java)
+        Truth.assertThat(expectedModel).isInstanceOf(CharacterBasicInfoDomainModel::class.java)
     }
 }
