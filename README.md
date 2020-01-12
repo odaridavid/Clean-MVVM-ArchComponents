@@ -271,7 +271,7 @@ height in inches property.
 
 ## Demo
 
-![App Demo](../art/force_.gif)
+<img src="art/force_.gif" width=200/>
 
 ## License
 
