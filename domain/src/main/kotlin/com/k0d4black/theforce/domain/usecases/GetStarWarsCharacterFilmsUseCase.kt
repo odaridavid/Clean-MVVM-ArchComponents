@@ -1,18 +1,17 @@
 package com.k0d4black.theforce.domain.usecases
 
 
-import com.k0d4black.theforce.domain.models.CharacterBasicInfoDomainModel
+import com.k0d4black.theforce.domain.models.StarWarsCharacterFilm
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
-class GetCharacterBasicInfoUseCase @Inject constructor(
+class GetStarWarsCharacterFilmsUseCase @Inject constructor(
     private val characterDetailsRepository: ICharacterDetailsRepository
-) : UseCase<Int, Flow<CharacterBasicInfoDomainModel>> {
+) : UseCase<Int, Flow<List<StarWarsCharacterFilm>>> {
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override suspend fun execute(characterId: Int) =
-        characterDetailsRepository.getCharacterDetails(characterId)
-
+        characterDetailsRepository.getCharacterFilms(characterId)
 }

@@ -2,7 +2,7 @@ package com.k0d4black.theforce.domain.usecase
 
 
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
-import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.domain.usecases.SearchStarWarsCharacterUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,16 +12,16 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class CharacterSearchUseCaseTest {
+internal class StarWarsSearchStarWarsCharacterUseCaseTest {
 
     @Mock
     private lateinit var searchRepositoryMock: ICharacterSearchRepository
 
-    private lateinit var characterSearchUseCase: CharacterSearchUseCase
+    private lateinit var searchStarWarsCharacterUseCase: SearchStarWarsCharacterUseCase
 
     @Before
     fun setup() {
-        characterSearchUseCase = CharacterSearchUseCase(searchRepositoryMock)
+        searchStarWarsCharacterUseCase = SearchStarWarsCharacterUseCase(searchRepositoryMock)
     }
 
     @Test
@@ -31,7 +31,7 @@ internal class CharacterSearchUseCaseTest {
             val searchParameter = "Luke"
 
             //When
-            characterSearchUseCase.execute(searchParameter)
+            searchStarWarsCharacterUseCase.execute(searchParameter)
 
             //Then
             verify(searchRepositoryMock).searchCharacters(searchParameter)

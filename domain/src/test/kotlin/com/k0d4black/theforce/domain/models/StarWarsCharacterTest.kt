@@ -4,22 +4,23 @@ import com.google.common.truth.Truth
 import org.junit.Test
 
 
-internal class CharacterBasicInfoDomainModelTest {
+internal class StarWarsCharacterTest {
 
-    lateinit var expectedModel: CharacterBasicInfoDomainModel
+    lateinit var expectedModel: StarWarsCharacter
 
     @Test
     fun `instantiate character basic info domain model`() {
         //Given
         expectedModel =
-            CharacterBasicInfoDomainModel(
+            StarWarsCharacter(
                 name = "Luke Skywalker",
                 birthYear = "19 BBY",
-                height = "172"
+                height = "172",
+                url ="www.wkwk.ckck/23"
             )
         val actualModel = expectedModel.copy()
         //Then
-        Truth.assertThat(actualModel).isInstanceOf(CharacterBasicInfoDomainModel::class.java)
-        Truth.assertThat(expectedModel).isInstanceOf(CharacterBasicInfoDomainModel::class.java)
+        Truth.assertThat(actualModel).isInstanceOf(StarWarsCharacter::class.java)
+        Truth.assertThat(expectedModel).isInstanceOf(StarWarsCharacter::class.java)
     }
 }

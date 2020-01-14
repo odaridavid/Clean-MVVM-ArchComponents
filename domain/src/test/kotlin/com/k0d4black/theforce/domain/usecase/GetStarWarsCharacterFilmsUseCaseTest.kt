@@ -1,8 +1,7 @@
 package com.k0d4black.theforce.domain.usecase
 
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
-import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
-
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -12,15 +11,15 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class GetCharacterBasicInfoUseCaseTest {
+internal class GetStarWarsCharacterFilmsUseCaseTest {
     @Mock
     private lateinit var characterDetailsRepositoryMock: ICharacterDetailsRepository
 
-    private lateinit var getCharacterBasicInfoUseCase: GetCharacterBasicInfoUseCase
+    private lateinit var getStarWarsCharacterFilmsUseCase: GetStarWarsCharacterFilmsUseCase
 
     @Before
     fun setup() {
-        getCharacterBasicInfoUseCase = GetCharacterBasicInfoUseCase(characterDetailsRepositoryMock)
+        getStarWarsCharacterFilmsUseCase = GetStarWarsCharacterFilmsUseCase(characterDetailsRepositoryMock)
     }
 
     @Test
@@ -30,10 +29,10 @@ internal class GetCharacterBasicInfoUseCaseTest {
             val characterId = 10
 
             //When
-            getCharacterBasicInfoUseCase.execute(characterId)
+            getStarWarsCharacterFilmsUseCase.execute(characterId)
 
             //Then
-            verify(characterDetailsRepositoryMock).getCharacterDetails(characterId)
+            verify(characterDetailsRepositoryMock).getCharacterFilms(characterId)
         }
     }
 }
