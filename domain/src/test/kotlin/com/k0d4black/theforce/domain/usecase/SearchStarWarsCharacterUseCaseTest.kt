@@ -12,7 +12,7 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class StarWarsSearchStarWarsCharacterUseCaseTest {
+internal class SearchStarWarsCharacterUseCaseTest {
 
     @Mock
     private lateinit var searchRepositoryMock: ICharacterSearchRepository
