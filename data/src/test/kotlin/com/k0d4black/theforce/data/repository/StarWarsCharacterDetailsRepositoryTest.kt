@@ -4,7 +4,7 @@ import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
 import com.k0d4black.theforce.data.helpers.NON_EXISTANT_CHARACTER_ID
-import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
+import com.k0d4black.theforce.data.source.StarWarsCharacterDetailsDataSource
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -12,15 +12,15 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.HttpException
 
-internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
+internal class StarWarsCharacterDetailsRepositoryTest : BaseTest() {
 
     private lateinit var characterDetailsRepository: ICharacterDetailsRepository
 
     @Before
     override fun setup() {
         super.setup()
-        val characterDetailsDataSourceMock = CharacterDetailsDataSource(starWarsApiService)
-        characterDetailsRepository = CharacterDetailsRepository(characterDetailsDataSourceMock)
+        val characterDetailsDataSourceMock = StarWarsCharacterDetailsDataSource(starWarsApiService)
+        characterDetailsRepository = StarWarsCharacterDetailsRepository(characterDetailsDataSourceMock)
     }
 
     @Test
@@ -52,7 +52,11 @@ internal class CharacterDetailsRepositoryIntegrationTest : BaseTest() {
 
     @Test(expected = HttpException::class)
     fun `given an invalid character id when executed then return no results`() {
-        runBlocking { characterDetailsRepository.getCharacterDetails(NON_EXISTANT_CHARACTER_ID) }
+        runBlocking {
+            characterDetailsRepository.getCharacterDetails(NON_EXISTANT_CHARACTER_ID).collect {
+
+            }
+        }
     }
 
 }

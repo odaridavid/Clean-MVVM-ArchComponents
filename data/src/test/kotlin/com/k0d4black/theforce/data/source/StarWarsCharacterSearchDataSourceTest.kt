@@ -10,20 +10,20 @@ import org.junit.Before
 import org.junit.Test
 
 
-class CharacterSearchDataSourceTest : BaseTest() {
+class StarWarsCharacterSearchDataSourceTest : BaseTest() {
 
-    private lateinit var characterSearchDataSource: CharacterSearchDataSource
+    private lateinit var starWarsCharacterSearchDataSource: StarWarsCharacterSearchDataSource
 
     @Before
     override fun setup() {
         super.setup()
-        characterSearchDataSource = CharacterSearchDataSource(starWarsApiService)
+        starWarsCharacterSearchDataSource = StarWarsCharacterSearchDataSource(starWarsApiService)
     }
 
     @Test
     fun `given search parameters when parameters exist then get available matching characters`() {
         runBlocking {
-            val response = characterSearchDataSource.query(EXISTING_SEARCH_PARAMS)
+            val response = starWarsCharacterSearchDataSource.query(EXISTING_SEARCH_PARAMS)
             response.collect { Truth.assertThat(it).isNotEmpty() }
         }
     }
@@ -31,7 +31,7 @@ class CharacterSearchDataSourceTest : BaseTest() {
     @Test
     fun `given search parameters when parameters dont exist then get no matching characters`() {
         runBlocking {
-            val response = characterSearchDataSource.query(NON_EXISTENT_SEARCH_PARAMS)
+            val response = starWarsCharacterSearchDataSource.query(NON_EXISTENT_SEARCH_PARAMS)
             response.collect { Truth.assertThat(it).isEmpty() }
         }
     }

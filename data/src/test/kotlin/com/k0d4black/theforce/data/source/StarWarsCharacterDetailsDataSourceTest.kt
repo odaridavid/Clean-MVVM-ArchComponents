@@ -10,27 +10,27 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.HttpException
 
-internal class CharacterDetailsDataSourceTest : BaseTest() {
+internal class StarWarsCharacterDetailsDataSourceTest : BaseTest() {
 
-    private lateinit var characterDetailsDataSource: CharacterDetailsDataSource
+    private lateinit var starWarsCharacterDetailsDataSource: StarWarsCharacterDetailsDataSource
 
     @Before
     override fun setup() {
         super.setup()
-        characterDetailsDataSource = CharacterDetailsDataSource(starWarsApiService)
+        starWarsCharacterDetailsDataSource = StarWarsCharacterDetailsDataSource(starWarsApiService)
     }
 
     @Test
     fun `given a valid character id when executed then return character details`() {
         runBlocking {
             val characterDetailsFlow =
-                characterDetailsDataSource.getCharacterBasicDetails(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterBasicDetails(EXISTING_CHARACTER_ID)
             val characterFilmsFlow =
-                characterDetailsDataSource.getCharacterFilms(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterFilms(EXISTING_CHARACTER_ID)
             val characterSpeciesFlow =
-                characterDetailsDataSource.getCharacterSpecies(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterSpecies(EXISTING_CHARACTER_ID)
             val characterPlanetFlow =
-                characterDetailsDataSource.getCharacterPlanet(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterPlanet(EXISTING_CHARACTER_ID)
 
             characterDetailsFlow.collect {
                 Truth.assertThat(it.name).matches("Luke Skywalker")
@@ -50,7 +50,9 @@ internal class CharacterDetailsDataSourceTest : BaseTest() {
     @Test(expected = HttpException::class)
     fun `given invalid character id when executed then return error response `() {
         runBlocking {
-            characterDetailsDataSource.getCharacterBasicDetails(NON_EXISTANT_CHARACTER_ID)
+            starWarsCharacterDetailsDataSource.getCharacterBasicDetails(NON_EXISTANT_CHARACTER_ID).collect {
+                //Throws Exception
+            }
         }
     }
 }

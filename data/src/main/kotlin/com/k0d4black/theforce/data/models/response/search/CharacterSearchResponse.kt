@@ -1,4 +1,6 @@
-package com.k0d4black.theforce.data.models.response
+package com.k0d4black.theforce.data.models.response.search
+
+import com.k0d4black.theforce.data.models.response.CharacterResponse
 
 
 data class CharacterSearchResponse(
@@ -7,3 +9,4 @@ data class CharacterSearchResponse(
     val previous: Any,
     val results: List<CharacterResponse>
 )
+
