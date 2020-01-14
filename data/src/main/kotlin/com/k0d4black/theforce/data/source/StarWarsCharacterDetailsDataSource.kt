@@ -2,7 +2,6 @@ package com.k0d4black.theforce.data.source
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.mappers.toEntity
-import com.k0d4black.theforce.data.models.entity.StarWarsCharacterEntity
 import com.k0d4black.theforce.data.models.entity.StarWarsCharacterFilmEntity
 import com.k0d4black.theforce.data.models.entity.StarWarsCharacterPlanetEntity
 import com.k0d4black.theforce.data.models.entity.StarWarsCharacterSpeciesEntity
@@ -16,14 +15,9 @@ import javax.inject.Inject
  */
 class StarWarsCharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
 
-    suspend fun getCharacterBasicDetails(characterId: Int): Flow<StarWarsCharacterEntity> {
-        return flow { emit(apiService.getCharacterDetails(characterId).toEntity()) }
-    }
-
-
     suspend fun getCharacterPlanet(characterId: Int): Flow<StarWarsCharacterPlanetEntity> {
         val characterDetailsHomeWorldResponse = apiService.getCharacterHomeworld(characterId)
-        return flow { emit(apiService.getPlanet(characterDetailsHomeWorldResponse.homeWorld.id).toEntity()) }
+        return flow { emit(apiService.getPlanetDetails(characterDetailsHomeWorldResponse.homeWorld.id).toEntity()) }
     }
 
 
@@ -31,7 +25,7 @@ class StarWarsCharacterDetailsDataSource @Inject constructor(private val apiServ
         val characterDetailsResponse = apiService.getCharacterSpecies(characterId)
         val characterSpecies = mutableListOf<StarWarsCharacterSpeciesEntity>()
         for (specie in characterDetailsResponse.species) {
-            val specieResponse = apiService.getSpecies(specie.id)
+            val specieResponse = apiService.getSpeciesDetails(specie.id)
             characterSpecies.add(specieResponse.toEntity())
         }
         return flow { emit(characterSpecies) }
@@ -42,7 +36,7 @@ class StarWarsCharacterDetailsDataSource @Inject constructor(private val apiServ
         val characterDetailsResponse = apiService.getCharacterFilms(characterId)
         val characterFilms = mutableListOf<StarWarsCharacterFilmEntity>()
         for (film in characterDetailsResponse.films) {
-            val filmResponse = apiService.getFilms(film.id)
+            val filmResponse = apiService.getFilmDetails(film.id)
             characterFilms.add(filmResponse.toEntity())
         }
         return flow { emit(characterFilms) }

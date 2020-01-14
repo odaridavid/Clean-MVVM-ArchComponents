@@ -4,7 +4,6 @@ package com.k0d4black.theforce.di.modules.details
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import com.k0d4black.theforce.data.repository.StarWarsCharacterDetailsRepository
 import com.k0d4black.theforce.data.source.StarWarsCharacterDetailsDataSource
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterUseCase
 import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
 import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterPlanetUseCase
 import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterSpeciesUseCase
@@ -13,11 +12,6 @@ import dagger.Provides
 
 @Module
 class CharacterDetailsModule {
-
-    @Provides
-    fun provideCharacterBasicInfoUseCase(
-        starWarsCharacterDetailsRepository: StarWarsCharacterDetailsRepository
-    ): GetStarWarsCharacterUseCase = GetStarWarsCharacterUseCase(starWarsCharacterDetailsRepository)
 
     @Provides
     fun provideCharacterFilmsUseCase(

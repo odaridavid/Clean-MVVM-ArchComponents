@@ -18,11 +18,6 @@ class StarWarsCharacterDetailsRepository @Inject constructor(
     private val starWarsCharacterDetailsDataSource: StarWarsCharacterDetailsDataSource
 ) : ICharacterDetailsRepository {
 
-    override suspend fun getCharacterDetails(characterId: Int): Flow<StarWarsCharacter> {
-        return starWarsCharacterDetailsDataSource.getCharacterBasicDetails(characterId)
-            .map { it.toDomain() }
-    }
-
     override suspend fun getCharacterPlanet(characterId: Int): Flow<StarWarsCharacterPlanet> {
         return starWarsCharacterDetailsDataSource.getCharacterPlanet(characterId).map { it.toDomain() }
     }
