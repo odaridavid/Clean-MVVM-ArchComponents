@@ -1,35 +1,33 @@
 package com.k0d4black.theforce.utils
 
-import com.k0d4black.theforce.domain.models.*
+import com.k0d4black.theforce.domain.models.StarWarsCharacter
+import com.k0d4black.theforce.domain.models.StarWarsCharacterFilm
+import com.k0d4black.theforce.domain.models.StarWarsCharacterPlanet
+import com.k0d4black.theforce.domain.models.StarWarsCharacterSpecies
 
 object SampleData {
     val speciesDomainModel = listOf(
-        CharacterSpeciesDomainModel(
+        StarWarsCharacterSpecies(
             name = "name",
             language = "language"
         )
     )
-    val characterDomainModel =
-        CharacterBasicInfoDomainModel(
-            name = "name",
-            birthYear = "123 BBY",
-            height = "234"
-        )
     val characterFilms = listOf(
-        CharacterFilmDomainModel(
+        StarWarsCharacterFilm(
             title = "title",
             openingCrawl = "opening crawl"
         )
     )
     val planetDomainModel =
-        CharacterPlanetDomainModel(
+        StarWarsCharacterPlanet(
             name = "name",
             population = "100000"
         )
-    val searchResults =listOf(
-        CharacterSearchDomainModel(
+    val searchResults = listOf(
+        StarWarsCharacter(
             "Darth Vader",
             "12BBY",
+            "123",
             "https://swapi.co/api/species/2/"
         )
     )

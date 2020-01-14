@@ -6,7 +6,7 @@
 
         <variable
             name="film"
-            type="com.k0d4black.theforce.models.CharacterFilmPresentationModel" />
+            type="com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel" />
     </data>
 
     <LinearLayout

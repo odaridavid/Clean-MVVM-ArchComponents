@@ -1,13 +1,11 @@
 package com.k0d4black.theforce.di.modules.search
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.repository.CharacterSearchRepository
-import com.k0d4black.theforce.data.source.CharacterSearchDataSource
-import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
-import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.data.repository.StarWarsCharacterSearchRepository
+import com.k0d4black.theforce.data.source.StarWarsCharacterSearchDataSource
+import com.k0d4black.theforce.domain.usecases.SearchStarWarsCharacterUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import com.k0d4black.theforce.features.character_search.SearchQueryListener
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -21,12 +19,12 @@ class CharacterSearchModule {
 
     @Provides
     fun provideCharacterSearchUseCase(
-        characterSearchRepository: CharacterSearchRepository
-    ): CharacterSearchUseCase = CharacterSearchUseCase(characterSearchRepository)
+        starWarsCharacterSearchRepository: StarWarsCharacterSearchRepository
+    ): SearchStarWarsCharacterUseCase = SearchStarWarsCharacterUseCase(starWarsCharacterSearchRepository)
 
     @Provides
-    fun provideCharacterSearchDataSource(apiService: StarWarsApiService): CharacterSearchDataSource =
-        CharacterSearchDataSource(apiService)
+    fun provideCharacterSearchDataSource(apiService: StarWarsApiService): StarWarsCharacterSearchDataSource =
+        StarWarsCharacterSearchDataSource(apiService)
 
 }
 

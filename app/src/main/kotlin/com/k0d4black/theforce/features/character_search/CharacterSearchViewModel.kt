@@ -6,28 +6,28 @@ import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.domain.usecases.SearchStarWarsCharacterUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.CharacterSearchPresentationModel
+import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharacterSearchViewModel @Inject constructor(
-    private val characterSearchUseCase: CharacterSearchUseCase
+    private val searchStarWarsCharacterUseCase: SearchStarWarsCharacterUseCase
 ) : UiStateViewModel() {
 
-    val searchResults: LiveData<List<CharacterSearchPresentationModel>>
-        get() = _searchResults
+    val searchResultsStarWars: LiveData<List<StarWarsCharacterUiModel>>
+        get() = _searchResultsStarWars
 
-    private var _searchResults: MutableLiveData<List<CharacterSearchPresentationModel>> =
+    private var _searchResultsStarWars: MutableLiveData<List<StarWarsCharacterUiModel>> =
         MutableLiveData()
 
     fun executeCharacterSearch(params: String) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            characterSearchUseCase.execute(params).collect { results ->
-                _searchResults.value = results.map { it.toPresentation() }
+            searchStarWarsCharacterUseCase.execute(params).collect { results ->
+                _searchResultsStarWars.value = results.map { it.toPresentation() }
             }
         }
         _uiState.value = Success

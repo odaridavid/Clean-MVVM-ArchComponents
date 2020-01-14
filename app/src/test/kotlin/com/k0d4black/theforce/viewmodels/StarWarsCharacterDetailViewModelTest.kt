@@ -2,10 +2,9 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterSpeciesUseCase
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
@@ -21,16 +20,14 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class CharacterDetailViewModelTest : BaseViewModelTest() {
+internal class StarWarsCharacterDetailViewModelTest : BaseViewModelTest() {
 
     @Mock
-    lateinit var getCharacterBasicInfoUseCase: GetCharacterBasicInfoUseCase
+    lateinit var getStarWarsCharacterFilmsUseCase: GetStarWarsCharacterFilmsUseCase
     @Mock
-    lateinit var getCharacterFilmsUseCase: GetCharacterFilmsUseCase
+    lateinit var getStarWarsCharacterPlanetUseCase: GetStarWarsCharacterPlanetUseCase
     @Mock
-    lateinit var getCharacterPlanetUseCase: GetCharacterPlanetUseCase
-    @Mock
-    lateinit var getCharacterSpeciesUseCase: GetCharacterSpeciesUseCase
+    lateinit var getStarWarsCharacterSpeciesUseCase: GetStarWarsCharacterSpeciesUseCase
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
@@ -39,10 +36,9 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
     @Before
     fun setup() {
         characterDetailViewModel = CharacterDetailViewModel(
-            getCharacterBasicInfoUseCase,
-            getCharacterSpeciesUseCase,
-            getCharacterPlanetUseCase,
-            getCharacterFilmsUseCase
+            getStarWarsCharacterSpeciesUseCase,
+            getStarWarsCharacterPlanetUseCase,
+            getStarWarsCharacterFilmsUseCase
         )
     }
 
@@ -54,36 +50,28 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
             characterDetailViewModel.getCharacterDetails(characterIdParams)
 
-            characterDetailViewModel.characterDetail.observeOnce {
-                Truth.assertThat(it).isEqualTo(SampleData.characterDomainModel.toPresentation())
-            }
-            characterDetailViewModel.characterCharacterSpecies.observeOnce {
+            characterDetailViewModel.characterStarWarsCharacterSpecies.observeOnce {
                 Truth.assertThat(it)
                     .isEqualTo(SampleData.speciesDomainModel.map { it.toPresentation() })
             }
-            characterDetailViewModel.characterFilms.observeOnce {
+            characterDetailViewModel.starWarsCharacterFilms.observeOnce {
                 Truth.assertThat(it)
                     .isEqualTo(SampleData.characterFilms.map { it.toPresentation() })
             }
-            characterDetailViewModel.characterCharacterPlanet.observeOnce {
+            characterDetailViewModel.characterStarWarsCharacterPlanet.observeOnce {
                 Truth.assertThat(it).isEqualTo(SampleData.planetDomainModel.toPresentation())
             }
         }
-
-
     }
 
     private suspend fun setMockAnswers() {
-        given(getCharacterSpeciesUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterSpeciesUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.speciesDomainModel)
         })
-        given(getCharacterBasicInfoUseCase.execute(characterIdParams)).willReturn(flow {
-            emit(SampleData.characterDomainModel)
-        })
-        given(getCharacterFilmsUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterFilmsUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.characterFilms)
         })
-        given(getCharacterPlanetUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterPlanetUseCase.execute(characterIdParams)).willReturn(flow {
             emit(SampleData.planetDomainModel)
         })
     }

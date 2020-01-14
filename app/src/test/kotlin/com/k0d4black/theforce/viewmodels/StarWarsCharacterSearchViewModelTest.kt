@@ -2,7 +2,7 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.domain.usecases.CharacterSearchUseCase
+import com.k0d4black.theforce.domain.usecases.SearchStarWarsCharacterUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
@@ -18,10 +18,10 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-internal class CharacterSearchViewModelTest : BaseViewModelTest() {
+internal class StarWarsCharacterSearchViewModelTest : BaseViewModelTest() {
 
     @Mock
-    lateinit var characterSearchUseCase: CharacterSearchUseCase
+    lateinit var searchStarWarsCharacterUseCase: SearchStarWarsCharacterUseCase
 
     private lateinit var characterSearchViewModel: CharacterSearchViewModel
 
@@ -29,7 +29,7 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @Before
     fun setup() {
-        characterSearchViewModel = CharacterSearchViewModel(characterSearchUseCase)
+        characterSearchViewModel = CharacterSearchViewModel(searchStarWarsCharacterUseCase)
     }
 
     @ExperimentalCoroutinesApi
@@ -38,15 +38,15 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
         runBlockingTest {
             setMockAnswer()
             characterSearchViewModel.executeCharacterSearch(searchParams)
-            characterSearchViewModel.searchResults.observeOnce {
-                Truth.assertThat(it).isEqualTo(SampleData.searchResults.map { it.toPresentation() })
-
+            characterSearchViewModel.searchResultsStarWars.observeOnce {
+                Truth.assertThat(it)
+                    .isEqualTo(SampleData.searchResults.map { character -> character.toPresentation() })
             }
         }
     }
 
     private suspend fun setMockAnswer() {
-        given(characterSearchUseCase.execute(searchParams)).willReturn(flow {
+        given(searchStarWarsCharacterUseCase.execute(searchParams)).willReturn(flow {
             emit(SampleData.searchResults)
         })
     }
