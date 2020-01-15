@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.FilmItemLayoutBinding
-import com.k0d4black.theforce.models.CharacterFilmPresentationModel
+import com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel
 
-class FilmsAdapter : ListAdapter<CharacterFilmPresentationModel, FilmsAdapter.FilmViewHolder>(
+class FilmsAdapter : ListAdapter<StarWarsCharacterFilmsUiModel, FilmsAdapter.FilmViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
@@ -24,24 +24,24 @@ class FilmsAdapter : ListAdapter<CharacterFilmPresentationModel, FilmsAdapter.Fi
     inner class FilmViewHolder(private val binding: FilmItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelCharacter: CharacterFilmPresentationModel) {
-            binding.film = modelCharacter
+        fun bind(modelStarWarsCharacter: StarWarsCharacterFilmsUiModel) {
+            binding.film = modelStarWarsCharacter
             binding.executePendingBindings()
         }
     }
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<CharacterFilmPresentationModel>() {
+            object : DiffUtil.ItemCallback<StarWarsCharacterFilmsUiModel>() {
                 override fun areItemsTheSame(
-                    oldItem: CharacterFilmPresentationModel,
-                    newItem: CharacterFilmPresentationModel
+                    oldItem: StarWarsCharacterFilmsUiModel,
+                    newItem: StarWarsCharacterFilmsUiModel
                 ): Boolean = oldItem.title == newItem.title
 
 
                 override fun areContentsTheSame(
-                    oldItem: CharacterFilmPresentationModel,
-                    newItem: CharacterFilmPresentationModel
+                    oldItem: StarWarsCharacterFilmsUiModel,
+                    newItem: StarWarsCharacterFilmsUiModel
                 ): Boolean = oldItem == newItem
             }
     }

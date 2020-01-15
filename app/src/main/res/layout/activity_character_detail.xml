@@ -7,11 +7,11 @@
 
         <variable
             name="character"
-            type="com.k0d4black.theforce.models.CharacterDetailsPresentationModel" />
+            type="com.k0d4black.theforce.models.StarWarsCharacterUiModel" />
 
         <variable
             name="planet"
-            type="com.k0d4black.theforce.models.CharacterPlanetPresentationModel" />
+            type="com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel" />
     </data>
 
     <ScrollView

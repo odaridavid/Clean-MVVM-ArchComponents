@@ -15,6 +15,8 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
+import com.k0d4black.theforce.domain.utils.id
+import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
@@ -33,39 +35,39 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
 
-    companion object {
-        const val CHARACTER_ID_DEFAULT_VALUE = -1
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
 
-        val characterId = intent.getIntExtra(CHARACTER_ID_KEY, CHARACTER_ID_DEFAULT_VALUE)
+        val character = intent.getParcelableExtra<StarWarsCharacterUiModel>(CHARACTER_PARCEL_KEY)
 
-        characterDetailViewModel.getCharacterDetails(characterId)
+        character?.run {
+            characterDetailViewModel.getCharacterDetails(this.url.id)
+            displayCharacterDetails(this)
+        }?: characterDetailViewModel.displayCharacterError()
 
         observeUiState()
-        observeCharacterBasicDetails()
         observeCharacterPlanet()
         observeCharacterFilms()
         observeCharacterSpecies()
     }
 
     private fun observeCharacterSpecies() {
-        characterDetailViewModel.characterCharacterSpecies.observe(this, Observer { species ->
-            binding.characterDetailsSpeciesRecyclerView.apply {
-                adapter = speciesAdapter.apply { submitList(species) }
-                initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
-            }
-            enableGroup(R.id.character_species_group)
-        })
+        characterDetailViewModel.characterStarWarsCharacterSpecies.observe(
+            this,
+            Observer { species ->
+                binding.characterDetailsSpeciesRecyclerView.apply {
+                    adapter = speciesAdapter.apply { submitList(species) }
+                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
+                }
+                enableGroup(R.id.character_species_group)
+            })
     }
 
     private fun observeCharacterFilms() {
-        characterDetailViewModel.characterFilms.observe(this, Observer { films ->
+        characterDetailViewModel.starWarsCharacterFilms.observe(this, Observer { films ->
             binding.characterDetailsFilmsRecyclerView.apply {
                 adapter = filmsAdapter.apply { submitList(films) }
                 layoutManager =
@@ -80,18 +82,16 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterPlanet() {
-        characterDetailViewModel.characterCharacterPlanet.observe(this, Observer { planet ->
+        characterDetailViewModel.characterStarWarsCharacterPlanet.observe(this, Observer { planet ->
             binding.planet = planet
             enableGroup(R.id.character_planet_group)
         })
     }
 
-    private fun observeCharacterBasicDetails() {
-        characterDetailViewModel.characterDetail.observe(this, Observer { character ->
-            supportActionBar?.title = character.name
-            binding.character = character
-            enableGroup(R.id.character_details_group)
-        })
+    private fun displayCharacterDetails(character: StarWarsCharacterUiModel) {
+        supportActionBar?.title = character.name
+        binding.character = character
+        enableGroup(R.id.character_details_group)
     }
 
     private fun observeUiState() {

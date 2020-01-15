@@ -2,14 +2,11 @@ package com.k0d4black.theforce.di.modules.details
 
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.repository.CharacterDetailsRepository
-import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
-import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
-import com.k0d4black.theforce.domain.usecases.GetCharacterBasicInfoUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetCharacterSpeciesUseCase
-import dagger.Binds
+import com.k0d4black.theforce.data.repository.StarWarsCharacterDetailsRepository
+import com.k0d4black.theforce.data.source.StarWarsCharacterDetailsDataSource
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterSpeciesUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -17,27 +14,22 @@ import dagger.Provides
 class CharacterDetailsModule {
 
     @Provides
-    fun provideCharacterBasicInfoUseCase(
-        characterDetailsRepository: CharacterDetailsRepository
-    ): GetCharacterBasicInfoUseCase = GetCharacterBasicInfoUseCase(characterDetailsRepository)
-
-    @Provides
     fun provideCharacterFilmsUseCase(
-        characterDetailsRepository: CharacterDetailsRepository
-    ): GetCharacterFilmsUseCase = GetCharacterFilmsUseCase(characterDetailsRepository)
+        starWarsCharacterDetailsRepository: StarWarsCharacterDetailsRepository
+    ): GetStarWarsCharacterFilmsUseCase = GetStarWarsCharacterFilmsUseCase(starWarsCharacterDetailsRepository)
 
     @Provides
     fun provideCharacterPlanetUseCase(
-        characterDetailsRepository: CharacterDetailsRepository
-    ): GetCharacterPlanetUseCase = GetCharacterPlanetUseCase(characterDetailsRepository)
+        starWarsCharacterDetailsRepository: StarWarsCharacterDetailsRepository
+    ): GetStarWarsCharacterPlanetUseCase = GetStarWarsCharacterPlanetUseCase(starWarsCharacterDetailsRepository)
 
     @Provides
     fun provideCharacterSpeciesUseCase(
-        characterDetailsRepository: CharacterDetailsRepository
-    ): GetCharacterSpeciesUseCase = GetCharacterSpeciesUseCase(characterDetailsRepository)
+        starWarsCharacterDetailsRepository: StarWarsCharacterDetailsRepository
+    ): GetStarWarsCharacterSpeciesUseCase = GetStarWarsCharacterSpeciesUseCase(starWarsCharacterDetailsRepository)
 
     @Provides
-    fun provideCharacterDetailsDataSource(apiService: StarWarsApiService): CharacterDetailsDataSource =
-        CharacterDetailsDataSource(apiService)
+    fun provideCharacterDetailsDataSource(apiService: StarWarsApiService): StarWarsCharacterDetailsDataSource =
+        StarWarsCharacterDetailsDataSource(apiService)
 
 }

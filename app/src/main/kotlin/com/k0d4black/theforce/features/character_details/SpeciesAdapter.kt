@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.SpecieItemLayoutBinding
-import com.k0d4black.theforce.models.CharacterSpeciesPresentationModel
+import com.k0d4black.theforce.models.StarWarsCharacterSpeciesUiModel
 
-class SpeciesAdapter : ListAdapter<CharacterSpeciesPresentationModel, SpeciesAdapter.SpecieViewHolder>(
+class SpeciesAdapter : ListAdapter<StarWarsCharacterSpeciesUiModel, SpeciesAdapter.SpecieViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
@@ -24,24 +24,24 @@ class SpeciesAdapter : ListAdapter<CharacterSpeciesPresentationModel, SpeciesAda
     inner class SpecieViewHolder(private val binding: SpecieItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelCharacter: CharacterSpeciesPresentationModel) {
-            binding.species = modelCharacter
+        fun bind(modelStarWarsCharacter: StarWarsCharacterSpeciesUiModel) {
+            binding.species = modelStarWarsCharacter
             binding.executePendingBindings()
         }
     }
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<CharacterSpeciesPresentationModel>() {
+            object : DiffUtil.ItemCallback<StarWarsCharacterSpeciesUiModel>() {
                 override fun areItemsTheSame(
-                    oldItem: CharacterSpeciesPresentationModel,
-                    newItem: CharacterSpeciesPresentationModel
+                    oldItem: StarWarsCharacterSpeciesUiModel,
+                    newItem: StarWarsCharacterSpeciesUiModel
                 ): Boolean = oldItem.name == newItem.name
 
 
                 override fun areContentsTheSame(
-                    oldItem: CharacterSpeciesPresentationModel,
-                    newItem: CharacterSpeciesPresentationModel
+                    oldItem: StarWarsCharacterSpeciesUiModel,
+                    newItem: StarWarsCharacterSpeciesUiModel
                 ): Boolean = oldItem == newItem
             }
     }

@@ -15,7 +15,7 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import com.k0d4black.theforce.models.CharacterSearchPresentationModel
+import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
@@ -31,9 +31,9 @@ class SearchActivity : AppCompatActivity() {
     private val characterSearchViewModel: CharacterSearchViewModel by viewModels { viewModelFactory }
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
-        SearchResultAdapter { characterId ->
+        SearchResultAdapter { character ->
             Intent(this, CharacterDetailActivity::class.java).apply {
-                putExtra(CHARACTER_ID_KEY, characterId)
+                putExtra(CHARACTER_PARCEL_KEY, character)
             }.also { startActivity(it) }
         }
     }
@@ -61,7 +61,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun observeSearchResults() {
-        characterSearchViewModel.searchResults.observe(this, Observer {
+        characterSearchViewModel.searchResultsStarWars.observe(this, Observer {
             displaySearchResults(it)
         })
     }
@@ -75,14 +75,14 @@ class SearchActivity : AppCompatActivity() {
             }))
     }
 
-    private fun displaySearchResults(searchResults: List<CharacterSearchPresentationModel>) {
+    private fun displaySearchResults(searchResultStarWars: List<StarWarsCharacterUiModel>) {
         loading_search_results_progress_bar.animate().alpha(0f)
             .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
-        if (searchResults.isNotEmpty()) {
+        if (searchResultStarWars.isNotEmpty()) {
             if (search_tip_text_view.isVisible) search_tip_text_view.hide()
             search_results_recycler_view.apply {
                 adapter =
-                    ScaleInAnimationAdapter(searchResultAdapter.apply { submitList(searchResults) })
+                    ScaleInAnimationAdapter(searchResultAdapter.apply { submitList(searchResultStarWars) })
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
             search_results_recycler_view.show()

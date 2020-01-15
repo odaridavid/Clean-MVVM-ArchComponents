@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.SearchResultLayoutItemBinding
-import com.k0d4black.theforce.domain.utils.id
-import com.k0d4black.theforce.models.CharacterSearchPresentationModel
+import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import kotlinx.android.synthetic.main.search_result_layout_item.view.*
 
 
-class SearchResultAdapter(val onClick: (Int) -> Unit) :
-    ListAdapter<CharacterSearchPresentationModel, SearchResultAdapter.SearchedCharacterViewHolder>(
+class SearchResultAdapter(val onClick: (StarWarsCharacterUiModel) -> Unit) :
+    ListAdapter<StarWarsCharacterUiModel, SearchResultAdapter.SearchedCharacterViewHolder>(
         SearchedCharacterDiffUtil
     ) {
 
@@ -28,28 +27,28 @@ class SearchResultAdapter(val onClick: (Int) -> Unit) :
     inner class SearchedCharacterViewHolder(private val binding: SearchResultLayoutItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelSearch: CharacterSearchPresentationModel) {
-            binding.searchedCharacter = modelSearch
+        fun bind(modelSearchStarWars: StarWarsCharacterUiModel) {
+            binding.searchedCharacter = modelSearchStarWars
             binding.executePendingBindings()
 
             binding.root.more_info_arrow_image_button.setOnClickListener {
-                onClick(modelSearch.url.id)
+                onClick(modelSearchStarWars)
             }
         }
     }
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<CharacterSearchPresentationModel>() {
+            object : DiffUtil.ItemCallback<StarWarsCharacterUiModel>() {
                 override fun areItemsTheSame(
-                    oldItem: CharacterSearchPresentationModel,
-                    newItem: CharacterSearchPresentationModel
+                    oldItem: StarWarsCharacterUiModel,
+                    newItem: StarWarsCharacterUiModel
                 ): Boolean = oldItem.url == newItem.url
 
 
                 override fun areContentsTheSame(
-                    oldItem: CharacterSearchPresentationModel,
-                    newItem: CharacterSearchPresentationModel
+                    oldItem: StarWarsCharacterUiModel,
+                    newItem: StarWarsCharacterUiModel
                 ): Boolean = oldItem == newItem
 
             }

@@ -8,8 +8,8 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import com.k0d4black.theforce.helpers.EXISTING_CHARACTER_ID
-import com.k0d4black.theforce.utils.CHARACTER_ID_KEY
+import com.k0d4black.theforce.models.StarWarsCharacterUiModel
+import com.k0d4black.theforce.utils.CHARACTER_PARCEL_KEY
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -29,12 +29,21 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
         activityRule.launchActivity(intent)
         SystemClock.sleep(2000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText("HTTP 404 Client Error")))
+            .check(matches(withText("Error Loading Character")))
     }
 
     @Test
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
-        val intent = Intent().putExtra(CHARACTER_ID_KEY, EXISTING_CHARACTER_ID)
+        val intent = Intent().putExtra(
+            CHARACTER_PARCEL_KEY,
+            StarWarsCharacterUiModel(
+                name = "Luke",
+                birthYear = "12BBY",
+                heightInCm = "234",
+                heightInInches = "544",
+                url = "1"
+            )
+        )
         activityRule.launchActivity(intent)
         SystemClock.sleep(2000)
         onView(withId(R.id.character_details_birth_year_title_text_view)).check(matches(isDisplayed()))
