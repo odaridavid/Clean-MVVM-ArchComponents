@@ -45,13 +45,13 @@ class CharacterDetailViewModel @Inject constructor(
     fun getCharacterDetails(characterId: Int) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            getStarWarsCharacterPlanetUseCase.execute(characterId).collect {
+            getStarWarsCharacterPlanetUseCase(characterId).collect {
                 _characterPlanet.value = it.toPresentation()
             }
-            getStarWarsCharacterFilmsUseCase.execute(characterId).collect {
+            getStarWarsCharacterFilmsUseCase(characterId).collect {
                 _characterFilms.value = it.map { film -> film.toPresentation() }
             }
-            getStarWarsCharacterSpeciesUseCase.execute(characterId).collect {
+            getStarWarsCharacterSpeciesUseCase(characterId).collect {
                 _characterSpecies.value = it.map { species -> species.toPresentation() }
             }
             _uiState.value = Success
