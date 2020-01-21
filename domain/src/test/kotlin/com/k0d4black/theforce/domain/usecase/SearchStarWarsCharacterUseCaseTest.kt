@@ -31,7 +31,7 @@ internal class SearchStarWarsCharacterUseCaseTest {
             val searchParameter = "Luke"
 
             //When
-            searchStarWarsCharacterUseCase.execute(searchParameter)
+            searchStarWarsCharacterUseCase(searchParameter)
 
             //Then
             verify(searchRepositoryMock).searchCharacters(searchParameter)

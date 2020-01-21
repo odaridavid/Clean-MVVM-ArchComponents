@@ -29,7 +29,7 @@ internal class GetStarWarsCharacterFilmsUseCaseTest {
             val characterId = 10
 
             //When
-            getStarWarsCharacterFilmsUseCase.execute(characterId)
+            getStarWarsCharacterFilmsUseCase(characterId)
 
             //Then
             verify(characterDetailsRepositoryMock).getCharacterFilms(characterId)

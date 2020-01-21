@@ -65,13 +65,13 @@ internal class StarWarsCharacterDetailViewModelTest : BaseViewModelTest() {
     }
 
     private suspend fun setMockAnswers() {
-        given(getStarWarsCharacterSpeciesUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterSpeciesUseCase(characterIdParams)).willReturn(flow {
             emit(SampleData.speciesDomainModel)
         })
-        given(getStarWarsCharacterFilmsUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterFilmsUseCase(characterIdParams)).willReturn(flow {
             emit(SampleData.characterFilms)
         })
-        given(getStarWarsCharacterPlanetUseCase.execute(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterPlanetUseCase(characterIdParams)).willReturn(flow {
             emit(SampleData.planetDomainModel)
         })
     }

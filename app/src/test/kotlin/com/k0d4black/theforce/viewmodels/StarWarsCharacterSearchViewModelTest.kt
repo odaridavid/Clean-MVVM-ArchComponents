@@ -46,7 +46,7 @@ internal class StarWarsCharacterSearchViewModelTest : BaseViewModelTest() {
     }
 
     private suspend fun setMockAnswer() {
-        given(searchStarWarsCharacterUseCase.execute(searchParams)).willReturn(flow {
+        given(searchStarWarsCharacterUseCase(searchParams)).willReturn(flow {
             emit(SampleData.searchResults)
         })
     }
