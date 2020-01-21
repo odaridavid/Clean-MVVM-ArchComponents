@@ -26,7 +26,7 @@ class CharacterSearchViewModel @Inject constructor(
     fun executeCharacterSearch(params: String) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            searchStarWarsCharacterUseCase.execute(params).collect { results ->
+            searchStarWarsCharacterUseCase(params).collect { results ->
                 _searchResultsStarWars.value = results.map { it.toPresentation() }
             }
         }
