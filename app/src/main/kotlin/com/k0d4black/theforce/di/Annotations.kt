@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 /**
- *Scopes dependencies injected into activity to live as long as the activity is alive.
+ * Scopes dependencies injected into activity to be preserved as long as the activity component is available
  */
 @Scope
 annotation class ActivityScope
