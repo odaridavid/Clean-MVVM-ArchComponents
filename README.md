@@ -2,7 +2,7 @@
 <img src="art/app_icon_no_bg.png" alt="home" width="100"/>
 </p>
 <p align="center">
-<img  src="https://travis-ci.com/Davidodari/Clean-MVVM-ArchComponents-.svg?token=ssxgxFpzTcwt6ABmpYRk&branch=develop">&nbsp;
+<img  src="https://travis-ci.com/odaridavid/Clean-MVVM-ArchComponents-.svg?branch=develop">&nbsp;
 <a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
   <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
 </a>&nbsp;
