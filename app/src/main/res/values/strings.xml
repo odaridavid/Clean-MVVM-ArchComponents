@@ -1,31 +1,42 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- Search Activity-->
+    <!-- Search Activity -->
     <string name="info_no_matching_results">No matching results</string>
     <string name="info_search_tip">Search for your favourite StarWars characters by clicking on the search icon.</string>
     <string name="title_explore">Explore</string>
-    <string name="menu_title_search">Search</string>
     <string name="content_description_more_info_arrow">View Character Details</string>
     <string name="title_explore_activity">Explore</string>
     <string name="info_no_results">No Matching Search Results</string>
 
-    <!-- Character Detail Activity-->
+    <!-- Main Menu -->
+    <string name="menu_title_search">Search</string>
+    <string name="menu_title_settings">Settings</string>
+
+    <!-- Character Detail Activity -->
     <string name="title_birth_year">Birth Year</string>
     <string name="title_height">Height</string>
     <string name="title_planet_info">Planet Info</string>
     <string name="title_films">Films</string>
     <string name="title_species">Species</string>
-    <!--    Data Binding String Templates-->
+
+    <!-- Data Binding String Templates -->
     <string name="template_planet_name">Name : %s</string>
     <string name="template_planet_population">Population : %s</string>
     <string name="template_species_name">Name : %s</string>
     <string name="template_height_cm">%s cm</string>
     <string name="template_height_inches">%s inches</string>
     <string name="template_species_language">Language : %s</string>
+
+    <!-- State Strings -->
     <string name="info_loading_status">Loading Character</string>
     <string name="error_loading_character_details">Couldn\'t load character details.</string>
-    <string name="info_loading_complete">Character Loaded Succesfully</string>
+    <string name="info_loading_complete">Character Loaded Successfully</string>
     <string name="info_search_done">Search Done</string>
+
+    <!-- Settings Activity -->
+    <string name="info_app_version">Version %s</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_about">About</string>
 
 </resources>

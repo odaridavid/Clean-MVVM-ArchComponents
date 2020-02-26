@@ -210,6 +210,7 @@ and default parameters
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
+- [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
 
 ## Extras
 
@@ -261,13 +262,6 @@ easy to reuse dimension values across the app.
 Theming is guided by the material design specifications with a ```DayNight```
 theme which can later be used to provide Night variant for the app and 
 enhance user experience.
-
-#### Converting centimeters to inches
-
-There is a utility,`convertToInches` method which takes in a centimeter 
-value from the domain model and on mapping to the presentation layer 
-model it takes in both centimeters and assigns a converted value to 
-height in inches property.
 
 ## Demo
 

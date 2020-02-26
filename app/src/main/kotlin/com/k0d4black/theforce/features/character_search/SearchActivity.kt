@@ -3,6 +3,7 @@ package com.k0d4black.theforce.features.character_search
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -15,6 +16,7 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
+import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
@@ -82,7 +84,11 @@ class SearchActivity : AppCompatActivity() {
             if (search_tip_text_view.isVisible) search_tip_text_view.hide()
             search_results_recycler_view.apply {
                 adapter =
-                    ScaleInAnimationAdapter(searchResultAdapter.apply { submitList(searchResultStarWars) })
+                    ScaleInAnimationAdapter(searchResultAdapter.apply {
+                        submitList(
+                            searchResultStarWars
+                        )
+                    })
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
             search_results_recycler_view.show()
@@ -119,6 +125,14 @@ class SearchActivity : AppCompatActivity() {
             SearchQueryListener(characterSearchViewModel)
         )
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_settings) {
+            val settingsIntent = Intent(this, SettingsActivity::class.java)
+            startActivity(settingsIntent)
+            true
+        } else super.onOptionsItemSelected(item)
     }
 
 }

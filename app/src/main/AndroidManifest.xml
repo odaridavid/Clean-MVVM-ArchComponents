@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".features.settings.AboutActivity"
+            android:label="@string/title_about"
+            android:parentActivityName=".features.settings.SettingsActivity" />
+        <activity
+            android:name=".features.settings.SettingsActivity"
+            android:label="@string/title_settings"
+            android:parentActivityName=".features.character_search.SearchActivity" />
+        <activity
             android:name=".features.character_details.CharacterDetailActivity"
             android:parentActivityName=".features.character_search.SearchActivity" />
         <activity
