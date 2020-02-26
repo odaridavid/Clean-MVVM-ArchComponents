@@ -23,6 +23,7 @@ ext {
     crashlyticsVersion = '2.10.1'
     lifecycleExtensionsVersion = '2.1.0'
     recyclerviewAnimationVersion = '3.0.0'
+    aboutLibsVersion = '8.0.0-rc01'
 
     //Data
     retrofitVersion = '2.7.0'
@@ -62,7 +63,9 @@ ext {
             dagger2Android         : "com.google.dagger:dagger-android:$dagger2Version",
             dagger2AndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger2Version",
             lifecycleExtensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
-            recyclerviewAnimations : "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion"
+            recyclerviewAnimations : "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion",
+            aboutLibraryCore       : "com.mikepenz:aboutlibraries-core:$aboutLibsVersion",
+            aboutLibraryUi         : "com.mikepenz:aboutlibraries:$aboutLibsVersion"
     ]
 
     dataDependencies = [
@@ -76,10 +79,10 @@ ext {
     ]
 
     domainDependencies = [
-            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
-            dagger2Processor  : "com.google.dagger:dagger-compiler:$dagger2Version",
-            dagger2           : "com.google.dagger:dagger:$dagger2Version"
+            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            coroutinesCore  : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
+            dagger2Processor: "com.google.dagger:dagger-compiler:$dagger2Version",
+            dagger2         : "com.google.dagger:dagger:$dagger2Version"
     ]
 
     testDependencies = [

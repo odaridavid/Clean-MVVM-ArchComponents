@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/search_results_layout"
     android:layout_width="match_parent"
+    tools:menu="@menu/main_menu"
     android:layout_height="match_parent"
     tools:context=".features.character_search.SearchActivity">
 

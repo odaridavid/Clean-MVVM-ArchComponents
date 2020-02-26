@@ -12,9 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:label="@string/title_settings"
+            android:name=".features.settings.SettingsActivity"
+            android:parentActivityName=".features.character_search.SearchActivity" />
+
         <activity
             android:name=".features.character_details.CharacterDetailActivity"
             android:parentActivityName=".features.character_search.SearchActivity" />
+
         <activity
             android:name=".features.character_search.SearchActivity"
             android:screenOrientation="portrait"
