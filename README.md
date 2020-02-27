@@ -265,7 +265,7 @@ enhance user experience.
 
 ## Demo
 
-<img src="art/force_.gif" width=200/>
+<img src="art/appdemo.gif" width=200/>
 
 ## License
 
