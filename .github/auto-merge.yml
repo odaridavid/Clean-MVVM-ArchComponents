@@ -1,0 +1,7 @@
+minApprovals: NONE
+deleteBranchAfterMerge: true
+mergeMethod: squash
+reportStatus: true
+mergeCommitMessage: |
+  {title} (#{number})
+  {body}
