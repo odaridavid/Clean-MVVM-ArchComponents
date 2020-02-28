@@ -88,6 +88,15 @@ internal class SearchActivityIntegrationTest : BaseTest() {
             .check(matches(isDisplayed()))
     }
 
+    @Test
+    fun shouldLaunchAboutScreen() {
+        onView(withId(R.id.action_settings))
+            .perform(click());
+        onView(withId(R.id.about_card_view))
+            .perform(click())
+        intended(hasComponent("com.k0d4black.theforce.features.settings.AboutActivity"))
+    }
+
     @After
     override fun tearDown() {
         super.tearDown()
