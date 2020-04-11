@@ -56,7 +56,6 @@ a clear separation of concerns with its Abstraction Principle.
 
 The `domain` and `data` layers are java module libraries as the business 
 logic does not rely on the Android frameworks concrete implementations.
-This will also help with build performance with a smaller Task Dependency Graph.
 
 #### Presentation
 
