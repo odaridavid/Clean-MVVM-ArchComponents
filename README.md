@@ -11,7 +11,7 @@
 
 # The-Force
 
-An Android app consuming [a Star Wars API](https://swapi.co/documentation) to display Movie Characters
+An Android app consuming [a Star Wars API](https://swapi.py4e.com/documentation) to display Movie Characters
 it has been built with clean architecture principles, Repository Pattern and MVVM
 pattern as well as Architecture Components.
 
