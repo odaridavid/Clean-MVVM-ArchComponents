@@ -3,29 +3,29 @@ package com.k0d4black.theforce.data.api
 import com.k0d4black.theforce.data.models.response.details.*
 import com.k0d4black.theforce.data.models.response.search.CharacterSearchResponse
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface StarWarsApiService {
 
     @GET("people")
     suspend fun searchCharacters(@Query("search") params: String): CharacterSearchResponse
 
-    @GET("species/{id}/")
-    suspend fun getSpeciesDetails(@Path("id") speciesId: Int): SpeciesResponse
+    @GET
+    suspend fun getSpeciesDetails(@Url speciesUrl: String): SpeciesResponse
 
-    @GET("films/{id}/")
-    suspend fun getFilmDetails(@Path("id") filmsId: Int): FilmResponse
+    @GET
+    suspend fun getFilmDetails(@Url filmsUrl: String): FilmResponse
 
-    @GET("planets/{id}/")
-    suspend fun getPlanetDetails(@Path("id") planetId: Int): PlanetResponse
+    @GET
+    suspend fun getPlanetDetails(@Url planetUrl: String): PlanetResponse
 
-    @GET("people/{id}/")
-    suspend fun getCharacterFilms(@Path("id") characterId: Int): CharacterDetailsFilmsResponse
+    @GET
+    suspend fun getCharacterFilms(@Url characterUrl: String): CharacterDetailsFilmsResponse
 
-    @GET("people/{id}/")
-    suspend fun getCharacterSpecies(@Path("id") characterId: Int): CharacterDetailsSpeciesResponse
+    @GET
+    suspend fun getCharacterSpecies(@Url characterUrl: String): CharacterDetailsSpeciesResponse
 
-    @GET("people/{id}/")
-    suspend fun getCharacterHomeworld(@Path("id") characterId: Int): CharacterDetailsHomeWorldResponse
+    @GET
+    suspend fun getCharacterHomeworld(@Url characterUrl: String): CharacterDetailsHomeWorldResponse
 }

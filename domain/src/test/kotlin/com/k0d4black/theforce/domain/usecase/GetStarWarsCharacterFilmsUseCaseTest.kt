@@ -19,14 +19,15 @@ internal class GetStarWarsCharacterFilmsUseCaseTest {
 
     @Before
     fun setup() {
-        getStarWarsCharacterFilmsUseCase = GetStarWarsCharacterFilmsUseCase(characterDetailsRepositoryMock)
+        getStarWarsCharacterFilmsUseCase =
+            GetStarWarsCharacterFilmsUseCase(characterDetailsRepositoryMock)
     }
 
     @Test
     fun `when request for character then get character details`() {
         runBlocking {
             //Given
-            val characterId = 10
+            val characterId = "https://swapi.py4e.com/api/people/3/"
 
             //When
             getStarWarsCharacterFilmsUseCase(characterId)

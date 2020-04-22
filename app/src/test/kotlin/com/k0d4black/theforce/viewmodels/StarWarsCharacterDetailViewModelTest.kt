@@ -31,7 +31,7 @@ internal class StarWarsCharacterDetailViewModelTest : BaseViewModelTest() {
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
-    private val characterIdParams = 1
+    private val characterUrl =  "https://swapi.py4e.com/api/people/1/"
 
     @Before
     fun setup() {
@@ -48,7 +48,7 @@ internal class StarWarsCharacterDetailViewModelTest : BaseViewModelTest() {
         runBlockingTest {
             setMockAnswers()
 
-            characterDetailViewModel.getCharacterDetails(characterIdParams)
+            characterDetailViewModel.getCharacterDetails(characterUrl)
 
             characterDetailViewModel.characterStarWarsCharacterSpecies.observeOnce {
                 Truth.assertThat(it)
@@ -65,13 +65,13 @@ internal class StarWarsCharacterDetailViewModelTest : BaseViewModelTest() {
     }
 
     private suspend fun setMockAnswers() {
-        given(getStarWarsCharacterSpeciesUseCase(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterSpeciesUseCase(characterUrl)).willReturn(flow {
             emit(SampleData.speciesDomainModel)
         })
-        given(getStarWarsCharacterFilmsUseCase(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterFilmsUseCase(characterUrl)).willReturn(flow {
             emit(SampleData.characterFilms)
         })
-        given(getStarWarsCharacterPlanetUseCase(characterIdParams)).willReturn(flow {
+        given(getStarWarsCharacterPlanetUseCase(characterUrl)).willReturn(flow {
             emit(SampleData.planetDomainModel)
         })
     }

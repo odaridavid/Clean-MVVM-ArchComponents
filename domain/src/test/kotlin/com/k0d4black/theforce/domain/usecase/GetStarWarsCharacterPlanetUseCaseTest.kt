@@ -27,7 +27,7 @@ internal class GetStarWarsCharacterPlanetUseCaseTest {
     fun `when request for character then get character details`() {
         runBlocking {
             //Given
-            val characterId = 10
+            val characterId = "https://swapi.py4e.com/api/people/3/"
 
             //When
             getStarWarsCharacterPlanetUseCase(characterId)

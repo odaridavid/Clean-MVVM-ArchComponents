@@ -9,6 +9,6 @@ class GetStarWarsCharacterPlanetUseCase @Inject constructor(
     private val characterDetailsRepository: ICharacterDetailsRepository
 ) {
 
-    suspend operator fun invoke(characterId: Int) =
-        characterDetailsRepository.getCharacterPlanet(characterId)
+    suspend operator fun invoke(characterUrl: String) =
+        characterDetailsRepository.getCharacterPlanet(characterUrl)
 }

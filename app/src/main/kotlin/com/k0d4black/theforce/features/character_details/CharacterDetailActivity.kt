@@ -15,7 +15,6 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
-import com.k0d4black.theforce.domain.utils.id
 import com.k0d4black.theforce.models.StarWarsCharacterUiModel
 import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
@@ -44,9 +43,9 @@ class CharacterDetailActivity : AppCompatActivity() {
         val character = intent.getParcelableExtra<StarWarsCharacterUiModel>(CHARACTER_PARCEL_KEY)
 
         character?.run {
-            characterDetailViewModel.getCharacterDetails(this.url.id)
+            characterDetailViewModel.getCharacterDetails(this.url)
             displayCharacterDetails(this)
-        }?: characterDetailViewModel.displayCharacterError()
+        } ?: characterDetailViewModel.displayCharacterError()
 
         observeUiState()
         observeCharacterPlanet()

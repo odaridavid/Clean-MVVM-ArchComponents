@@ -2,7 +2,7 @@ package com.k0d4black.theforce.data.repository
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.BaseTest
-import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
+import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_URL
 import com.k0d4black.theforce.data.source.StarWarsCharacterDetailsDataSource
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.collect
@@ -26,11 +26,11 @@ internal class StarWarsCharacterDetailsRepositoryTest : BaseTest() {
     fun `given a character id when executed then return character details`() {
         runBlocking {
             val characterFilmsFlow =
-                characterDetailsRepository.getCharacterFilms(EXISTING_CHARACTER_ID)
+                characterDetailsRepository.getCharacterFilms(EXISTING_CHARACTER_URL)
             val characterSpeciesFlow =
-                characterDetailsRepository.getCharacterSpecies(EXISTING_CHARACTER_ID)
+                characterDetailsRepository.getCharacterSpecies(EXISTING_CHARACTER_URL)
             val characterPlanetFlow =
-                characterDetailsRepository.getCharacterPlanet(EXISTING_CHARACTER_ID)
+                characterDetailsRepository.getCharacterPlanet(EXISTING_CHARACTER_URL)
 
             characterFilmsFlow.collect {
                 Truth.assertThat(it.size).isAtLeast(1)
