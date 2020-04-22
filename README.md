@@ -32,10 +32,10 @@ package-name: com.k0d4black.theforce
 
 - [Architecture](#architecture)
 - [Testing](#testing)
-- [App Flow](#appflow)
+- [App Flow](#app-flow)
 - [Libraries](#libraries)
 - [Extras](#extras)
-- [Screenshots](#screenshots)
+- [Demo](#demo)
 
 ## Architecture
 
