@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface ICharacterDetailsRepository {
 
-    suspend fun getCharacterPlanet(characterId: Int): Flow<StarWarsCharacterPlanet>
+    suspend fun getCharacterPlanet(characterUrl: String): Flow<StarWarsCharacterPlanet>
 
-    suspend fun getCharacterSpecies(characterId: Int): Flow<List<StarWarsCharacterSpecies>>
+    suspend fun getCharacterSpecies(characterUrl: String): Flow<List<StarWarsCharacterSpecies>>
 
-    suspend fun getCharacterFilms(characterId: Int): Flow<List<StarWarsCharacterFilm>>
+    suspend fun getCharacterFilms(characterUrl: String): Flow<List<StarWarsCharacterFilm>>
 
 }

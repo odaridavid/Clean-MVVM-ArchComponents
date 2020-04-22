@@ -9,7 +9,7 @@ class GetStarWarsCharacterSpeciesUseCase @Inject constructor(
 ) {
 
 
-    suspend operator fun invoke(characterId: Int) =
-        characterDetailsRepository.getCharacterSpecies(characterId)
+    suspend operator fun invoke(characterUrl: String) =
+        characterDetailsRepository.getCharacterSpecies(characterUrl)
 
 }

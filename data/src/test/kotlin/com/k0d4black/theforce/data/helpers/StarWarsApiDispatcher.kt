@@ -24,27 +24,27 @@ class StarWarsRequestDispatcher : Dispatcher() {
                         getJson("json/character_search_no_match.json")
                     )
             }
-            "/people/$NON_EXISTANT_CHARACTER_ID/" -> {
+            NON_EXISTANT_CHARACTER_URL -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
                     .setBody(getJson("json/not_found.json"))
             }
-            "/people/$EXISTING_CHARACTER_ID/" -> {
+            EXISTING_CHARACTER_URL -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson("json/character_details.json"))
             }
-            "/species/$SPECIES_ID/" -> {
+            SPECIES_URL -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson("json/characters_species.json"))
             }
-            "/films/$FILM_ID/" -> {
+            FILM_URL -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson("json/character_films.json"))
             }
-            "/planets/$PLANET_ID/" -> {
+            PLANET_URL -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson("json/character_planet.json"))

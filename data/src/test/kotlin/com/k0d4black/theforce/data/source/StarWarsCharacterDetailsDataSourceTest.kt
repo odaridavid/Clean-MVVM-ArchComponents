@@ -2,7 +2,7 @@ package com.k0d4black.theforce.data.source
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.BaseTest
-import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_ID
+import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_URL
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -22,11 +22,11 @@ internal class StarWarsCharacterDetailsDataSourceTest : BaseTest() {
     fun `given a valid character id when executed then return character details`() {
         runBlocking {
             val characterFilmsFlow =
-                starWarsCharacterDetailsDataSource.getCharacterFilms(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterFilms(EXISTING_CHARACTER_URL)
             val characterSpeciesFlow =
-                starWarsCharacterDetailsDataSource.getCharacterSpecies(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterSpecies(EXISTING_CHARACTER_URL)
             val characterPlanetFlow =
-                starWarsCharacterDetailsDataSource.getCharacterPlanet(EXISTING_CHARACTER_ID)
+                starWarsCharacterDetailsDataSource.getCharacterPlanet(EXISTING_CHARACTER_URL)
 
             characterFilmsFlow.collect {
                 Truth.assertThat(it.size).isAtLeast(1)

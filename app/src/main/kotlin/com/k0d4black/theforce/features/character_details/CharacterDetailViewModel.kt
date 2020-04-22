@@ -42,16 +42,16 @@ class CharacterDetailViewModel @Inject constructor(
     private var _characterSpecies =
         MutableLiveData<List<StarWarsCharacterSpeciesUiModel>>()
 
-    fun getCharacterDetails(characterId: Int) {
+    fun getCharacterDetails(characterUrl: String) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            getStarWarsCharacterPlanetUseCase(characterId).collect {
+            getStarWarsCharacterPlanetUseCase(characterUrl).collect {
                 _characterPlanet.value = it.toPresentation()
             }
-            getStarWarsCharacterFilmsUseCase(characterId).collect {
+            getStarWarsCharacterFilmsUseCase(characterUrl).collect {
                 _characterFilms.value = it.map { film -> film.toPresentation() }
             }
-            getStarWarsCharacterSpeciesUseCase(characterId).collect {
+            getStarWarsCharacterSpeciesUseCase(characterUrl).collect {
                 _characterSpecies.value = it.map { species -> species.toPresentation() }
             }
             _uiState.value = Success
@@ -59,7 +59,6 @@ class CharacterDetailViewModel @Inject constructor(
     }
 
     fun displayCharacterError() {
-        //TODO Navigate back to search
         _uiState.value = Error(Exception("Error Loading Character"))
     }
 }

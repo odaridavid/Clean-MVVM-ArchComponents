@@ -9,6 +9,6 @@ class GetStarWarsCharacterFilmsUseCase @Inject constructor(
     private val characterDetailsRepository: ICharacterDetailsRepository
 ) {
 
-    suspend operator fun invoke(characterId: Int) =
-        characterDetailsRepository.getCharacterFilms(characterId)
+    suspend operator fun invoke(characterUrl: String) =
+        characterDetailsRepository.getCharacterFilms(characterUrl)
 }
