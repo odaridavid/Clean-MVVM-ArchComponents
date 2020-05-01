@@ -18,7 +18,7 @@ class SearchResultAdapter(val onClick: (StarWarsCharacterUiModel) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchedCharacterViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        return SearchedCharacterViewHolder(SearchResultLayoutItemBinding.inflate(inflater))
+        return SearchedCharacterViewHolder(SearchResultLayoutItemBinding.inflate(inflater,parent,false))
     }
 
     override fun onBindViewHolder(holder: SearchedCharacterViewHolder, position: Int): Unit =
