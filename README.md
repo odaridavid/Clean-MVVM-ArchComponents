@@ -266,6 +266,10 @@ enhance user experience.
 
 <img src="art/appdemo.gif" width=200/>
 
+## Copyright Notice
+
+Star Wars and all associated names are copyright Lucasfilm ltd.
+
 ## License
 
  ```
