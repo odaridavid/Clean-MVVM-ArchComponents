@@ -33,7 +33,7 @@ android {
         applicationId "com.k0d4black.theforce"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
+        versionCode rootProject.ext.versionCodeMajor * 10000 + rootProject.ext.versionCodeMinor * 100 + rootProject.ext.versionCodePatch
         versionName rootProject.ext.versionName
         testInstrumentationRunner "com.k0d4black.theforce.runner.MockTestRunner"
     }

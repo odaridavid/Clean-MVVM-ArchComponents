@@ -6,8 +6,10 @@ ext {
     buildToolsVersion = "29.0.2"
 
     //App Versioning
-    versionCode = 1
-    versionName = "1.0"
+    versionCodeMajor = 1
+    versionCodeMinor = 0
+    versionCodePatch = 1
+    versionName = "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
 
     //Dependencies Version - Presentation
     appcompatVersion = '1.1.0'
