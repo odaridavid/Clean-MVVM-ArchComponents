@@ -266,6 +266,11 @@ enhance user experience.
 
 <img src="art/appdemo.gif" width=200/>
 
+
+<a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='150'/></a>
+
+Google Play and the Google Play logo are trademarks of Google LLC.
+
 ## Copyright Notice
 
 Star Wars and all associated names are copyright Lucasfilm ltd.
