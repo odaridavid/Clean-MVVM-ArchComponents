@@ -42,6 +42,6 @@ open class StarWarsApiModule {
 
     @Provides
     @Named("baseUrl")
-    open fun provideBaseUrl(): String = "https://swapi.py4e.com/api/"
+    open fun provideBaseUrl(): String = "https://swapi.dev/api/"
 
 }
