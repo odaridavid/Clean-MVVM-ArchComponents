@@ -11,14 +11,10 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.commons.AnimatorListener
-import com.k0d4black.theforce.commons.Error
-import com.k0d4black.theforce.commons.Loading
-import com.k0d4black.theforce.commons.Success
+import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.StarWarsCharacterUiModel
-import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_search.*
@@ -46,25 +42,20 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         observeUiState()
-        observeSearchResults()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeUiState() {
         characterSearchViewModel.uiState.observe(this, Observer {
             when (it) {
-                is Success -> showSnackbar(
-                    search_results_recycler_view,
-                    getString(R.string.info_search_done)
-                )
+                is Success<*> -> {
+                    val data = it.data as List<StarWarsCharacterUiModel>
+                    showSnackbar(search_results_recycler_view, getString(R.string.info_search_done))
+                    displaySearchResults(data)
+                }
                 is Error -> displayErrorState(it.error)
                 is Loading -> displayLoadingState()
             }
-        })
-    }
-
-    private fun observeSearchResults() {
-        characterSearchViewModel.searchResultsStarWars.observe(this, Observer {
-            displaySearchResults(it)
         })
     }
 
@@ -78,20 +69,23 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun displaySearchResults(searchResultStarWars: List<StarWarsCharacterUiModel>) {
-        loading_search_results_progress_bar.animate().alpha(0f)
+        loading_search_results_progress_bar.animate()
+            .alpha(0f)
             .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
+
         if (searchResultStarWars.isNotEmpty()) {
+
             if (search_tip_text_view.isVisible) search_tip_text_view.hide()
+
             search_results_recycler_view.apply {
-                adapter =
-                    ScaleInAnimationAdapter(searchResultAdapter.apply {
-                        submitList(
-                            searchResultStarWars
-                        )
-                    })
+                adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
+                    submitList(searchResultStarWars)
+                })
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
+
             search_results_recycler_view.show()
+
         } else displayNoSearchResults()
     }
 
