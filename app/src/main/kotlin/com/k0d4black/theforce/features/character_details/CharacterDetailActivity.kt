@@ -10,13 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.commons.AnimatorListener
-import com.k0d4black.theforce.commons.Error
-import com.k0d4black.theforce.commons.Loading
-import com.k0d4black.theforce.commons.Success
+import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.StarWarsCharacterUiModel
-import com.k0d4black.theforce.utils.*
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import javax.inject.Inject
@@ -97,12 +93,18 @@ class CharacterDetailActivity : AppCompatActivity() {
         characterDetailViewModel.uiState.observe(this, Observer {
             val anchor = character_details_layout
             when (it) {
-                is Success -> {
-                    showSnackbar(anchor, getString(R.string.info_loading_complete))
+                is Success<*> -> {
+                    showSnackbar(
+                        anchor,
+                        getString(R.string.info_loading_complete)
+                    )
                     binding.loadingCharacterProgressBar.hide()
                 }
                 is Error -> displayErrorState(it.error)
-                is Loading -> showSnackbar(anchor, getString(R.string.info_loading_status))
+                is Loading -> showSnackbar(
+                    anchor,
+                    getString(R.string.info_loading_status)
+                )
             }
         })
     }
@@ -111,7 +113,10 @@ class CharacterDetailActivity : AppCompatActivity() {
     private fun displayErrorState(exception: Throwable) {
         binding.loadingCharacterProgressBar.hide()
         binding.loadingErrorTextView.show()
-        showSnackbar(character_details_layout, "${exception.message}")
+        showSnackbar(
+            character_details_layout,
+            "${exception.message}"
+        )
     }
 
     //Synthetics upcasting to View , Define type explicitly

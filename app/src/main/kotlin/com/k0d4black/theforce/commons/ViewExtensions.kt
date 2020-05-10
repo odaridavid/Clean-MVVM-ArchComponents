@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.utils
+package com.k0d4black.theforce.commons
 
 import android.content.Context
 import android.view.View

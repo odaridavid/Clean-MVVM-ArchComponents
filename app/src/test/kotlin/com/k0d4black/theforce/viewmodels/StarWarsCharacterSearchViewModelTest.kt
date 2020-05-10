@@ -2,9 +2,9 @@ package com.k0d4black.theforce.viewmodels
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
+import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.domain.usecases.SearchStarWarsCharacterUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
-import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,9 +38,8 @@ internal class StarWarsCharacterSearchViewModelTest : BaseViewModelTest() {
         runBlockingTest {
             setMockAnswer()
             characterSearchViewModel.executeCharacterSearch(searchParams)
-            characterSearchViewModel.searchResultsStarWars.observeOnce {
-                Truth.assertThat(it)
-                    .isEqualTo(SampleData.searchResults.map { character -> character.toPresentation() })
+            characterSearchViewModel.uiState.observeOnce { state ->
+                Truth.assertThat(state).isInstanceOf(Success::class.java)
             }
         }
     }

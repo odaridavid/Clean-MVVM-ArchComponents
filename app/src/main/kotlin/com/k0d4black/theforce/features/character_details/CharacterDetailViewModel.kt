@@ -54,7 +54,7 @@ class CharacterDetailViewModel @Inject constructor(
             getStarWarsCharacterSpeciesUseCase(characterUrl).collect {
                 _characterSpecies.value = it.map { species -> species.toPresentation() }
             }
-            _uiState.value = Success
+            _uiState.value = Success(Unit)
         }
     }
 
