@@ -8,7 +8,7 @@ import com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel
 import com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel
 import com.k0d4black.theforce.models.StarWarsCharacterSpeciesUiModel
 import com.k0d4black.theforce.models.StarWarsCharacterUiModel
-import com.k0d4black.theforce.utils.convertToInches
+import com.k0d4black.theforce.commons.convertToInches
 
 
 fun StarWarsCharacter.toPresentation(): StarWarsCharacterUiModel {

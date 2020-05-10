@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.utils
+package com.k0d4black.theforce.commons
 
 import java.math.BigDecimal
 import java.math.RoundingMode
