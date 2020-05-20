@@ -48,16 +48,16 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
         runBlockingTest {
             characterDetailViewModel.getCharacterDetails(characterUrl)
 
-            characterDetailViewModel.characterStarWarsCharacterSpecies.observeOnce {
-                Truth.assertThat(it)
-                    .isEqualTo(SampleData.speciesDomainModel.map { it.toPresentation() })
+            characterDetailViewModel.characterStarWarsCharacterSpecies.observeOnce {speciesPresentation->
+                Truth.assertThat(speciesPresentation)
+                    .isEqualTo(SampleData.species.map { it.toPresentation() })
             }
-            characterDetailViewModel.starWarsCharacterFilms.observeOnce {
-                Truth.assertThat(it)
-                    .isEqualTo(SampleData.characterFilms.map { it.toPresentation() })
+            characterDetailViewModel.starWarsCharacterFilms.observeOnce {filmPresentation->
+                Truth.assertThat(filmPresentation)
+                    .isEqualTo(SampleData.films.map { it.toPresentation() })
             }
-            characterDetailViewModel.characterPlanet.observeOnce {
-                Truth.assertThat(it).isEqualTo(SampleData.planetDomainModel.toPresentation())
+            characterDetailViewModel.characterPlanet.observeOnce {planetPresentation->
+                Truth.assertThat(planetPresentation).isEqualTo(SampleData.planet.toPresentation())
             }
         }
     }

@@ -6,19 +6,19 @@ import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.models.Specie
 
 object SampleData {
-    val speciesDomainModel = listOf(
+    val species = listOf(
         Specie(
             name = "name",
             language = "language"
         )
     )
-    val characterFilms = listOf(
+    val films = listOf(
         Film(
             title = "title",
             openingCrawl = "opening crawl"
         )
     )
-    val planetDomainModel =
+    val planet =
         Planet(
             name = "name",
             population = "100000"
