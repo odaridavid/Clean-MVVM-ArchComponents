@@ -7,6 +7,6 @@ class SearchCharactersUseCase @Inject constructor(
     private val searchRepository: ICharacterSearchRepository
 ) {
 
-    suspend operator fun invoke(params: String) = searchRepository.searchCharacters(params)
+    suspend operator fun invoke(characterName: String) = searchRepository.searchCharacters(characterName)
 
 }
