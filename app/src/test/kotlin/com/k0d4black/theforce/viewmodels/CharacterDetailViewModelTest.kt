@@ -10,12 +10,10 @@ import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito.given
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -24,14 +22,16 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     @Mock
     lateinit var getFilmsUseCase: GetFilmsUseCase
+
     @Mock
     lateinit var getPlanetUseCase: GetPlanetUseCase
+
     @Mock
     lateinit var getSpeciesUseCase: GetSpeciesUseCase
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
-    private val characterUrl =  "https://swapi.py4e.com/api/people/1/"
+    private val characterUrl = "https://swapi.py4e.com/api/people/1/"
 
     @Before
     fun setup() {
@@ -46,8 +46,6 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
     @Test
     fun shouldGetCharacterDetails() {
         runBlockingTest {
-            setMockAnswers()
-
             characterDetailViewModel.getCharacterDetails(characterUrl)
 
             characterDetailViewModel.characterStarWarsCharacterSpecies.observeOnce {
@@ -62,18 +60,6 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
                 Truth.assertThat(it).isEqualTo(SampleData.planetDomainModel.toPresentation())
             }
         }
-    }
-
-    private suspend fun setMockAnswers() {
-        given(getSpeciesUseCase(characterUrl)).willReturn(flow {
-            emit(SampleData.speciesDomainModel)
-        })
-        given(getFilmsUseCase(characterUrl)).willReturn(flow {
-            emit(SampleData.characterFilms)
-        })
-        given(getPlanetUseCase(characterUrl)).willReturn(flow {
-            emit(SampleData.planetDomainModel)
-        })
     }
 
 }
