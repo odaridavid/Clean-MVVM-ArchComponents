@@ -1,17 +1,17 @@
 package com.k0d4black.theforce.domain.repository
 
-import com.k0d4black.theforce.domain.models.StarWarsCharacterFilm
-import com.k0d4black.theforce.domain.models.StarWarsCharacterPlanet
-import com.k0d4black.theforce.domain.models.StarWarsCharacterSpecies
+import com.k0d4black.theforce.domain.models.Film
+import com.k0d4black.theforce.domain.models.Planet
+import com.k0d4black.theforce.domain.models.Specie
 import kotlinx.coroutines.flow.Flow
 
 
 interface ICharacterDetailsRepository {
 
-    suspend fun getCharacterPlanet(characterUrl: String): Flow<StarWarsCharacterPlanet>
+    suspend fun getCharacterPlanet(characterUrl: String): Flow<Planet>
 
-    suspend fun getCharacterSpecies(characterUrl: String): Flow<List<StarWarsCharacterSpecies>>
+    suspend fun getCharacterSpecies(characterUrl: String): Flow<List<Specie>>
 
-    suspend fun getCharacterFilms(characterUrl: String): Flow<List<StarWarsCharacterFilm>>
+    suspend fun getCharacterFilms(characterUrl: String): Flow<List<Film>>
 
 }

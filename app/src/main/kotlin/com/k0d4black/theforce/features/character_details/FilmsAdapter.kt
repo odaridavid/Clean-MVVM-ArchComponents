@@ -5,26 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.k0d4black.theforce.databinding.FilmItemLayoutBinding
-import com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel
+import com.k0d4black.theforce.databinding.ItemFilmBinding
+import com.k0d4black.theforce.models.FilmPresentation
 
-class FilmsAdapter : ListAdapter<StarWarsCharacterFilmsUiModel, FilmsAdapter.FilmViewHolder>(
+class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        return FilmViewHolder(FilmItemLayoutBinding.inflate(inflater))
+        return FilmViewHolder(ItemFilmBinding.inflate(inflater))
     }
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class FilmViewHolder(private val binding: FilmItemLayoutBinding) :
+    inner class FilmViewHolder(private val binding: ItemFilmBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelStarWarsCharacter: StarWarsCharacterFilmsUiModel) {
+        fun bind(modelStarWarsCharacter: FilmPresentation) {
             binding.film = modelStarWarsCharacter
             binding.executePendingBindings()
         }
@@ -32,17 +32,17 @@ class FilmsAdapter : ListAdapter<StarWarsCharacterFilmsUiModel, FilmsAdapter.Fil
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<StarWarsCharacterFilmsUiModel>() {
+            object : DiffUtil.ItemCallback<FilmPresentation>() {
                 override fun areItemsTheSame(
-                    oldItem: StarWarsCharacterFilmsUiModel,
-                    newItem: StarWarsCharacterFilmsUiModel
-                ): Boolean = oldItem.title == newItem.title
+                    oldItem: FilmPresentation,
+                    newItem: FilmPresentation
+                ): Boolean = oldItem == newItem
 
 
                 override fun areContentsTheSame(
-                    oldItem: StarWarsCharacterFilmsUiModel,
-                    newItem: StarWarsCharacterFilmsUiModel
-                ): Boolean = oldItem == newItem
+                    oldItem: FilmPresentation,
+                    newItem: FilmPresentation
+                ): Boolean = oldItem.title == newItem.title
             }
     }
 }

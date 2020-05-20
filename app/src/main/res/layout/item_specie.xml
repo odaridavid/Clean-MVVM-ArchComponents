@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="species"
+            type="com.k0d4black.theforce.models.SpeciePresentation" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/species_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/template_species_name,species.name)}"
+            tools:text="Species Name" />
+
+        <TextView
+            android:id="@+id/species_language_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/template_species_language,species.language)}"
+            tools:text="Language" />
+
+    </LinearLayout>
+</layout>

@@ -7,51 +7,51 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetSpeciesUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel
-import com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel
-import com.k0d4black.theforce.models.StarWarsCharacterSpeciesUiModel
+import com.k0d4black.theforce.models.FilmPresentation
+import com.k0d4black.theforce.models.PlanetPresentation
+import com.k0d4black.theforce.models.SpeciePresentation
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharacterDetailViewModel @Inject constructor(
-    private val getStarWarsCharacterSpeciesUseCase: GetStarWarsCharacterSpeciesUseCase,
-    private val getStarWarsCharacterPlanetUseCase: GetStarWarsCharacterPlanetUseCase,
-    private val getStarWarsCharacterFilmsUseCase: GetStarWarsCharacterFilmsUseCase
+    private val getSpeciesUseCase: GetSpeciesUseCase,
+    private val getPlanetUseCase: GetPlanetUseCase,
+    private val getFilmsUseCase: GetFilmsUseCase
 ) : UiStateViewModel() {
 
-    val characterStarWarsCharacterPlanet: LiveData<StarWarsCharacterPlanetUiModel>
+    val characterPlanet: LiveData<PlanetPresentation>
         get() = _characterPlanet
 
     private var _characterPlanet =
-        MutableLiveData<StarWarsCharacterPlanetUiModel>()
+        MutableLiveData<PlanetPresentation>()
 
-    val starWarsCharacterFilms: LiveData<List<StarWarsCharacterFilmsUiModel>>
+    val starWarsCharacterFilms: LiveData<List<FilmPresentation>>
         get() = _characterFilms
 
     private var _characterFilms =
-        MutableLiveData<List<StarWarsCharacterFilmsUiModel>>()
+        MutableLiveData<List<FilmPresentation>>()
 
-    val characterStarWarsCharacterSpecies: LiveData<List<StarWarsCharacterSpeciesUiModel>>
+    val characterStarWarsCharacterSpecies: LiveData<List<SpeciePresentation>>
         get() = _characterSpecies
 
     private var _characterSpecies =
-        MutableLiveData<List<StarWarsCharacterSpeciesUiModel>>()
+        MutableLiveData<List<SpeciePresentation>>()
 
     fun getCharacterDetails(characterUrl: String) {
         _uiState.value = Loading
         viewModelScope.launch(handler) {
-            getStarWarsCharacterPlanetUseCase(characterUrl).collect {
+            getPlanetUseCase(characterUrl).collect {
                 _characterPlanet.value = it.toPresentation()
             }
-            getStarWarsCharacterFilmsUseCase(characterUrl).collect {
+            getFilmsUseCase(characterUrl).collect {
                 _characterFilms.value = it.map { film -> film.toPresentation() }
             }
-            getStarWarsCharacterSpeciesUseCase(characterUrl).collect {
+            getSpeciesUseCase(characterUrl).collect {
                 _characterSpecies.value = it.map { species -> species.toPresentation() }
             }
             _uiState.value = Success(Unit)

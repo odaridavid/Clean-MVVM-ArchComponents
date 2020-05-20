@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import com.k0d4black.theforce.models.StarWarsCharacterUiModel
+import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.commons.CHARACTER_PARCEL_KEY
 import org.junit.After
 import org.junit.Rule
@@ -36,7 +36,7 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
         val intent = Intent().putExtra(
             CHARACTER_PARCEL_KEY,
-            StarWarsCharacterUiModel(
+            CharacterPresentation(
                 name = "Luke",
                 birthYear = "12BBY",
                 heightInCm = "234",

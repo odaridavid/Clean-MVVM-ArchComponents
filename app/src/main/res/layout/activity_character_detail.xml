@@ -7,11 +7,11 @@
 
         <variable
             name="character"
-            type="com.k0d4black.theforce.models.StarWarsCharacterUiModel" />
+            type="com.k0d4black.theforce.models.CharacterPresentation" />
 
         <variable
             name="planet"
-            type="com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel" />
+            type="com.k0d4black.theforce.models.PlanetPresentation" />
     </data>
 
     <ScrollView
@@ -132,7 +132,7 @@
                     android:layout_margin="@dimen/margin_default"
                     app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view"
                     tools:itemCount="2"
-                    tools:listitem="@layout/film_item_layout" />
+                    tools:listitem="@layout/item_film" />
 
                 <TextView
                     android:id="@+id/character_details_species_title_text_view"
@@ -151,7 +151,7 @@
                     android:layout_margin="@dimen/margin_default"
                     app:layout_constraintTop_toBottomOf="@id/character_details_species_title_text_view"
                     tools:itemCount="2"
-                    tools:listitem="@layout/specie_item_layout" />
+                    tools:listitem="@layout/item_specie" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/character_details_group"

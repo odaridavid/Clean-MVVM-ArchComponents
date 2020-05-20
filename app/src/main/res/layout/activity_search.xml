@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="2"
-        tools:listitem="@layout/search_result_layout_item" />
+        tools:listitem="@layout/item_search" />
 
     <TextView
         android:id="@+id/no_results_text_view"

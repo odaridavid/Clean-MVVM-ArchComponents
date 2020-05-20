@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.api
 
-import com.k0d4black.theforce.data.models.response.details.*
-import com.k0d4black.theforce.data.models.response.search.CharacterSearchResponse
+import com.k0d4black.theforce.data.models.response.*
+import com.k0d4black.theforce.data.models.response.SearchResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
@@ -9,23 +9,23 @@ import retrofit2.http.Url
 interface StarWarsApiService {
 
     @GET("people")
-    suspend fun searchCharacters(@Query("search") params: String): CharacterSearchResponse
+    suspend fun searchCharacters(@Query("search") params: String): SearchResponse
 
     @GET
-    suspend fun getSpeciesDetails(@Url speciesUrl: String): SpeciesResponse
+    suspend fun getSpecieDetails(@Url speciesUrl: String): SpecieDetailResponse
 
     @GET
-    suspend fun getFilmDetails(@Url filmsUrl: String): FilmResponse
+    suspend fun getFilmDetails(@Url filmsUrl: String): FilmDetailResponse
 
     @GET
-    suspend fun getPlanetDetails(@Url planetUrl: String): PlanetResponse
+    suspend fun getPlanetDetails(@Url planetUrl: String): PlanetDetailsResponse
 
     @GET
-    suspend fun getCharacterFilms(@Url characterUrl: String): CharacterDetailsFilmsResponse
+    suspend fun getFilms(@Url characterUrl: String): FilmsResponse
 
     @GET
-    suspend fun getCharacterSpecies(@Url characterUrl: String): CharacterDetailsSpeciesResponse
+    suspend fun getSpecies(@Url characterUrl: String): SpeciesResponse
 
     @GET
-    suspend fun getCharacterHomeworld(@Url characterUrl: String): CharacterDetailsHomeWorldResponse
+    suspend fun getPlanet(@Url characterUrl: String): PlanetResponse
 }
