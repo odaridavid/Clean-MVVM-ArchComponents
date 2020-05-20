@@ -25,24 +25,24 @@ class CharacterDetailViewModel @Inject constructor(
     private val getFilmsUseCase: GetFilmsUseCase
 ) : UiStateViewModel() {
 
-    val characterPlanet: LiveData<PlanetPresentation>
-        get() = _characterPlanet
+    val planet: LiveData<PlanetPresentation>
+        get() = _planet
 
-    private var _characterPlanet = MutableLiveData<PlanetPresentation>()
+    private var _planet = MutableLiveData<PlanetPresentation>()
 
-    val starWarsCharacterFilms: LiveData<List<FilmPresentation>>
-        get() = _characterFilms
+    val films: LiveData<List<FilmPresentation>>
+        get() = _films
 
-    private var _characterFilms = MutableLiveData<List<FilmPresentation>>()
+    private var _films = MutableLiveData<List<FilmPresentation>>()
 
-    val characterStarWarsCharacterSpecies: LiveData<List<SpeciePresentation>>
-        get() = _characterSpecies
+    val species: LiveData<List<SpeciePresentation>>
+        get() = _species
 
-    private var _characterSpecies = MutableLiveData<List<SpeciePresentation>>()
+    private var _species = MutableLiveData<List<SpeciePresentation>>()
 
     fun getCharacterDetails(characterUrl: String) {
-        _uiState.value = Loading
         viewModelScope.launch(Dispatchers.IO + handler) {
+            _uiState.postValue(Loading)
             loadPlanet(characterUrl)
             loadFilms(characterUrl)
             loadSpecies(characterUrl)
@@ -53,21 +53,21 @@ class CharacterDetailViewModel @Inject constructor(
     private suspend fun loadPlanet(characterUrl: String) {
         getPlanetUseCase(characterUrl).collect { planet ->
             val planetPresentation = planet.toPresentation()
-            _characterPlanet.postValue(planetPresentation)
+            _planet.postValue(planetPresentation)
         }
     }
 
     private suspend fun loadFilms(characterUrl: String) {
         getFilmsUseCase(characterUrl).collect { films ->
             val filmsPresentation = films.map { eachFilm -> eachFilm.toPresentation() }
-            _characterFilms.postValue(filmsPresentation)
+            _films.postValue(filmsPresentation)
         }
     }
 
     private suspend fun loadSpecies(characterUrl: String) {
         getSpeciesUseCase(characterUrl).collect { species ->
             val speciesPresentation = species.map { eachSpecie -> eachSpecie.toPresentation() }
-            _characterSpecies.postValue(speciesPresentation)
+            _species.postValue(speciesPresentation)
         }
     }
 

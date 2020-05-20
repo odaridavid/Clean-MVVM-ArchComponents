@@ -50,7 +50,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterSpecies() {
-        characterDetailViewModel.characterStarWarsCharacterSpecies.observe(
+        characterDetailViewModel.species.observe(
             this,
             Observer { species ->
                 if (species.isNotEmpty()) {
@@ -64,7 +64,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterFilms() {
-        characterDetailViewModel.starWarsCharacterFilms.observe(this, Observer { films ->
+        characterDetailViewModel.films.observe(this, Observer { films ->
             binding.characterDetailsFilmsRecyclerView.apply {
                 adapter = filmsAdapter.apply { submitList(films) }
                 layoutManager =
@@ -79,7 +79,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterPlanet() {
-        characterDetailViewModel.characterPlanet.observe(this, Observer { planet ->
+        characterDetailViewModel.planet.observe(this, Observer { planet ->
             binding.planet = planet
             enableGroup(R.id.character_planet_group)
         })
