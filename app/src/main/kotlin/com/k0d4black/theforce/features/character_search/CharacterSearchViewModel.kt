@@ -16,11 +16,11 @@ class CharacterSearchViewModel @Inject constructor(
 ) : UiStateViewModel() {
 
     fun executeCharacterSearch(characterName: String) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
-            _uiState.postValue(Loading)
+        viewModelScope.launch(handler) {
+            _uiState.value = Loading
             searchCharactersUseCase(characterName).collect { results ->
                 val characters = results.map { character -> character.toPresentation() }
-                _uiState.postValue(Success(characters))
+                _uiState.value = Success(characters)
             }
         }
     }

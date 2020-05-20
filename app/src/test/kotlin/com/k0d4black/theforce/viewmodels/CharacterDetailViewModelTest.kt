@@ -56,7 +56,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
                 Truth.assertThat(filmPresentation)
                     .isEqualTo(SampleData.films.map { it.toPresentation() })
             }
-            characterDetailViewModel.planet1.observeOnce { planetPresentation->
+            characterDetailViewModel.planet.observeOnce { planetPresentation->
                 Truth.assertThat(planetPresentation).isEqualTo(SampleData.planet.toPresentation())
             }
         }

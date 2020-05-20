@@ -14,7 +14,6 @@ import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FilmPresentation
 import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -41,33 +40,33 @@ class CharacterDetailViewModel @Inject constructor(
     private var _species = MutableLiveData<List<SpeciePresentation>>()
 
     fun getCharacterDetails(characterUrl: String) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
-            _uiState.postValue(Loading)
+        viewModelScope.launch(handler) {
+            _uiState.value = Loading
             loadPlanet(characterUrl)
             loadFilms(characterUrl)
             loadSpecies(characterUrl)
-            _uiState.postValue(Success(Unit))
+            _uiState.value = Success(Unit)
         }
     }
 
     private suspend fun loadPlanet(characterUrl: String) {
         getPlanetUseCase(characterUrl).collect { planet ->
             val planetPresentation = planet.toPresentation()
-            _planet.postValue(planetPresentation)
+            _planet.value = planetPresentation
         }
     }
 
     private suspend fun loadFilms(characterUrl: String) {
         getFilmsUseCase(characterUrl).collect { films ->
             val filmsPresentation = films.map { eachFilm -> eachFilm.toPresentation() }
-            _films.postValue(filmsPresentation)
+            _films.value = filmsPresentation
         }
     }
 
     private suspend fun loadSpecies(characterUrl: String) {
         getSpeciesUseCase(characterUrl).collect { species ->
             val speciesPresentation = species.map { eachSpecie -> eachSpecie.toPresentation() }
-            _species.postValue(speciesPresentation)
+            _species.value = speciesPresentation
         }
     }
 
