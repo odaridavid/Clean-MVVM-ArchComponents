@@ -41,7 +41,7 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
                 birthYear = "12BBY",
                 heightInCm = "234",
                 heightInInches = "544",
-                url = "1"
+                url = "https://swapi.py4e.com/api/people/1/"
             )
         )
         activityRule.launchActivity(intent)
