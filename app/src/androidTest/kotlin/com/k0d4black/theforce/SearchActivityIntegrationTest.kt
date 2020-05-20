@@ -74,6 +74,7 @@ internal class SearchActivityIntegrationTest : BaseTest() {
                 0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
             )
         )
+        SystemClock.sleep(1500)
         intended(hasComponent("com.k0d4black.theforce.features.character_details.CharacterDetailActivity"))
     }
 
