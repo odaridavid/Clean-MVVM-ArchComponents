@@ -2,4 +2,6 @@
 <resources>
     <dimen name="margin_default">16dp</dimen>
     <dimen name="padding_default">16dp</dimen>
+    <dimen name="cardview_elevation">8dp</dimen>
+    <dimen name="cardview_radius">4dp</dimen>
 </resources>

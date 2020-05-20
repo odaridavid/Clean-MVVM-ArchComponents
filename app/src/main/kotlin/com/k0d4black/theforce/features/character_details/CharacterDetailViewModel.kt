@@ -14,6 +14,7 @@ import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FilmPresentation
 import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,34 +28,46 @@ class CharacterDetailViewModel @Inject constructor(
     val characterPlanet: LiveData<PlanetPresentation>
         get() = _characterPlanet
 
-    private var _characterPlanet =
-        MutableLiveData<PlanetPresentation>()
+    private var _characterPlanet = MutableLiveData<PlanetPresentation>()
 
     val starWarsCharacterFilms: LiveData<List<FilmPresentation>>
         get() = _characterFilms
 
-    private var _characterFilms =
-        MutableLiveData<List<FilmPresentation>>()
+    private var _characterFilms = MutableLiveData<List<FilmPresentation>>()
 
     val characterStarWarsCharacterSpecies: LiveData<List<SpeciePresentation>>
         get() = _characterSpecies
 
-    private var _characterSpecies =
-        MutableLiveData<List<SpeciePresentation>>()
+    private var _characterSpecies = MutableLiveData<List<SpeciePresentation>>()
 
     fun getCharacterDetails(characterUrl: String) {
         _uiState.value = Loading
-        viewModelScope.launch(handler) {
-            getPlanetUseCase(characterUrl).collect {
-                _characterPlanet.value = it.toPresentation()
-            }
-            getFilmsUseCase(characterUrl).collect {
-                _characterFilms.value = it.map { film -> film.toPresentation() }
-            }
-            getSpeciesUseCase(characterUrl).collect {
-                _characterSpecies.value = it.map { species -> species.toPresentation() }
-            }
-            _uiState.value = Success(Unit)
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            loadPlanet(characterUrl)
+            loadFilms(characterUrl)
+            loadSpecies(characterUrl)
+            _uiState.postValue(Success(Unit))
+        }
+    }
+
+    private suspend fun loadPlanet(characterUrl: String) {
+        getPlanetUseCase(characterUrl).collect { planet ->
+            val planetPresentation = planet.toPresentation()
+            _characterPlanet.postValue(planetPresentation)
+        }
+    }
+
+    private suspend fun loadFilms(characterUrl: String) {
+        getFilmsUseCase(characterUrl).collect { films ->
+            val filmsPresentation = films.map { eachFilm -> eachFilm.toPresentation() }
+            _characterFilms.postValue(filmsPresentation)
+        }
+    }
+
+    private suspend fun loadSpecies(characterUrl: String) {
+        getSpeciesUseCase(characterUrl).collect { species ->
+            val speciesPresentation = species.map { eachSpecie -> eachSpecie.toPresentation() }
+            _characterSpecies.postValue(speciesPresentation)
         }
     }
 

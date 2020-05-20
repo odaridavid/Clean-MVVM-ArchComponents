@@ -53,11 +53,13 @@ class CharacterDetailActivity : AppCompatActivity() {
         characterDetailViewModel.characterStarWarsCharacterSpecies.observe(
             this,
             Observer { species ->
-                binding.characterDetailsSpeciesRecyclerView.apply {
-                    adapter = speciesAdapter.apply { submitList(species) }
-                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
+                if (species.isNotEmpty()) {
+                    binding.characterDetailsSpeciesRecyclerView.apply {
+                        adapter = speciesAdapter.apply { submitList(species) }
+                        initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
+                    }
+                    enableGroup(R.id.character_species_group)
                 }
-                enableGroup(R.id.character_species_group)
             })
     }
 
