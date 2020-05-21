@@ -7,11 +7,11 @@
 
         <variable
             name="character"
-            type="com.k0d4black.theforce.models.StarWarsCharacterUiModel" />
+            type="com.k0d4black.theforce.models.CharacterPresentation" />
 
         <variable
             name="planet"
-            type="com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel" />
+            type="com.k0d4black.theforce.models.PlanetPresentation" />
     </data>
 
     <ScrollView
@@ -125,14 +125,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/character_details_planet_population_text_view" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/character_details_films_recycler_view"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/films_card_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
-                    app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/film_item_layout" />
+                    android:elevation="@dimen/cardview_elevation"
+                    app:cardCornerRadius="@dimen/cardview_radius"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/character_details_species_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/character_details_films_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/item_film" />
+
+                </com.google.android.material.card.MaterialCardView>
+
 
                 <TextView
                     android:id="@+id/character_details_species_title_text_view"
@@ -142,7 +155,7 @@
                     android:text="@string/title_species"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/character_details_films_recycler_view" />
+                    app:layout_constraintTop_toBottomOf="@id/films_card_container" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/character_details_species_recycler_view"
@@ -151,7 +164,7 @@
                     android:layout_margin="@dimen/margin_default"
                     app:layout_constraintTop_toBottomOf="@id/character_details_species_title_text_view"
                     tools:itemCount="2"
-                    tools:listitem="@layout/specie_item_layout" />
+                    tools:listitem="@layout/item_specie" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/character_details_group"
@@ -172,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:constraint_referenced_ids="character_details_films_title_text_view,character_details_films_recycler_view" />
+                    app:constraint_referenced_ids="character_details_films_title_text_view,films_card_container" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/character_species_group"

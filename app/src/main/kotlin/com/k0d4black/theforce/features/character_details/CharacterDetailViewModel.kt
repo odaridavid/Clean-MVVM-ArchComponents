@@ -7,54 +7,66 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetStarWarsCharacterSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetSpeciesUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.StarWarsCharacterFilmsUiModel
-import com.k0d4black.theforce.models.StarWarsCharacterPlanetUiModel
-import com.k0d4black.theforce.models.StarWarsCharacterSpeciesUiModel
+import com.k0d4black.theforce.models.FilmPresentation
+import com.k0d4black.theforce.models.PlanetPresentation
+import com.k0d4black.theforce.models.SpeciePresentation
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CharacterDetailViewModel @Inject constructor(
-    private val getStarWarsCharacterSpeciesUseCase: GetStarWarsCharacterSpeciesUseCase,
-    private val getStarWarsCharacterPlanetUseCase: GetStarWarsCharacterPlanetUseCase,
-    private val getStarWarsCharacterFilmsUseCase: GetStarWarsCharacterFilmsUseCase
+    private val getSpeciesUseCase: GetSpeciesUseCase,
+    private val getPlanetUseCase: GetPlanetUseCase,
+    private val getFilmsUseCase: GetFilmsUseCase
 ) : UiStateViewModel() {
 
-    val characterStarWarsCharacterPlanet: LiveData<StarWarsCharacterPlanetUiModel>
-        get() = _characterPlanet
+    val planet: LiveData<PlanetPresentation>
+        get() = _planet
 
-    private var _characterPlanet =
-        MutableLiveData<StarWarsCharacterPlanetUiModel>()
+    private var _planet = MutableLiveData<PlanetPresentation>()
 
-    val starWarsCharacterFilms: LiveData<List<StarWarsCharacterFilmsUiModel>>
-        get() = _characterFilms
+    val films: LiveData<List<FilmPresentation>>
+        get() = _films
 
-    private var _characterFilms =
-        MutableLiveData<List<StarWarsCharacterFilmsUiModel>>()
+    private var _films = MutableLiveData<List<FilmPresentation>>()
 
-    val characterStarWarsCharacterSpecies: LiveData<List<StarWarsCharacterSpeciesUiModel>>
-        get() = _characterSpecies
+    val species: LiveData<List<SpeciePresentation>>
+        get() = _species
 
-    private var _characterSpecies =
-        MutableLiveData<List<StarWarsCharacterSpeciesUiModel>>()
+    private var _species = MutableLiveData<List<SpeciePresentation>>()
 
     fun getCharacterDetails(characterUrl: String) {
-        _uiState.value = Loading
         viewModelScope.launch(handler) {
-            getStarWarsCharacterPlanetUseCase(characterUrl).collect {
-                _characterPlanet.value = it.toPresentation()
-            }
-            getStarWarsCharacterFilmsUseCase(characterUrl).collect {
-                _characterFilms.value = it.map { film -> film.toPresentation() }
-            }
-            getStarWarsCharacterSpeciesUseCase(characterUrl).collect {
-                _characterSpecies.value = it.map { species -> species.toPresentation() }
-            }
+            _uiState.value = Loading
+            loadPlanet(characterUrl)
+            loadFilms(characterUrl)
+            loadSpecies(characterUrl)
             _uiState.value = Success(Unit)
+        }
+    }
+
+    private suspend fun loadPlanet(characterUrl: String) {
+        getPlanetUseCase(characterUrl).collect { planet ->
+            val planetPresentation = planet.toPresentation()
+            _planet.value = planetPresentation
+        }
+    }
+
+    private suspend fun loadFilms(characterUrl: String) {
+        getFilmsUseCase(characterUrl).collect { films ->
+            val filmsPresentation = films.map { eachFilm -> eachFilm.toPresentation() }
+            _films.value = filmsPresentation
+        }
+    }
+
+    private suspend fun loadSpecies(characterUrl: String) {
+        getSpeciesUseCase(characterUrl).collect { species ->
+            val speciesPresentation = species.map { eachSpecie -> eachSpecie.toPresentation() }
+            _species.value = speciesPresentation
         }
     }
 

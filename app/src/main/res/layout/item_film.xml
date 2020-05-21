@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="film"
+            type="com.k0d4black.theforce.models.FilmPresentation" />
+    </data>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_default"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/film_title_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@{film.title}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                tools:text="Film Name" />
+
+            <TextView
+                android:id="@+id/film_opening_crawl_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="@{film.openingCrawl}"
+                tools:text="Film Opening Crawl" />
+
+        </LinearLayout>
+</layout>

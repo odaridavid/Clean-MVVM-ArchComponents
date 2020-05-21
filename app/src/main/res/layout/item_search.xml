@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="searchedCharacter"
+            type="com.k0d4black.theforce.models.CharacterPresentation" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_default">
+
+        <TextView
+            android:id="@+id/character_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{searchedCharacter.name}'
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Darth Vader" />
+
+        <TextView
+            android:id="@+id/character_birth_year_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:text='@{searchedCharacter.birthYear}'
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_name_text_view"
+            tools:text="BBY 14" />
+
+
+        <ImageButton
+            android:id="@+id/more_info_arrow_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/background_light"
+            android:contentDescription="@string/content_description_more_info_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_arrow_right_black_32dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

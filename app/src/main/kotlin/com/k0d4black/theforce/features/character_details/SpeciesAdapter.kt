@@ -5,26 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.k0d4black.theforce.databinding.SpecieItemLayoutBinding
-import com.k0d4black.theforce.models.StarWarsCharacterSpeciesUiModel
+import com.k0d4black.theforce.databinding.ItemSpecieBinding
+import com.k0d4black.theforce.models.SpeciePresentation
 
-class SpeciesAdapter : ListAdapter<StarWarsCharacterSpeciesUiModel, SpeciesAdapter.SpecieViewHolder>(
+class SpeciesAdapter : ListAdapter<SpeciePresentation, SpeciesAdapter.SpecieViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecieViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        return SpecieViewHolder(SpecieItemLayoutBinding.inflate(inflater))
+        return SpecieViewHolder(ItemSpecieBinding.inflate(inflater))
     }
 
     override fun onBindViewHolder(holder: SpecieViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class SpecieViewHolder(private val binding: SpecieItemLayoutBinding) :
+    inner class SpecieViewHolder(private val binding: ItemSpecieBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelStarWarsCharacter: StarWarsCharacterSpeciesUiModel) {
+        fun bind(modelStarWarsCharacter: SpeciePresentation) {
             binding.species = modelStarWarsCharacter
             binding.executePendingBindings()
         }
@@ -32,17 +32,17 @@ class SpeciesAdapter : ListAdapter<StarWarsCharacterSpeciesUiModel, SpeciesAdapt
 
     companion object {
         val SearchedCharacterDiffUtil =
-            object : DiffUtil.ItemCallback<StarWarsCharacterSpeciesUiModel>() {
+            object : DiffUtil.ItemCallback<SpeciePresentation>() {
                 override fun areItemsTheSame(
-                    oldItem: StarWarsCharacterSpeciesUiModel,
-                    newItem: StarWarsCharacterSpeciesUiModel
-                ): Boolean = oldItem.name == newItem.name
+                    oldItem: SpeciePresentation,
+                    newItem: SpeciePresentation
+                ): Boolean = oldItem == newItem
 
 
                 override fun areContentsTheSame(
-                    oldItem: StarWarsCharacterSpeciesUiModel,
-                    newItem: StarWarsCharacterSpeciesUiModel
-                ): Boolean = oldItem == newItem
+                    oldItem: SpeciePresentation,
+                    newItem: SpeciePresentation
+                ): Boolean = oldItem.name == newItem.name
             }
     }
 }

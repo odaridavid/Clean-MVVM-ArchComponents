@@ -28,6 +28,7 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class SearchActivityIntegrationTest : BaseTest() {
+    //TODO Use idling resource
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =
@@ -52,7 +53,6 @@ internal class SearchActivityIntegrationTest : BaseTest() {
     fun shouldDisplayDataOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        SystemClock.sleep(2000)
         onView(withId(R.id.search_results_recycler_view)).check(matches(isDisplayed()))
     }
 
@@ -68,13 +68,13 @@ internal class SearchActivityIntegrationTest : BaseTest() {
     fun shouldNavigateToCharacterDetailOnItemClick() {
         onView(withId(R.id.action_search)).perform(click())
         onView(isAssignableFrom(EditText::class.java)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        SystemClock.sleep(2000)
+        SystemClock.sleep(1500)
         onView(withId(R.id.search_results_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<SearchResultAdapter.SearchedCharacterViewHolder>(
                 0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
             )
         )
-        SystemClock.sleep(2000)
+        SystemClock.sleep(1500)
         intended(hasComponent("com.k0d4black.theforce.features.character_details.CharacterDetailActivity"))
     }
 

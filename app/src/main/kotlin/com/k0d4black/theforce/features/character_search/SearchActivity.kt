@@ -14,7 +14,7 @@ import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.features.settings.SettingsActivity
-import com.k0d4black.theforce.models.StarWarsCharacterUiModel
+import com.k0d4black.theforce.models.CharacterPresentation
 import dagger.android.AndroidInjection
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_search.*
@@ -49,7 +49,7 @@ class SearchActivity : AppCompatActivity() {
         characterSearchViewModel.uiState.observe(this, Observer {
             when (it) {
                 is Success<*> -> {
-                    val data = it.data as List<StarWarsCharacterUiModel>
+                    val data = it.data as List<CharacterPresentation>
                     showSnackbar(search_results_recycler_view, getString(R.string.info_search_done))
                     displaySearchResults(data)
                 }
@@ -68,7 +68,7 @@ class SearchActivity : AppCompatActivity() {
             }))
     }
 
-    private fun displaySearchResults(searchResultStarWars: List<StarWarsCharacterUiModel>) {
+    private fun displaySearchResults(searchResultStarWars: List<CharacterPresentation>) {
         loading_search_results_progress_bar.animate()
             .alpha(0f)
             .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
