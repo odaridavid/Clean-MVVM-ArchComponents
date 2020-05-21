@@ -77,14 +77,11 @@ dependencies {
     implementation project(':data')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-
-    implementation appDependencies.kotlin
+    //Jetpack
     implementation appDependencies.appCompat
     implementation appDependencies.androidxKtx
     implementation appDependencies.constraintLayout
     implementation appDependencies.supportV4
-
-    //Jetpack
     implementation appDependencies.fragmentKtx
     implementation appDependencies.lifecycleExtensions
 
@@ -105,10 +102,7 @@ dependencies {
     implementation appDependencies.aboutLibraryCore
     implementation appDependencies.aboutLibraryUi
 
-    //DI
-    implementation appDependencies.dagger2
-    implementation appDependencies.dagger2Android
-    kapt appDependencies.dagger2AndroidProcessor
+    //Dagger2
     kapt appDependencies.dagger2Processor
 
     //Test Libs
@@ -132,6 +126,6 @@ dependencies {
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
     kaptAndroidTest testDependencies.dagger2Processor
-    kaptAndroidTest appDependencies.dagger2AndroidProcessor
+
 }
 apply plugin: 'com.google.gms.google-services'

@@ -15,7 +15,6 @@ import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
-import dagger.android.AndroidInjection
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
@@ -37,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        injector.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
