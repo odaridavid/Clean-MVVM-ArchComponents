@@ -50,7 +50,6 @@ ext {
 
     //App/Presentation Layer
     appDependencies = [
-            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
             appCompat             : "androidx.appcompat:appcompat:$appcompatVersion",
             androidxKtx           : "androidx.core:core-ktx:$androidxCoreKtxVersion",
             constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
@@ -68,15 +67,13 @@ ext {
     ]
 
     dataDependencies = [
-            kotlin            : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
             retrofit          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             moshiConverter    : "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
-            coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
     ]
 
     domainDependencies = [
-            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
             coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
             dagger2       : "com.google.dagger:dagger:$dagger2Version"
     ]

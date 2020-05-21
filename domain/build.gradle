@@ -7,8 +7,8 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation domainDependencies.kotlin
-    implementation domainDependencies.coroutinesCore
+    api domainDependencies.kotlin
+    api domainDependencies.coroutinesCore
     api domainDependencies.dagger2
 
 

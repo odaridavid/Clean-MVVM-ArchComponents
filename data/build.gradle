@@ -9,11 +9,9 @@ dependencies {
 
     api project(':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation dataDependencies.kotlin
     api dataDependencies.retrofit
     api dataDependencies.moshiConverter
     api dataDependencies.loggingInterceptor
-    implementation dataDependencies.coroutinesCore
 
 
     testImplementation testDependencies.junit

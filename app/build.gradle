@@ -77,14 +77,11 @@ dependencies {
     implementation project(':data')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-
-    implementation appDependencies.kotlin
+    //Jetpack
     implementation appDependencies.appCompat
     implementation appDependencies.androidxKtx
     implementation appDependencies.constraintLayout
     implementation appDependencies.supportV4
-
-    //Jetpack
     implementation appDependencies.fragmentKtx
     implementation appDependencies.lifecycleExtensions
 
