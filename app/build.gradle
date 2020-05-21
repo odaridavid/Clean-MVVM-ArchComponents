@@ -105,10 +105,7 @@ dependencies {
     implementation appDependencies.aboutLibraryCore
     implementation appDependencies.aboutLibraryUi
 
-    //DI
-    implementation appDependencies.dagger2
-    implementation appDependencies.dagger2Android
-    kapt appDependencies.dagger2AndroidProcessor
+    //Dagger2
     kapt appDependencies.dagger2Processor
 
     //Test Libs
@@ -132,6 +129,6 @@ dependencies {
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
     kaptAndroidTest testDependencies.dagger2Processor
-    kaptAndroidTest appDependencies.dagger2AndroidProcessor
+
 }
 apply plugin: 'com.google.gms.google-services'

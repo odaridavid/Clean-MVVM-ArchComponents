@@ -13,7 +13,6 @@ import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import javax.inject.Inject
 
@@ -31,7 +30,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        injector.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)

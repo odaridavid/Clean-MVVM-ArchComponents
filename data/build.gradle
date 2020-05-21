@@ -1,6 +1,5 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
-apply plugin: 'kotlin-kapt'
 
 
 dependencies {
@@ -15,8 +14,6 @@ dependencies {
     api dataDependencies.moshiConverter
     api dataDependencies.loggingInterceptor
     implementation dataDependencies.coroutinesCore
-    api dataDependencies.dagger2
-    kapt dataDependencies.dagger2Processor
 
 
     testImplementation testDependencies.junit

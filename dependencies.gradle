@@ -50,24 +50,21 @@ ext {
 
     //App/Presentation Layer
     appDependencies = [
-            kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
-            appCompat              : "androidx.appcompat:appcompat:$appcompatVersion",
-            androidxKtx            : "androidx.core:core-ktx:$androidxCoreKtxVersion",
-            constraintLayout       : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
-            supportV4              : "androidx.legacy:legacy-support-v4:$supportV4Version",
-            leakCanary             : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
-            material               : "com.google.android.material:material:$materialVersion",
-            firebaseAnalytics      : "com.google.firebase:firebase-analytics:$analyticsVersion",
-            fragmentKtx            : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
-            crashlytics            : "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
-            dagger2Processor       : "com.google.dagger:dagger-compiler:$dagger2Version",
-            dagger2                : "com.google.dagger:dagger:$dagger2Version",
-            dagger2Android         : "com.google.dagger:dagger-android:$dagger2Version",
-            dagger2AndroidProcessor: "com.google.dagger:dagger-android-processor:$dagger2Version",
-            lifecycleExtensions    : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
-            recyclerviewAnimations : "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion",
-            aboutLibraryCore       : "com.mikepenz:aboutlibraries-core:$aboutLibsVersion",
-            aboutLibraryUi         : "com.mikepenz:aboutlibraries:$aboutLibsVersion"
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
+            appCompat             : "androidx.appcompat:appcompat:$appcompatVersion",
+            androidxKtx           : "androidx.core:core-ktx:$androidxCoreKtxVersion",
+            constraintLayout      : "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            supportV4             : "androidx.legacy:legacy-support-v4:$supportV4Version",
+            leakCanary            : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
+            material              : "com.google.android.material:material:$materialVersion",
+            firebaseAnalytics     : "com.google.firebase:firebase-analytics:$analyticsVersion",
+            fragmentKtx           : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
+            crashlytics           : "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
+            lifecycleExtensions   : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
+            recyclerviewAnimations: "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion",
+            aboutLibraryCore      : "com.mikepenz:aboutlibraries-core:$aboutLibsVersion",
+            aboutLibraryUi        : "com.mikepenz:aboutlibraries:$aboutLibsVersion",
+            dagger2Processor      : "com.google.dagger:dagger-compiler:$dagger2Version"
     ]
 
     dataDependencies = [
@@ -75,16 +72,13 @@ ext {
             retrofit          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             moshiConverter    : "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
-            coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
-            dagger2Processor  : "com.google.dagger:dagger-compiler:$dagger2Version",
-            dagger2           : "com.google.dagger:dagger:$dagger2Version"
+            coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
     ]
 
     domainDependencies = [
-            kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
-            coroutinesCore  : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
-            dagger2Processor: "com.google.dagger:dagger-compiler:$dagger2Version",
-            dagger2         : "com.google.dagger:dagger:$dagger2Version"
+            kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
+            dagger2       : "com.google.dagger:dagger:$dagger2Version"
     ]
 
     testDependencies = [
