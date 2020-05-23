@@ -1,22 +1,28 @@
 package com.k0d4black.theforce
 
 import android.app.Application
-import com.k0d4black.theforce.di.AppComponent
-import com.k0d4black.theforce.di.DaggerAppComponent
-
+import com.k0d4black.theforce.modules.repositoriesModule
+import com.k0d4black.theforce.di.modules.viewModelsModule
+import com.k0d4black.theforce.modules.dataSourceModule
+import com.k0d4black.theforce.modules.networkModule
+import com.k0d4black.theforce.modules.useCasesModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 open class TheForceApplication : Application() {
 
-    private lateinit var appComponent: AppComponent
-
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.factory()
-            .create(applicationContext)
 
-        getApplicationComponent().inject(this)
+        startKoin {
+            androidLogger()
+            androidContext(this@TheForceApplication)
+            modules(
+                networkModule,
+                viewModelsModule, repositoriesModule, dataSourceModule,
+                useCasesModule
+            )
+        }
     }
-
-    open fun getApplicationComponent(): AppComponent = appComponent
-
 }

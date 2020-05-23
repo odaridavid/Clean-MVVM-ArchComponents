@@ -8,12 +8,11 @@ import com.k0d4black.theforce.domain.models.Specie
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 /**
  * Co-ordinates data sources exposing character details
  */
-class CharacterDetailsRepository @Inject constructor(
+class CharacterDetailsRepository(
     private val characterDetailsDataSource: CharacterDetailsDataSource
 ) : ICharacterDetailsRepository {
 

@@ -1,46 +1,47 @@
 package com.k0d4black.theforce.di
 
-import com.k0d4black.theforce.data.api.HttpClient
-import com.k0d4black.theforce.data.api.LoggingInterceptor
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import dagger.Module
-import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Named
-import javax.inject.Singleton
+import java.util.concurrent.TimeUnit
 
-@Module
 class FakeStarWarsApiModule {
 
-    @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor = LoggingInterceptor.create()
+    val fakeNetworkModule = module {
 
-    @Provides
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return HttpClient.setupOkhttpClient(httpLoggingInterceptor)
+        single { provideService(get()) }
+
+        single {
+            provideRetrofit(
+                get(),
+                provideBaseUrl()
+            )
+        }
+
+        single { provideOkHttpClient() }
     }
 
-    @Singleton
-    @Provides
-    fun provideStarWarsApi(retrofit: Retrofit): StarWarsApiService {
-        return retrofit.create(StarWarsApiService::class.java)
+    private fun provideOkHttpClient(): OkHttpClient {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
+            .connectTimeout(60L, TimeUnit.SECONDS)
+            .readTimeout(60L, TimeUnit.SECONDS)
+            .addInterceptor(httpLoggingInterceptor).build()
     }
 
-    @Singleton
-    @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient, @Named("baseUrl") baseUrl: String): Retrofit {
+    private fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(url)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .build()
+            .addConverterFactory(MoshiConverterFactory.create()).build()
     }
 
-    @Provides
-    @Named("baseUrl")
-    fun provideBaseUrl(): String = "http://localhost:8080/"
+    private fun provideService(retrofit: Retrofit): StarWarsApiService =
+        retrofit.create(StarWarsApiService::class.java)
 
+    fun provideBaseUrl(): String = "http://localhost:8080/"
 }

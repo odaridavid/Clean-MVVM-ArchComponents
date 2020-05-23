@@ -1,11 +1,11 @@
 package com.k0d4black.theforce.domain.usecases
 
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
-import javax.inject.Inject
+import org.koin.core.KoinComponent
 
-class SearchCharactersUseCase @Inject constructor(
+class SearchCharactersUseCase(
     private val searchRepository: ICharacterSearchRepository
-) {
+): KoinComponent {
 
     suspend operator fun invoke(characterName: String) = searchRepository.searchCharacters(characterName)
 

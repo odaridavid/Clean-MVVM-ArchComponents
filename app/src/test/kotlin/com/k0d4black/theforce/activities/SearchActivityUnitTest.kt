@@ -40,11 +40,6 @@ class SearchActivityUnitTest {
 
     @Test
     fun `validate search menu is displayed`() {
-        searchActivity =
-            Robolectric.buildActivity(SearchActivity::class.java)
-                .create()
-                .visible()
-                .get()
         val menu = Shadows.shadowOf(searchActivity).optionsMenu
         val menuItem = menu.findItem(R.id.action_search)
         assertThat(menuItem.isVisible)

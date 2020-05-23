@@ -66,10 +66,8 @@ The UI layer `feature` package contains `character_detail` and
 `character_search` which contain an activity and corresponding 
 viewmodel as well as other UI related classes.
 
-The viewmodels are provided by the ViewModelFactory using Dagger2 it 
-utilises the **Factory Pattern** by providing an annotation that maps the
-respective viewmodel requested for instantiation with the
-`ViewModelProvider.Factory`
+The viewmodels are provided by the Koin that uses Kotlin's DSLs
+to lazily resolve dependency graph at runtime
 
 The ViewModel then receives data from the use case and updates the 
 LiveData being watched by the activity,the Activity then makes updates 
@@ -205,7 +203,7 @@ and default parameters
 - [Material Design](https://material.io/develop/android/docs/getting-started/) - build awesome beautiful UIs.🔥🔥
 - [Firebase](https://firebase.google.com/) - Backend As A Service for faster mobile development.
   - [Crashylitics](https://firebase.google.com/docs/crashlytics) - Provide Realtime crash reports from users end.
-- [Dagger2](https://github.com/google/dagger) - Dependency Injection lib built with scaling in mind and has large community support.
+- [Koin](https://github.com/InsertKoinIO/koin) - A pragmatic lightweight dependency injection framework for Kotlin
 - [Robolectric](http://robolectric.org/) - Unit test on android framework.
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations

@@ -1,13 +1,11 @@
 package com.k0d4black.theforce.domain.usecases
 
-
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
-import javax.inject.Inject
+import org.koin.core.KoinComponent
 
-
-class GetPlanetUseCase @Inject constructor(
+class GetPlanetUseCase(
     private val characterDetailsRepository: ICharacterDetailsRepository
-) {
+): KoinComponent {
 
     suspend operator fun invoke(characterUrl: String) =
         characterDetailsRepository.getCharacterPlanet(characterUrl)

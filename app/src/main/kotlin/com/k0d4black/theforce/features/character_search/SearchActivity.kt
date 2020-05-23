@@ -4,12 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
@@ -17,15 +15,11 @@ import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_search.*
-import javax.inject.Inject
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val characterSearchViewModel: CharacterSearchViewModel by viewModels { viewModelFactory }
+    private val characterSearchViewModel by viewModel<CharacterSearchViewModel>()
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { character ->
@@ -36,7 +30,6 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 

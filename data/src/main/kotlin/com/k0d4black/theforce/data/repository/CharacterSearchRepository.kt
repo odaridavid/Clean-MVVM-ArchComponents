@@ -6,12 +6,11 @@ import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 /**
  * Co-ordinates data sources exposing search results
  */
-class CharacterSearchRepository @Inject constructor(
+class CharacterSearchRepository(
     private val characterSearchDataSource: CharacterSearchDataSource
 ) : ICharacterSearchRepository {
 

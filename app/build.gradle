@@ -75,6 +75,7 @@ dependencies {
 
     //Local Libs
     implementation project(':data')
+    implementation project(':di')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Jetpack
@@ -102,8 +103,10 @@ dependencies {
     implementation appDependencies.aboutLibraryCore
     implementation appDependencies.aboutLibraryUi
 
-    //Dagger2
-    kapt appDependencies.dagger2Processor
+    // Koin
+    implementation appDependencies.koinAndroid
+    implementation appDependencies.koinLifeCycleScope
+    implementation appDependencies.koinAndroidViewModel
 
     //Test Libs
     testImplementation testDependencies.junit
@@ -117,6 +120,7 @@ dependencies {
     testImplementation testDependencies.archComponentTest
     testImplementation testDependencies.coroutinesTest
     testImplementation testDependencies.mockitoInline
+    testImplementation testDependencies.koinTest
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.runner
     androidTestImplementation testDependencies.rules
@@ -125,7 +129,6 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
-    kaptAndroidTest testDependencies.dagger2Processor
 
 }
 apply plugin: 'com.google.gms.google-services'

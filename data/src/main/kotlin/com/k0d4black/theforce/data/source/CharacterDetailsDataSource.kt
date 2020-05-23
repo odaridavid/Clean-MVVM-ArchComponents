@@ -7,12 +7,11 @@ import com.k0d4black.theforce.data.models.entity.PlanetEntity
 import com.k0d4black.theforce.data.models.entity.SpecieEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 /**
  * Gets character details data from network resource
  */
-class CharacterDetailsDataSource @Inject constructor(private val apiService: StarWarsApiService) {
+class CharacterDetailsDataSource(private val apiService: StarWarsApiService) {
 
     /**
      * @param characterUrl an absolute url to the character information
