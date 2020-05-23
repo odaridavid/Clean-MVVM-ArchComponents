@@ -9,13 +9,14 @@ import com.k0d4black.theforce.features.character_search.SearchActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.AutoCloseKoinTest
 import org.robolectric.Robolectric
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.O_MR1])
-class SearchActivityUnitTest {
+class SearchActivityUnitTest : AutoCloseKoinTest(){
 
     private lateinit var searchActivity: SearchActivity
 
@@ -24,10 +25,9 @@ class SearchActivityUnitTest {
         searchActivity =
             Robolectric.buildActivity(SearchActivity::class.java)
                 .create()
-                .resume()
+                .visible()
                 .get()
     }
-
 
     @Test
     fun `validate default info text shown`() {
@@ -40,15 +40,8 @@ class SearchActivityUnitTest {
 
     @Test
     fun `validate search menu is displayed`() {
-        searchActivity =
-            Robolectric.buildActivity(SearchActivity::class.java)
-                .create()
-                .visible()
-                .get()
         val menu = Shadows.shadowOf(searchActivity).optionsMenu
         val menuItem = menu.findItem(R.id.action_search)
         assertThat(menuItem.isVisible)
     }
-
-
 }

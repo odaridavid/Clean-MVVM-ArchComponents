@@ -1,27 +1,22 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterDetailActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val characterDetailViewModel: CharacterDetailViewModel by viewModels { viewModelFactory }
+    private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
 
     lateinit var binding: ActivityCharacterDetailBinding
 
@@ -30,7 +25,6 @@ class CharacterDetailActivity : AppCompatActivity() {
     private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        injector.inject(this)
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)

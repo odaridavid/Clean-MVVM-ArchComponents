@@ -2,9 +2,8 @@ package com.k0d4black.theforce.features.character_search
 
 import androidx.appcompat.widget.SearchView
 import kotlinx.coroutines.*
-import javax.inject.Inject
 
-class SearchQueryListener @Inject constructor(private val viewModel: CharacterSearchViewModel) :
+class SearchQueryListener(private val viewModel: CharacterSearchViewModel) :
     SearchView.OnQueryTextListener {
 
     private val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)

@@ -1,28 +1,13 @@
 package com.k0d4black.theforce.di.modules
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import com.k0d4black.theforce.di.ViewModelKey
-import com.k0d4black.theforce.di.factory.ViewModelFactory
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoMap
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-abstract class ViewModelModule {
+val viewModelsModule = module {
 
-    @IntoMap
-    @Binds
-    @ViewModelKey(CharacterSearchViewModel::class)
-    abstract fun bindCharacterSearchViewModel(characterSearchViewModel: CharacterSearchViewModel): ViewModel
+    viewModel { CharacterSearchViewModel(get()) }
 
-    @IntoMap
-    @Binds
-    @ViewModelKey(CharacterDetailViewModel::class)
-    abstract fun bindCharacterDetailViewModel(characterDetailViewModel: CharacterDetailViewModel): ViewModel
-
-    @Binds
-    abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+    viewModel { CharacterDetailViewModel(get(), get(), get()) }
 }

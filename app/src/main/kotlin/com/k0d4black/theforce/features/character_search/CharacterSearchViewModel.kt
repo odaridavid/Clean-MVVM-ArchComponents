@@ -6,12 +6,10 @@ import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
 import com.k0d4black.theforce.domain.usecases.SearchCharactersUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CharacterSearchViewModel @Inject constructor(
+class CharacterSearchViewModel(
     private val searchCharactersUseCase: SearchCharactersUseCase
 ) : UiStateViewModel() {
 

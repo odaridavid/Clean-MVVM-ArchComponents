@@ -16,9 +16,8 @@ import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CharacterDetailViewModel @Inject constructor(
+class CharacterDetailViewModel(
     private val getSpeciesUseCase: GetSpeciesUseCase,
     private val getPlanetUseCase: GetPlanetUseCase,
     private val getFilmsUseCase: GetFilmsUseCase

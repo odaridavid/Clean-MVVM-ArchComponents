@@ -13,7 +13,6 @@ dependencies {
     api dataDependencies.moshiConverter
     api dataDependencies.loggingInterceptor
 
-
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockitoInline
