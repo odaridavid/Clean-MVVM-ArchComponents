@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.di.modules
+package com.k0d4black.theforce.di
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
 import okhttp3.OkHttpClient
@@ -8,16 +8,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
-val NetworkModule = module {
+val fakeNetworkModule = module {
 
     single { provideService(get()) }
 
-    single { provideRetrofit(get(), provideBaseUrl()) }
+    single {
+        provideRetrofit(
+            get(),
+            provideBaseUrl()
+        )
+    }
 
     single { provideOkHttpClient() }
 }
 
-fun provideOkHttpClient(): OkHttpClient {
+private fun provideOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     return OkHttpClient.Builder()
@@ -26,13 +31,14 @@ fun provideOkHttpClient(): OkHttpClient {
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
+private fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
     return Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create()).build()
 }
 
-fun provideService(retrofit: Retrofit): StarWarsApiService = retrofit.create(StarWarsApiService::class.java)
+private fun provideService(retrofit: Retrofit): StarWarsApiService =
+    retrofit.create(StarWarsApiService::class.java)
 
-fun provideBaseUrl(): String = "https://swapi.dev/api/"
+private fun provideBaseUrl(): String = "http://localhost:8080/"
