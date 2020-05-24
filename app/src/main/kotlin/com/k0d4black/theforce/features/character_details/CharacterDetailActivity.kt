@@ -11,6 +11,7 @@ import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.FilmPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,21 +44,21 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun observeCharacterSpecies() {
-        characterDetailViewModel.species.observe(
-            this,
-            Observer { species ->
-                if (species.isNotEmpty()) {
-                    binding.characterDetailsSpeciesRecyclerView.apply {
-                        adapter = speciesAdapter.apply { submitList(species) }
-                        initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
-                    }
-                    enableGroup(R.id.character_species_group)
+        characterDetailViewModel.species.observe(this, Observer { species ->
+            if (species.isNotEmpty()) {
+                binding.characterDetailsSpeciesRecyclerView.apply {
+                    adapter = speciesAdapter.apply { submitList(species) }
+                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
                 }
-            })
+                enableGroup(R.id.character_species_group)
+            }
+        })
     }
 
     private fun observeCharacterFilms() {
-        characterDetailViewModel.films.observe(this, Observer { films ->
+        val films = mutableListOf<FilmPresentation>()
+        characterDetailViewModel.films.observe(this, Observer { film ->
+            films.add(film)
             binding.characterDetailsFilmsRecyclerView.apply {
                 adapter = filmsAdapter.apply { submitList(films) }
                 layoutManager =
@@ -89,17 +90,11 @@ class CharacterDetailActivity : AppCompatActivity() {
             val anchor = character_details_layout
             when (it) {
                 is Success<*> -> {
-                    showSnackbar(
-                        anchor,
-                        getString(R.string.info_loading_complete)
-                    )
+                    showSnackbar(anchor, getString(R.string.info_loading_complete))
                     binding.loadingCharacterProgressBar.hide()
                 }
                 is Error -> displayErrorState(it.error)
-                is Loading -> showSnackbar(
-                    anchor,
-                    getString(R.string.info_loading_status)
-                )
+                is Loading -> showSnackbar(anchor, getString(R.string.info_loading_status))
             }
         })
     }
@@ -114,11 +109,13 @@ class CharacterDetailActivity : AppCompatActivity() {
         )
     }
 
-    //Synthetics upcasting to View , Define type explicitly
-    private fun enableGroup(@IdRes groupId: Int) = findViewById<Group>(groupId).animate()
-        .alpha(1f)
-        .setListener(AnimatorListener(onEnd = {
-            findViewById<Group>(groupId).show()
-        }))
+    private fun enableGroup(@IdRes groupId: Int) {
+        findViewById<Group>(groupId)
+            .animate()
+            .alpha(1f)
+            .setListener(AnimatorListener(onEnd = {
+                findViewById<Group>(groupId).show()
+            }))
+    }
 
 }

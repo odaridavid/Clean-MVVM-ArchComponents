@@ -11,48 +11,47 @@ import kotlinx.coroutines.flow.flow
 /**
  * Gets character details data from network resource
  */
-class CharacterDetailsDataSource(private val apiService: StarWarsApiService) {
+class CharacterDetailsRemoteDataSource(private val apiService: StarWarsApiService) {
 
     /**
      * @param characterUrl an absolute url to the character information
      *
      * @return [Flow] of planet entity that can be used in the data layer
      */
-    suspend fun getCharacterPlanet(characterUrl: String): Flow<PlanetEntity> {
+    suspend fun getCharacterPlanet(characterUrl: String): Flow<PlanetEntity> = flow {
         val planetResponse = apiService.getPlanet(characterUrl)
-        return flow {
-            emit(apiService.getPlanetDetails(planetResponse.homeworldUrl).toEntity())
-        }
+        val planet = apiService.getPlanetDetails(planetResponse.homeworldUrl)
+        emit(planet.toEntity())
     }
 
     /**
      * @param characterUrl an absolute url to the character information
      *
-     * @return [Flow] of a list of specie entities that can be used in the data layer
+     * @return [Flow] of a list of specie entities that can be used in the data layer.Emits the whole
+     * list once ready.
      */
-    suspend fun getCharacterSpecies(characterUrl: String): Flow<List<SpecieEntity>> {
+    suspend fun getCharacterSpecies(characterUrl: String): Flow<List<SpecieEntity>> = flow {
         val speciesResponse = apiService.getSpecies(characterUrl)
         val species = mutableListOf<SpecieEntity>()
         for (specieUrl in speciesResponse.specieUrls) {
             val specie = apiService.getSpecieDetails(specieUrl)
             species.add(specie.toEntity())
         }
-        return flow { emit(species) }
+        emit(species)
     }
 
     /**
      * @param characterUrl an absolute url to the character information
      *
-     * @return [Flow] of a list of film entities that can be used in the data layer
+     * @return [Flow] of film entities that can be used in the data layer.Each film is emitted
+     * immediately its received from the API.
      */
-    suspend fun getCharacterFilms(characterUrl: String): Flow<List<FilmEntity>> {
+    suspend fun getCharacterFilms(characterUrl: String): Flow<FilmEntity> = flow {
         val filmsResponse = apiService.getFilms(characterUrl)
-        val films = mutableListOf<FilmEntity>()
         for (filmUrl in filmsResponse.filmUrls) {
             val film = apiService.getFilmDetails(filmUrl)
-            films.add(film.toEntity())
+            emit(film.toEntity())
         }
-        return flow { emit(films) }
     }
 
 }

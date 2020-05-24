@@ -7,9 +7,9 @@ import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.commons.Loading
 import com.k0d4black.theforce.commons.Success
 import com.k0d4black.theforce.commons.UiStateViewModel
-import com.k0d4black.theforce.domain.usecases.GetFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.FilmsUseCase
+import com.k0d4black.theforce.domain.usecases.PlanetUseCase
+import com.k0d4black.theforce.domain.usecases.SpeciesUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FilmPresentation
 import com.k0d4black.theforce.models.PlanetPresentation
@@ -18,9 +18,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CharacterDetailViewModel(
-    private val getSpeciesUseCase: GetSpeciesUseCase,
-    private val getPlanetUseCase: GetPlanetUseCase,
-    private val getFilmsUseCase: GetFilmsUseCase
+    private val getSpeciesUseCase: SpeciesUseCase,
+    private val getPlanetUseCase: PlanetUseCase,
+    private val getFilmsUseCase: FilmsUseCase
 ) : UiStateViewModel() {
 
     val planet: LiveData<PlanetPresentation>
@@ -28,10 +28,10 @@ class CharacterDetailViewModel(
 
     private var _planet = MutableLiveData<PlanetPresentation>()
 
-    val films: LiveData<List<FilmPresentation>>
+    val films: LiveData<FilmPresentation>
         get() = _films
 
-    private var _films = MutableLiveData<List<FilmPresentation>>()
+    private var _films = MutableLiveData<FilmPresentation>()
 
     val species: LiveData<List<SpeciePresentation>>
         get() = _species
@@ -57,7 +57,7 @@ class CharacterDetailViewModel(
 
     private suspend fun loadFilms(characterUrl: String) {
         getFilmsUseCase(characterUrl).collect { films ->
-            val filmsPresentation = films.map { eachFilm -> eachFilm.toPresentation() }
+            val filmsPresentation = films.toPresentation()
             _films.value = filmsPresentation
         }
     }

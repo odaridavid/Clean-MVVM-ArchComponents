@@ -7,7 +7,13 @@ import org.koin.dsl.module
 
 val viewModelsModule = module {
 
-    viewModel { CharacterSearchViewModel(get()) }
+    viewModel { CharacterSearchViewModel(searchCharactersUseCase = get()) }
 
-    viewModel { CharacterDetailViewModel(get(), get(), get()) }
+    viewModel {
+        CharacterDetailViewModel(
+            getFilmsUseCase = get(),
+            getPlanetUseCase = get(),
+            getSpeciesUseCase = get()
+        )
+    }
 }
