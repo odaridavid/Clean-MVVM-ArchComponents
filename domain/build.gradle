@@ -10,8 +10,6 @@ dependencies {
     api domainDependencies.kotlin
     api domainDependencies.coroutinesCore
 
-    implementation domainDependencies.koinAndroid
-    
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockitoInline
