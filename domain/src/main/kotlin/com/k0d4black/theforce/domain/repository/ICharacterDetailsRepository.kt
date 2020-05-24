@@ -12,6 +12,6 @@ interface ICharacterDetailsRepository {
 
     suspend fun getCharacterSpecies(characterUrl: String): Flow<List<Specie>>
 
-    suspend fun getCharacterFilms(characterUrl: String): Flow<List<Film>>
+    suspend fun getCharacterFilms(characterUrl: String): Flow<Film>
 
 }
