@@ -34,6 +34,7 @@ package-name: com.k0d4black.theforce
 - [Testing](#testing)
 - [App Flow](#app-flow)
 - [Libraries](#libraries)
+- [Contributors](#contributors)
 - [Extras](#extras)
 - [Demo](#demo)
 
@@ -208,6 +209,12 @@ and default parameters
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 - [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
+
+## Contributors
+
+- Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor.
+
+Feel free to contribute in any way to the project.
 
 ## Extras
 
