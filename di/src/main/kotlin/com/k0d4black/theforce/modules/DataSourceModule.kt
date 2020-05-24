@@ -6,7 +6,7 @@ import org.koin.dsl.module
 
 val dataSourceModule = module {
 
-    single { CharacterSearchRemoteDataSource(get()) }
+    single { CharacterSearchRemoteDataSource(apiService = get()) }
 
-    single { CharacterDetailsRemoteDataSource(get()) }
+    single { CharacterDetailsRemoteDataSource(apiService = get()) }
 }
