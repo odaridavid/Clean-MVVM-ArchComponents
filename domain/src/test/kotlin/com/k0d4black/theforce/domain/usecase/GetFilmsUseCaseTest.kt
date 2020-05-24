@@ -19,15 +19,14 @@ internal class GetFilmsUseCaseTest {
 
     @Before
     fun setup() {
-        getFilmsUseCase =
-            GetFilmsUseCase(characterDetailsRepositoryMock)
+        getFilmsUseCase = GetFilmsUseCase(characterDetailsRepositoryMock)
     }
 
     @Test
     fun `given character url when request for film then get character film`() {
         runBlocking {
             //Given
-            val characterUrl = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "/api/people/3/"
 
             //When
             getFilmsUseCase(characterUrl)

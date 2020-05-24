@@ -26,7 +26,7 @@ internal class GetSpecieUseCaseTest {
     fun `given character url when request for species then get character species`() {
         runBlocking {
             //Given
-            val characterUrl = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "/api/people/3/"
 
             //When
             getSpeciesUseCase(characterUrl)

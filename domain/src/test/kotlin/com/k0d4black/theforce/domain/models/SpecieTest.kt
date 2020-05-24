@@ -6,7 +6,7 @@ import org.junit.Test
 
 internal class SpecieTest {
 
-    lateinit var expectedModelStarWars: Specie
+    private lateinit var expectedModelStarWars: Specie
 
     @Test
     fun `instantiate character species domain model`() {

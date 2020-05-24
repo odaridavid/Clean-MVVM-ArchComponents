@@ -5,7 +5,7 @@ import org.junit.Test
 
 internal class PlanetTest {
 
-    lateinit var expectedModelStarWars: Planet
+   private lateinit var expectedModelStarWars: Planet
 
     @Test
     fun `instantiate character planet domain model`() {

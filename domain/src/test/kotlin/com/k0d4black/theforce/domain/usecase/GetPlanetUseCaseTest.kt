@@ -27,7 +27,7 @@ internal class GetPlanetUseCaseTest {
     fun `given character url when request for planet then get character planet`() {
         runBlocking {
             //Given
-            val characterUrl = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "/api/people/3/"
 
             //When
             getPlanetUseCase(characterUrl)
