@@ -14,8 +14,6 @@ dependencies {
     api dataDependencies.loggingInterceptor
 
     testImplementation testDependencies.junit
-    testImplementation testDependencies.mockito
-    testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.googleTruth
     testImplementation testDependencies.mockWebServer
 }
