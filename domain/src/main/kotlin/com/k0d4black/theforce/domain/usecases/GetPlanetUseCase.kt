@@ -1,12 +1,14 @@
 package com.k0d4black.theforce.domain.usecases
 
+import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.KoinComponent
 
 class GetPlanetUseCase(
     private val characterDetailsRepository: ICharacterDetailsRepository
-): KoinComponent {
+) : BaseUseCase<String, Flow<Planet>>, KoinComponent {
 
-    suspend operator fun invoke(characterUrl: String) =
-        characterDetailsRepository.getCharacterPlanet(characterUrl)
+    override suspend operator fun invoke(params: String) =
+        characterDetailsRepository.getCharacterPlanet(params)
 }
