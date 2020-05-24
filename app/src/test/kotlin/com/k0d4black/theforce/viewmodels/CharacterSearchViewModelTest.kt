@@ -37,10 +37,10 @@ class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `given an empty search parameter when search executed then return success state`() {
+    fun `given an empty search parameter when search executed then return error state`() {
         runBlockingTest {
             prepareViewModel(UIState.ERROR)
-            characterSearchViewModel.executeCharacterSearch(searchParams)
+            characterSearchViewModel.executeCharacterSearch("")
             characterSearchViewModel.uiState.observeOnce { state ->
                 Truth.assertThat(state).isInstanceOf(Error::class.java)
             }
