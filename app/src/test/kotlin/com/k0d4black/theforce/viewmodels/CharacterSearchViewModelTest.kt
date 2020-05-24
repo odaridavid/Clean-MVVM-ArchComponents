@@ -31,7 +31,7 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun shouldReceiveSearchResults() {
+    fun `given a search parameter when search executed then return success state`() {
         runBlockingTest {
             characterSearchViewModel.executeCharacterSearch(searchParams)
             characterSearchViewModel.uiState.observeOnce { state ->

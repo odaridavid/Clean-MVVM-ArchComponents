@@ -40,7 +40,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun shouldGetCharacterDetails() {
+    fun `given a character url when character details request sent then get character details`() {
         runBlockingTest {
             characterDetailViewModel.getCharacterDetails(characterUrl)
 
