@@ -1,21 +1,20 @@
 package com.k0d4black.theforce.modules
 
-import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
-import com.k0d4black.theforce.domain.usecases.*
+import com.k0d4black.theforce.domain.usecases.GetFilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetPlanetUseCase
+import com.k0d4black.theforce.domain.usecases.GetSpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.SearchCharactersUseCase
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val useCasesModule = module {
 
-    single { provideSearchUseCase(get()) }
+    single(named("search")) { SearchCharactersUseCase(get()) }
 
-    single { GetSpeciesUseCase(get()) }
+    single(named("species")) { GetSpeciesUseCase(get()) }
 
-    single { GetPlanetUseCase(get()) }
+    single(named("planet")) { GetPlanetUseCase(get()) }
 
-    single { GetFilmsUseCase(get()) }
+    single(named("films")) { GetFilmsUseCase(get()) }
 
-}
-
-fun provideSearchUseCase(searchRepository: ICharacterSearchRepository): SearchUseCase {
-    return SearchCharactersUseCase(searchRepository)
 }

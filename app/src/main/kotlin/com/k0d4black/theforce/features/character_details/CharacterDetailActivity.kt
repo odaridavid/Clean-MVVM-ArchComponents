@@ -1,6 +1,7 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
