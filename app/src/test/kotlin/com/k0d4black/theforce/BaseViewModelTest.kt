@@ -7,7 +7,7 @@ import org.junit.Rule
 import org.koin.test.AutoCloseKoinTest
 
 
-internal open class BaseViewModelTest : AutoCloseKoinTest() {
+open class BaseViewModelTest : AutoCloseKoinTest() {
     /**
      * Swaps the background executor used by the Architecture Components with a different one which
      * executes each task synchronously.
