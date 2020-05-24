@@ -23,16 +23,16 @@ internal class GetSpecieUseCaseTest {
     }
 
     @Test
-    fun `when request for character then get character details`() {
+    fun `given character url when request for species then get character species`() {
         runBlocking {
             //Given
-            val characterId = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "https://swapi.py4e.com/api/people/3/"
 
             //When
-            getSpeciesUseCase(characterId)
+            getSpeciesUseCase(characterUrl)
 
             //Then
-            verify(characterDetailsRepositoryMock).getCharacterSpecies(characterId)
+            verify(characterDetailsRepositoryMock).getCharacterSpecies(characterUrl)
         }
     }
 }

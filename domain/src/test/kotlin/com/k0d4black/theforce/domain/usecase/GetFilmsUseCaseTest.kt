@@ -24,16 +24,16 @@ internal class GetFilmsUseCaseTest {
     }
 
     @Test
-    fun `when request for character then get character details`() {
+    fun `given character url when request for film then get character film`() {
         runBlocking {
             //Given
-            val characterId = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "https://swapi.py4e.com/api/people/3/"
 
             //When
-            getFilmsUseCase(characterId)
+            getFilmsUseCase(characterUrl)
 
             //Then
-            verify(characterDetailsRepositoryMock).getCharacterFilms(characterId)
+            verify(characterDetailsRepositoryMock).getCharacterFilms(characterUrl)
         }
     }
 }

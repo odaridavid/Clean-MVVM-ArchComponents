@@ -24,16 +24,16 @@ internal class GetPlanetUseCaseTest {
     }
 
     @Test
-    fun `when request for character then get character details`() {
+    fun `given character url when request for planet then get character planet`() {
         runBlocking {
             //Given
-            val characterId = "https://swapi.py4e.com/api/people/3/"
+            val characterUrl = "https://swapi.py4e.com/api/people/3/"
 
             //When
-            getPlanetUseCase(characterId)
+            getPlanetUseCase(characterUrl)
 
             //Then
-            verify(characterDetailsRepositoryMock).getCharacterPlanet(characterId)
+            verify(characterDetailsRepositoryMock).getCharacterPlanet(characterUrl)
         }
     }
 }
