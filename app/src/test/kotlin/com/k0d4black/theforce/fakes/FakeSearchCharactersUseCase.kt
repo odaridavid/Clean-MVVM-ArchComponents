@@ -15,22 +15,29 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.usecases.SearchUseCase
+import com.k0d4black.theforce.viewmodels.CharacterSearchViewModelTest
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-
-class FakeSearchCharactersUseCase : SearchUseCase {
+class FakeSearchCharactersUseCase(private val uiState: CharacterSearchViewModelTest.UIState) :
+    SearchUseCase {
     override suspend fun invoke(params: String): Flow<List<Character>> = flow {
-        emit(
-            listOf(
-                Character(
-                    "Darth Vader",
-                    "12BBY",
-                    "123",
-                    "https://swapi.co/api/species/2/"
+
+        when (uiState) {
+            CharacterSearchViewModelTest.UIState.SUCCESS -> {
+                emit(
+                    listOf(
+                        Character(
+                            "Darth Vader",
+                            "12BBY",
+                            "123",
+                            "https://swapi.co/api/species/2/"
+                        )
+                    )
                 )
-            )
-        )
+            }
+            CharacterSearchViewModelTest.UIState.ERROR -> throw Throwable()
+        }
     }
 
 }
