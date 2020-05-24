@@ -165,7 +165,7 @@ View models testing on live data were guided by this [article](https://proandroi
  
  The list results are bound by a recycler view and 
  each List item contains a button when on clicked navigates to 
- `CharacterDetailsActivity` screen with an Intent Extra of character id.
+ `CharacterDetailsActivity` screen with an Intent Extra of character url.
  
  **Details Screen**
  
