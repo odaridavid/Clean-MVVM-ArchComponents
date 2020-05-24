@@ -129,6 +129,8 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
+    //For Fake Network Module
+    androidTestImplementation project(":data")
 
 }
 apply plugin: 'com.google.gms.google-services'
