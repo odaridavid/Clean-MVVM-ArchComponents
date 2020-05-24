@@ -4,7 +4,7 @@ import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.BaseTest
 import com.k0d4black.theforce.data.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.data.helpers.NON_EXISTENT_SEARCH_PARAMS
-import com.k0d4black.theforce.data.source.CharacterSearchDataSource
+import com.k0d4black.theforce.data.source.CharacterSearchRemoteDataSource
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -18,7 +18,7 @@ internal class CharacterSearchRepositoryTest : BaseTest() {
     @Before
     override fun setup() {
         super.setup()
-        val characterSearchDataSourceMock = CharacterSearchDataSource(starWarsApiService)
+        val characterSearchDataSourceMock = CharacterSearchRemoteDataSource(starWarsApiService)
         characterSearchRepository = CharacterSearchRepository(characterSearchDataSourceMock)
     }
 

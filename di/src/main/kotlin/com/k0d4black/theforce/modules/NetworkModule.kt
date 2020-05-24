@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.modules
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -39,6 +38,7 @@ private fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
         .addConverterFactory(MoshiConverterFactory.create()).build()
 }
 
-private fun provideService(retrofit: Retrofit): StarWarsApiService = retrofit.create(StarWarsApiService::class.java)
+private fun provideService(retrofit: Retrofit): StarWarsApiService =
+    retrofit.create(StarWarsApiService::class.java)
 
 private fun provideBaseUrl(): String = "https://swapi.dev/api/"

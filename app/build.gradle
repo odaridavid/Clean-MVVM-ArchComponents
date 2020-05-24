@@ -116,10 +116,8 @@ dependencies {
     testImplementation testDependencies.runner
     testImplementation testDependencies.rules
     testImplementation testDependencies.googleTruth
-    testImplementation testDependencies.mockito
     testImplementation testDependencies.archComponentTest
     testImplementation testDependencies.coroutinesTest
-    testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.koinTest
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.runner
