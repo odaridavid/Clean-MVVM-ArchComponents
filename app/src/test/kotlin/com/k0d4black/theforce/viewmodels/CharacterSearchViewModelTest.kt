@@ -34,7 +34,7 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun shouldReceiveSearchResults() {
+    fun shouldReceiveSuccessSearchResults() {
         runBlockingTest {
             setMockAnswer()
             characterSearchViewModel.executeCharacterSearch(searchParams)
@@ -44,9 +44,25 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
         }
     }
 
+    @ExperimentalCoroutinesApi
+    @Test
+    fun shouldReceiveFailSearchResults() {
+        runBlockingTest {
+            setMockFailAnswer()
+            characterSearchViewModel.executeCharacterSearch(searchParams)
+            characterSearchViewModel.uiState.observeOnce { state ->
+                Truth.assertThat(state).isInstanceOf(Error::class.java)
+            }
+        }
+    }
+
     private suspend fun setMockAnswer() {
         given(searchCharactersUseCase(searchParams)).willReturn(flow {
             emit(SampleData.searchResults)
         })
+    }
+
+    private suspend fun setMockFailAnswer() {
+        given(searchCharactersUseCase(searchParams)).willThrow()
     }
 }
