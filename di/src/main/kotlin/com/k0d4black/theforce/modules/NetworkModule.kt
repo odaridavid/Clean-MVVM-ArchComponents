@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.modules
 
 import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -23,7 +22,7 @@ val networkModule = module {
     single { provideOkHttpClient() }
 }
 
-fun provideOkHttpClient(): OkHttpClient {
+private fun provideOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     return OkHttpClient.Builder()
@@ -32,13 +31,14 @@ fun provideOkHttpClient(): OkHttpClient {
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
+private fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
     return Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
         .addConverterFactory(MoshiConverterFactory.create()).build()
 }
 
-fun provideService(retrofit: Retrofit): StarWarsApiService = retrofit.create(StarWarsApiService::class.java)
+private fun provideService(retrofit: Retrofit): StarWarsApiService =
+    retrofit.create(StarWarsApiService::class.java)
 
-fun provideBaseUrl(): String = "https://swapi.dev/api/"
+private fun provideBaseUrl(): String = "https://swapi.dev/api/"

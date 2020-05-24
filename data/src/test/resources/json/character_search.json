@@ -12,20 +12,20 @@
       "eye_color": "yellow",
       "birth_year": "41.9BBY",
       "gender": "male",
-      "homeworld": "https://swapi.co/api/planets/1/",
+      "homeworld": "/api/planets/1/",
       "films": [
-        "https://swapi.co/api/films/1/"
+        "/api/films/1/"
       ],
       "species": [
-        "https://swapi.co/api/species/1/"
+        "/api/species/1/"
       ],
       "vehicles": [],
       "starships": [
-        "https://swapi.co/api/starships/13/"
+        "/api/starships/1/"
       ],
       "created": "2014-12-10T15:18:20.704000Z",
       "edited": "2014-12-20T21:17:50.313000Z",
-      "url": "https://swapi.co/api/people/1/"
+      "url": "/api/people/1/"
     }
   ]
 }

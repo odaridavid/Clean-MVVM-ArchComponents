@@ -8,7 +8,13 @@ import org.koin.dsl.module
 
 val repositoriesModule = module {
 
-    single<ICharacterSearchRepository> { CharacterSearchRepository(get()) }
+    single<ICharacterSearchRepository> {
+        CharacterSearchRepository(characterSearchRemoteDataSource = get())
+    }
 
-    single<ICharacterDetailsRepository> { CharacterDetailsRepository(get()) }
+    single<ICharacterDetailsRepository> {
+        CharacterDetailsRepository(
+            characterDetailsRemoteDataSource = get()
+        )
+    }
 }

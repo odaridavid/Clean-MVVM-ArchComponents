@@ -34,6 +34,7 @@ package-name: com.k0d4black.theforce
 - [Testing](#testing)
 - [App Flow](#app-flow)
 - [Libraries](#libraries)
+- [Contributors](#contributors)
 - [Extras](#extras)
 - [Demo](#demo)
 
@@ -91,13 +92,15 @@ Use cases are also provided in the domain layer and orchestrate the flow
 of data from the data layer onto the presentation layer and a split into
 modular pieces serving one particular purpose.
 
+The UseCases use a ```BaseUseCase``` interface that defines the parameters its taking in and output
+this helps in creating fakes using in testing.
+
 #### Data
 
 The Data layer using the **Repository Pattern**  will be able to 
 provide data to the defined use cases which in this case is searching
 for characters and viewing details of selected characters.The use-cases
-are based on the single responsibility rule as they serve only one particular 
-purpose.
+are based on the single responsibility rule.
 
 This provides a more decoupled system,as it is isolated from changes to the 
 db by abstracting low level implementation details of data sources and
@@ -132,11 +135,6 @@ and mappers to the domain models.
 Currently the data source tests serve as unit tests verifying the appropriate
 responses are received from remote source.
 
-We mock the repositories and verify the expected behavior once a use case
-has been called to action.
-
-Utilities and Extension functions have also been tested.
-
 3. Presentation
 
 The Presentation layer contains robolectric jvm tests on for menu items 
@@ -147,8 +145,6 @@ The UI tests display data served from a mock web server running from the
 devices localhost,this removes flakiness compared to relying on actual 
 data from the real server aspects such as internet connection or 
 network service might bring up issues.
-
-The tests are have been done per activity.
 
 View models testing on live data were guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
 
@@ -164,14 +160,12 @@ View models testing on live data were guided by this [article](https://proandroi
  
  The list results are bound by a recycler view and 
  each List item contains a button when on clicked navigates to 
- `CharacterDetailsActivity` screen with an Intent Extra of character id.
+ `CharacterDetailsActivity` screen with an Intent Extra of character url.
  
  **Details Screen**
  
  The details Screen displays character information after viewmodel receives 
- data from the usecase.The data is bound through Data binding ,which 
- proves useful to binding model data removing need for boilerplate
- findViewById.
+ data from the usecase.The data is bound to the UI through Data binding.
  
  The Character Details are displayed by satisfying constraints to various 
  views using the constraint layout which flattens our view hierarchy and 
@@ -195,7 +189,7 @@ and supports coroutines out of the box.
 requests on the data layer for Entities and understands Kotlin non-nullable 
 and default parameters
 - [okhttp-logging-interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - logs HTTP request and response data.
-- [Mockito](https://site.mockito.org/) - Mocking framework used to provide mocks of my classes in unit tests.
+- [Mockito](https://site.mockito.org/) - Mocking framework used to provide mocks to verify behaviour in domain usecases tests.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides `runBlocking` coroutine builder used in tests
 - [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned
 - [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - web server for testing HTTP clients ,verify requests and responses on the star wars api with the retrofit client.
@@ -208,6 +202,12 @@ and default parameters
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 - [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
+
+## Contributors
+
+- Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor.
+
+Feel free to contribute in any way to the project.
 
 ## Extras
 

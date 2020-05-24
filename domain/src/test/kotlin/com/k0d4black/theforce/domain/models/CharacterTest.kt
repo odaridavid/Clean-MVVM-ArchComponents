@@ -6,7 +6,7 @@ import org.junit.Test
 
 internal class CharacterTest {
 
-    lateinit var expectedModel: Character
+    private lateinit var expectedModel: Character
 
     @Test
     fun `instantiate character basic info domain model`() {
@@ -16,7 +16,7 @@ internal class CharacterTest {
                 name = "Luke Skywalker",
                 birthYear = "19 BBY",
                 height = "172",
-                url ="www.wkwk.ckck/23"
+                url = "www.wkwk.ckck/23"
             )
         val actualModel = expectedModel.copy()
         //Then

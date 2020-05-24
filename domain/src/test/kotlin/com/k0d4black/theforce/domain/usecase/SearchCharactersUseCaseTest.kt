@@ -25,7 +25,7 @@ internal class SearchCharactersUseCaseTest {
     }
 
     @Test
-    fun `when search executed then get search result`() {
+    fun `given search parameter when search executed then get search result`() {
         runBlocking {
             //Given
             val searchParameter = "Luke"

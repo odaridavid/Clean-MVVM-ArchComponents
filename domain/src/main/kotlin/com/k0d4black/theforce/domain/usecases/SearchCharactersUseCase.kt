@@ -1,12 +1,16 @@
 package com.k0d4black.theforce.domain.usecases
 
+import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
-import org.koin.core.KoinComponent
+import kotlinx.coroutines.flow.Flow
+
+typealias SearchUseCase = BaseUseCase<String, Flow<List<Character>>>
 
 class SearchCharactersUseCase(
     private val searchRepository: ICharacterSearchRepository
-): KoinComponent {
+) : SearchUseCase {
 
-    suspend operator fun invoke(characterName: String) = searchRepository.searchCharacters(characterName)
+    override suspend operator fun invoke(params: String) =
+        searchRepository.searchCharacters(params)
 
 }

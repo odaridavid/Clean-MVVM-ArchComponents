@@ -74,7 +74,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    implementation project(':data')
+    implementation project(':domain')
     implementation project(':di')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -116,10 +116,8 @@ dependencies {
     testImplementation testDependencies.runner
     testImplementation testDependencies.rules
     testImplementation testDependencies.googleTruth
-    testImplementation testDependencies.mockito
     testImplementation testDependencies.archComponentTest
     testImplementation testDependencies.coroutinesTest
-    testImplementation testDependencies.mockitoInline
     testImplementation testDependencies.koinTest
     androidTestImplementation testDependencies.espressoCore
     androidTestImplementation testDependencies.runner
@@ -129,6 +127,8 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
+    //For Fake Network Module
+    androidTestImplementation project(":data")
 
 }
 apply plugin: 'com.google.gms.google-services'

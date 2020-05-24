@@ -7,22 +7,10 @@ import com.k0d4black.theforce.domain.models.Specie
 
 object SampleData {
     val species = listOf(
-        Specie(
-            name = "name",
-            language = "language"
-        )
+        Specie(name = "name", language = "language")
     )
-    val films = listOf(
-        Film(
-            title = "title",
-            openingCrawl = "opening crawl"
-        )
-    )
-    val planet =
-        Planet(
-            name = "name",
-            population = "100000"
-        )
+    val films = Film(title = "title", openingCrawl = "opening crawl")
+    val planet = Planet(name = "name", population = "100000")
     val searchResults = listOf(
         Character(
             "Darth Vader",

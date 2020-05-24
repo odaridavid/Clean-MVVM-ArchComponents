@@ -7,15 +7,15 @@
   "edited": "2014-12-10T16:44:31.486000Z",
   "eye_colors": "blue, green, yellow, brown, golden, red",
   "hair_colors": "black, brown",
-  "homeworld": "https://swapi.co/api/planets/14/",
+  "homeworld": "/api/planets/1/",
   "language": "Shyriiwook",
   "name": "Wookie",
   "people": [
-    "https://swapi.co/api/people/13/"
+    "/api/people/1/"
   ],
   "films": [
-    "https://swapi.co/api/films/1/"
+    "/api/films/1/"
   ],
   "skin_colors": "gray",
-  "url": "https://swapi.co/api/species/3/"
+  "url": "/api/species/1/"
 }

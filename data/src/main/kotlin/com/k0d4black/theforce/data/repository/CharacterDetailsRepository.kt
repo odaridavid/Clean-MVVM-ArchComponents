@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.data.repository
 
 import com.k0d4black.theforce.data.mappers.toDomain
-import com.k0d4black.theforce.data.source.CharacterDetailsDataSource
+import com.k0d4black.theforce.data.source.CharacterDetailsRemoteDataSource
 import com.k0d4black.theforce.domain.models.Film
 import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.models.Specie
@@ -13,22 +13,22 @@ import kotlinx.coroutines.flow.map
  * Co-ordinates data sources exposing character details
  */
 class CharacterDetailsRepository(
-    private val characterDetailsDataSource: CharacterDetailsDataSource
+    private val characterDetailsRemoteDataSource: CharacterDetailsRemoteDataSource
 ) : ICharacterDetailsRepository {
 
     override suspend fun getCharacterPlanet(characterUrl: String): Flow<Planet> {
-        return characterDetailsDataSource.getCharacterPlanet(characterUrl)
+        return characterDetailsRemoteDataSource.getCharacterPlanet(characterUrl)
             .map { planet -> planet.toDomain() }
     }
 
     override suspend fun getCharacterSpecies(characterUrl: String): Flow<List<Specie>> {
-        return characterDetailsDataSource.getCharacterSpecies(characterUrl)
+        return characterDetailsRemoteDataSource.getCharacterSpecies(characterUrl)
             .map { species -> species.map { eachSpecie -> eachSpecie.toDomain() } }
     }
 
-    override suspend fun getCharacterFilms(characterUrl: String): Flow<List<Film>> {
-        return characterDetailsDataSource.getCharacterFilms(characterUrl)
-            .map { films -> films.map { eachFilm -> eachFilm.toDomain() } }
+    override suspend fun getCharacterFilms(characterUrl: String): Flow<Film> {
+        return characterDetailsRemoteDataSource.getCharacterFilms(characterUrl)
+            .map { film -> film.toDomain() }
     }
 
 }

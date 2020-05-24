@@ -5,7 +5,7 @@ import org.junit.Test
 
 internal class FilmTest {
 
-    lateinit var expectedModelStarWars: Film
+   private lateinit var expectedModelStarWars: Film
 
     @Test
     fun `instantiate character film domain model`() {

@@ -30,7 +30,7 @@ class SearchActivityUnitTest : AutoCloseKoinTest(){
     }
 
     @Test
-    fun `validate default info text shown`() {
+    fun `given activity is visible when app launches then validate default info text shown`() {
         val infoTextView = searchActivity.findViewById<TextView>(R.id.search_tip_text_view)
         assertThat(infoTextView).isNotNull()
         assertThat(infoTextView.text.toString()).matches(searchActivity.resources.getString(
@@ -39,7 +39,7 @@ class SearchActivityUnitTest : AutoCloseKoinTest(){
     }
 
     @Test
-    fun `validate search menu is displayed`() {
+    fun `given activity is visible when app launched then validate search menu is displayed`() {
         val menu = Shadows.shadowOf(searchActivity).optionsMenu
         val menuItem = menu.findItem(R.id.action_search)
         assertThat(menuItem.isVisible)

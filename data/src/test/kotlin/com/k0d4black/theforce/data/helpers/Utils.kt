@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.data.helpers
 
 
-import com.google.common.annotations.Beta
 import com.google.common.io.Resources.getResource
 import java.io.File
 
