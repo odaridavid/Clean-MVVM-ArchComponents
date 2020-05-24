@@ -74,7 +74,7 @@ dependencies {
     def testDependencies = rootProject.ext.testDependencies
 
     //Local Libs
-    implementation project(':data')
+    implementation project(':domain')
     implementation project(':di')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
