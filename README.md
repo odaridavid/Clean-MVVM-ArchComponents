@@ -92,6 +92,9 @@ Use cases are also provided in the domain layer and orchestrate the flow
 of data from the data layer onto the presentation layer and a split into
 modular pieces serving one particular purpose.
 
+The UseCases use a ```BaseUseCase``` interface that defines the parameters its taking in and output
+this helps in creating fakes using in testing.
+
 #### Data
 
 The Data layer using the **Repository Pattern**  will be able to 
