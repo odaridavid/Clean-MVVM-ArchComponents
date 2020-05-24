@@ -9,7 +9,7 @@ typealias SpeciesUseCase = BaseUseCase<String, Flow<List<Specie>>>
 
 class GetSpeciesUseCase(
     private val characterDetailsRepository: ICharacterDetailsRepository
-) : SpeciesUseCase, KoinComponent {
+) : SpeciesUseCase {
 
     override suspend operator fun invoke(params: String) =
         characterDetailsRepository.getCharacterSpecies(params)

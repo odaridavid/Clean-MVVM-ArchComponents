@@ -7,7 +7,7 @@ dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.testDependencies
 
-    api project(':domain')
+    implementation project(':domain')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api dataDependencies.retrofit
     api dataDependencies.moshiConverter
