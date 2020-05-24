@@ -1,27 +1,23 @@
 package com.k0d4black.theforce.viewmodels
 
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
 import com.k0d4black.theforce.commons.Success
-import com.k0d4black.theforce.domain.usecases.SearchCharactersUseCase
+import com.k0d4black.theforce.fakes.FakeSearchCharactersUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
-import com.k0d4black.theforce.utils.SampleData
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito.given
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.robolectric.annotation.Config
 
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 internal class CharacterSearchViewModelTest : BaseViewModelTest() {
-
-    @Mock
-    lateinit var searchCharactersUseCase: SearchCharactersUseCase
 
     private lateinit var characterSearchViewModel: CharacterSearchViewModel
 
@@ -29,6 +25,7 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
 
     @Before
     fun setup() {
+        val searchCharactersUseCase = FakeSearchCharactersUseCase()
         characterSearchViewModel = CharacterSearchViewModel(searchCharactersUseCase)
     }
 
@@ -36,7 +33,6 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
     @Test
     fun shouldReceiveSearchResults() {
         runBlockingTest {
-            setMockAnswer()
             characterSearchViewModel.executeCharacterSearch(searchParams)
             characterSearchViewModel.uiState.observeOnce { state ->
                 Truth.assertThat(state).isInstanceOf(Success::class.java)
@@ -44,9 +40,4 @@ internal class CharacterSearchViewModelTest : BaseViewModelTest() {
         }
     }
 
-    private suspend fun setMockAnswer() {
-        given(searchCharactersUseCase(searchParams)).willReturn(flow {
-            emit(SampleData.searchResults)
-        })
-    }
 }

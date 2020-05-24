@@ -1,10 +1,12 @@
 package com.k0d4black.theforce.viewmodels
 
+import android.os.Build
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.domain.usecases.GetFilmsUseCase
-import com.k0d4black.theforce.domain.usecases.GetPlanetUseCase
-import com.k0d4black.theforce.domain.usecases.GetSpeciesUseCase
+import com.k0d4black.theforce.fakes.FakeGetFilmsUseCase
+import com.k0d4black.theforce.fakes.FakeGetPlanetUseCase
+import com.k0d4black.theforce.fakes.FakeGetSpeciesUseCase
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.SampleData
@@ -14,27 +16,21 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
+import org.robolectric.annotation.Config
 
-@RunWith(MockitoJUnitRunner::class)
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [Build.VERSION_CODES.P])
 internal class CharacterDetailViewModelTest : BaseViewModelTest() {
-
-    @Mock
-    lateinit var getFilmsUseCase: GetFilmsUseCase
-
-    @Mock
-    lateinit var getPlanetUseCase: GetPlanetUseCase
-
-    @Mock
-    lateinit var getSpeciesUseCase: GetSpeciesUseCase
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
-    private val characterUrl = "https://swapi.py4e.com/api/people/1/"
+    private val characterUrl = "/api/people/1/"
 
     @Before
     fun setup() {
+        val getFilmsUseCase = FakeGetFilmsUseCase()
+        val getPlanetUseCase = FakeGetPlanetUseCase()
+        val getSpeciesUseCase = FakeGetSpeciesUseCase()
         characterDetailViewModel = CharacterDetailViewModel(
             getSpeciesUseCase,
             getPlanetUseCase,
@@ -48,15 +44,15 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
         runBlockingTest {
             characterDetailViewModel.getCharacterDetails(characterUrl)
 
-            characterDetailViewModel.species.observeOnce { speciesPresentation->
+            characterDetailViewModel.species.observeOnce { speciesPresentation ->
                 Truth.assertThat(speciesPresentation)
                     .isEqualTo(SampleData.species.map { it.toPresentation() })
             }
-            characterDetailViewModel.films.observeOnce { filmPresentation->
+            characterDetailViewModel.films.observeOnce { filmPresentation ->
                 Truth.assertThat(filmPresentation)
-                    .isEqualTo(SampleData.films.map { it.toPresentation() })
+                    .isEqualTo(SampleData.films.toPresentation())
             }
-            characterDetailViewModel.planet.observeOnce { planetPresentation->
+            characterDetailViewModel.planet.observeOnce { planetPresentation ->
                 Truth.assertThat(planetPresentation).isEqualTo(SampleData.planet.toPresentation())
             }
         }
