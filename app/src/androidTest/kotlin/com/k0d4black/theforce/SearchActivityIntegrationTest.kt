@@ -29,7 +29,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class SearchActivityIntegrationTest : BaseTest() {
-    //TODO Use idling resource
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =

@@ -13,7 +13,6 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Add Swipe to refresh for error scenarios
 //TODO Set Intent Data to be part of the view state
 class CharacterDetailActivity : AppCompatActivity() {
 
