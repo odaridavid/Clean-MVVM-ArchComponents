@@ -36,10 +36,10 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
 
-        observeUiState()
+        observeSearchViewState()
     }
 
-    private fun observeUiState() {
+    private fun observeSearchViewState() {
         characterSearchViewModel.searchViewState.observe(this, Observer {
             when (it) {
                 is SearchResultLoaded -> {
