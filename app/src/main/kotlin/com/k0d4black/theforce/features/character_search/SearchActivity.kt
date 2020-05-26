@@ -104,7 +104,7 @@ class SearchActivity : AppCompatActivity() {
             .alpha(0f)
             .setListener(AnimatorListener(onEnd = { binding.loadingSearchResultsProgressBar.hide() }))
         showSearchTip()
-        showSnackbar(binding.searchResultsRecyclerView, message)
+        showSnackbar(binding.searchResultsRecyclerView, message, isError = true)
     }
 
     private fun showSearchTip() {

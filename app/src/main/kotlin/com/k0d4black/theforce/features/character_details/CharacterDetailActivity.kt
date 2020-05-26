@@ -104,7 +104,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun displayErrorState(message: String) {
         binding.loadingErrorTextView.show()
-        showSnackbar(character_details_layout, message)
+        showSnackbar(character_details_layout, message, isError = true)
     }
 
     private fun enableGroup(@IdRes groupId: Int) {
