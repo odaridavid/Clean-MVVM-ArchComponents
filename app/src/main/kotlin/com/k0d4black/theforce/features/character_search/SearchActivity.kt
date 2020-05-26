@@ -7,19 +7,22 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
+import com.k0d4black.theforce.databinding.ActivitySearchBinding
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
-import kotlinx.android.synthetic.main.activity_search.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchActivity : AppCompatActivity() {
 
     private val characterSearchViewModel by viewModel<CharacterSearchViewModel>()
+
+    lateinit var binding: ActivitySearchBinding
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { character ->
@@ -31,7 +34,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
 
         observeUiState()
     }
@@ -40,7 +43,10 @@ class SearchActivity : AppCompatActivity() {
         characterSearchViewModel.searchViewState.observe(this, Observer {
             when (it) {
                 is SearchResultLoaded -> {
-                    showSnackbar(search_results_recycler_view, getString(R.string.info_search_done))
+                    showSnackbar(
+                        binding.searchResultsRecyclerView,
+                        getString(R.string.info_search_done)
+                    )
                     displaySearchResults(it.searchResults)
                 }
                 is Error -> displayErrorState(it.message)
@@ -50,55 +56,62 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun displayLoadingState() {
-        search_tip_text_view.animate()
+        binding.searchTipTextView
+            .animate()
             .alpha(0f)
             .setListener(AnimatorListener(onEnd = {
-                search_tip_text_view.hide()
-                loading_search_results_progress_bar.show()
+                binding.searchTipTextView.hide()
+                binding.loadingSearchResultsProgressBar.show()
             }))
     }
 
     private fun displaySearchResults(searchResultStarWars: List<CharacterPresentation>) {
-        loading_search_results_progress_bar.animate()
+        val progressBar = binding.loadingSearchResultsProgressBar
+        val searchTipTextView = binding.searchTipTextView
+        progressBar.animate()
             .alpha(0f)
-            .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
+            .setListener(AnimatorListener(onEnd = { progressBar.hide() }))
 
         if (searchResultStarWars.isNotEmpty()) {
 
-            if (search_tip_text_view.isVisible) search_tip_text_view.hide()
+            if (searchTipTextView.isVisible) searchTipTextView.hide()
 
-            search_results_recycler_view.apply {
+            binding.searchResultsRecyclerView.apply {
                 adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
                     submitList(searchResultStarWars)
                 })
                 initRecyclerViewWithLineDecoration(this@SearchActivity)
             }
 
-            search_results_recycler_view.show()
+            binding.searchResultsRecyclerView.show()
 
         } else displayNoSearchResults()
     }
 
     private fun displayNoSearchResults() {
         showSearchTip()
-        search_results_recycler_view.hide()
+        binding.searchResultsRecyclerView.hide()
         showSnackbar(
-            search_results_recycler_view,
+            binding.searchResultsRecyclerView,
             getString(R.string.info_no_results)
         )
     }
 
     private fun displayErrorState(message: String) {
-        search_results_recycler_view.hide()
-        loading_search_results_progress_bar.animate().alpha(0f)
-            .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
+        binding.searchResultsRecyclerView.hide()
+        binding.loadingSearchResultsProgressBar
+            .animate()
+            .alpha(0f)
+            .setListener(AnimatorListener(onEnd = { binding.loadingSearchResultsProgressBar.hide() }))
         showSearchTip()
-        showSnackbar(search_results_recycler_view, message)
+        showSnackbar(binding.searchResultsRecyclerView, message)
     }
 
     private fun showSearchTip() {
-        search_tip_text_view.animate().alpha(1f)
-            .setListener(AnimatorListener(onEnd = { search_tip_text_view.show() }))
+        binding.searchTipTextView
+            .animate()
+            .alpha(1f)
+            .setListener(AnimatorListener(onEnd = { binding.searchTipTextView.show() }))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

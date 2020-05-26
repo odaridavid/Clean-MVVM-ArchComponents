@@ -6,14 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 //TODO Add Swipe to refresh for error scenarios
+//TODO Set Intent Data to be part of the view state
 class CharacterDetailActivity : AppCompatActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -47,43 +48,56 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun observeUiState() {
         characterDetailViewModel.detailViewState.observe(this, Observer {
-            //Species
-            it.specie?.let { species ->
-                binding.characterDetailsSpeciesRecyclerView.apply {
-                    adapter = speciesAdapter.apply { submitList(species) }
-                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
-                }
-                enableGroup(R.id.character_species_group)
-            }
-            //Films
-            it.films?.let { films ->
-                binding.characterDetailsFilmsRecyclerView.apply {
-                    adapter = filmsAdapter.apply { submitList(films) }
-                    layoutManager =
-                        LinearLayoutManager(
-                            this@CharacterDetailActivity,
-                            LinearLayoutManager.HORIZONTAL,
-                            false
-                        )
-                }
-                enableGroup(R.id.character_film_group)
-            }
-            //Planet
-            it.planet?.let { planet ->
-                binding.planet = planet
-                enableGroup(R.id.character_planet_group)
-            }
-            //Loading
-            if (it.isLoading) {
-                binding.loadingCharacterProgressBar.show()
-            } else {
-                binding.loadingCharacterProgressBar.hide()
-            }
+            renderSpecies(it)
 
-            it.error?.let { e ->
-                displayErrorState(e.message)
-            }
+            renderFilms(it)
+
+            renderPlanetDetails(it)
+
+            renderLoadingState(it)
+
+            renderError(it)
         })
+    }
+
+    private fun renderSpecies(it: CharacterDetailsViewState) {
+        it.specie?.let { species ->
+            binding.characterDetailsSpeciesRecyclerView.apply {
+                adapter = speciesAdapter.apply { submitList(species) }
+                initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
+            }
+            enableGroup(R.id.character_species_group)
+        }
+    }
+
+    private fun renderError(it: CharacterDetailsViewState) {
+        it.error?.let { e ->
+            displayErrorState(e.message)
+        }
+    }
+
+    private fun renderFilms(it: CharacterDetailsViewState) {
+        it.films?.let { films ->
+            binding.characterDetailsFilmsRecyclerView.apply {
+                adapter = filmsAdapter.apply { submitList(films) }
+                layoutManager = provideHorizontalLayoutManager()
+            }
+            enableGroup(R.id.character_film_group)
+        }
+    }
+
+    private fun renderPlanetDetails(it: CharacterDetailsViewState) {
+        it.planet?.let { planet ->
+            binding.planet = planet
+            enableGroup(R.id.character_planet_group)
+        }
+    }
+
+    private fun renderLoadingState(it: CharacterDetailsViewState) {
+        if (it.isLoading)
+            binding.loadingCharacterProgressBar.show()
+        else
+            binding.loadingCharacterProgressBar.hide()
     }
 
 

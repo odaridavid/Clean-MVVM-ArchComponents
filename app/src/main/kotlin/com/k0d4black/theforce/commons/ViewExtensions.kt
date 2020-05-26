@@ -6,8 +6,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 fun View.show() {
     this.visibility = View.VISIBLE
@@ -26,5 +24,9 @@ fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation)
     layoutManager = linearLayoutManager
     addItemDecoration(itemDecoration)
+}
+
+fun Context.provideHorizontalLayoutManager(): LinearLayoutManager {
+    return LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 }
 
