@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.Group
@@ -12,10 +11,9 @@ import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.FilmPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
+//TODO Add Swipe to refresh for error scenarios
 class CharacterDetailActivity : AppCompatActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -35,79 +33,63 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         character?.run {
             characterDetailViewModel.getCharacterDetails(this.url)
-            displayCharacterDetails(this)
+            bindCharacterIntentExtras(this)
         } ?: characterDetailViewModel.displayCharacterError()
 
         observeUiState()
-        observeCharacterPlanet()
-        observeCharacterFilms()
-        observeCharacterSpecies()
     }
 
-    private fun observeCharacterSpecies() {
-        characterDetailViewModel.species.observe(this, Observer { species ->
-            if (species.isNotEmpty()) {
-                binding.characterDetailsSpeciesRecyclerView.apply {
-                    adapter = speciesAdapter.apply { submitList(species) }
-                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
-                }
-                enableGroup(R.id.character_species_group)
-            }
-        })
-    }
-
-    private fun observeCharacterFilms() {
-        val films = mutableListOf<FilmPresentation>()
-        characterDetailViewModel.films.observe(this, Observer { film ->
-            films.add(film)
-            binding.characterDetailsFilmsRecyclerView.apply {
-                adapter = filmsAdapter.apply { submitList(films) }
-                layoutManager =
-                    LinearLayoutManager(
-                        this@CharacterDetailActivity,
-                        LinearLayoutManager.HORIZONTAL,
-                        false
-                    )
-            }
-            enableGroup(R.id.character_film_group)
-        })
-    }
-
-    private fun observeCharacterPlanet() {
-        characterDetailViewModel.planet.observe(this, Observer { planet ->
-            binding.planet = planet
-            enableGroup(R.id.character_planet_group)
-        })
-    }
-
-    private fun displayCharacterDetails(character: CharacterPresentation) {
+    private fun bindCharacterIntentExtras(character: CharacterPresentation) {
         supportActionBar?.title = character.name
         binding.character = character
         enableGroup(R.id.character_details_group)
     }
 
     private fun observeUiState() {
-        characterDetailViewModel.uiState.observe(this, Observer {
-            val anchor = character_details_layout
-            when (it) {
-                is Success<*> -> {
-                    showSnackbar(anchor, getString(R.string.info_loading_complete))
-                    binding.loadingCharacterProgressBar.hide()
+        characterDetailViewModel.detailViewState.observe(this, Observer {
+            //Species
+            it.specie?.let { species ->
+                binding.characterDetailsSpeciesRecyclerView.apply {
+                    adapter = speciesAdapter.apply { submitList(species) }
+                    initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
                 }
-                is Error -> displayErrorState(it.error)
-                is Loading -> showSnackbar(anchor, getString(R.string.info_loading_status))
+                enableGroup(R.id.character_species_group)
+            }
+            //Films
+            it.films?.let { films ->
+                binding.characterDetailsFilmsRecyclerView.apply {
+                    adapter = filmsAdapter.apply { submitList(films) }
+                    layoutManager =
+                        LinearLayoutManager(
+                            this@CharacterDetailActivity,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        )
+                }
+                enableGroup(R.id.character_film_group)
+            }
+            //Planet
+            it.planet?.let { planet ->
+                binding.planet = planet
+                enableGroup(R.id.character_planet_group)
+            }
+            //Loading
+            if (it.isLoading) {
+                binding.loadingCharacterProgressBar.show()
+            } else {
+                binding.loadingCharacterProgressBar.hide()
+            }
+
+            it.error?.let { e ->
+                displayErrorState(e.message)
             }
         })
     }
 
 
-    private fun displayErrorState(exception: Throwable) {
-        binding.loadingCharacterProgressBar.hide()
+    private fun displayErrorState(message: String) {
         binding.loadingErrorTextView.show()
-        showSnackbar(
-            character_details_layout,
-            "${exception.message}"
-        )
+        showSnackbar(character_details_layout, message)
     }
 
     private fun enableGroup(@IdRes groupId: Int) {

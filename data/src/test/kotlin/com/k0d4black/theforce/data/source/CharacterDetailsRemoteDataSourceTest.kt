@@ -28,8 +28,8 @@ internal class CharacterDetailsRemoteDataSourceTest : BaseTest() {
             val planetFlow =
                 characterDetailsRemoteDataSource.getCharacterPlanet(EXISTING_CHARACTER_URL)
 
-            filmsFlow.collect { film ->
-                Truth.assertThat(film.title).isEqualTo("A New Hope")
+            filmsFlow.collect { films ->
+                Truth.assertThat(films.size).isAtLeast(1)
             }
             planetFlow.collect { planet ->
                 Truth.assertThat(planet.name).matches("Tatooine")

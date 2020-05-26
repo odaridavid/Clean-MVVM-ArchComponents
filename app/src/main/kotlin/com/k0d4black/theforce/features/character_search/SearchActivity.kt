@@ -36,16 +36,14 @@ class SearchActivity : AppCompatActivity() {
         observeUiState()
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun observeUiState() {
-        characterSearchViewModel.uiState.observe(this, Observer {
+        characterSearchViewModel.searchViewState.observe(this, Observer {
             when (it) {
-                is Success<*> -> {
-                    val data = it.data as List<CharacterPresentation>
+                is SearchResultLoaded -> {
                     showSnackbar(search_results_recycler_view, getString(R.string.info_search_done))
-                    displaySearchResults(data)
+                    displaySearchResults(it.searchResults)
                 }
-                is Error -> displayErrorState(it.error)
+                is Error -> displayErrorState(it.message)
                 is Loading -> displayLoadingState()
             }
         })
@@ -90,12 +88,12 @@ class SearchActivity : AppCompatActivity() {
         )
     }
 
-    private fun displayErrorState(error: Throwable) {
+    private fun displayErrorState(message: String) {
         search_results_recycler_view.hide()
         loading_search_results_progress_bar.animate().alpha(0f)
             .setListener(AnimatorListener(onEnd = { loading_search_results_progress_bar.hide() }))
         showSearchTip()
-        showSnackbar(search_results_recycler_view, "${error.message}")
+        showSnackbar(search_results_recycler_view, message)
     }
 
     private fun showSearchTip() {
