@@ -44,12 +44,16 @@ internal class CharacterDetailViewModel(
             )
     }
 
-    fun getCharacterDetails(characterUrl: String) {
+    fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
+        if (isRetry) {
+            _detailViewState.value = _detailViewState.value?.copy(error = null, isLoading = true)
+        }
         viewModelScope.launch(characterDetailExceptionHandler) {
             loadPlanet(characterUrl)
             loadFilms(characterUrl)
             loadSpecies(characterUrl)
             _detailViewState.value = _detailViewState.value?.copy(isLoading = false)
+
         }
     }
 
