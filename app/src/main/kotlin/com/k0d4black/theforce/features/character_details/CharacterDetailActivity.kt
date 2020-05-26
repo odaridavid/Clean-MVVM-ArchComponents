@@ -36,9 +36,9 @@ class CharacterDetailActivity : AppCompatActivity() {
             characterDetailViewModel.getCharacterDetails(this.url)
             bindCharacterIntentExtras(this)
         } ?: characterDetailViewModel
-            .displayCharacterError(getString(R.string.character_details_load_error))
+            .displayCharacterError(getString(R.string.error_character_details))
 
-        observeUiState()
+        observeDetailViewState()
     }
 
     private fun bindCharacterIntentExtras(character: CharacterPresentation) {
@@ -47,7 +47,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         enableGroup(R.id.character_details_group)
     }
 
-    private fun observeUiState() {
+    private fun observeDetailViewState() {
         characterDetailViewModel.detailViewState.observe(this, Observer {
             renderSpecies(it)
 
