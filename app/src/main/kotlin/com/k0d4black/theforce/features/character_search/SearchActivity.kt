@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
@@ -47,7 +46,7 @@ class SearchActivity : AppCompatActivity() {
                         binding.searchResultsRecyclerView,
                         getString(R.string.info_search_done)
                     )
-                    displaySearchResults(it.searchResults)
+                    renderSearchResults(it.searchResults)
                 }
                 is Error -> displayErrorState(it.message)
                 is Loading -> displayLoadingState()
@@ -65,27 +64,29 @@ class SearchActivity : AppCompatActivity() {
             }))
     }
 
-    private fun displaySearchResults(searchResultStarWars: List<CharacterPresentation>) {
+    private fun renderSearchResults(searchResults: List<CharacterPresentation>) {
         val progressBar = binding.loadingSearchResultsProgressBar
-        val searchTipTextView = binding.searchTipTextView
         progressBar.animate()
             .alpha(0f)
             .setListener(AnimatorListener(onEnd = { progressBar.hide() }))
 
-        if (searchResultStarWars.isNotEmpty()) {
+        if (searchResults.isEmpty()) {
+            displayNoSearchResults()
+            return
+        }
 
-            if (searchTipTextView.isVisible) searchTipTextView.hide()
+        displaySearchResults(searchResults)
+    }
 
-            binding.searchResultsRecyclerView.apply {
-                adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
-                    submitList(searchResultStarWars)
-                })
-                initRecyclerViewWithLineDecoration(this@SearchActivity)
-            }
-
-            binding.searchResultsRecyclerView.show()
-
-        } else displayNoSearchResults()
+    private fun displaySearchResults(searchResults: List<CharacterPresentation>) {
+        binding.searchTipTextView.hide()
+        binding.searchResultsRecyclerView.apply {
+            adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
+                submitList(searchResults)
+            })
+            initRecyclerViewWithLineDecoration(this@SearchActivity)
+        }
+        binding.searchResultsRecyclerView.show()
     }
 
     private fun displayNoSearchResults() {
