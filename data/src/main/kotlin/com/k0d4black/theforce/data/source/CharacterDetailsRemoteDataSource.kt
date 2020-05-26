@@ -46,12 +46,14 @@ class CharacterDetailsRemoteDataSource(private val apiService: StarWarsApiServic
      * @return [Flow] of film entities that can be used in the data layer.Each film is emitted
      * immediately its received from the API.
      */
-    suspend fun getCharacterFilms(characterUrl: String): Flow<FilmEntity> = flow {
+    suspend fun getCharacterFilms(characterUrl: String): Flow<List<FilmEntity>> = flow {
         val filmsResponse = apiService.getFilms(characterUrl)
+        val films = mutableListOf<FilmEntity>()
         for (filmUrl in filmsResponse.filmUrls) {
             val film = apiService.getFilmDetails(filmUrl)
-            emit(film.toEntity())
+            films.add(film.toEntity())
         }
+        emit(films)
     }
 
 }

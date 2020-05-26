@@ -11,21 +11,17 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.fakes
+package com.k0d4black.theforce.commons
 
-import com.k0d4black.theforce.domain.models.Film
-import com.k0d4black.theforce.domain.usecases.FilmsUseCase
-import com.k0d4black.theforce.utils.UiState
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import java.net.UnknownHostException
 
-
-class FakeGetFilmsUseCase(private val uiState: UiState) : FilmsUseCase {
-    override suspend fun invoke(params: String): Flow<List<Film>> = flow {
-        when (uiState) {
-            UiState.SUCCESS -> emit(listOf(Film(title = "title", openingCrawl = "opening crawl")))
-            UiState.ERROR -> throw Throwable()
+object ExceptionHandler {
+     //TODO Load strings from resources for easier localization.
+    fun parse(t: Throwable): String {
+        return when (t) {
+            is UnknownHostException -> "Check Internet Connection"
+            else -> "Oops!! An Error Occured"
         }
-
     }
+
 }

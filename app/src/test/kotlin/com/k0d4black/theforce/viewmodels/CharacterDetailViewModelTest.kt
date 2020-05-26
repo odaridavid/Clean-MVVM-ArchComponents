@@ -8,12 +8,10 @@ import com.k0d4black.theforce.fakes.FakeGetFilmsUseCase
 import com.k0d4black.theforce.fakes.FakeGetPlanetUseCase
 import com.k0d4black.theforce.fakes.FakeGetSpeciesUseCase
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
-import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.utils.SampleData
+import com.k0d4black.theforce.utils.UiState
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
@@ -26,36 +24,45 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     private val characterUrl = "/api/people/1/"
 
-    @Before
-    fun setup() {
-        val getFilmsUseCase = FakeGetFilmsUseCase()
-        val getPlanetUseCase = FakeGetPlanetUseCase()
-        val getSpeciesUseCase = FakeGetSpeciesUseCase()
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `given a character url when character details request sent then get character details`() {
+        runBlockingTest {
+            prepareViewModel(UiState.SUCCESS)
+            characterDetailViewModel.getCharacterDetails(characterUrl)
+            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
+                Truth.assertThat(detailViewState.error).isNull()
+                Truth.assertThat(detailViewState.isLoading).isFalse()
+                Truth.assertThat(detailViewState.films).isNotEmpty()
+                Truth.assertThat(detailViewState.planet).isNotNull()
+                Truth.assertThat(detailViewState.specie).isNotEmpty()
+            }
+        }
+    }
+
+
+    @ExperimentalCoroutinesApi
+    @Test
+    fun `given an invalid state when character details request sent then get view state eror`() {
+        runBlockingTest {
+            prepareViewModel(UiState.ERROR)
+            characterDetailViewModel.getCharacterDetails(characterUrl)
+            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
+                Truth.assertThat(detailViewState.error).isNotNull()
+                Truth.assertThat(detailViewState.isLoading).isFalse()
+            }
+        }
+    }
+
+    override fun prepareViewModel(uiState: UiState) {
+        val getFilmsUseCase = FakeGetFilmsUseCase(uiState)
+        val getPlanetUseCase = FakeGetPlanetUseCase(uiState)
+        val getSpeciesUseCase = FakeGetSpeciesUseCase(uiState)
         characterDetailViewModel = CharacterDetailViewModel(
             getSpeciesUseCase,
             getPlanetUseCase,
             getFilmsUseCase
         )
-    }
-
-    @ExperimentalCoroutinesApi
-    @Test
-    fun `given a character url when character details request sent then get character details`() {
-        runBlockingTest {
-            characterDetailViewModel.getCharacterDetails(characterUrl)
-
-            characterDetailViewModel.species.observeOnce { speciesPresentation ->
-                Truth.assertThat(speciesPresentation)
-                    .isEqualTo(SampleData.species.map { it.toPresentation() })
-            }
-            characterDetailViewModel.films.observeOnce { filmPresentation ->
-                Truth.assertThat(filmPresentation)
-                    .isEqualTo(SampleData.films.toPresentation())
-            }
-            characterDetailViewModel.planet.observeOnce { planetPresentation ->
-                Truth.assertThat(planetPresentation).isEqualTo(SampleData.planet.toPresentation())
-            }
-        }
     }
 
 }

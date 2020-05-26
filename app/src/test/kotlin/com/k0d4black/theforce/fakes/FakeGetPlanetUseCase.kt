@@ -15,13 +15,17 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.usecases.PlanetUseCase
+import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-class FakeGetPlanetUseCase : PlanetUseCase {
+class FakeGetPlanetUseCase(private val uiState: UiState) : PlanetUseCase {
     override suspend fun invoke(params: String): Flow<Planet> = flow {
-        emit(Planet(name = "name", population = "100000"))
+        when (uiState) {
+            UiState.SUCCESS -> emit(Planet(name = "name", population = "100000"))
+            UiState.ERROR -> throw Throwable()
+        }
     }
 
 }

@@ -4,7 +4,7 @@ import com.k0d4black.theforce.domain.models.Film
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias FilmsUseCase = BaseUseCase<String, Flow<Film>>
+typealias FilmsUseCase = BaseUseCase<String, Flow<List<Film>>>
 
 class GetFilmsUseCase(
     private val characterDetailsRepository: ICharacterDetailsRepository
