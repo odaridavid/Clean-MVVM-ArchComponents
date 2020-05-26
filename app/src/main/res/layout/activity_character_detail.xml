@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_default"
                 android:drawableTop="@drawable/ic_error_24dp"
-                android:text="@string/error_loading_character_details"
+                android:text="@string/error_character_details"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:visibility="gone" />
