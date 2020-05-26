@@ -15,13 +15,12 @@ package com.k0d4black.theforce.commons
 
 import java.net.UnknownHostException
 
-//Test Exception Handler
 object ExceptionHandler {
-
+     //TODO Load strings from resources for easier localization.
     fun parse(t: Throwable): String {
         return when (t) {
             is UnknownHostException -> "Check Internet Connection"
-            else -> "Oops!! An Error Occured."
+            else -> "Oops!! An Error Occured"
         }
     }
 

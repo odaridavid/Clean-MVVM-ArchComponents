@@ -35,7 +35,8 @@ class CharacterDetailActivity : AppCompatActivity() {
         character?.run {
             characterDetailViewModel.getCharacterDetails(this.url)
             bindCharacterIntentExtras(this)
-        } ?: characterDetailViewModel.displayCharacterError()
+        } ?: characterDetailViewModel
+            .displayCharacterError(getString(R.string.character_details_load_error))
 
         observeUiState()
     }

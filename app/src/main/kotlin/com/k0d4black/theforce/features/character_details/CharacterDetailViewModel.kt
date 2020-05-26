@@ -29,7 +29,8 @@ internal class CharacterDetailViewModel(
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
-        _detailViewState.value = _detailViewState.value?.copy(error = Error(message),isLoading = false)
+        _detailViewState.value =
+            _detailViewState.value?.copy(error = Error(message), isLoading = false)
     }
 
     init {
@@ -73,9 +74,9 @@ internal class CharacterDetailViewModel(
         }
     }
 
-    fun displayCharacterError() {
+    fun displayCharacterError(message: String) {
         _detailViewState.value =
-            _detailViewState.value?.copy(error = Error("Couldn't load character details."),isLoading = false)
+            _detailViewState.value?.copy(error = Error(message), isLoading = false)
     }
 }
 
