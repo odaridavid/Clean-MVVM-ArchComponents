@@ -35,6 +35,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         character?.run {
             characterDetailViewModel.getCharacterDetails(this.url)
             bindCharacterIntentExtras(this)
+            observeNetworkChanges(character.url)
         } ?: characterDetailViewModel
             .displayCharacterError(getString(R.string.error_character_details))
 
@@ -74,7 +75,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     private fun renderError(it: CharacterDetailsViewState) {
         it.error?.let { e ->
             displayErrorState(e.message)
-        }
+        } ?: binding.loadingErrorTextView.hide()
     }
 
     private fun renderFilms(it: CharacterDetailsViewState) {
@@ -116,4 +117,21 @@ class CharacterDetailActivity : AppCompatActivity() {
             }))
     }
 
+    private fun observeNetworkChanges(characterUrl: String) {
+        onNetworkChange { isConnected ->
+            characterDetailViewModel.detailViewState.value?.let { viewState ->
+                if (isConnected && viewState.error != null) {
+                    characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
+                }
+            }
+
+        }
+    }
+
+    private fun onNetworkChange(block: (Boolean) -> Unit) {
+        NetworkUtils.getNetworkStatus(this)
+            .observe(this, Observer { isConnected ->
+                block(isConnected)
+            })
+    }
 }
