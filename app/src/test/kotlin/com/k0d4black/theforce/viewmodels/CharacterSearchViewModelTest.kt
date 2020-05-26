@@ -4,10 +4,11 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.commons.Success
-import com.k0d4black.theforce.commons.Error
 import com.k0d4black.theforce.fakes.FakeSearchCharactersUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
+import com.k0d4black.theforce.features.character_search.Error
+import com.k0d4black.theforce.features.character_search.SearchResultLoaded
+import com.k0d4black.theforce.utils.UiState
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
@@ -27,10 +28,10 @@ class CharacterSearchViewModelTest : BaseViewModelTest() {
     @Test
     fun `given a search parameter when search executed then return success state`() {
         runBlockingTest {
-            prepareViewModel(UIState.SUCCESS)
+            prepareViewModel(UiState.SUCCESS)
             characterSearchViewModel.executeCharacterSearch(searchParams)
-            characterSearchViewModel.uiState.observeOnce { state ->
-                Truth.assertThat(state).isInstanceOf(Success::class.java)
+            characterSearchViewModel.searchViewState.observeOnce { state ->
+                Truth.assertThat(state).isInstanceOf(SearchResultLoaded::class.java)
             }
         }
     }
@@ -39,22 +40,16 @@ class CharacterSearchViewModelTest : BaseViewModelTest() {
     @Test
     fun `given an empty search parameter when search executed then return error state`() {
         runBlockingTest {
-            prepareViewModel(UIState.ERROR)
+            prepareViewModel(UiState.ERROR)
             characterSearchViewModel.executeCharacterSearch("")
-            characterSearchViewModel.uiState.observeOnce { state ->
+            characterSearchViewModel.searchViewState.observeOnce { state ->
                 Truth.assertThat(state).isInstanceOf(Error::class.java)
             }
         }
     }
 
-    private fun prepareViewModel(uiState: UIState) {
+    override fun prepareViewModel(uiState: UiState) {
         val searchCharactersUseCase = FakeSearchCharactersUseCase(uiState)
         characterSearchViewModel = CharacterSearchViewModel(searchCharactersUseCase)
     }
-
-    enum class UIState {
-        SUCCESS,
-        ERROR
-    }
-
 }

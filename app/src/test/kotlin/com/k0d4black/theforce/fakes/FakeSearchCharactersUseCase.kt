@@ -15,16 +15,14 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.usecases.SearchUseCase
-import com.k0d4black.theforce.viewmodels.CharacterSearchViewModelTest
+import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FakeSearchCharactersUseCase(private val uiState: CharacterSearchViewModelTest.UIState) :
-    SearchUseCase {
+class FakeSearchCharactersUseCase(private val uiState: UiState) : SearchUseCase {
     override suspend fun invoke(params: String): Flow<List<Character>> = flow {
-
         when (uiState) {
-            CharacterSearchViewModelTest.UIState.SUCCESS -> {
+            UiState.SUCCESS -> {
                 emit(
                     listOf(
                         Character(
@@ -36,7 +34,7 @@ class FakeSearchCharactersUseCase(private val uiState: CharacterSearchViewModelT
                     )
                 )
             }
-            CharacterSearchViewModelTest.UIState.ERROR -> throw Throwable()
+            UiState.ERROR -> throw Throwable()
         }
     }
 
