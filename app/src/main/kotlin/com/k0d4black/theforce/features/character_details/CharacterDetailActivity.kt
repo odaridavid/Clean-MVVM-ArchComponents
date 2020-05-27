@@ -55,10 +55,17 @@ class CharacterDetailActivity : AppCompatActivity() {
 
             renderPlanetDetails(it)
 
-            renderLoadingState(it)
+            renderOnLoading(it)
 
-            renderError(it)
+            renderOnError(it)
+
+            renderOnComplete(it)
         })
+    }
+
+    private fun renderOnComplete(it: CharacterDetailsViewState) {
+        if (it.isComplete)
+            showSnackbar(binding.characterDetailsLayout, getString(R.string.info_loading_complete))
     }
 
     private fun renderSpecies(it: CharacterDetailsViewState) {
@@ -71,7 +78,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderError(it: CharacterDetailsViewState) {
+    private fun renderOnError(it: CharacterDetailsViewState) {
         it.error?.let { e ->
             displayErrorState(e.message)
         } ?: binding.loadingErrorTextView.hide()
@@ -94,7 +101,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun renderLoadingState(it: CharacterDetailsViewState) {
+    private fun renderOnLoading(it: CharacterDetailsViewState) {
         if (it.isLoading)
             binding.loadingCharacterProgressBar.show()
         else
@@ -104,7 +111,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun displayErrorState(message: String) {
         binding.loadingErrorTextView.show()
-        showSnackbar(character_details_layout, message)
+        showSnackbar(character_details_layout, message, isError = true)
     }
 
     private fun enableGroup(@IdRes groupId: Int) {

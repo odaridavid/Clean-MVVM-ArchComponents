@@ -37,6 +37,7 @@ internal class CharacterDetailViewModel(
         _detailViewState.value =
             CharacterDetailsViewState(
                 isLoading = true,
+                isComplete = false,
                 error = null,
                 planet = null,
                 films = null,
@@ -52,7 +53,8 @@ internal class CharacterDetailViewModel(
             loadPlanet(characterUrl)
             loadFilms(characterUrl)
             loadSpecies(characterUrl)
-            _detailViewState.value = _detailViewState.value?.copy(isLoading = false)
+            _detailViewState.value =
+                _detailViewState.value?.copy(isLoading = false, isComplete = true)
 
         }
     }
@@ -87,7 +89,8 @@ internal class CharacterDetailViewModel(
 internal sealed class DetailViewState
 internal data class Error(val message: String) : DetailViewState()
 internal data class CharacterDetailsViewState(
-    val isLoading: Boolean = false,
+    val isLoading: Boolean,
+    val isComplete: Boolean,
     val error: Error?,
     val planet: PlanetPresentation?,
     val films: List<FilmPresentation>?,
