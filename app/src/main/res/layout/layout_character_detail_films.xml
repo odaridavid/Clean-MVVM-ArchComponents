@@ -25,24 +25,24 @@
             android:text="@string/title_films"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/character_details_planet_population_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/specie_card_container" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/films_card_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:elevation="@dimen/cardview_elevation"
-            app:cardCornerRadius="@dimen/cardview_radius"
-            app:layout_constraintBottom_toTopOf="@id/character_details_species_title_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:cardElevation="@dimen/cardview_elevation"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/character_details_films_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_film" />
 
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="character_details_films_title_text_view,films_card_container" />
+            app:constraint_referenced_ids="films_card_container" />
 
     </merge>
 </layout>

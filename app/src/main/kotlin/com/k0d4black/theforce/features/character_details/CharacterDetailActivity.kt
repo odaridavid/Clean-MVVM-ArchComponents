@@ -70,10 +70,12 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderSpecies(it: CharacterDetailsViewState) {
         it.specie?.let { species ->
-            binding.specieLayout.characterDetailsSpeciesRecyclerView.apply {
-                adapter = speciesAdapter.apply { submitList(species) }
-                initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
-            }
+            if (species.isNotEmpty()) {
+                binding.specieLayout.noSpeciesTextView.hide()
+                binding.specieLayout.characterDetailsSpeciesRecyclerView.apply {
+                    adapter = speciesAdapter.apply { submitList(species) }
+                }
+            } else binding.specieLayout.noSpeciesTextView.show()
             enableGroup(R.id.character_species_group)
         }
     }
@@ -88,7 +90,6 @@ class CharacterDetailActivity : AppCompatActivity() {
         it.films?.let { films ->
             binding.filmsLayout.characterDetailsFilmsRecyclerView.apply {
                 adapter = filmsAdapter.apply { submitList(films) }
-                layoutManager = provideHorizontalLayoutManager()
             }
             enableGroup(R.id.character_film_group)
         }
