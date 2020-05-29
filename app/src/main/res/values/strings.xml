@@ -17,11 +17,12 @@
     <!-- Character Detail Activity -->
     <string name="title_birth_year">Birth Year</string>
     <string name="title_height">Height</string>
-    <string name="title_planet_info">Planet Info</string>
+    <string name="title_planet">Planet</string>
     <string name="title_films">Films</string>
     <string name="title_species">Species</string>
     <string name="error_character_details">Couldn\'t load character details</string>
     <string name="info_loading_complete">Character Loaded Successfully</string>
+    <string name="info_specie_information_unavailable">Specie information unavailable</string>
 
     <!-- Data Binding String Templates -->
     <string name="template_planet_name">Name : %s</string>
