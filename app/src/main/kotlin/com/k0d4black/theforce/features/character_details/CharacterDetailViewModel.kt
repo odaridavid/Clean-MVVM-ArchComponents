@@ -13,6 +13,7 @@ import com.k0d4black.theforce.models.FilmPresentation
 import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -50,9 +51,12 @@ internal class CharacterDetailViewModel(
             _detailViewState.value = _detailViewState.value?.copy(error = null, isLoading = true)
         }
         viewModelScope.launch(characterDetailExceptionHandler) {
-            loadPlanet(characterUrl)
-            loadFilms(characterUrl)
-            loadSpecies(characterUrl)
+            val planetRequest = async { loadPlanet(characterUrl) }
+            val filmsRequest = async { loadFilms(characterUrl) }
+            val speciesRequest = async { loadSpecies(characterUrl) }
+            planetRequest.await()
+            filmsRequest.await()
+            speciesRequest.await()
             _detailViewState.value =
                 _detailViewState.value?.copy(isLoading = false, isComplete = true)
 

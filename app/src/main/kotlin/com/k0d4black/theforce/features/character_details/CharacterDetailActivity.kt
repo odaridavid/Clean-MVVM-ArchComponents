@@ -31,20 +31,14 @@ class CharacterDetailActivity : AppCompatActivity() {
 
         val character = intent.getParcelableExtra<CharacterPresentation>(CHARACTER_PARCEL_KEY)
 
-        character?.run {
-            characterDetailViewModel.getCharacterDetails(this.url)
-            bindCharacterIntentExtras(this)
-            observeNetworkChanges(character.url)
+        character?.let { characterInfo ->
+            characterDetailViewModel.getCharacterDetails(characterInfo.url)
+            renderCharacterInfo(characterInfo)
+            observeNetworkChanges(characterInfo.url)
         } ?: characterDetailViewModel
             .displayCharacterError(getString(R.string.error_character_details))
 
         observeDetailViewState()
-    }
-
-    private fun bindCharacterIntentExtras(character: CharacterPresentation) {
-        supportActionBar?.title = character.name
-        binding.character = character
-        enableGroup(R.id.character_details_group)
     }
 
     private fun observeDetailViewState() {
@@ -63,6 +57,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         })
     }
 
+    private fun renderCharacterInfo(character: CharacterPresentation) {
+        supportActionBar?.title = character.name
+        binding.infoLayout.character = character
+        enableGroup(R.id.character_details_group)
+    }
+
     private fun renderOnComplete(it: CharacterDetailsViewState) {
         if (it.isComplete)
             showSnackbar(binding.characterDetailsLayout, getString(R.string.info_loading_complete))
@@ -70,7 +70,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderSpecies(it: CharacterDetailsViewState) {
         it.specie?.let { species ->
-            binding.characterDetailsSpeciesRecyclerView.apply {
+            binding.specieLayout.characterDetailsSpeciesRecyclerView.apply {
                 adapter = speciesAdapter.apply { submitList(species) }
                 initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
             }
@@ -86,7 +86,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderFilms(it: CharacterDetailsViewState) {
         it.films?.let { films ->
-            binding.characterDetailsFilmsRecyclerView.apply {
+            binding.filmsLayout.characterDetailsFilmsRecyclerView.apply {
                 adapter = filmsAdapter.apply { submitList(films) }
                 layoutManager = provideHorizontalLayoutManager()
             }
@@ -96,7 +96,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderPlanetDetails(it: CharacterDetailsViewState) {
         it.planet?.let { planet ->
-            binding.planet = planet
+            binding.planetLayout.planet = planet
             enableGroup(R.id.character_planet_group)
         }
     }
@@ -130,7 +130,6 @@ class CharacterDetailActivity : AppCompatActivity() {
                     characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
                 }
             }
-
         }
     }
 
