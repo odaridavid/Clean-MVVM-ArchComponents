@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+
+ Copyright  David Odari
+
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except 
+ in compliance with the License. You may obtain a copy of the License at
+            http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software distributed under the License 
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+
+-->
+<layout>
+
+    <data>
+
+        <variable
+            name="planet"
+            type="com.k0d4black.theforce.models.PlanetPresentation" />
+
+    </data>
+
+    <merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <TextView
+            android:id="@+id/character_details_planet_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/title_planet_info"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />
+
+        <TextView
+            android:id="@+id/character_details_planet_name_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:fontFamily="@font/roboto_light"
+            android:text="@{String.format(@string/template_planet_name,planet.name)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_details_planet_title_text_view"
+            tools:text="Language : Blaa Blaa" />
+
+        <TextView
+            android:id="@+id/character_details_planet_population_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:fontFamily="@font/roboto_light"
+            android:text="@{String.format(@string/template_planet_population,planet.population)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_details_planet_name_text_view"
+            tools:text="Population : 2340000" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/character_planet_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="character_details_planet_title_text_view,character_details_planet_name_text_view,character_details_planet_population_text_view" />
+
+    </merge>
+</layout>
