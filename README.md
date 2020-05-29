@@ -71,17 +71,12 @@ The viewmodels are provided by the Koin that uses Kotlin's DSLs
 to lazily resolve dependency graph at runtime
 
 The ViewModel then receives data from the use case and updates the 
-LiveData being watched by the activity,the Activity then makes updates 
-to the UI as need be depending on the type of value received by the 
-LiveData.This results in the **Observer Pattern** and binding of list 
-data with the Recycler Views **Adapter Pattern**.
+LiveData being observed by the activity,the Activity then makes updates 
+to the UI as need be depending on the current view state.
 
-The ``UiStateViewModel`` also help coordinate the state of the UI,updating 
-current view as needed using the **State Pattern** 
-
-This pattern makes the Activities "dumb" by delegating data and logic 
-operations to the Viewmodel,hence decoupling the UI layer and makes testing
-components in isolation easier.
+The UI utilises a **State pattern** by representing expected view states using sealed classes.
+This aids with delegating logic operations  to the Viewmodel and makes testing in isolation
+easier.
 
 #### Domain
 
@@ -120,7 +115,7 @@ Testing has been done based on the architectural layers.
 1. Domain
 
 Contains tests that encompass domain models and uses mockito to verify 
-use cases.
+use case behavior.
 
 2. Data
 
@@ -167,10 +162,6 @@ View models testing on live data were guided by this [article](https://proandroi
  The details Screen displays character information after viewmodel receives 
  data from the usecase.The data is bound to the UI through Data binding.
  
- The Character Details are displayed by satisfying constraints to various 
- views using the constraint layout which flattens our view hierarchy and 
- avoids nesting of multiple layouts for displaying complex objects.
- 
  The views displaying character data are logically  grouped by 
  constraint layout Group widget making it simpler to enable and disable 
  a large set of views.
@@ -205,7 +196,7 @@ and default parameters
 
 ## Contributors
 
-- Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor.
+- Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor and additional test cases.
 
 Feel free to contribute in any way to the project.
 
@@ -262,16 +253,20 @@ enhance user experience.
 
 ## Demo
 
-<img src="art/appdemo.gif" width=200/>
+<img src="art/force_demo.gif" width=200/>
 
 
-<a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='150'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
 
 Google Play and the Google Play logo are trademarks of Google LLC.
 
 ## Copyright Notice
 
 Star Wars and all associated names are copyright Lucasfilm ltd.
+
+## Related Posts
+
+[Handling Dynamic Urls](https://davidodari.hashnode.dev/retrofit-handling-dynamic-urls-ck9zygtw700x0ans1tm5spma4)
 
 ## License
 

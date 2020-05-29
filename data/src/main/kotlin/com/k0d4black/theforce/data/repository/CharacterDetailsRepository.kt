@@ -23,12 +23,12 @@ class CharacterDetailsRepository(
 
     override suspend fun getCharacterSpecies(characterUrl: String): Flow<List<Specie>> {
         return characterDetailsRemoteDataSource.getCharacterSpecies(characterUrl)
-            .map { species -> species.map { eachSpecie -> eachSpecie.toDomain() } }
+            .map { species -> species.map { specie -> specie.toDomain() } }
     }
 
-    override suspend fun getCharacterFilms(characterUrl: String): Flow<Film> {
+    override suspend fun getCharacterFilms(characterUrl: String): Flow<List<Film>> {
         return characterDetailsRemoteDataSource.getCharacterFilms(characterUrl)
-            .map { film -> film.toDomain() }
+            .map { films -> films.map { film -> film.toDomain() } }
     }
 
 }

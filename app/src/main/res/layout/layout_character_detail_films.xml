@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+
+ Copyright  David Odari
+
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except 
+ in compliance with the License. You may obtain a copy of the License at
+            http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software distributed under the License 
+ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ or implied. See the License for the specific language governing permissions and limitations under
+ the License.
+
+-->
+<layout>
+
+    <merge xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <TextView
+            android:id="@+id/character_details_films_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:text="@string/title_films"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_details_planet_population_text_view" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/films_card_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:elevation="@dimen/cardview_elevation"
+            app:cardCornerRadius="@dimen/cardview_radius"
+            app:layout_constraintBottom_toTopOf="@id/character_details_species_title_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/character_details_films_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_film" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/character_film_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="character_details_films_title_text_view,films_card_container" />
+
+    </merge>
+</layout>

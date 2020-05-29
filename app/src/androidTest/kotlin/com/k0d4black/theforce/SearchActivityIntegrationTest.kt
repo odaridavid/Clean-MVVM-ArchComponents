@@ -16,6 +16,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.features.character_search.SearchActivity
 import com.k0d4black.theforce.features.character_search.SearchResultAdapter
+import com.k0d4black.theforce.helpers.EXCEPTION_THROWN_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.ViewAction
@@ -28,7 +29,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 internal class SearchActivityIntegrationTest : BaseTest() {
-    //TODO Use idling resource
 
     @get:Rule
     var activityRule: ActivityTestRule<SearchActivity> =
@@ -75,14 +75,18 @@ internal class SearchActivityIntegrationTest : BaseTest() {
             )
         )
         SystemClock.sleep(1500)
-        intended(hasComponent("com.k0d4black.theforce.features.character_details.CharacterDetailActivity"))
+        intended(hasComponent(CHARACTER_DETAIL_ACTIVITY_COMPONENT))
     }
 
 
     @Test
     fun shouldDisplayErrorMessageOnSearch() {
         onView(withId(R.id.action_search)).perform(click())
-        onView(isAssignableFrom(EditText::class.java)).perform(typeText("Error"))
+        onView(isAssignableFrom(EditText::class.java)).perform(
+            typeText(
+                EXCEPTION_THROWN_SEARCH_PARAMS
+            )
+        )
         SystemClock.sleep(2000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(isDisplayed()))
@@ -94,13 +98,20 @@ internal class SearchActivityIntegrationTest : BaseTest() {
             .perform(click());
         onView(withId(R.id.about_card_view))
             .perform(click())
-        intended(hasComponent("com.k0d4black.theforce.features.settings.AboutActivity"))
+        intended(hasComponent(ABOUT_ACTIVITY_COMPONENT))
     }
 
     @After
     override fun tearDown() {
         super.tearDown()
         activityRule.finishActivity()
+    }
+
+    companion object {
+        private const val ABOUT_ACTIVITY_COMPONENT =
+            "com.k0d4black.theforce.features.settings.AboutActivity"
+        private const val CHARACTER_DETAIL_ACTIVITY_COMPONENT =
+            "com.k0d4black.theforce.features.character_details.CharacterDetailActivity"
     }
 
 }

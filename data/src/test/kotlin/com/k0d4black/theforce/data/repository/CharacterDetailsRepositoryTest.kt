@@ -28,8 +28,8 @@ internal class CharacterDetailsRepositoryTest : BaseTest() {
             val speciesFlow = characterDetailsRepository.getCharacterSpecies(EXISTING_CHARACTER_URL)
             val planetFlow = characterDetailsRepository.getCharacterPlanet(EXISTING_CHARACTER_URL)
 
-            filmsFlow.collect { film ->
-                Truth.assertThat(film.title).isEqualTo("A New Hope")
+            filmsFlow.collect { films ->
+                Truth.assertThat(films.size).isAtLeast(1)
             }
             planetFlow.collect { planet ->
                 Truth.assertThat(planet.name).matches("Tatooine")
