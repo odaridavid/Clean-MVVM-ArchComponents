@@ -35,17 +35,6 @@
                     layout="@layout/layout_character_detail_specie" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
-                android:id="@+id/loading_error_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_default"
-                android:drawableTop="@drawable/ic_error_24dp"
-                android:text="@string/error_character_details"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:visibility="gone" />
         </LinearLayout>
 
     </ScrollView>

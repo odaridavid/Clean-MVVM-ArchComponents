@@ -11,7 +11,6 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Set Intent Data to be part of the view state
 class CharacterDetailActivity : AppCompatActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -79,8 +78,9 @@ class CharacterDetailActivity : AppCompatActivity() {
     private fun renderOnError(it: CharacterDetailsViewState) {
         it.error?.let { e ->
             displayErrorState(e.message)
-        } ?: binding.loadingErrorTextView.hide()
+        }
     }
+
 
     private fun renderFilms(it: CharacterDetailsViewState) {
         it.films?.let { films ->
@@ -105,7 +105,12 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     private fun displayErrorState(message: String) {
-        binding.loadingErrorTextView.show()
+        binding.filmsLayout.filmsProgressBar.hide()
+        binding.planetLayout.planetProgressBar.hide()
+        binding.specieLayout.speciesProgressBar.hide()
+        binding.filmsLayout.filmsErrorTextView.show()
+        binding.planetLayout.planetErrorTextView.show()
+        binding.specieLayout.specieErrorTextView.show()
         showSnackbar(character_details_layout, message, isError = true)
     }
 
@@ -113,6 +118,12 @@ class CharacterDetailActivity : AppCompatActivity() {
         onNetworkChange { isConnected ->
             characterDetailViewModel.detailViewState.value?.let { viewState ->
                 if (isConnected && viewState.error != null) {
+                    binding.filmsLayout.filmsErrorTextView.remove()
+                    binding.planetLayout.planetErrorTextView.remove()
+                    binding.specieLayout.specieErrorTextView.remove()
+                    binding.filmsLayout.filmsProgressBar.show()
+                    binding.planetLayout.planetProgressBar.show()
+                    binding.specieLayout.speciesProgressBar.show()
                     characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
                 }
             }

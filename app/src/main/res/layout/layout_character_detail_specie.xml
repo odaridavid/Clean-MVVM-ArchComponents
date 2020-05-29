@@ -24,9 +24,9 @@
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_specie"
             android:drawablePadding="@dimen/drawable_padding"
-            app:drawableTint="@color/colorSecondaryVariant"
             android:text="@string/title_species"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/planet_card_container" />
 
@@ -59,9 +59,9 @@
                     android:id="@+id/no_species_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="invisible"
                     android:text="@string/info_specie_information_unavailable"
                     android:textAlignment="center"
+                    android:visibility="invisible"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ProgressBar
@@ -69,10 +69,25 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/specie_error_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:drawableTop="@drawable/ic_error_24dp"
+                    android:text="Error Loading Specie"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </merge>
