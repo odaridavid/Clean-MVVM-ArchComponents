@@ -30,9 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:text="@string/title_birth_year"
             android:drawableStart="@drawable/ic_birth"
             android:drawablePadding="8dp"
+            android:text="@string/title_birth_year"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,9 +53,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:text="@string/title_height"
-            android:drawablePadding="8dp"
             android:drawableStart="@drawable/ic_height"
+            android:drawablePadding="8dp"
+            android:text="@string/title_height"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,14 +81,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
             tools:text="123 cm" />
-
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/character_details_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="character_details_birth_year_title_text_view,character_details_birth_year_text_view,character_details_height_title_text_view,character_details_height_in_cm_text_view,character_details_height_in_inches_text_view" />
-
     </merge>
 </layout>

@@ -36,13 +36,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ProgressBar
-                android:id="@+id/loading_character_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_default" />
-
             <TextView
                 android:id="@+id/loading_error_text_view"
                 android:layout_width="match_parent"

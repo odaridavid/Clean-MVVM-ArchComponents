@@ -19,6 +19,10 @@ fun View.hide() {
     this.visibility = View.INVISIBLE
 }
 
+fun View.remove(){
+    this.visibility = View.GONE
+}
+
 fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
     val sb = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
     if (isError)
