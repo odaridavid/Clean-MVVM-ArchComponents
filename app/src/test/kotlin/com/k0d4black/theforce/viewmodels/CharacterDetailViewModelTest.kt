@@ -32,7 +32,6 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
             characterDetailViewModel.getCharacterDetails(characterUrl)
             characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
                 Truth.assertThat(detailViewState.error).isNull()
-                Truth.assertThat(detailViewState.isLoading).isFalse()
                 Truth.assertThat(detailViewState.films).isNotEmpty()
                 Truth.assertThat(detailViewState.planet).isNotNull()
                 Truth.assertThat(detailViewState.specie).isNotEmpty()
@@ -49,7 +48,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
             characterDetailViewModel.getCharacterDetails(characterUrl)
             characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
                 Truth.assertThat(detailViewState.error).isNotNull()
-                Truth.assertThat(detailViewState.isLoading).isFalse()
+
             }
         }
     }

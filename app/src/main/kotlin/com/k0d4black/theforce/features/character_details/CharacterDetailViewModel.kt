@@ -30,14 +30,12 @@ internal class CharacterDetailViewModel(
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
-        _detailViewState.value =
-            _detailViewState.value?.copy(error = Error(message), isLoading = false)
+        _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
     init {
         _detailViewState.value =
             CharacterDetailsViewState(
-                isLoading = true,
                 isComplete = false,
                 error = null,
                 planet = null,
@@ -48,7 +46,7 @@ internal class CharacterDetailViewModel(
 
     fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
         if (isRetry) {
-            _detailViewState.value = _detailViewState.value?.copy(error = null, isLoading = true)
+            _detailViewState.value = _detailViewState.value?.copy(error = null)
         }
         viewModelScope.launch(characterDetailExceptionHandler) {
             val planetRequest = async { loadPlanet(characterUrl) }
@@ -57,8 +55,7 @@ internal class CharacterDetailViewModel(
             planetRequest.await()
             filmsRequest.await()
             speciesRequest.await()
-            _detailViewState.value =
-                _detailViewState.value?.copy(isLoading = false, isComplete = true)
+            _detailViewState.value = _detailViewState.value?.copy(isComplete = true)
 
         }
     }
@@ -86,14 +83,13 @@ internal class CharacterDetailViewModel(
 
     fun displayCharacterError(message: String) {
         _detailViewState.value =
-            _detailViewState.value?.copy(error = Error(message), isLoading = false)
+            _detailViewState.value?.copy(error = Error(message))
     }
 }
 
 internal sealed class DetailViewState
 internal data class Error(val message: String) : DetailViewState()
 internal data class CharacterDetailsViewState(
-    val isLoading: Boolean,
     val isComplete: Boolean,
     val error: Error?,
     val planet: PlanetPresentation?,

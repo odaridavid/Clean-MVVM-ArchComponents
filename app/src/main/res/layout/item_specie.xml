@@ -11,13 +11,14 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/species_name_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_species_name,species.name)}"
             tools:text="Species Name" />
 
@@ -25,6 +26,8 @@
             android:id="@+id/species_language_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="15sp"
             android:text="@{String.format(@string/template_species_language,species.language)}"
             tools:text="Language" />
 

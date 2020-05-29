@@ -1,9 +1,7 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
-import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.Group
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
@@ -13,7 +11,6 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Set Intent Data to be part of the view state
 class CharacterDetailActivity : AppCompatActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -49,8 +46,6 @@ class CharacterDetailActivity : AppCompatActivity() {
 
             renderPlanetDetails(it)
 
-            renderOnLoading(it)
-
             renderOnError(it)
 
             renderOnComplete(it)
@@ -60,7 +55,6 @@ class CharacterDetailActivity : AppCompatActivity() {
     private fun renderCharacterInfo(character: CharacterPresentation) {
         supportActionBar?.title = character.name
         binding.infoLayout.character = character
-        enableGroup(R.id.character_details_group)
     }
 
     private fun renderOnComplete(it: CharacterDetailsViewState) {
@@ -70,63 +64,66 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderSpecies(it: CharacterDetailsViewState) {
         it.specie?.let { species ->
-            binding.specieLayout.characterDetailsSpeciesRecyclerView.apply {
-                adapter = speciesAdapter.apply { submitList(species) }
-                initRecyclerViewWithLineDecoration(this@CharacterDetailActivity)
+            with(binding.specieLayout) {
+                speciesProgressBar.remove()
+                if (species.isNotEmpty()) {
+                    characterDetailsSpeciesRecyclerView.apply {
+                        adapter = speciesAdapter.apply { submitList(species) }
+                    }
+                } else noSpeciesTextView.show()
             }
-            enableGroup(R.id.character_species_group)
         }
     }
 
     private fun renderOnError(it: CharacterDetailsViewState) {
         it.error?.let { e ->
             displayErrorState(e.message)
-        } ?: binding.loadingErrorTextView.hide()
+        }
     }
+
 
     private fun renderFilms(it: CharacterDetailsViewState) {
         it.films?.let { films ->
-            binding.filmsLayout.characterDetailsFilmsRecyclerView.apply {
-                adapter = filmsAdapter.apply { submitList(films) }
-                layoutManager = provideHorizontalLayoutManager()
+            with(binding.filmsLayout) {
+                filmsProgressBar.remove()
+                characterDetailsFilmsRecyclerView.apply {
+                    adapter = filmsAdapter.apply { submitList(films) }
+                }
             }
-            enableGroup(R.id.character_film_group)
         }
     }
 
     private fun renderPlanetDetails(it: CharacterDetailsViewState) {
         it.planet?.let { planet ->
-            binding.planetLayout.planet = planet
-            enableGroup(R.id.character_planet_group)
+            with(binding.planetLayout) {
+                planetProgressBar.remove()
+                this.planet = planet
+                characterDetailsPlanetNameTextView.show()
+                characterDetailsPlanetPopulationTextView.show()
+            }
         }
     }
 
-    private fun renderOnLoading(it: CharacterDetailsViewState) {
-        if (it.isLoading)
-            binding.loadingCharacterProgressBar.show()
-        else
-            binding.loadingCharacterProgressBar.hide()
-    }
-
-
     private fun displayErrorState(message: String) {
-        binding.loadingErrorTextView.show()
+        binding.filmsLayout.filmsProgressBar.hide()
+        binding.planetLayout.planetProgressBar.hide()
+        binding.specieLayout.speciesProgressBar.hide()
+        binding.filmsLayout.filmsErrorTextView.show()
+        binding.planetLayout.planetErrorTextView.show()
+        binding.specieLayout.specieErrorTextView.show()
         showSnackbar(character_details_layout, message, isError = true)
-    }
-
-    private fun enableGroup(@IdRes groupId: Int) {
-        findViewById<Group>(groupId)
-            .animate()
-            .alpha(1f)
-            .setListener(AnimatorListener(onEnd = {
-                findViewById<Group>(groupId).show()
-            }))
     }
 
     private fun observeNetworkChanges(characterUrl: String) {
         onNetworkChange { isConnected ->
             characterDetailViewModel.detailViewState.value?.let { viewState ->
                 if (isConnected && viewState.error != null) {
+                    binding.filmsLayout.filmsErrorTextView.remove()
+                    binding.planetLayout.planetErrorTextView.remove()
+                    binding.specieLayout.specieErrorTextView.remove()
+                    binding.filmsLayout.filmsProgressBar.show()
+                    binding.planetLayout.planetProgressBar.show()
+                    binding.specieLayout.speciesProgressBar.show()
                     characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
                 }
             }

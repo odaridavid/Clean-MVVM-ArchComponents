@@ -19,6 +19,10 @@ fun View.hide() {
     this.visibility = View.INVISIBLE
 }
 
+fun View.remove(){
+    this.visibility = View.GONE
+}
+
 fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
     val sb = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
     if (isError)
@@ -34,17 +38,12 @@ fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false)
 
 fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     val linearLayoutManager = LinearLayoutManager(context)
-    val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation).apply{
+    val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation).apply {
         setDrawable(context.getDrawable(R.drawable.view_divider)!!)
     }
     layoutManager = linearLayoutManager
     addItemDecoration(itemDecoration)
 }
-
-fun Context.provideHorizontalLayoutManager(): LinearLayoutManager {
-    return LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-}
-
 
 fun Context.loadColor(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
