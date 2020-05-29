@@ -2,7 +2,7 @@
 <img src="art/app_icon_no_bg.png" alt="home" width="100"/>
 </p>
 <p align="center">
-<img  src="https://travis-ci.com/odaridavid/Clean-MVVM-ArchComponents-.svg?branch=develop">&nbsp;
+<img  src="https://travis-ci.com/odaridavid/Clean-MVVM-ArchComponents.svg?branch=develop">&nbsp;
 <a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
   <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
 </a>&nbsp;
@@ -36,6 +36,7 @@ package-name: com.k0d4black.theforce
 - [Libraries](#libraries)
 - [Contributors](#contributors)
 - [Extras](#extras)
+- [Related Posts](#related-posts)
 - [Demo](#demo)
 
 ## Architecture
@@ -253,7 +254,7 @@ enhance user experience.
 
 ## Demo
 
-<img src="art/force_demo.gif" width=200/>
+<img src="art/tf.gif" width=200/>
 
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
