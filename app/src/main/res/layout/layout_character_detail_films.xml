@@ -23,9 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_film"
-            android:drawablePadding="8dp"
+            android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_films"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specie_card_container" />
 

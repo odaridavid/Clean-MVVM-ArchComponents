@@ -4,4 +4,5 @@
     <dimen name="padding_default">16dp</dimen>
     <dimen name="cardview_elevation">4dp</dimen>
     <dimen name="cardview_radius">4dp</dimen>
+    <dimen name="drawable_padding">8dp</dimen>
 </resources>
