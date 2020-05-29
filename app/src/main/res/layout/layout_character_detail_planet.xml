@@ -31,6 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/title_planet"
+            android:drawableStart="@drawable/ic_planet"
+            android:drawablePadding="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />

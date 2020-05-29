@@ -31,6 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/title_birth_year"
+            android:drawableStart="@drawable/ic_birth"
+            android:drawablePadding="8dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:text="@string/title_height"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_height"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -22,6 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
+            android:drawableStart="@drawable/ic_specie"
+            android:drawablePadding="8dp"
             android:text="@string/title_species"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            app:cardElevation="@dimen/cardview_elevation"
             app:cardCornerRadius="0dp"
+            app:cardElevation="@dimen/cardview_elevation"
             app:layout_constraintTop_toBottomOf="@id/character_details_species_title_text_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
