@@ -264,6 +264,10 @@ Google Play and the Google Play logo are trademarks of Google LLC.
 
 Star Wars and all associated names are copyright Lucasfilm ltd.
 
+## Related Posts
+
+[Handling Dynamic Urls](https://davidodari.hashnode.dev/retrofit-handling-dynamic-urls-ck9zygtw700x0ans1tm5spma4)
+
 ## License
 
  ```
