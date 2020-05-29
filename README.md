@@ -32,7 +32,6 @@ package-name: com.k0d4black.theforce
 
 - [Architecture](#architecture)
 - [Testing](#testing)
-- [App Flow](#app-flow)
 - [Libraries](#libraries)
 - [Contributors](#contributors)
 - [Extras](#extras)
@@ -143,29 +142,6 @@ data from the real server aspects such as internet connection or
 network service might bring up issues.
 
 View models testing on live data were guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
-
-## App Flow
- 
- **Search Screen**
- 
- The Search screen contains a default text view that will hint user on 
- how to search and on search they will be presented with a list of characters.
- The characters on the search result only contain a name ,birth year and url 
- that will be used to load more content if need be,this saves on loading time 
- and results in a faster search experience.
- 
- The list results are bound by a recycler view and 
- each List item contains a button when on clicked navigates to 
- `CharacterDetailsActivity` screen with an Intent Extra of character url.
- 
- **Details Screen**
- 
- The details Screen displays character information after viewmodel receives 
- data from the usecase.The data is bound to the UI through Data binding.
- 
- The views displaying character data are logically  grouped by 
- constraint layout Group widget making it simpler to enable and disable 
- a large set of views.
  
 ## Libraries
 
