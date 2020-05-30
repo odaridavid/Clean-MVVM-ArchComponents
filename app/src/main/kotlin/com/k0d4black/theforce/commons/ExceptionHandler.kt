@@ -13,19 +13,24 @@
  **/
 package com.k0d4black.theforce.commons
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
+import androidx.annotation.StringRes
 import com.k0d4black.theforce.R
 import java.net.UnknownHostException
 
 object ExceptionHandler {
 
-    fun parse(app: Application, t: Throwable): String {
+    @SuppressLint("SupportAnnotationUsage")
+    @StringRes
+    fun parse(t: Throwable): Int {
         return when (t) {
             is UnknownHostException -> {
-                app.resources.getString(R.string.exception_check_internet_connection)
+                R.string.exception_check_internet_connection
             }
             else -> {
-                app.resources.getString(R.string.exception_an_error_occurred)
+                R.string.exception_an_error_occurred
             }
         }
     }

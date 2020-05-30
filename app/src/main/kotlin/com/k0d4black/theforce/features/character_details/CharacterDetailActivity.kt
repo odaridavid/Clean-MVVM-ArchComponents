@@ -33,7 +33,7 @@ class CharacterDetailActivity : AppCompatActivity() {
             renderCharacterInfo(characterInfo)
             observeNetworkChanges(characterInfo.url)
         } ?: characterDetailViewModel
-            .displayCharacterError(getString(R.string.error_character_details))
+            .displayCharacterError(R.string.error_character_details)
 
         observeDetailViewState()
     }
@@ -77,7 +77,7 @@ class CharacterDetailActivity : AppCompatActivity() {
 
     private fun renderOnError(it: CharacterDetailsViewState) {
         it.error?.let { e ->
-            displayErrorState(e.message)
+            displayErrorState(resources.getString(e.message))
         }
     }
 

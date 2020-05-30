@@ -47,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
                     )
                     renderSearchResults(it.searchResults)
                 }
-                is Error -> displayErrorState(it.message)
+                is Error -> displayErrorState(resources.getString(it.message))
                 is Loading -> displayLoadingState()
             }
         })

@@ -1,6 +1,6 @@
 package com.k0d4black.theforce.features.character_details
 
-import android.app.Application
+import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.FilmsUseCase
@@ -16,23 +16,18 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class CharacterDetailViewModel(
-    application: Application,
     private val getSpeciesUseCase: SpeciesUseCase,
     private val getPlanetUseCase: PlanetUseCase,
     private val getFilmsUseCase: FilmsUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     val detailViewState: LiveData<CharacterDetailsViewState>
         get() = _detailViewState
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
-    val app by lazy {
-        application
-    }
-
-    private val characterDetailExceptionHandler = CoroutineExceptionHandler { context, exception ->
-        val message = ExceptionHandler.parse(app, exception)
+    private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
@@ -84,14 +79,14 @@ internal class CharacterDetailViewModel(
         }
     }
 
-    fun displayCharacterError(message: String) {
+    fun displayCharacterError(message: Int) {
         _detailViewState.value =
             _detailViewState.value?.copy(error = Error(message))
     }
 }
 
 internal sealed class DetailViewState
-internal data class Error(val message: String) : DetailViewState()
+internal data class Error(@StringRes val message: Int) : DetailViewState()
 internal data class CharacterDetailsViewState(
     val isComplete: Boolean,
     val error: Error?,

@@ -1,6 +1,6 @@
 package com.k0d4black.theforce.features.character_search
 
-import android.app.Application
+import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchUseCase
@@ -11,21 +11,16 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class CharacterSearchViewModel(
-    application: Application,
     private val searchCharactersUseCase: SearchUseCase
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     val searchViewState: LiveData<SearchViewState>
         get() = _searchViewState
 
     private var _searchViewState = MutableLiveData<SearchViewState>()
 
-    val app by lazy {
-        application
-    }
-
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(app, exception)
+        val message = ExceptionHandler.parse(exception)
         _searchViewState.value = Error(message)
     }
 
@@ -43,7 +38,7 @@ internal class CharacterSearchViewModel(
 }
 
 internal sealed class SearchViewState
-internal class Error(val message: String) : SearchViewState()
+internal class Error(@StringRes val message: Int) : SearchViewState()
 internal object Loading : SearchViewState()
 internal class SearchResultLoaded(
     val searchResults: List<CharacterPresentation>
