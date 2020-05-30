@@ -1,9 +1,7 @@
 package com.k0d4black.theforce.features.character_details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.Application
+import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.FilmsUseCase
 import com.k0d4black.theforce.domain.usecases.PlanetUseCase
@@ -18,18 +16,23 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class CharacterDetailViewModel(
+    application: Application,
     private val getSpeciesUseCase: SpeciesUseCase,
     private val getPlanetUseCase: PlanetUseCase,
     private val getFilmsUseCase: FilmsUseCase
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
     val detailViewState: LiveData<CharacterDetailsViewState>
         get() = _detailViewState
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
-    private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(exception)
+    val app by lazy {
+        application
+    }
+
+    private val characterDetailExceptionHandler = CoroutineExceptionHandler { context, exception ->
+        val message = ExceptionHandler.parse(app, exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 

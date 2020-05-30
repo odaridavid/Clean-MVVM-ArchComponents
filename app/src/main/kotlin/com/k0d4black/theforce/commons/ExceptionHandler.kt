@@ -13,14 +13,20 @@
  **/
 package com.k0d4black.theforce.commons
 
+import android.app.Application
+import com.k0d4black.theforce.R
 import java.net.UnknownHostException
 
 object ExceptionHandler {
-     //TODO Load strings from resources for easier localization.
-    fun parse(t: Throwable): String {
+
+    fun parse(app: Application, t: Throwable): String {
         return when (t) {
-            is UnknownHostException -> "Check Internet Connection"
-            else -> "Oops!! An Error Occured"
+            is UnknownHostException -> {
+                app.resources.getString(R.string.exception_check_internet_connection)
+            }
+            else -> {
+                app.resources.getString(R.string.exception_an_error_occurred)
+            }
         }
     }
 
