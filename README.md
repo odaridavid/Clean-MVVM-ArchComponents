@@ -6,7 +6,7 @@
 <a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
   <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
 </a>&nbsp;
-<a href="https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Davidodari/The-Force-Clean-MVVM-ArchComponents-&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/4347e606b8f64d568aba90e00655a9f4"/></a>
+<a href="https://www.codacy.com/manual/Davidodari/Clean-MVVM-ArchComponents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=odaridavid/Clean-MVVM-ArchComponents&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/aff63473b3e7420f9c23ffb4a64b19ed"/></a>
 </p>
 
 # The-Force
