@@ -13,8 +13,7 @@ class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
-        val context = parent.context
-        val inflater = LayoutInflater.from(context)
+        val inflater = LayoutInflater.from(parent.context)
         return FilmViewHolder(ItemFilmBinding.inflate(inflater))
     }
 
