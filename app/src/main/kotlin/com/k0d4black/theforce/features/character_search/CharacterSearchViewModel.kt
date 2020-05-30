@@ -1,9 +1,7 @@
 package com.k0d4black.theforce.features.character_search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.annotation.StringRes
+import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchUseCase
 import com.k0d4black.theforce.mappers.toPresentation
@@ -40,7 +38,7 @@ internal class CharacterSearchViewModel(
 }
 
 internal sealed class SearchViewState
-internal class Error(val message: String) : SearchViewState()
+internal class Error(@StringRes val message: Int) : SearchViewState()
 internal object Loading : SearchViewState()
 internal class SearchResultLoaded(
     val searchResults: List<CharacterPresentation>

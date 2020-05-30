@@ -23,19 +23,22 @@ val networkModule = module {
 }
 
 private fun provideOkHttpClient(): OkHttpClient {
-    val httpLoggingInterceptor = HttpLoggingInterceptor()
-    httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+    val httpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
     return OkHttpClient.Builder()
         .connectTimeout(60L, TimeUnit.SECONDS)
         .readTimeout(60L, TimeUnit.SECONDS)
-        .addInterceptor(httpLoggingInterceptor).build()
+        .addInterceptor(httpLoggingInterceptor)
+        .build()
 }
 
 private fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
     return Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create()).build()
+        .addConverterFactory(MoshiConverterFactory.create())
+        .build()
 }
 
 private fun provideService(retrofit: Retrofit): StarWarsApiService =

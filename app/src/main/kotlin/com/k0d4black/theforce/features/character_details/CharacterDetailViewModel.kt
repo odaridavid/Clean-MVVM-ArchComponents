@@ -1,9 +1,7 @@
 package com.k0d4black.theforce.features.character_details
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.annotation.StringRes
+import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.FilmsUseCase
 import com.k0d4black.theforce.domain.usecases.PlanetUseCase
@@ -81,14 +79,14 @@ internal class CharacterDetailViewModel(
         }
     }
 
-    fun displayCharacterError(message: String) {
+    fun displayCharacterError(message: Int) {
         _detailViewState.value =
             _detailViewState.value?.copy(error = Error(message))
     }
 }
 
 internal sealed class DetailViewState
-internal data class Error(val message: String) : DetailViewState()
+internal data class Error(@StringRes val message: Int) : DetailViewState()
 internal data class CharacterDetailsViewState(
     val isComplete: Boolean,
     val error: Error?,

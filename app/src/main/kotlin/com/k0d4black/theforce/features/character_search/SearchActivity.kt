@@ -1,6 +1,5 @@
 package com.k0d4black.theforce.features.character_search
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -25,9 +24,9 @@ class SearchActivity : AppCompatActivity() {
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { character ->
-            Intent(this, CharacterDetailActivity::class.java).apply {
+            startActivity<CharacterDetailActivity> {
                 putExtra(CHARACTER_PARCEL_KEY, character)
-            }.also { startActivity(it) }
+            }
         }
     }
 
@@ -48,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
                     )
                     renderSearchResults(it.searchResults)
                 }
-                is Error -> displayErrorState(it.message)
+                is Error -> displayErrorState(resources.getString(it.message))
                 is Loading -> displayLoadingState()
             }
         })
@@ -127,8 +126,7 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.action_settings) {
-            val settingsIntent = Intent(this, SettingsActivity::class.java)
-            startActivity(settingsIntent)
+            startActivity<SettingsActivity>()
             true
         } else super.onOptionsItemSelected(item)
     }

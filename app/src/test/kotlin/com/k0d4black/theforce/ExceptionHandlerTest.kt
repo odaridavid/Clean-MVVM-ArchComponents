@@ -13,7 +13,6 @@
  **/
 package com.k0d4black.theforce
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.commons.ExceptionHandler
 import org.junit.Test
@@ -27,12 +26,12 @@ class ExceptionHandlerTest {
     @Test
     fun `given an exception when is instance of UnknownHostException then get No Internet Connection string `() {
         val message = ExceptionHandler.parse(UnknownHostException())
-        Truth.assertThat(message).contains("Check Internet Connection")
+        Truth.assertThat(message).isEqualTo(R.string.exception_check_internet_connection)
     }
 
     @Test
     fun `given an exception when is unknown instance then get default string`() {
         val message = ExceptionHandler.parse(Exception())
-        Truth.assertThat(message).contains("Oops!! An Error Occured")
+        Truth.assertThat(message).isEqualTo(R.string.exception_an_error_occurred)
     }
 }
