@@ -112,12 +112,12 @@ domain will be mapped to the presentation model.
 
 Testing has been done based on the architectural layers.
 
-1. Domain
+1.Domain
 
 Contains tests that encompass domain models and uses mockito to verify 
 use case behavior.
 
-2. Data
+2.Data
 
 Tests in the data inherit from a base test that provides a mock web server 
 with the api interface to request paths the routing of paths to responses 
@@ -130,7 +130,7 @@ and mappers to the domain models.
 Currently the data source tests serve as unit tests verifying the appropriate
 responses are received from remote source.
 
-3. Presentation
+3.Presentation
 
 The Presentation layer contains robolectric jvm tests on for menu items 
 and instrumentation tests checking on system behaviour as per user
@@ -230,7 +230,7 @@ enhance user experience.
 
 ## Demo
 
-<img src="art/tf.gif" width=200/>
+<img src="art/force_gif.gif" width=200/>
 
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
