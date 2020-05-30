@@ -32,7 +32,6 @@ package-name: com.k0d4black.theforce
 
 - [Architecture](#architecture)
 - [Testing](#testing)
-- [App Flow](#app-flow)
 - [Libraries](#libraries)
 - [Contributors](#contributors)
 - [Extras](#extras)
@@ -113,12 +112,12 @@ domain will be mapped to the presentation model.
 
 Testing has been done based on the architectural layers.
 
-1. Domain
+1.Domain
 
 Contains tests that encompass domain models and uses mockito to verify 
 use case behavior.
 
-2. Data
+2.Data
 
 Tests in the data inherit from a base test that provides a mock web server 
 with the api interface to request paths the routing of paths to responses 
@@ -131,7 +130,7 @@ and mappers to the domain models.
 Currently the data source tests serve as unit tests verifying the appropriate
 responses are received from remote source.
 
-3. Presentation
+3.Presentation
 
 The Presentation layer contains robolectric jvm tests on for menu items 
 and instrumentation tests checking on system behaviour as per user
@@ -143,29 +142,6 @@ data from the real server aspects such as internet connection or
 network service might bring up issues.
 
 View models testing on live data were guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
-
-## App Flow
- 
- **Search Screen**
- 
- The Search screen contains a default text view that will hint user on 
- how to search and on search they will be presented with a list of characters.
- The characters on the search result only contain a name ,birth year and url 
- that will be used to load more content if need be,this saves on loading time 
- and results in a faster search experience.
- 
- The list results are bound by a recycler view and 
- each List item contains a button when on clicked navigates to 
- `CharacterDetailsActivity` screen with an Intent Extra of character url.
- 
- **Details Screen**
- 
- The details Screen displays character information after viewmodel receives 
- data from the usecase.The data is bound to the UI through Data binding.
- 
- The views displaying character data are logically  grouped by 
- constraint layout Group widget making it simpler to enable and disable 
- a large set of views.
  
 ## Libraries
 
@@ -254,7 +230,7 @@ enhance user experience.
 
 ## Demo
 
-<img src="art/tf.gif" width=200/>
+<img src="art/force_gif.gif" width=200/>
 
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
