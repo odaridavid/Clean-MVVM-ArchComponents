@@ -46,7 +46,6 @@ android {
                     appIcon                : "@mipmap/ic_launcher",
                     appIconRound           : "@mipmap/ic_launcher_round"
             ]
-            signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix ".debug"

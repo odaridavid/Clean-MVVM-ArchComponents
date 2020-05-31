@@ -6,8 +6,8 @@ ext {
     buildToolsVersion = "29.0.2"
 
     //App Versioning
-    versionCodeMajor = 1
-    versionCodeMinor = 3
+    versionCodeMajor = 2
+    versionCodeMinor = 0
     versionCodePatch = 0
     versionName = "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
 
