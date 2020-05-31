@@ -1,5 +1,6 @@
 package com.k0d4black.theforce.features.character_search
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler

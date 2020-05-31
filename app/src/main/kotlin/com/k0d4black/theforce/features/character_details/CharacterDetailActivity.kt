@@ -118,16 +118,20 @@ class CharacterDetailActivity : AppCompatActivity() {
         onNetworkChange { isConnected ->
             characterDetailViewModel.detailViewState.value?.let { viewState ->
                 if (isConnected && viewState.error != null) {
-                    binding.filmsLayout.filmsErrorTextView.remove()
-                    binding.planetLayout.planetErrorTextView.remove()
-                    binding.specieLayout.specieErrorTextView.remove()
-                    binding.filmsLayout.filmsProgressBar.show()
-                    binding.planetLayout.planetProgressBar.show()
-                    binding.specieLayout.speciesProgressBar.show()
+                    resolveErrorViewState()
                     characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
                 }
             }
         }
+    }
+
+    private fun resolveErrorViewState() {
+        binding.filmsLayout.filmsErrorTextView.remove()
+        binding.planetLayout.planetErrorTextView.remove()
+        binding.specieLayout.specieErrorTextView.remove()
+        binding.filmsLayout.filmsProgressBar.show()
+        binding.planetLayout.planetProgressBar.show()
+        binding.specieLayout.speciesProgressBar.show()
     }
 
     private fun onNetworkChange(block: (Boolean) -> Unit) {

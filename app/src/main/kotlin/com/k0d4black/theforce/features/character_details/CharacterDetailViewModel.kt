@@ -1,7 +1,11 @@
 package com.k0d4black.theforce.features.character_details
 
+import android.util.Log
 import androidx.annotation.StringRes
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.FilmsUseCase
 import com.k0d4black.theforce.domain.usecases.PlanetUseCase
@@ -27,6 +31,7 @@ internal class CharacterDetailViewModel(
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        Log.d("Character Detail VM", "$exception")
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
@@ -47,14 +52,10 @@ internal class CharacterDetailViewModel(
             _detailViewState.value = _detailViewState.value?.copy(error = null)
         }
         viewModelScope.launch(characterDetailExceptionHandler) {
-            val planetRequest = async { loadPlanet(characterUrl) }
-            val filmsRequest = async { loadFilms(characterUrl) }
-            val speciesRequest = async { loadSpecies(characterUrl) }
-            planetRequest.await()
-            filmsRequest.await()
-            speciesRequest.await()
+            async { loadPlanet(characterUrl) }.await()
+            async { loadFilms(characterUrl) }.await()
+            async { loadSpecies(characterUrl) }.await()
             _detailViewState.value = _detailViewState.value?.copy(isComplete = true)
-
         }
     }
 

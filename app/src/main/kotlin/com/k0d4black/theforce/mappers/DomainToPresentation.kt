@@ -22,7 +22,7 @@ fun Character.toPresentation(): CharacterPresentation {
 }
 
 fun Planet.toPresentation(): PlanetPresentation {
-    val populationAsLong = if (this.population.contains("Unknown")) 0L else this.population.toLong()
+    val populationAsLong = if (this.population.contains("unknown")) 0L else this.population.toLong()
     return PlanetPresentation(this.name, populationAsLong)
 }
 
