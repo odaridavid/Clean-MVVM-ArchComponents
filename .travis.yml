@@ -2,27 +2,31 @@ language: android
 dist: trusty
 env:
   global:
-    - ANDROID_TARGET=android-22
-    - ANDROID_ABI=armeabi-v7a
+  - ANDROID_TARGET=android-22
+  - ANDROID_ABI=armeabi-v7a
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-29.0.2
-    - android-29
-    - extra
-    - $ANDROID_TARGET
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
+  - tools
+  - platform-tools
+  - build-tools-29.0.2
+  - android-29
+  - extra
+  - "$ANDROID_TARGET"
+  - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
   licenses:
-    - 'android-sdk-preview-license-52d11cd2'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
+  - android-sdk-preview-license-52d11cd2
+  - android-sdk-license-.+
+  - google-gdk-license-.+
+before_install:
+- openssl aes-256-cbc -K $encrypted_50477c21cd2c_key -iv $encrypted_50477c21cd2c_iv
+  -in secrets.tar.enc -out secrets.tar -d
+- tar xvf secrets.tar
 script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - ./gradlew connectedCheck
+- "./gradlew build jacocoTestReport assembleAndroidTest"
+- echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+- emulator -avd test -no-audio -no-window &
+- android-wait-for-emulator
+- adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+- "./gradlew connectedCheck"
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t aaf7e8f7-d198-4ac1-9370-e8d4e5840497
+- bash <(curl -s https://codecov.io/bash) -t aaf7e8f7-d198-4ac1-9370-e8d4e5840497

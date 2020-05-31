@@ -6,7 +6,7 @@
 <a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
   <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
 </a>&nbsp;
-<a href="https://www.codacy.com/manual/Davidodari/Clean-MVVM-ArchComponents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=odaridavid/Clean-MVVM-ArchComponents&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/aff63473b3e7420f9c23ffb4a64b19ed"/></a>
+<a href="https://codebeat.co/projects/github-com-odaridavid-clean-mvvm-archcomponents-develop"><img alt="codebeat badge" src="https://codebeat.co/badges/3032633f-5bec-413e-a5fa-b385fe7cc298" /></a>
 </p>
 
 # The-Force
@@ -19,24 +19,54 @@ Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/ab
 
 Build System : [Gradle](https://gradle.org/)
 
-## Prerequisite
-
-Before running the project create a [firebase project](https://firebase.google.com/) 
-and replace the **google-services.json** with yours in the `app` directory for a successful build and 
-enable crashylitics.
-```
-package-name: com.k0d4black.theforce
-```
-
 ## Table of Contents
 
+- [Prerequisite](#prerequisite)
 - [Architecture](#architecture)
 - [Testing](#testing)
 - [Libraries](#libraries)
 - [Contributors](#contributors)
-- [Extras](#extras)
 - [Related Posts](#related-posts)
 - [Demo](#demo)
+
+## Prerequisite
+
+Before running the project create a [firebase project](https://firebase.google.com/) 
+and replace the **google-services.json** with yours in the `app` directory for a successful build and 
+enable crashlytics.
+```
+package-name: com.k0d4black.theforce
+```
+
+To run the release build successfully in travis you will need to replace the default values in 
+```keystore.properties.sample```file with your own in a ```keystore.properties``` file.
+
+Next archive your keystore file and the properties file with the following command
+```shell script
+ tar cvf secrets.tar keystore.properties theforce.jks
+```
+
+Next encrypt the archive and add config to travis with the following command
+```shell script
+travis encrypt-file --pro secrets.tar --add
+```
+
+Verify that in your travis.yml in the ```before_install``` it looks something like
+```yaml
+before_install:
+  - openssl aes-256-cbc -K $encrypted_5880cf525281_key -iv $encrypted_5880cf525281_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
+```
+
+Make sure to add only the `*.enc` file to git,leave out the keystore.properties and `*.jks` file.
+Add the following to the root `.gitignore` just to be sure
+```gitignore
+*.jks
+*.tar
+keystore.properties
+```
+
+If you encounter any error check [this site](https://docs.travis-ci.com/user/encrypting-files/) out.
 
 ## Architecture
 
@@ -176,57 +206,6 @@ and default parameters
 - Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor and additional test cases.
 
 Feel free to contribute in any way to the project.
-
-## Extras
-
-#### Gradle Dependencies
-
-Centralized versioning of gradle dependencies in a global file,
-```dependencies.gradle```, visible to all available modules.This helps 
-maintain dependency versioning for different modules as well as improve
-dependency organisation and readability by providing a clear separation
-of which dependencies go where.
-
-#### CI-Pipeline
-
-[Travis CI](https://travis-ci.com/) is used for development pipeline to
-automatically build and test the project every time you push updates to 
-version control.
-
-#### Code Analysis
-
-With static code analysis you can enforce a consistent style guide on 
-the project.This is possible by defining constraints with Detekt.
-
-This Project is integrated with [Codacy](https://www.codacy.com/) that 
-makes use of Detekt for static code analysis on Kotlin files.You can
-either configure rules from their dashboard or enforce a Detekt 
-configuration locally and port it to codacy.
-
-The rules can be configured to be checked for each pull request,commit 
-or merge made.
-
-#### Resource Values
-
-**Fonts**
-
-The app makes use of downloadable fonts which reduces APK size compared to
-having the font files within the app.
-
-**Dimension & String Values**
-
-String values are stored in the strings value file this will make it 
-easier for app localization and internationalization as well as string
-templating currently utilised by data binding.
-
-Dimensions have also been stored in a dimensions value file making it 
-easy to reuse dimension values across the app.
-
-**Themes & Styles**
-
-Theming is guided by the material design specifications with a ```DayNight```
-theme which can later be used to provide Night variant for the app and 
-enhance user experience.
 
 ## Demo
 
