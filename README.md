@@ -48,7 +48,7 @@ Next archive your keystore file and the properties file with the following comma
 
 Next encrypt the archive and add config to travis with the following command
 ```shell script
-travis encrypt-file secrets.tar --add
+travis encrypt-file --pro secrets.tar --add
 ```
 
 Verify that in your travis.yml in the ```before_install``` it looks something like
