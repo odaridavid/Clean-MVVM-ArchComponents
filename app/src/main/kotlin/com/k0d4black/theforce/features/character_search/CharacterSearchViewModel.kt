@@ -1,5 +1,6 @@
 package com.k0d4black.theforce.features.character_search
 
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.*
 import com.k0d4black.theforce.commons.ExceptionHandler
@@ -20,6 +21,7 @@ internal class CharacterSearchViewModel(
     private var _searchViewState = MutableLiveData<SearchViewState>()
 
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        Log.d("Vm","$exception")
         val message = ExceptionHandler.parse(exception)
         _searchViewState.value = Error(message)
     }

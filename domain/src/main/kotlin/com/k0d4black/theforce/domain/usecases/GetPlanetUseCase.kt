@@ -2,6 +2,7 @@ package com.k0d4black.theforce.domain.usecases
 
 import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
+import com.k0d4black.theforce.domain.toHttps
 import kotlinx.coroutines.flow.Flow
 
 typealias PlanetUseCase = BaseUseCase<String, Flow<Planet>>
@@ -11,5 +12,5 @@ class GetPlanetUseCase(
 ) : PlanetUseCase {
 
     override suspend operator fun invoke(params: String) =
-        characterDetailsRepository.getCharacterPlanet(params)
+        characterDetailsRepository.getCharacterPlanet(params.toHttps())
 }
