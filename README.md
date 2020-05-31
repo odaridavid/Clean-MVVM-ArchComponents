@@ -19,6 +19,16 @@ Min Api Level : 21 [Supports Over 87% Devices ](https://developer.android.com/ab
 
 Build System : [Gradle](https://gradle.org/)
 
+## Table of Contents
+
+- [Prerequisite](#prerequisite)
+- [Architecture](#architecture)
+- [Testing](#testing)
+- [Libraries](#libraries)
+- [Contributors](#contributors)
+- [Related Posts](#related-posts)
+- [Demo](#demo)
+
 ## Prerequisite
 
 Before running the project create a [firebase project](https://firebase.google.com/) 
@@ -28,17 +38,34 @@ enable crashylitics.
 package-name: com.k0d4black.theforce
 ```
 
-To run the release build you will need to replace the default values in ```keystore.properties```
-file with your own.
+To run the release build successfully in travis you will need to replace the default values in 
+```keystore.properties```file with your own.
 
-## Table of Contents
+Next archive your keystore file and the properties file with the folloing command
+```shell script
+ tar cvf secrets.tar keystore.properties theforce.jks
+```
 
-- [Architecture](#architecture)
-- [Testing](#testing)
-- [Libraries](#libraries)
-- [Contributors](#contributors)
-- [Related Posts](#related-posts)
-- [Demo](#demo)
+Next encrypt the archive and add config to travis with the following command
+```shell script
+travis encrypt-file secrets.tar --add
+```
+Verify that in your travis.yml in the ```before_install``` it looks something like
+```yaml
+before_install:
+  - openssl aes-256-cbc -K $encrypted_5880cf525281_key -iv $encrypted_5880cf525281_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
+```
+
+Make sure to add only the `*.enc` file to git,leave out the keystore.properties and `*.jks` file.
+Add the following to the root `.gitignore` just to be sure
+```gitignore
+*.jks
+*.tar
+keystore.properties
+```
+
+If you encounter any error check [this site](https://docs.travis-ci.com/user/encrypting-files/) out
 
 ## Architecture
 
