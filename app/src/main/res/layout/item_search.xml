@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="searchedCharacter"
             type="com.k0d4black.theforce.models.CharacterPresentation" />
@@ -15,13 +16,24 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_default">
 
+        <ImageView
+            android:id="@+id/character_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_character"
+            android:padding="@dimen/drawable_padding"
+            android:tint="@color/colorOnBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/character_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{searchedCharacter.name}'
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/character_image_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Darth Vader" />
 
@@ -32,7 +44,7 @@
             android:fontFamily="@font/roboto_light"
             android:text='@{searchedCharacter.birthYear}'
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/character_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/character_name_text_view"
             tools:text="BBY 14" />
 
@@ -43,10 +55,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@android:color/background_light"
             android:contentDescription="@string/content_description_more_info_arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_arrow_right_black_32dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_arrow_right_black_32dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
