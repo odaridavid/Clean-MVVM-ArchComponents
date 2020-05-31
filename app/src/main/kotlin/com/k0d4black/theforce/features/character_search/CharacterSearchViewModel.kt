@@ -21,7 +21,6 @@ internal class CharacterSearchViewModel(
     private var _searchViewState = MutableLiveData<SearchViewState>()
 
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        Log.d("Vm","$exception")
         val message = ExceptionHandler.parse(exception)
         _searchViewState.value = Error(message)
     }

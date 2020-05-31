@@ -26,15 +26,6 @@ jacocoAndroidUnitTestReport {
 
 android {
 
-    signingConfigs {
-        release {
-            keyAlias "theforcekey"
-            keyPassword "theforce2020"
-            storeFile file("../theforce.jks")
-            storePassword "theforce2020"
-        }
-    }
-
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
