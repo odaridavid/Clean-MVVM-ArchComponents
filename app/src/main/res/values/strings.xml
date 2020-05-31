@@ -28,7 +28,7 @@
 
     <!-- Data Binding String Templates -->
     <string name="template_planet_name">Name : %s</string>
-    <string name="template_planet_population">Population : %s</string>
+    <string name="template_planet_population">Population : %,d</string>
     <string name="template_species_name">Name : %s</string>
     <string name="template_height_cm">%s cm</string>
     <string name="template_height_inches">%s inches</string>
