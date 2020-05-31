@@ -10,7 +10,7 @@ internal class SearchQueryListener(private val viewModel: CharacterSearchViewMod
 
     private var searchJob: Job? = null
 
-    private var debouncePeriod = 400L
+    private var debouncePeriod = 500L
 
     override fun onQueryTextSubmit(query: String?): Boolean = false
 
@@ -20,7 +20,7 @@ internal class SearchQueryListener(private val viewModel: CharacterSearchViewMod
         searchJob = coroutineScope.launch {
             newText?.let {
                 delay(debouncePeriod)
-                if (it.isNotBlank())
+                if (it.isNotBlank() && it.length > 2)
                     viewModel.executeCharacterSearch(it)
             }
         }

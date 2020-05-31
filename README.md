@@ -209,7 +209,8 @@ Feel free to contribute in any way to the project.
 
 ## Demo
 
-<img src="art/force_gif.gif" width=200/>
+|<img src="art/s1.png" width=200/>|<img src="art/s2.png" width=200/>|
+|:----:|:----:|
 
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
