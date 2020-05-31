@@ -1,5 +1,5 @@
 <p align="center">
-<img src="art/app_icon_no_bg.png" alt="home" width="100"/>
+<img src="art/app_icon.png" alt="home" width="100"/>
 </p>
 <p align="center">
 <img  src="https://travis-ci.com/odaridavid/Clean-MVVM-ArchComponents.svg?branch=develop">&nbsp;
