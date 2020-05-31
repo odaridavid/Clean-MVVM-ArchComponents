@@ -6,7 +6,7 @@
 <a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
   <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
 </a>&nbsp;
-<a href="https://www.codacy.com/manual/Davidodari/Clean-MVVM-ArchComponents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=odaridavid/Clean-MVVM-ArchComponents&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/aff63473b3e7420f9c23ffb4a64b19ed"/></a>
+<a href="https://www.codacy.com/manual/Davidodari/Clean-MVVM-ArchComponents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=odaridavid/Clean-MVVM-ArchComponents&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/2163c31c4196409da806c5bfaf22c005"/></a>
 </p>
 
 # The-Force
@@ -27,6 +27,9 @@ enable crashylitics.
 ```
 package-name: com.k0d4black.theforce
 ```
+
+To run the release build you will need to replace the default values in ```keystore.properties```
+file with your own.
 
 ## Table of Contents
 

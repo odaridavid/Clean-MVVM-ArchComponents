@@ -24,10 +24,23 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
@@ -38,6 +51,7 @@ android {
         testInstrumentationRunner "com.k0d4black.theforce.runner.MockTestRunner"
     }
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -46,7 +60,9 @@ android {
                     appIcon                : "@mipmap/ic_launcher",
                     appIconRound           : "@mipmap/ic_launcher_round"
             ]
+            signingConfig signingConfigs.release
         }
+
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
