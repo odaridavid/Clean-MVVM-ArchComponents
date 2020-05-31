@@ -33,15 +33,15 @@ Build System : [Gradle](https://gradle.org/)
 
 Before running the project create a [firebase project](https://firebase.google.com/) 
 and replace the **google-services.json** with yours in the `app` directory for a successful build and 
-enable crashylitics.
+enable crashlytics.
 ```
 package-name: com.k0d4black.theforce
 ```
 
 To run the release build successfully in travis you will need to replace the default values in 
-```keystore.properties```file with your own.
+```keystore.properties.sample```file with your own in a ```keystore.properties``` file.
 
-Next archive your keystore file and the properties file with the folloing command
+Next archive your keystore file and the properties file with the following command
 ```shell script
  tar cvf secrets.tar keystore.properties theforce.jks
 ```
@@ -50,6 +50,7 @@ Next encrypt the archive and add config to travis with the following command
 ```shell script
 travis encrypt-file secrets.tar --add
 ```
+
 Verify that in your travis.yml in the ```before_install``` it looks something like
 ```yaml
 before_install:
@@ -65,7 +66,7 @@ Add the following to the root `.gitignore` just to be sure
 keystore.properties
 ```
 
-If you encounter any error check [this site](https://docs.travis-ci.com/user/encrypting-files/) out
+If you encounter any error check [this site](https://docs.travis-ci.com/user/encrypting-files/) out.
 
 ## Architecture
 
