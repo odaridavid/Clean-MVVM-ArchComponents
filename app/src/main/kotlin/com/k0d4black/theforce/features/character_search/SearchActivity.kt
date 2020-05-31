@@ -3,10 +3,10 @@ package com.k0d4black.theforce.features.character_search
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivitySearchBinding
@@ -16,7 +16,7 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity() {
 
     private val characterSearchViewModel by viewModel<CharacterSearchViewModel>()
 

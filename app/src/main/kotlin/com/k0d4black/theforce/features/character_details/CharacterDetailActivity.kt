@@ -1,9 +1,9 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
@@ -11,7 +11,7 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterDetailActivity : AppCompatActivity() {
+class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
 
