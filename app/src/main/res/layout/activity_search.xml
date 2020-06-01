@@ -3,26 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_results_layout"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/dashboard_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutDescription="@xml/search_motion_scene"
         tools:context=".features.character_search.SearchActivity"
         tools:menu="@menu/main_menu">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
         <TextView
-            android:id="@+id/search_tip_text_view"
-            style="@style/TextViewInfo"
+            android:id="@+id/search_tagline_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/explore_starwars_characters"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:drawableTop="@drawable/ic_search_black_48dp"
-            android:text="@string/info_search_tip"
-            app:drawableTint="@color/colorSecondary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/search_view_background"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:focusable="true"
+            android:hint="@string/hint_character_name"
+            android:inputType="text"
+            android:padding="@dimen/padding_default" />
 
         <ProgressBar
             android:id="@+id/loading_search_results_progress_bar"
@@ -34,29 +48,49 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/favorites_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_favorite_on"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:text="@string/title_favorites"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:drawableTint="@color/colorSecondaryVariant" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favorites_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_default"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/favorites_title_text_view"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_favorite" />
+
+        <TextView
+            android:id="@+id/no_favorites_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_no_favs_96dp"
+            android:drawablePadding="@dimen/drawable_padding"
+            android:text="@string/info_no_favorite_characters"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:drawableTint="@color/colorSecondaryVariant" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_results_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_edit_text"
             tools:itemCount="2"
             tools:listitem="@layout/item_search" />
 
-        <TextView
-            android:id="@+id/no_results_text_view"
-            style="@style/TextViewInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:text="@string/info_no_matching_results"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
