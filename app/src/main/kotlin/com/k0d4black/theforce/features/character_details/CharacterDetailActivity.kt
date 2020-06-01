@@ -3,14 +3,21 @@ package com.k0d4black.theforce.features.character_details
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//TODO Show on search success
+//TODO Show on search error
+//TODO Show Search Loading
+//TODO Show on search empty
+//TODO Add favs icon to details toolbar
+//TODO Hide favorites recycler on close
+// TODO
 class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -25,6 +32,10 @@ class CharacterDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
+
+        setSupportActionBar(binding.detailsToolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val character = intent.getParcelableExtra<CharacterPresentation>(CHARACTER_PARCEL_KEY)
 
