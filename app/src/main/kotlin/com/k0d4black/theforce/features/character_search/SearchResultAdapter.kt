@@ -10,7 +10,7 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.item_search.view.*
 
 
-class SearchResultAdapter(val onClick: (CharacterPresentation) -> Unit) :
+internal class SearchResultAdapter(val onClick: (CharacterPresentation) -> Unit) :
     ListAdapter<CharacterPresentation, SearchResultAdapter.SearchedCharacterViewHolder>(
         SearchedCharacterDiffUtil
     ) {

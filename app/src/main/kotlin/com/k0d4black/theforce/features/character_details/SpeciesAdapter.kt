@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemSpecieBinding
 import com.k0d4black.theforce.models.SpeciePresentation
 
-class SpeciesAdapter : ListAdapter<SpeciePresentation, SpeciesAdapter.SpecieViewHolder>(
+internal class SpeciesAdapter : ListAdapter<SpeciePresentation, SpeciesAdapter.SpecieViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 

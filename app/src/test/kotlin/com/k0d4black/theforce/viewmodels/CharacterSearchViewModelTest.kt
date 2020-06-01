@@ -6,8 +6,6 @@ import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
 import com.k0d4black.theforce.fakes.FakeSearchCharactersUseCase
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
-import com.k0d4black.theforce.features.character_search.Error
-import com.k0d4black.theforce.features.character_search.SearchResultLoaded
 import com.k0d4black.theforce.utils.UiState
 import com.k0d4black.theforce.utils.observeOnce
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,7 +29,8 @@ class CharacterSearchViewModelTest : BaseViewModelTest() {
             prepareViewModel(UiState.SUCCESS)
             characterSearchViewModel.executeCharacterSearch(searchParams)
             characterSearchViewModel.searchViewState.observeOnce { state ->
-                Truth.assertThat(state).isInstanceOf(SearchResultLoaded::class.java)
+                Truth.assertThat(state.error).isNull()
+                Truth.assertThat(state.searchResults).isNotEmpty()
             }
         }
     }
@@ -43,7 +42,7 @@ class CharacterSearchViewModelTest : BaseViewModelTest() {
             prepareViewModel(UiState.ERROR)
             characterSearchViewModel.executeCharacterSearch("")
             characterSearchViewModel.searchViewState.observeOnce { state ->
-                Truth.assertThat(state).isInstanceOf(Error::class.java)
+                Truth.assertThat(state.error).isNotNull()
             }
         }
     }

@@ -1,7 +1,5 @@
 package com.k0d4black.theforce.features.character_details
 
-import android.util.Log
-import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +9,7 @@ import com.k0d4black.theforce.domain.usecases.FilmsUseCase
 import com.k0d4black.theforce.domain.usecases.PlanetUseCase
 import com.k0d4black.theforce.domain.usecases.SpeciesUseCase
 import com.k0d4black.theforce.mappers.toPresentation
+import com.k0d4black.theforce.models.Error
 import com.k0d4black.theforce.models.FilmPresentation
 import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
@@ -31,7 +30,6 @@ internal class CharacterDetailViewModel(
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        Log.d("Character Detail VM", "$exception")
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
@@ -86,14 +84,12 @@ internal class CharacterDetailViewModel(
     }
 }
 
-internal sealed class DetailViewState
-internal data class Error(@StringRes val message: Int) : DetailViewState()
 internal data class CharacterDetailsViewState(
     val isComplete: Boolean,
     val error: Error?,
     val planet: PlanetPresentation?,
     val films: List<FilmPresentation>?,
     val specie: List<SpeciePresentation>?
-) : DetailViewState()
+)
 
 

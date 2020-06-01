@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemFilmBinding
 import com.k0d4black.theforce.models.FilmPresentation
 
-class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(
+internal class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(
     SearchedCharacterDiffUtil
 ) {
 

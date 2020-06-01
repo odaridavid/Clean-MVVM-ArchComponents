@@ -7,7 +7,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.k0d4black.theforce.commons.CHARACTER_PARCEL_KEY
+import com.k0d4black.theforce.commons.NavigationUtils
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import org.junit.After
@@ -29,13 +29,13 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
         activityRule.launchActivity(intent)
         SystemClock.sleep(2000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
-            .check(matches(withText(activityRule.activity.resources.getString(R.string.error_character_details))))
+            .check(matches(withText(activityRule.activity.resources.getString(R.string.error_loading_character_details))))
     }
 
     @Test
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
         val intent = Intent().putExtra(
-            CHARACTER_PARCEL_KEY,
+            NavigationUtils.CHARACTER_PARCEL_KEY,
             CharacterPresentation(
                 name = "Luke",
                 birthYear = "12BBY",

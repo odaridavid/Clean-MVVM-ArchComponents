@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.settings
+package com.k0d4black.theforce.features.about
 
 import android.os.Bundle
 import com.k0d4black.theforce.R
@@ -6,7 +6,7 @@ import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.databinding.ActivityAboutBinding
 import com.mikepenz.aboutlibraries.LibsBuilder
 
-class AboutActivity : BaseActivity() {
+internal class AboutActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

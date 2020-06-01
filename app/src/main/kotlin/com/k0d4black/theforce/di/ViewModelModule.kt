@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.di.modules
+package com.k0d4black.theforce.di
 
 import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel

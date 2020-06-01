@@ -11,7 +11,7 @@ import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
 
 
-fun Character.toPresentation(): CharacterPresentation {
+internal fun Character.toPresentation(): CharacterPresentation {
     return CharacterPresentation(
         this.name,
         this.birthYear,
@@ -21,15 +21,15 @@ fun Character.toPresentation(): CharacterPresentation {
     )
 }
 
-fun Planet.toPresentation(): PlanetPresentation {
+internal fun Planet.toPresentation(): PlanetPresentation {
     val populationAsLong = if (this.population.contains("unknown")) 0L else this.population.toLong()
     return PlanetPresentation(this.name, populationAsLong)
 }
 
-fun Film.toPresentation(): FilmPresentation {
+internal fun Film.toPresentation(): FilmPresentation {
     return FilmPresentation(this.title, this.openingCrawl)
 }
 
-fun Specie.toPresentation(): SpeciePresentation {
+internal fun Specie.toPresentation(): SpeciePresentation {
     return SpeciePresentation(this.name, this.language)
 }

@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.k0d4black.theforce.R
 
-fun View.show() {
+internal fun View.show() {
     this.visibility = View.VISIBLE
 }
 
-fun View.hide() {
+internal fun View.hide() {
     this.visibility = View.INVISIBLE
 }
 
-fun View.remove(){
+internal fun View.remove() {
     this.visibility = View.GONE
 }
 
-fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
+internal fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
     val sb = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
     if (isError)
         sb.setBackgroundTint(loadColor(R.color.colorError))
@@ -37,7 +37,7 @@ fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false)
 
 }
 
-fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
+internal fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     val linearLayoutManager = LinearLayoutManager(context)
     val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation).apply {
         setDrawable(context.getDrawable(R.drawable.view_divider)!!)
@@ -46,11 +46,11 @@ fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     addItemDecoration(itemDecoration)
 }
 
-fun Context.loadColor(@ColorRes colorRes: Int): Int {
+internal fun Context.loadColor(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
 }
 
-inline fun <reified T : Activity> Context.startActivity(block: Intent.() -> Unit = {}) {
+internal inline fun <reified T : Activity> Context.startActivity(block: Intent.() -> Unit = {}) {
     val intent = Intent(this, T::class.java)
     block(intent)
     startActivity(intent)

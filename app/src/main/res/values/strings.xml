@@ -1,17 +1,18 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- Search Activity -->
+    <!-- Dashboard Activity -->
     <string name="info_no_matching_results">No matching results</string>
-    <string name="info_search_tip">Search for your favourite StarWars characters by clicking on the search icon.</string>
-    <string name="title_explore">Explore</string>
-    <string name="content_description_more_info_arrow">View Character Details</string>
-    <string name="title_explore_activity">Explore</string>
     <string name="info_no_results">No Matching Search Results</string>
+    <string name="info_no_favorite_characters">No Favorite Characters</string>
     <string name="info_search_done">Search Done</string>
+    <string name="content_description_more_info_arrow">View Character Details</string>
+    <string name="hint_character_name">Character Name</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="menu_title_favorites">Favorites</string>
+    <string name="explore_starwars_characters">Explore StarWars Characters.</string>
 
-    <!-- Main Menu -->
-    <string name="menu_title_search">Search</string>
+    <!-- Dashboard Activity Menu -->
     <string name="menu_title_settings">Settings</string>
 
     <!-- Character Detail Activity -->
@@ -20,11 +21,8 @@
     <string name="title_planet">Planet</string>
     <string name="title_films">Films</string>
     <string name="title_species">Species</string>
-    <string name="error_character_details">Couldn\'t load character details</string>
     <string name="info_loading_complete">Character Loaded Successfully</string>
     <string name="info_specie_information_unavailable">Specie information unavailable</string>
-    <string name="exception_check_internet_connection">Check Internet Connection</string>
-    <string name="exception_an_error_occurred">Oops!! An Error Occurred</string>
 
     <!-- Data Binding String Templates -->
     <string name="template_planet_name">Name : %s</string>
@@ -35,13 +33,16 @@
     <string name="template_species_language">Language : %s</string>
 
     <!-- Settings Activity -->
-    <string name="info_app_version">Version %s</string>
     <string name="title_settings">Settings</string>
-    <string name="title_about">About</string>
     <string name="star_wars_copyright">Star Wars and all associated names are copyright Lucasfilm ltd.</string>
-    <string name="hint_character_name">Character Name</string>
-    <string name="info_no_favorite_characters">No Favorite Characters</string>
-    <string name="title_favorites">Favorites</string>
-    <string name="explore_starwars_characters">Explore StarWars Characters.</string>
+
+    <!-- About Activity -->
+    <string name="title_about">About</string>
+    <string name="info_app_version">Version %s</string>
+
+    <!-- Error Strings -->
+    <string name="error_check_internet_connection">Check Internet Connection</string>
+    <string name="error_oops_error_occured">Oops!! An Error Occurred</string>
+    <string name="error_loading_character_details">Couldn\'t load character details</string>
 
 </resources>

@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/search_motion_scene"
-        tools:context=".features.character_search.SearchActivity"
+        tools:context=".features.DashboardActivity"
         tools:menu="@menu/main_menu">
 
         <androidx.appcompat.widget.Toolbar
@@ -39,20 +39,15 @@
             android:padding="@dimen/padding_default" />
 
         <ProgressBar
-            android:id="@+id/loading_search_results_progress_bar"
+            android:id="@+id/search_results_progress_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/favorites_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_favorite_on"
+            android:drawableStart="@drawable/ic_fav_off"
             android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_favorites"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"

@@ -5,8 +5,9 @@ import android.view.View
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.startActivity
 import com.k0d4black.theforce.databinding.ActivitySettingsBinding
+import com.k0d4black.theforce.features.about.AboutActivity
 
-class SettingsActivity : BaseActivity() {
+internal class SettingsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

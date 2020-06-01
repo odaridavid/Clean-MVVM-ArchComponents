@@ -13,18 +13,10 @@
  **/
 package com.k0d4black.theforce.commons
 
-import androidx.annotation.StringRes
-import com.k0d4black.theforce.R
-import java.net.UnknownHostException
+import android.os.Build.VERSION.SDK_INT
+import androidx.annotation.IntRange
 
-internal object ExceptionHandler {
 
-    @StringRes
-    fun parse(t: Throwable): Int {
-        return when (t) {
-            is UnknownHostException -> R.string.error_check_internet_connection
-            else -> R.string.error_oops_error_occured
-        }
-    }
-
+internal fun versionFrom(@IntRange(from = 1, to = 29) version: Int): Boolean {
+    return SDK_INT >= version
 }

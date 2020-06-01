@@ -104,10 +104,6 @@ The ViewModel then receives data from the use case and updates the
 LiveData being observed by the activity,the Activity then makes updates 
 to the UI as need be depending on the current view state.
 
-The UI utilises a **State pattern** by representing expected view states using sealed classes.
-This aids with delegating logic operations  to the Viewmodel and makes testing in isolation
-easier.
-
 #### Domain
 
 The domain layer contains domain model classes which represent the

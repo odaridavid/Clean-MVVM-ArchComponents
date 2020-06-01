@@ -11,20 +11,11 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.commons
+package com.k0d4black.theforce.models
 
 import androidx.annotation.StringRes
-import com.k0d4black.theforce.R
-import java.net.UnknownHostException
 
-internal object ExceptionHandler {
-
-    @StringRes
-    fun parse(t: Throwable): Int {
-        return when (t) {
-            is UnknownHostException -> R.string.error_check_internet_connection
-            else -> R.string.error_oops_error_occured
-        }
-    }
-
-}
+/**
+ * Represents error states in a given view state
+ */
+internal data class Error(@StringRes val message: Int)

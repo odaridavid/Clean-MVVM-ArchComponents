@@ -1,6 +1,8 @@
 package com.k0d4black.theforce.features.character_details
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
@@ -11,18 +13,11 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Show on search success
-//TODO Show on search error
-//TODO Show Search Loading
-//TODO Show on search empty
-//TODO Add favs icon to details toolbar
-//TODO Hide favorites recycler on close
-// TODO
-class CharacterDetailActivity : BaseActivity() {
+internal class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
 
-    lateinit var binding: ActivityCharacterDetailBinding
+    private lateinit var binding: ActivityCharacterDetailBinding
 
     private val filmsAdapter: FilmsAdapter by lazy { FilmsAdapter() }
 
@@ -37,16 +32,32 @@ class CharacterDetailActivity : BaseActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val character = intent.getParcelableExtra<CharacterPresentation>(CHARACTER_PARCEL_KEY)
+        val character = intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
 
         character?.let { characterInfo ->
             characterDetailViewModel.getCharacterDetails(characterInfo.url)
             renderCharacterInfo(characterInfo)
             observeNetworkChanges(characterInfo.url)
         } ?: characterDetailViewModel
-            .displayCharacterError(R.string.error_character_details)
+            .displayCharacterError(R.string.error_loading_character_details)
 
         observeDetailViewState()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.details_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_alter_favorites -> {
+                //TODO Save and remove to db and update action bar icon as needed
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
     private fun observeDetailViewState() {
