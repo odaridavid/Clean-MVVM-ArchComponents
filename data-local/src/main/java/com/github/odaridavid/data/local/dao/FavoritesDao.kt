@@ -20,7 +20,6 @@ import com.github.odaridavid.data.local.models.FavoriteWithFilms
 import com.github.odaridavid.data.local.models.FilmEntity
 import com.k0d4black.theforce.domain.models.Favorite
 
-//TODO Suspend functions and flows with room db
 @Dao
 interface FavoritesDao {
 
