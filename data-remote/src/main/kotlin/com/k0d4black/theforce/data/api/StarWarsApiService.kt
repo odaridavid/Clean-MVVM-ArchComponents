@@ -1,7 +1,6 @@
 package com.k0d4black.theforce.data.api
 
-import com.k0d4black.theforce.data.models.response.*
-import com.k0d4black.theforce.data.models.response.SearchResponse
+import com.k0d4black.theforce.data.models.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url
