@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -48,6 +49,10 @@ internal fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
 
 internal fun Context.loadColor(@ColorRes colorRes: Int): Int {
     return ContextCompat.getColor(this, colorRes)
+}
+
+internal fun Context.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 internal inline fun <reified T : Activity> Context.startActivity(block: Intent.() -> Unit = {}) {

@@ -3,13 +3,14 @@ package com.k0d4black.theforce.features
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
-import com.k0d4black.theforce.databinding.ActivitySearchBinding
+import com.k0d4black.theforce.databinding.ActivityDashboardBinding
 import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
 import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
 import com.k0d4black.theforce.features.character_search.SearchResultAdapter
@@ -19,11 +20,12 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//TODO Look into separating manifest for debug and release
 internal class DashboardActivity : BaseActivity() {
 
     private val characterSearchViewModel by viewModel<CharacterSearchViewModel>()
 
-    private lateinit var binding: ActivitySearchBinding
+    private lateinit var binding: ActivityDashboardBinding
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { character ->
@@ -35,7 +37,7 @@ internal class DashboardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
         setSupportActionBar(binding.searchToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -44,6 +46,7 @@ internal class DashboardActivity : BaseActivity() {
         binding.searchEditText.setOnFocusChangeListener { _, _ ->
             binding.dashboardLayout.transitionToEnd()
         }
+
         binding.searchEditText.doOnTextChanged { text, _, _, _ ->
             text?.let { name ->
                 if (name.length >= 2) {
@@ -83,6 +86,10 @@ internal class DashboardActivity : BaseActivity() {
             }
             displaySearchResults(state.searchResults)
         }
+    }
+
+    fun handleUpButtonClick(view: View) {
+        binding.dashboardLayout.transitionToStart()
     }
 
     private fun displaySearchResults(searchResults: List<CharacterPresentation>) {

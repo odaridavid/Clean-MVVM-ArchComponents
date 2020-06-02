@@ -16,12 +16,23 @@
     <Transition
         app:constraintSetEnd="@+id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="1500">
+        app:duration="1000">
         <OnClick
             app:clickAction="toggle"
             app:targetId="@id/search_edit_text" />
     </Transition>
     <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/back_to_start_state_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:alpha="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Constraint
             android:id="@+id/search_tagline_text_view"
             android:layout_width="wrap_content"
@@ -80,6 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_edit_text" />
+
         <Constraint
             android:id="@+id/search_results_progress_bar"
             android:layout_width="wrap_content"
@@ -92,6 +104,18 @@
 
     </ConstraintSet>
     <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/back_to_start_state_image_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:alpha="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <Constraint
             android:id="@+id/search_edit_text"
             android:layout_width="match_parent"
