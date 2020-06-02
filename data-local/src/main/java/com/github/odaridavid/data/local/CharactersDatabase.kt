@@ -11,18 +11,16 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.domain.usecases
+package com.github.odaridavid.data.local
 
-import com.k0d4black.theforce.domain.models.Favorite
-import com.k0d4black.theforce.domain.repository.IFavoritesRepository
-import kotlinx.coroutines.flow.Flow
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.github.odaridavid.data.local.dao.FavoritesDao
+import com.github.odaridavid.data.local.models.FavoriteEntity
+import com.github.odaridavid.data.local.models.FilmEntity
 
-typealias InsertFavoriteBaseUseCase = BaseUseCase<Favorite, Flow<String>>
 
-class InsertFavoriteUseCase(
-    private val favoritesRepository: IFavoritesRepository
-) : InsertFavoriteBaseUseCase {
-
-    override suspend fun invoke(params: Favorite) = favoritesRepository.insertFavorite(params)
-
+@Database(entities = [FavoriteEntity::class, FilmEntity::class], version = 1, exportSchema = false)
+abstract class CharactersDatabase : RoomDatabase() {
+    abstract fun favoritesDao(): FavoritesDao
 }

@@ -29,6 +29,6 @@ interface IFavoritesRepository {
 
     fun deleteAllFavorites(): Flow<Int>
 
-    fun insertFavorite(favorite: Favorite): Flow<Long>
+    fun insertFavorite(favorite: Favorite): Flow<String>
 
 }

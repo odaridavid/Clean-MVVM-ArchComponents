@@ -1,0 +1,43 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':domain')
+
+    //Persistence
+    implementation dataDependencies.roomRuntime
+    kapt dataDependencies.roomCompiler
+    implementation dataDependencies.roomKtx
+
+    //Tests
+    testImplementation testDependencies.runner
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.googleTruth
+    testImplementation testDependencies.roomTest
+    testImplementation testDependencies.androidxJunit
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.robolectric
+}

@@ -11,16 +11,20 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.domain.models
+package com.github.odaridavid.data.local.models
 
-data class Favorite(
-    val id: Int = 0,
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "favorites")
+data class FavoriteEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
-    val birthYear: String,
+    @ColumnInfo(name = "birth_year") val birthYear: String,
     val height: String,
-    val planetName: String,
-    val planetPopulation: String,
-    val specieName: String,
-    val specieLanguage: String,
-    val films: List<Film>
+    @ColumnInfo(name = "planet_name") val planetName: String,
+    @ColumnInfo(name = "planet_population") val planetPopulation: String,
+    @ColumnInfo(name = "specie_name") val specieName: String,
+    @ColumnInfo(name = "specie_language") val specieLanguage: String
 )

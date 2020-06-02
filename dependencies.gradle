@@ -31,6 +31,7 @@ ext {
     retrofitVersion = '2.7.0'
     moshiConverterVersion = '2.7.0'
     loggingInterceptorVersion = '4.2.1'
+    roomVersion = '2.2.5'
 
     //Testing
     mockitoVersion = '3.2.4'
@@ -64,21 +65,23 @@ ext {
             recyclerviewAnimations: "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion",
             aboutLibraryCore      : "com.mikepenz:aboutlibraries-core:$aboutLibsVersion",
             aboutLibraryUi        : "com.mikepenz:aboutlibraries:$aboutLibsVersion",
-            koinAndroid            : "org.koin:koin-android:$koinVersion",
-            koinLifeCycleScope     : "org.koin:koin-android-scope:$koinVersion",
-            koinAndroidViewModel   : "org.koin:koin-androidx-viewmodel:$koinVersion"
+            koinAndroid           : "org.koin:koin-android:$koinVersion",
+            koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
+            koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion"
     ]
 
     dataDependencies = [
             retrofit          : "com.squareup.retrofit2:retrofit:$retrofitVersion",
             moshiConverter    : "com.squareup.retrofit2:converter-moshi:$moshiConverterVersion",
             loggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion",
+            roomRuntime       : "androidx.room:room-runtime:$roomVersion",
+            roomCompiler      : "androidx.room:room-compiler:$roomVersion",
+            roomKtx           : "androidx.room:room-ktx:$roomVersion"
     ]
 
     domainDependencies = [
             kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
-            koinAndroid   : "org.koin:koin-android:$koinVersion"
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
     ]
 
     testDependencies = [
@@ -97,7 +100,7 @@ ext {
             espressoContrib  : "androidx.test.espresso:espresso-contrib:$espressoVersion",
             archComponentTest: "androidx.arch.core:core-testing:$archComponentTestVersion",
             coroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion",
-            koinTest         : "org.koin:koin-test:$koinVersion"
-
+            koinTest         : "org.koin:koin-test:$koinVersion",
+            roomTest         : "androidx.room:room-testing:$roomVersion"
     ]
 }

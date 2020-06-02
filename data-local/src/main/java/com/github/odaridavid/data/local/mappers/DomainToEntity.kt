@@ -11,18 +11,25 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.domain.usecases
+package com.github.odaridavid.data.local.mappers
 
+import com.github.odaridavid.data.local.models.FavoriteEntity
+import com.github.odaridavid.data.local.models.FilmEntity
 import com.k0d4black.theforce.domain.models.Favorite
-import com.k0d4black.theforce.domain.repository.IFavoritesRepository
-import kotlinx.coroutines.flow.Flow
+import com.k0d4black.theforce.domain.models.Film
 
-typealias InsertFavoriteBaseUseCase = BaseUseCase<Favorite, Flow<String>>
 
-class InsertFavoriteUseCase(
-    private val favoritesRepository: IFavoritesRepository
-) : InsertFavoriteBaseUseCase {
-
-    override suspend fun invoke(params: Favorite) = favoritesRepository.insertFavorite(params)
-
+internal fun Favorite.toEntity(): FavoriteEntity {
+    return FavoriteEntity(
+        name = name,
+        birthYear = birthYear,
+        height = height,
+        planetName = planetName,
+        planetPopulation = planetPopulation,
+        specieLanguage = specieLanguage,
+        specieName = specieName
+    )
 }
+
+internal fun Film.toEntity(favId: Long): FilmEntity = FilmEntity(title, openingCrawl, favId)
+
