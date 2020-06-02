@@ -4,16 +4,11 @@ apply plugin: 'kotlin'
 dependencies {
 
     def domainDependencies = rootProject.ext.domainDependencies
-    def testDependencies = rootProject.ext.testDependencies
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api domainDependencies.kotlin
     api domainDependencies.coroutinesCore
 
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.mockito
-    testImplementation testDependencies.mockitoInline
-    testImplementation testDependencies.googleTruth
 }
 
 sourceCompatibility = "8"

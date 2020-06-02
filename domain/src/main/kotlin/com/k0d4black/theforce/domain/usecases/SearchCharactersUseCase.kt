@@ -10,7 +10,6 @@ class SearchCharactersUseCase(
     private val searchRepository: ICharacterSearchRepository
 ) : SearchCharactersBaseUseCase {
 
-    override suspend operator fun invoke(params: String) =
-        searchRepository.searchCharacters(params)
+    override suspend operator fun invoke(params: String) = searchRepository.searchCharacters(params)
 
 }

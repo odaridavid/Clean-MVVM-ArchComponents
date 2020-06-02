@@ -23,7 +23,6 @@ class GetFavoriteByIdUseCase(
     private val favoritesRepository: IFavoritesRepository
 ) : GetFavoriteByIdBaseUseCase {
 
-    override suspend fun invoke(params: Int): Flow<Favorite> =
-        favoritesRepository.getFavoriteById(params)
+    override suspend fun invoke(params: Int) = favoritesRepository.getFavoriteById(params)
 
 }

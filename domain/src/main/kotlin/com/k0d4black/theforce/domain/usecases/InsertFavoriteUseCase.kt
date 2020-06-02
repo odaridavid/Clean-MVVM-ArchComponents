@@ -23,7 +23,6 @@ class InsertFavoriteUseCase(
     private val favoritesRepository: IFavoritesRepository
 ) : InsertFavoriteBaseUseCase {
 
-    override suspend fun invoke(params: Favorite): Flow<Long> =
-         favoritesRepository.insertFavorite(params)
+    override suspend fun invoke(params: Favorite) = favoritesRepository.insertFavorite(params)
 
 }

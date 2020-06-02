@@ -16,13 +16,12 @@ package com.k0d4black.theforce.domain.usecases
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias DeleteFavoriteBaseUseCase = BaseUseCase<Int, Flow<Long>>
+typealias DeleteFavoriteBaseUseCase = BaseUseCase<Int, Flow<Int>>
 
 class DeleteFavoriteUseCase(
     private val favoritesRepository: IFavoritesRepository
 ) : DeleteFavoriteBaseUseCase {
 
-    override suspend fun invoke(params: Int): Flow<Long> =
-        favoritesRepository.deleteFavorite(params)
+    override suspend fun invoke(params: Int) = favoritesRepository.deleteFavorite(params)
 
 }
