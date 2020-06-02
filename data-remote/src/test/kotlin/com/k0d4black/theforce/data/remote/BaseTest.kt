@@ -1,8 +1,8 @@
-package com.k0d4black.theforce.data
+package com.k0d4black.theforce.data.remote
 
 
-import com.k0d4black.theforce.data.api.StarWarsApiService
-import com.k0d4black.theforce.data.helpers.StarWarsRequestDispatcher
+import com.k0d4black.theforce.data.remote.api.StarWarsApiService
+import com.k0d4black.theforce.data.remote.helpers.StarWarsRequestDispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockWebServer

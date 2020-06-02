@@ -1,10 +1,10 @@
-package com.k0d4black.theforce.data.mappers
+package com.k0d4black.theforce.data.remote.mappers
 
 
-import com.k0d4black.theforce.data.models.CharacterResponse
-import com.k0d4black.theforce.data.models.FilmDetailResponse
-import com.k0d4black.theforce.data.models.PlanetDetailsResponse
-import com.k0d4black.theforce.data.models.SpecieDetailResponse
+import com.k0d4black.theforce.data.remote.models.CharacterResponse
+import com.k0d4black.theforce.data.remote.models.FilmDetailResponse
+import com.k0d4black.theforce.data.remote.models.PlanetDetailsResponse
+import com.k0d4black.theforce.data.remote.models.SpecieDetailResponse
 import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.models.Film
 import com.k0d4black.theforce.domain.models.Planet

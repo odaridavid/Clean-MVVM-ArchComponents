@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.data.helpers
+package com.k0d4black.theforce.data.remote.helpers
 
 //Maintains url path parameters for consistency across tests
 const val SPECIES_URL = "/api/species/1/"

@@ -1,6 +1,6 @@
-package com.k0d4black.theforce.data.api
+package com.k0d4black.theforce.data.remote.api
 
-import com.k0d4black.theforce.data.models.*
+import com.k0d4black.theforce.data.remote.models.*
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.http.Url

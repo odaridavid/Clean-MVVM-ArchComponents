@@ -1,9 +1,8 @@
-package com.k0d4black.theforce.data.repository
+package com.k0d4black.theforce.data.remote.repository
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.data.BaseTest
-import com.k0d4black.theforce.data.helpers.EXISTING_CHARACTER_URL
-import com.k0d4black.theforce.data.source.CharacterDetailsRemoteDataSource
+import com.k0d4black.theforce.data.remote.BaseTest
+import com.k0d4black.theforce.data.remote.helpers.EXISTING_CHARACTER_URL
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
@@ -17,8 +16,7 @@ internal class CharacterDetailsRepositoryTest : BaseTest() {
     @Before
     override fun setup() {
         super.setup()
-        val characterDetailsDataSourceMock = CharacterDetailsRemoteDataSource(starWarsApiService)
-        characterDetailsRepository = CharacterDetailsRepository(characterDetailsDataSourceMock)
+        characterDetailsRepository = CharacterDetailsRepository(starWarsApiService)
     }
 
     @Test

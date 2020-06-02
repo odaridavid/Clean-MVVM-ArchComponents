@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.data.helpers
+package com.k0d4black.theforce.data.remote.helpers
 
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse

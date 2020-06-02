@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.data.models
+package com.k0d4black.theforce.data.remote.models
 
 
 data class SearchResponse(
