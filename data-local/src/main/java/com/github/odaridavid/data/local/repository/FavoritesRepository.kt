@@ -15,14 +15,13 @@ package com.github.odaridavid.data.local.repository
 
 import com.github.odaridavid.data.local.dao.FavoritesDao
 import com.github.odaridavid.data.local.mappers.toDomain
-import com.github.odaridavid.data.local.mappers.toEntity
 import com.k0d4black.theforce.domain.models.Favorite
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-internal class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRepository {
+class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRepository {
 
     override fun getAllFavorites(): Flow<List<Favorite>> = flow {
         val favs = favoritesDao.getAll()
@@ -49,7 +48,7 @@ internal class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFa
         emit(rowsAffected)
     }
 
-    override fun insertFavorite(favorite: Favorite):Flow<String> = flow {
+    override fun insertFavorite(favorite: Favorite): Flow<String> = flow {
         favoritesDao.insert(favorite)
         emit("Done")
     }
