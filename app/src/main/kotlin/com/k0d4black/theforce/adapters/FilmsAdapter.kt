@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.character_details
+package com.k0d4black.theforce.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemFilmBinding
 import com.k0d4black.theforce.models.FilmPresentation
 
-internal class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(
-    SearchedCharacterDiffUtil
-) {
+internal class FilmsAdapter : ListAdapter<FilmPresentation,
+        FilmsAdapter.FilmViewHolder>(SearchedCharacterDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         val inflater = LayoutInflater.from(parent.context)

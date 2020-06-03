@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.character_search;
+package com.k0d4black.theforce.adapters;
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,15 +10,15 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import kotlinx.android.synthetic.main.item_search.view.*
 
 
-internal class SearchResultAdapter(val onClick: (CharacterPresentation) -> Unit) :
-    ListAdapter<CharacterPresentation, SearchResultAdapter.SearchedCharacterViewHolder>(
-        SearchedCharacterDiffUtil
-    ) {
+internal class SearchResultAdapter(
+    val onClick: (CharacterPresentation) -> Unit
+) : ListAdapter<CharacterPresentation,
+        SearchResultAdapter.SearchedCharacterViewHolder>(SearchedCharacterDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchedCharacterViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
-        return SearchedCharacterViewHolder(ItemSearchBinding.inflate(inflater,parent,false))
+        return SearchedCharacterViewHolder(ItemSearchBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: SearchedCharacterViewHolder, position: Int): Unit =

@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.character_details
+package com.k0d4black.theforce.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemSpecieBinding
 import com.k0d4black.theforce.models.SpeciePresentation
 
-internal class SpeciesAdapter : ListAdapter<SpeciePresentation, SpeciesAdapter.SpecieViewHolder>(
-    SearchedCharacterDiffUtil
-) {
+internal class SpeciesAdapter : ListAdapter<SpeciePresentation,
+        SpeciesAdapter.SpecieViewHolder>(SearchedCharacterDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecieViewHolder {
         val context = parent.context
