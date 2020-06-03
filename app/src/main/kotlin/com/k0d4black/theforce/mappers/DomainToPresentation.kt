@@ -1,35 +1,44 @@
 package com.k0d4black.theforce.mappers
 
 import com.k0d4black.theforce.commons.convertToInches
-import com.k0d4black.theforce.domain.models.Character
-import com.k0d4black.theforce.domain.models.Film
-import com.k0d4black.theforce.domain.models.Planet
-import com.k0d4black.theforce.domain.models.Specie
-import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.FilmPresentation
-import com.k0d4black.theforce.models.PlanetPresentation
-import com.k0d4black.theforce.models.SpeciePresentation
+import com.k0d4black.theforce.commons.populationToLong
+import com.k0d4black.theforce.domain.models.*
+import com.k0d4black.theforce.models.*
 
 
 internal fun Character.toPresentation(): CharacterPresentation {
     return CharacterPresentation(
-        this.name,
-        this.birthYear,
-        this.height,
-        convertToInches(this.height),
-        this.url
+        name,
+        birthYear,
+        height,
+        convertToInches(height),
+        url
     )
 }
 
 internal fun Planet.toPresentation(): PlanetPresentation {
-    val populationAsLong = if (this.population.contains("unknown")) 0L else this.population.toLong()
-    return PlanetPresentation(this.name, populationAsLong)
+    return PlanetPresentation(name, populationToLong(population))
 }
 
 internal fun Film.toPresentation(): FilmPresentation {
-    return FilmPresentation(this.title, this.openingCrawl)
+    return FilmPresentation(title, openingCrawl)
 }
 
 internal fun Specie.toPresentation(): SpeciePresentation {
-    return SpeciePresentation(this.name, this.language)
+    return SpeciePresentation(name, language)
+}
+
+internal fun Favorite.toPresentation(): FavoritePresentation {
+    return FavoritePresentation(
+        id = id,
+        name = name,
+        birthYear = birthYear,
+        height = height,
+        heightInInches = convertToInches(height),
+        planetName = planetName,
+        planetPopulation = populationToLong(planetPopulation),
+        specieName = specieName,
+        specieLanguage = specieLanguage,
+        films = films.map { it.toPresentation() }
+    )
 }
