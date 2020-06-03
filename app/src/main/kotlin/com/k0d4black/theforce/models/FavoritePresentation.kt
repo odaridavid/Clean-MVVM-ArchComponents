@@ -13,9 +13,19 @@
  **/
 package com.k0d4black.theforce.models
 
-import androidx.annotation.StringRes
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-/**
- * Represents error states in a given view state
- */
-internal data class Error(@StringRes val message: Int)
+@Parcelize
+internal data class FavoritePresentation(
+    val id: Int,
+    val name: String,
+    val birthYear: String,
+    val height: String,
+    val heightInInches:String,
+    val planetName: String,
+    val planetPopulation: Long,
+    val specieName: String,
+    val specieLanguage: String,
+    val films: List<FilmPresentation>
+) : Parcelable
