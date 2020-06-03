@@ -28,7 +28,7 @@ dependencies {
     implementation project(':domain')
 
     //Persistence
-    implementation dataDependencies.roomRuntime
+    api dataDependencies.roomRuntime
     kapt dataDependencies.roomCompiler
     implementation dataDependencies.roomKtx
 
