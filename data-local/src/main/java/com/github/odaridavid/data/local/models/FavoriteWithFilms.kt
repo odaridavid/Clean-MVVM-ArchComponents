@@ -21,7 +21,7 @@ data class FavoriteWithFilms(
     @Embedded val favoriteEntity: FavoriteEntity,
     @Relation(
         parentColumn = "id",
-        entityColumn = "favoriteId"
+        entityColumn = "fav_id"
     )
     val filmEntities: List<FilmEntity>
 )
