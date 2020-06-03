@@ -1,11 +1,11 @@
-package com.k0d4black.theforce.features.settings
+package com.k0d4black.theforce.activities
 
 import android.os.Bundle
 import android.view.View
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.startActivity
 import com.k0d4black.theforce.databinding.ActivitySettingsBinding
-import com.k0d4black.theforce.features.about.AboutActivity
+import com.k0d4black.theforce.activities.AboutActivity
 
 internal class SettingsActivity : BaseActivity() {
 

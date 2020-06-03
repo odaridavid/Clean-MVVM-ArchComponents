@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.about
+package com.k0d4black.theforce.activities
 
 import android.os.Bundle
 import com.k0d4black.theforce.R
