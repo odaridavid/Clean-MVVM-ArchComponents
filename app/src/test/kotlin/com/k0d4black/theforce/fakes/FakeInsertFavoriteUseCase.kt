@@ -13,18 +13,18 @@
  **/
 package com.k0d4black.theforce.fakes
 
-import com.k0d4black.theforce.domain.models.Planet
-import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
+import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.usecases.InsertFavoriteBaseUseCase
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
-class FakeGetPlanetUseCase(
+class FakeInsertFavoriteUseCase(
     uiState: UiState
-) : BaseTestUseCase<Planet>(uiState), GetPlanetBaseUseCase {
+) : BaseTestUseCase<String>(uiState), InsertFavoriteBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Planet> = execute()
+    override suspend fun invoke(params: Favorite): Flow<String> = execute()
 
-    override fun getValue(): Planet = Planet(name = "name", population = "100000")
+    override fun getValue(): String = "Done"
 
 }

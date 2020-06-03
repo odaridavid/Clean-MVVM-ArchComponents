@@ -13,18 +13,32 @@
  **/
 package com.k0d4black.theforce.fakes
 
-import com.k0d4black.theforce.domain.models.Planet
-import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
+import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Film
+import com.k0d4black.theforce.domain.usecases.GetAllFavoritesBaseUseCase
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
-class FakeGetPlanetUseCase(
+class FakeGetAllFavoritesUseCase(
     uiState: UiState
-) : BaseTestUseCase<Planet>(uiState), GetPlanetBaseUseCase {
+) : BaseTestUseCase<List<Favorite>>(uiState), GetAllFavoritesBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Planet> = execute()
+    override suspend fun invoke(params: Unit): Flow<List<Favorite>> = execute()
 
-    override fun getValue(): Planet = Planet(name = "name", population = "100000")
+    override fun getValue(): List<Favorite> =
+        listOf(
+            Favorite(
+                1,
+                "Hans",
+                "12 BBY",
+                "123",
+                "planet",
+                "100000",
+                "specie",
+                "language",
+                listOf(Film("title", "crawl"))
+            )
+        )
 
 }

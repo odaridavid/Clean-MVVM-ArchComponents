@@ -14,18 +14,17 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Specie
-import com.k0d4black.theforce.domain.usecases.SpeciesUseCase
+import com.k0d4black.theforce.domain.usecases.GetSpeciesBaseUseCase
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 
-class FakeGetSpeciesUseCase(private val uiState: UiState) : SpeciesUseCase {
-    override suspend fun invoke(params: String): Flow<List<Specie>> = flow {
-        when (uiState) {
-            UiState.SUCCESS -> emit(listOf(Specie(name = "name", language = "language")))
-            UiState.ERROR -> throw Throwable()
-        }
-    }
+class FakeGetSpeciesUseCase(
+    uiState: UiState
+) : BaseTestUseCase<List<Specie>>(uiState), GetSpeciesBaseUseCase {
+
+    override suspend fun invoke(params: String): Flow<List<Specie>> = execute()
+
+    override fun getValue(): List<Specie> = listOf(Specie(name = "name", language = "language"))
 
 }
