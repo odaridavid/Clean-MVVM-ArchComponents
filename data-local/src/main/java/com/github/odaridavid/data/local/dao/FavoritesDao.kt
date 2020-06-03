@@ -27,7 +27,10 @@ interface FavoritesDao {
     suspend fun deleteAll(): Int
 
     @Query("DELETE FROM favorites WHERE id=:id")
-    suspend fun delete(id: Int): Int
+    suspend fun deleteById(id: Int): Int
+
+    @Query("DELETE FROM favorites WHERE name=:name")
+    suspend fun deleteByName(name: String): Int
 
     @Transaction
     @Query("SELECT * FROM favorites WHERE id=:id")

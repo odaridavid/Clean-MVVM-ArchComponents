@@ -11,26 +11,18 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.domain.repository
+package com.k0d4black.theforce.domain.usecases
 
-import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 
 
-interface IFavoritesRepository {
+typealias DeleteFavoriteByNameBaseUseCase = BaseUseCase<String, Flow<Int>>
 
-    fun getAllFavorites(): Flow<List<Favorite>>
+class DeleteFavoriteByNameUseCase(
+    private val favoritesRepository: IFavoritesRepository
+) : DeleteFavoriteByNameBaseUseCase {
 
-    fun getFavoriteById(id: Int): Flow<Favorite>
-
-    fun getFavoriteByName(name: String): Flow<Favorite>
-
-    fun deleteFavoriteById(id: Int): Flow<Int>
-
-    fun deleteFavoriteByName(name: String): Flow<Int>
-
-    fun deleteAllFavorites(): Flow<Int>
-
-    fun insertFavorite(favorite: Favorite): Flow<String>
+    override suspend fun invoke(params: String) = favoritesRepository.deleteFavoriteByName(params)
 
 }

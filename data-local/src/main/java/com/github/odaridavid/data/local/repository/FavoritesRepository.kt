@@ -38,8 +38,13 @@ class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRe
         emit(fav.toDomain())
     }
 
-    override fun deleteFavorite(id: Int): Flow<Int> = flow {
-        val rowsAffected = favoritesDao.delete(id)
+    override fun deleteFavoriteById(id: Int): Flow<Int> = flow {
+        val rowsAffected = favoritesDao.deleteById(id)
+        emit(rowsAffected)
+    }
+
+    override fun deleteFavoriteByName(name: String): Flow<Int> = flow {
+        val rowsAffected = favoritesDao.deleteByName(name)
         emit(rowsAffected)
     }
 

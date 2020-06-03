@@ -78,7 +78,7 @@ class FavoritesRepositoryTest : BaseTest() {
             }
 
             //Delete Item with specified id
-            favoriteRepository.deleteFavorite(favId).collect { rowsAffected ->
+            favoriteRepository.deleteFavoriteById(favId).collect { rowsAffected ->
                 Truth.assertThat(rowsAffected).isAtMost(1)
             }
 
@@ -151,6 +151,21 @@ class FavoritesRepositoryTest : BaseTest() {
                 Truth.assertThat(favs).isEqualTo(SampleData.favoriteWithDbIds)
             }
 
+            //Clear data from tables
+            db.clearAllTables()
+        }
+
+    @Test
+    fun `given a favorite name when deleted then return no of affected rows`() =
+        runBlocking(Dispatchers.IO) {
+            //Save values to db with insert transaction
+            favoriteRepository.insertFavorite(SampleData.favorite).collect()
+
+            //Check if fav exists using name
+            val favorite = favoriteRepository.deleteFavoriteByName(SampleData.favorite.name)
+            favorite.collect { rowsAffected ->
+                Truth.assertThat(rowsAffected).isEqualTo(1)
+            }
 
             //Clear data from tables
             db.clearAllTables()
