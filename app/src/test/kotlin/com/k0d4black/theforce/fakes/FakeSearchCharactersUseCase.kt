@@ -15,23 +15,18 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
+import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 class FakeSearchCharactersUseCase(
     uiState: UiState
-) : BaseTestUseCase<List<Character>>(uiState), SearchCharactersBaseUseCase {
+) : BaseTestUseCase<List<Character>, String>(uiState), SearchCharactersBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<List<Character>> = execute()
+    override suspend fun invoke(params: String): Flow<List<Character>> = execute(params)
 
-    override fun getValue(): List<Character> =
-        listOf(
-            Character(
-                "Darth Vader",
-                "12BBY",
-                "123",
-                "https://swapi.co/api/species/2/"
-            )
-        )
+    override fun getValue(params: String): List<Character> {
+        return if (params.contentEquals("Darth")) Data.characters else emptyList()
+    }
 
 }

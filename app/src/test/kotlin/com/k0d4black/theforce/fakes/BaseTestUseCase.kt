@@ -18,15 +18,15 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 
-abstract class BaseTestUseCase<out T>(private val uiState: UiState) {
+abstract class BaseTestUseCase<out T, in P>(private val uiState: UiState) {
 
-    fun execute(): Flow<T> = flow {
+    fun execute(params: P): Flow<T> = flow {
         when (uiState) {
-            UiState.SUCCESS -> emit(getValue())
+            UiState.SUCCESS -> emit(getValue(params))
             UiState.ERROR -> throw Exception("Something went wrong")
         }
     }
 
-    abstract fun getValue(): T
+    abstract fun getValue(params: P): T
 
 }

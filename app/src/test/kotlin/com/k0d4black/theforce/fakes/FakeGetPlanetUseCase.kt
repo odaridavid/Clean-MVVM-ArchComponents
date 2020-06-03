@@ -15,16 +15,21 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Planet
 import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
+import com.k0d4black.theforce.utils.Data
+import com.k0d4black.theforce.utils.Data.CHARACTER_URL
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
 class FakeGetPlanetUseCase(
     uiState: UiState
-) : BaseTestUseCase<Planet>(uiState), GetPlanetBaseUseCase {
+) : BaseTestUseCase<Planet, String>(uiState), GetPlanetBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Planet> = execute()
+    override suspend fun invoke(params: String): Flow<Planet> = execute(params)
 
-    override fun getValue(): Planet = Planet(name = "name", population = "100000")
+    override fun getValue(params: String): Planet {
+        return if (params.contentEquals(CHARACTER_URL)) Data.planet else throw IllegalStateException()
+    }
+
 
 }

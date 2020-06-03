@@ -14,15 +14,16 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteBaseUseCase
+import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
 class FakeDeleteFavoriteUseCase(
     uiState: UiState
-) : BaseTestUseCase<Int>(uiState), DeleteFavoriteBaseUseCase {
+) : BaseTestUseCase<Int, Int>(uiState), DeleteFavoriteBaseUseCase {
 
-    override suspend fun invoke(params: Int): Flow<Int> = execute()
+    override suspend fun invoke(params: Int): Flow<Int> = execute(params)
 
-    override fun getValue(): Int = 1
+    override fun getValue(params: Int): Int = listOf(Data.favorites.removeAt(params - 1)).size
 }

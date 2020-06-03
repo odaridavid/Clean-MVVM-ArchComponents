@@ -14,29 +14,20 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Favorite
-import com.k0d4black.theforce.domain.models.Film
 import com.k0d4black.theforce.domain.usecases.GetFavoriteByNameBaseUseCase
+import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
 class FakeGetFavoriteByNameUseCase(
     uiState: UiState
-) : BaseTestUseCase<Favorite>(uiState), GetFavoriteByNameBaseUseCase {
+) : BaseTestUseCase<Favorite, String>(uiState), GetFavoriteByNameBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Favorite> = execute()
+    override suspend fun invoke(params: String): Flow<Favorite> = execute(params)
 
-    override fun getValue(): Favorite =
-        Favorite(
-            1,
-            "Hans",
-            "12 BBY",
-            "123",
-            "planet",
-            "100000",
-            "specie",
-            "language",
-            listOf(Film("title", "crawl"))
-        )
+    override fun getValue(params: String): Favorite =
+        Data.favorites.filter { it.name == params }.first()
+
 
 }

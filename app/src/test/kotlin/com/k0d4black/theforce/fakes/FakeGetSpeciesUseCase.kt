@@ -15,16 +15,20 @@ package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Specie
 import com.k0d4black.theforce.domain.usecases.GetSpeciesBaseUseCase
+import com.k0d4black.theforce.utils.Data
+import com.k0d4black.theforce.utils.Data.CHARACTER_URL
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
 class FakeGetSpeciesUseCase(
     uiState: UiState
-) : BaseTestUseCase<List<Specie>>(uiState), GetSpeciesBaseUseCase {
+) : BaseTestUseCase<List<Specie>, String>(uiState), GetSpeciesBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<List<Specie>> = execute()
+    override suspend fun invoke(params: String): Flow<List<Specie>> = execute(params)
 
-    override fun getValue(): List<Specie> = listOf(Specie(name = "name", language = "language"))
+    override fun getValue(params: String): List<Specie> {
+        return if (params.contentEquals(CHARACTER_URL)) Data.species else emptyList()
+    }
 
 }

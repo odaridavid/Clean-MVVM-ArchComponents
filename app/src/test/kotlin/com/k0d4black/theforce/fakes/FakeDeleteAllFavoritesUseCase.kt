@@ -14,16 +14,24 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.usecases.DeleteAllFavoritesBaseUseCase
+import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
 class FakeDeleteAllFavoritesUseCase(
     uiState: UiState
-) : BaseTestUseCase<Int>(uiState), DeleteAllFavoritesBaseUseCase {
+) : BaseTestUseCase<Int, Unit>(uiState), DeleteAllFavoritesBaseUseCase {
 
-    override suspend fun invoke(params: Unit): Flow<Int> = execute()
+    private val initialSize = Data.favorites.size
 
-    override fun getValue(): Int = 4
+    override suspend fun invoke(params: Unit): Flow<Int> {
+        Data.favorites.clear()
+        return execute(params)
+    }
+
+    override fun getValue(params: Unit): Int {
+        return if (initialSize > Data.favorites.size) initialSize else 0
+    }
 
 }
