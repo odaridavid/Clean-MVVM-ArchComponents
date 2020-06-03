@@ -9,3 +9,7 @@ import java.math.RoundingMode
  **/
 internal fun convertToInches(centimeters: String): String =
     (BigDecimal(centimeters.toDouble() * 0.393701).setScale(3, RoundingMode.HALF_EVEN)).toString()
+
+internal fun populationToLong(population: String): Long {
+    return if (population.contains("unknown", ignoreCase = true)) 0L else population.toLong()
+}
