@@ -4,32 +4,33 @@ import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
-import com.k0d4black.theforce.fakes.FakeGetFilmsUseCase
-import com.k0d4black.theforce.fakes.FakeGetPlanetUseCase
-import com.k0d4black.theforce.fakes.FakeGetSpeciesUseCase
-import com.k0d4black.theforce.features.character_details.CharacterDetailViewModel
+import com.k0d4black.theforce.fakes.*
+import com.k0d4black.theforce.mappers.toPresentation
+import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import com.k0d4black.theforce.utils.observeOnce
+import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
+@ExperimentalCoroutinesApi
 internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
 
-    private val characterUrl = "/api/people/1/"
-
-    @ExperimentalCoroutinesApi
     @Test
     fun `given a character url when character details request sent then get character details`() {
-        runBlockingTest {
+        coroutineTestRule.dispatcher.runBlockingTest {
             prepareViewModel(UiState.SUCCESS)
-            characterDetailViewModel.getCharacterDetails(characterUrl)
+
+            characterDetailViewModel.getCharacterDetails(Data.CHARACTER_URL)
+
             characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
                 Truth.assertThat(detailViewState.error).isNull()
                 Truth.assertThat(detailViewState.films).isNotEmpty()
@@ -40,15 +41,56 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
     }
 
 
-    @ExperimentalCoroutinesApi
     @Test
     fun `given an invalid state when character details request sent then get view state eror`() {
-        runBlockingTest {
+        coroutineTestRule.dispatcher.runBlockingTest {
             prepareViewModel(UiState.ERROR)
-            characterDetailViewModel.getCharacterDetails(characterUrl)
+            characterDetailViewModel.getCharacterDetails(Data.CHARACTER_URL)
             characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
                 Truth.assertThat(detailViewState.error).isNotNull()
+            }
+        }
+    }
 
+    @Test
+    fun `given a characters' details when saved and removed from favorites add and remove character`() {
+        coroutineTestRule.dispatcher.runBlockingTest {
+
+            prepareViewModel(UiState.SUCCESS)
+
+            characterDetailViewModel.saveFavorite(Data.favorite.toPresentation())
+
+            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
+                Truth.assertThat(detailViewState.isFavorite).isTrue()
+                Truth.assertThat(Data.favorites.size).isEqualTo(1)
+            }
+
+            characterDetailViewModel.deleteFavorite(Data.favorite.name)
+
+            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
+                Truth.assertThat(detailViewState.isFavorite).isFalse()
+                Truth.assertThat(Data.favorites.size).isEqualTo(0)
+            }
+        }
+    }
+
+    @Test
+    fun `given a characters name when queried for favorite get character details`() {
+        coroutineTestRule.dispatcher.runBlockingTest {
+
+            prepareViewModel(UiState.SUCCESS)
+
+            characterDetailViewModel.saveFavorite(Data.favorite.toPresentation())
+
+            characterDetailViewModel.getFavorite(Data.favorite.name)
+
+            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
+                Truth.assertThat(detailViewState.isFavorite).isTrue()
+                Truth.assertThat(detailViewState.isComplete).isTrue()
+                Truth.assertThat(detailViewState.films).isNotEmpty()
+                Truth.assertThat(detailViewState.info).isNotNull()
+                Truth.assertThat(detailViewState.planet).isNotNull()
+                Truth.assertThat(detailViewState.specie).isNotNull()
             }
         }
     }
@@ -57,11 +99,24 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
         val getFilmsUseCase = FakeGetFilmsUseCase(uiState)
         val getPlanetUseCase = FakeGetPlanetUseCase(uiState)
         val getSpeciesUseCase = FakeGetSpeciesUseCase(uiState)
-        characterDetailViewModel = CharacterDetailViewModel(
-            getSpeciesUseCase,
-            getPlanetUseCase,
-            getFilmsUseCase
-        )
+        val deleteFavoriteByNameUseCase = FakeDeleteFavoriteByNameUseCase(uiState)
+        val insertFavoriteUseCase = FakeInsertFavoriteUseCase(uiState)
+        val getFavoriteByNameUseCase = FakeGetFavoriteByNameUseCase(uiState)
+
+        characterDetailViewModel =
+            CharacterDetailViewModel(
+                getSpeciesUseCase,
+                getPlanetUseCase,
+                getFilmsUseCase,
+                deleteFavoriteByNameUseCase,
+                insertFavoriteUseCase,
+                getFavoriteByNameUseCase
+            )
+    }
+
+    @After
+    fun clear() {
+        Data.favorites.clear()
     }
 
 }

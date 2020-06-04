@@ -13,22 +13,22 @@
  **/
 package com.k0d4black.theforce.fakes
 
-import com.k0d4black.theforce.domain.models.Favorite
-import com.k0d4black.theforce.domain.usecases.GetFavoriteByNameBaseUseCase
+import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
 
-class FakeGetFavoriteByNameUseCase(
+class FakeDeleteFavoriteByNameUseCase(
     uiState: UiState
-) : BaseTestUseCase<Favorite, String>(uiState), GetFavoriteByNameBaseUseCase {
+) : BaseTestUseCase<Int, String>(uiState), DeleteFavoriteByNameBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Favorite> = execute(params)
+    override suspend fun invoke(params: String): Flow<Int> = execute(params)
 
-    override fun getValue(params: String): Favorite {
-        return Data.favorites.filter { it.name == params }.first()
+    override fun getValue(params: String): Int {
+        return Data.favorites.find { it.name == params }?.run {
+            listOf(Data.favorites.remove(this)).size
+        } ?: 0
     }
-
 
 }

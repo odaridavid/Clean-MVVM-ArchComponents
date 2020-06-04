@@ -42,5 +42,6 @@ object Data {
     )
 
     const val CHARACTER_URL = "/api/people/1/"
+    const val SEARCH_PARAM = "Darth"
 
 }
