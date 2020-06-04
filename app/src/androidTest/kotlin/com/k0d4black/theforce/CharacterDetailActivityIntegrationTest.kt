@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.commons.NavigationUtils
-import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
+import com.k0d4black.theforce.activities.CharacterDetailActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import org.junit.After
 import org.junit.Rule
@@ -18,10 +18,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class CharacterDetailActivityIntegrationTest : BaseTest() {
 
+    //TODO Test for Adding/Removing from favorites
+
     @get:Rule
     var activityRule: ActivityTestRule<CharacterDetailActivity> =
         ActivityTestRule(CharacterDetailActivity::class.java, false, false)
-
 
     @Test
     fun shouldDisplayErrorOnLaunchWithDefaultId() {
@@ -41,7 +42,7 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
                 birthYear = "12BBY",
                 heightInCm = "234",
                 heightInInches = "544",
-                url = "https://swapi.py4e.com/api/people/1/"
+                url = "/api/people/1/"
             )
         )
         activityRule.launchActivity(intent)

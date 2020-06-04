@@ -22,19 +22,16 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 
-val localDataSourceModule = module {
+val fakeLocalDataSourceModule = module {
 
     single<IFavoritesRepository> { FavoritesRepository(favoritesDao = get()) }
 
     single {
         Room
-            .databaseBuilder(androidContext(), CharactersDatabase::class.java, "character_db")
+            .inMemoryDatabaseBuilder(androidContext(), CharactersDatabase::class.java)
             .build()
     }
 
     single { provideLeagueDao(db = get()) }
 
-
 }
-
-fun provideLeagueDao(db: CharactersDatabase): FavoritesDao = db.favoritesDao()

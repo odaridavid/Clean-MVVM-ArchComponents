@@ -24,14 +24,9 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
 
-    single { provideService(get()) }
+    single { provideStarWarsService(retrofit = get()) }
 
-    single {
-        provideRetrofit(
-            get(),
-            provideBaseUrl()
-        )
-    }
+    single { provideRetrofit(okHttpClient = get(), url = "https://swapi.dev/api/") }
 
     single { provideOkHttpClient() }
 }
@@ -54,7 +49,6 @@ internal fun provideRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit 
         .addConverterFactory(MoshiConverterFactory.create())
         .build()
 }
-internal fun provideService(retrofit: Retrofit): StarWarsApiService =
-    retrofit.create(StarWarsApiService::class.java)
 
-private fun provideBaseUrl(): String = "https://swapi.dev/api/"
+internal fun provideStarWarsService(retrofit: Retrofit): StarWarsApiService =
+    retrofit.create(StarWarsApiService::class.java)

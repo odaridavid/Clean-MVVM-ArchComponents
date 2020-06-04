@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features
+package com.k0d4black.theforce.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -8,22 +8,21 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
-import com.k0d4black.theforce.features.character_details.CharacterDetailActivity
-import com.k0d4black.theforce.features.character_search.CharacterSearchViewModel
-import com.k0d4black.theforce.features.character_search.SearchResultAdapter
-import com.k0d4black.theforce.features.character_search.SearchResultViewState
-import com.k0d4black.theforce.features.settings.SettingsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.states.SearchViewState
+import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
+import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Look into separating manifest for debug and release
 internal class DashboardActivity : BaseActivity() {
 
-    private val characterSearchViewModel by viewModel<CharacterSearchViewModel>()
+    private val characterSearchViewModel by viewModel<DashboardSearchViewModel>()
+//    private val favoritesViewModel by viewModel<DashboardFavoritesViewModel>()
 
     private lateinit var binding: ActivityDashboardBinding
 
@@ -38,15 +37,28 @@ internal class DashboardActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
-        setSupportActionBar(binding.searchToolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
+        configSupportActionBar()
 
         observeSearchViewState()
+//        observeFavoritesViewState()
 
+        onInitialEditTextClick()
+
+        handleTextChanges()
+    }
+
+    private fun configSupportActionBar() {
+        setSupportActionBar(binding.searchToolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun onInitialEditTextClick() {
         binding.searchEditText.setOnFocusChangeListener { _, _ ->
             binding.dashboardLayout.transitionToEnd()
         }
+    }
 
+    private fun handleTextChanges() {
         binding.searchEditText.doOnTextChanged { text, _, _, _ ->
             text?.let { name ->
                 if (name.length >= 2) {
@@ -57,66 +69,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun observeSearchViewState() {
-        characterSearchViewModel.searchViewState.observe(this, Observer { state ->
-
-            renderSearchResults(state)
-
-            renderError(state)
-
-            renderLoading(state)
-        })
-    }
-
-    private fun renderLoading(state: SearchResultViewState) {
-        if (state.isLoading) {
-            binding.searchResultsRecyclerView.hide()
-            binding.searchResultsProgressBar.show()
-        } else {
-            binding.searchResultsProgressBar.hide()
-            binding.searchResultsRecyclerView.show()
-        }
-    }
-
-    private fun renderSearchResults(state: SearchResultViewState) {
-        state.searchResults?.run {
-            if (state.searchResults.isEmpty()) {
-                displayNoSearchResults()
-                return
-            }
-            displaySearchResults(state.searchResults)
-        }
-    }
-
     fun handleUpButtonClick(view: View) {
         binding.dashboardLayout.transitionToStart()
-    }
-
-    private fun displaySearchResults(searchResults: List<CharacterPresentation>) {
-        showSnackbar(
-            binding.searchResultsRecyclerView,
-            getString(R.string.info_search_done)
-        )
-        binding.searchResultsRecyclerView.apply {
-            adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
-                submitList(searchResults)
-            })
-            initRecyclerViewWithLineDecoration(this@DashboardActivity)
-        }
-    }
-
-    private fun displayNoSearchResults() {
-        binding.searchResultsRecyclerView.hide()
-        showSnackbar(
-            binding.searchResultsRecyclerView,
-            getString(R.string.info_no_results)
-        )
-    }
-
-    private fun renderError(state: SearchResultViewState) {
-        state.error?.run {
-            showSnackbar(binding.searchResultsRecyclerView, getString(this.message), isError = true)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -129,6 +83,69 @@ internal class DashboardActivity : BaseActivity() {
             startActivity<SettingsActivity>()
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+//    private fun observeFavoritesViewState() {
+//        favoritesViewModel.favoritesViewState.observe(this, Observer { state ->
+//
+//        })
+//    }
+
+    private fun observeSearchViewState() {
+        characterSearchViewModel.searchViewState.observe(this, Observer { state ->
+            state.searchResults?.let { searchResults ->
+                if (searchResults.isEmpty()) {
+                    handleNoSearchResults()
+                    return@let
+                }
+                handleSearchResults(searchResults)
+            }
+
+            handleSearchError(state)
+
+            handleSearchLoading(state)
+        })
+    }
+
+    private fun handleSearchLoading(state: SearchViewState) {
+        if (state.isLoading) {
+            binding.searchResultsRecyclerView.hide()
+            binding.searchResultsProgressBar.show()
+        } else {
+            binding.searchResultsProgressBar.hide()
+            binding.searchResultsRecyclerView.show()
+        }
+    }
+
+    private fun handleSearchResults(searchResults: List<CharacterPresentation>) {
+        showSnackbar(
+            binding.searchResultsRecyclerView,
+            getString(R.string.info_search_done)
+        )
+        binding.searchResultsRecyclerView.apply {
+            adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
+                submitList(searchResults)
+            })
+            initRecyclerViewWithLineDecoration(this@DashboardActivity)
+        }
+    }
+
+    private fun handleNoSearchResults() {
+        binding.searchResultsRecyclerView.hide()
+        showSnackbar(
+            binding.searchResultsRecyclerView,
+            getString(R.string.info_no_results)
+        )
+    }
+
+    private fun handleSearchError(state: SearchViewState) {
+        state.error?.run {
+            showSnackbar(
+                binding.searchResultsRecyclerView,
+                getString(this.message),
+                isError = true
+            )
+        }
     }
 
 }

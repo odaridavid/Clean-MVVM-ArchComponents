@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/search_motion_scene"
-        tools:context=".features.DashboardActivity"
+        tools:context=".activities.DashboardActivity"
         tools:menu="@menu/main_menu">
 
         <androidx.appcompat.widget.Toolbar

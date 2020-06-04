@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- Dashboard Activity -->
+    <!-- SearchViewState Activity -->
     <string name="info_no_matching_results">No matching results</string>
     <string name="info_no_results">No Matching Search Results</string>
     <string name="info_no_favorite_characters">No Favorite Characters</string>
@@ -12,7 +12,7 @@
     <string name="menu_title_favorites">Favorites</string>
     <string name="explore_starwars_characters">Explore StarWars Characters.</string>
 
-    <!-- Dashboard Activity Menu -->
+    <!-- SearchViewState Activity Menu -->
     <string name="menu_title_settings">Settings</string>
 
     <!-- Character Detail Activity -->

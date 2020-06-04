@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.features.character_details
+package com.k0d4black.theforce.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,10 +6,14 @@ import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.adapters.FilmsAdapter
+import com.k0d4black.theforce.adapters.SpeciesAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
+import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import kotlinx.android.synthetic.main.activity_character_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
