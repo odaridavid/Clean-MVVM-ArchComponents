@@ -2,8 +2,8 @@ package com.k0d4black.theforce.data.remote.repository
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.remote.BaseTest
-import com.k0d4black.theforce.data.remote.helpers.EXISTING_SEARCH_PARAMS
-import com.k0d4black.theforce.data.remote.helpers.NON_EXISTENT_SEARCH_PARAMS
+import com.k0d4black.theforce.data.remote.helpers.Constants.EXISTING_SEARCH_PARAMS
+import com.k0d4black.theforce.data.remote.helpers.Constants.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking

@@ -17,7 +17,7 @@ import com.k0d4black.theforce.domain.models.Favorite
 import com.k0d4black.theforce.domain.models.Film
 
 
-object SampleData {
+internal object SampleData {
     val favorite = Favorite(
         name = "Hans",
         birthYear = "12 BBY",

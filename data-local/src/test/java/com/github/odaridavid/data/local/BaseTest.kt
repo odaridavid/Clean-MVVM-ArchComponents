@@ -22,7 +22,7 @@ import org.junit.Before
 import java.io.IOException
 
 
-open class BaseTest {
+internal open class BaseTest {
 
     protected lateinit var db: CharactersDatabase
     protected lateinit var favoritesDao: FavoritesDao

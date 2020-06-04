@@ -13,7 +13,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-open class BaseTest {
+internal open class BaseTest {
 
     private lateinit var mockWebServer: MockWebServer
 

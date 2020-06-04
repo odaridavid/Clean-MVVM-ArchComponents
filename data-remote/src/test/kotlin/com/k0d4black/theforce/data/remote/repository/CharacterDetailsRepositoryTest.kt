@@ -2,7 +2,7 @@ package com.k0d4black.theforce.data.remote.repository
 
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.data.remote.BaseTest
-import com.k0d4black.theforce.data.remote.helpers.EXISTING_CHARACTER_URL
+import com.k0d4black.theforce.data.remote.helpers.Constants.EXISTING_CHARACTER_URL
 import com.k0d4black.theforce.domain.repository.ICharacterDetailsRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking

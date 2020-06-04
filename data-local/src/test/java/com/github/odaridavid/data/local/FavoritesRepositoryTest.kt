@@ -27,7 +27,7 @@ import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
-class FavoritesRepositoryTest : BaseTest() {
+internal class FavoritesRepositoryTest : BaseTest() {
 
     private lateinit var favoriteRepository: IFavoritesRepository
 

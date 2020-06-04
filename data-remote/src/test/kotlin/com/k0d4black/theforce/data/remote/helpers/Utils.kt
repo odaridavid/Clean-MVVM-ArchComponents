@@ -12,7 +12,7 @@ import java.io.File
  * @return json : JSON from file at given path
  */
 
-fun getJson(path: String): String {
+internal fun getJson(path: String): String {
     val uri = getResource(path)
     val file = File(uri.path)
     return String(file.readBytes())

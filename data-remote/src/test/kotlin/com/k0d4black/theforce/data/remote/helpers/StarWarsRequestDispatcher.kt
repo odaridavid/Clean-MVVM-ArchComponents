@@ -1,5 +1,12 @@
 package com.k0d4black.theforce.data.remote.helpers
 
+import com.k0d4black.theforce.data.remote.helpers.Constants.EXISTING_CHARACTER_URL
+import com.k0d4black.theforce.data.remote.helpers.Constants.EXISTING_SEARCH_PARAMS
+import com.k0d4black.theforce.data.remote.helpers.Constants.FILM_URL
+import com.k0d4black.theforce.data.remote.helpers.Constants.NON_EXISTANT_CHARACTER_URL
+import com.k0d4black.theforce.data.remote.helpers.Constants.NON_EXISTENT_SEARCH_PARAMS
+import com.k0d4black.theforce.data.remote.helpers.Constants.PLANET_URL
+import com.k0d4black.theforce.data.remote.helpers.Constants.SPECIES_URL
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
@@ -8,7 +15,7 @@ import java.net.HttpURLConnection
 /**
  * Handles Requests from mock web server
  */
-class StarWarsRequestDispatcher : Dispatcher() {
+internal class StarWarsRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
