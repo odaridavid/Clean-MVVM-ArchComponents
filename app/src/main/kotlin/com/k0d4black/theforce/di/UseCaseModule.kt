@@ -31,7 +31,9 @@ val useCasesModule = module {
 
     single(named("films")) { provideFilmsUseCase(get()) }
 
-    single(named("delete_favorite")) { provideDeleteFavoriteUseCase(get()) }
+    single(named("delete_favorite_by_id")) { provideDeleteFavoriteByIdUseCase(get()) }
+
+    single(named("delete_favorite_by_name")) { provideDeleteFavoriteByNameUseCase(get()) }
 
     single(named("delete_all_favorites")) { provideDeleteAllFavoritesUseCase(get()) }
 
@@ -61,8 +63,12 @@ fun provideFilmsUseCase(detailsRepository: ICharacterDetailsRepository): GetFilm
     return GetFilmsUseCase(detailsRepository)
 }
 
-fun provideDeleteFavoriteUseCase(favoritesRepository: IFavoritesRepository): DeleteFavoriteBaseUseCase {
-    return DeleteFavoriteUseCase(favoritesRepository)
+fun provideDeleteFavoriteByIdUseCase(favoritesRepository: IFavoritesRepository): DeleteFavoriteByIdBaseUseCase {
+    return DeleteFavoriteByIdUseCase(favoritesRepository)
+}
+
+fun provideDeleteFavoriteByNameUseCase(favoritesRepository: IFavoritesRepository): DeleteFavoriteByNameBaseUseCase {
+    return DeleteFavoriteByNameUseCase(favoritesRepository)
 }
 
 fun provideDeleteAllFavoritesUseCase(favoritesRepository: IFavoritesRepository): DeleteAllFavoritesBaseUseCase {
