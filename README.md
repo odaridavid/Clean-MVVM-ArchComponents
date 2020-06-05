@@ -171,7 +171,7 @@ and default parameters
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 - [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
-- [Stetho]() - debug bridge
+- [Stetho](https://github.com/facebook/stetho) - debug bridge
 
 ## Contributors
 
@@ -181,9 +181,13 @@ Feel free to contribute in any way to the project from typos in docs to code rev
 
 ## Demo
 
-|<img src="art/s1.png" width=200/>|<img src="art/s2.png" width=200/>|
-|:----:|:----:|
+The codebase in most cases will be ahead of whats on the store.
 
+|<img src="art/sh1.png" width=200/>|<img src="art/sh2.png" width=200/>|<img src="art/sh3.png" width=200/>|<img src="art/sh4.png" width=200/>|
+|:----:|:----:|:----:|:----:|
+
+|<img src="art/app.gif" width=200/>|
+|:----:|
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
 
