@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+//TODO Use one to many for film to characters on next migration
 @Entity(tableName = "films")
 data class FilmEntity(
     val title: String,
