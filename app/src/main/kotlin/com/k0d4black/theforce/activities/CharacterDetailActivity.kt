@@ -16,7 +16,7 @@ import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Disable Saving favs till everything is ready
+//TODO Disable Saving favs for remote till everything is done
 //TODO Some Characters not bloody saving
 internal class CharacterDetailActivity : BaseActivity() {
 

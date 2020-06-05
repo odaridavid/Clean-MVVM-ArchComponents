@@ -22,6 +22,7 @@ import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//TODO Favorites text view dissappears on transition to end and back
 internal class DashboardActivity : BaseActivity() {
 
     private val characterSearchViewModel by viewModel<DashboardSearchViewModel>()
@@ -60,9 +61,8 @@ internal class DashboardActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (binding.dashboardLayout.currentState == binding.dashboardLayout.startState) {
+        if (binding.dashboardLayout.currentState == binding.dashboardLayout.startState)
             favoritesViewModel.getAllFavorites()
-        }
     }
 
     private fun configSupportActionBar() {
