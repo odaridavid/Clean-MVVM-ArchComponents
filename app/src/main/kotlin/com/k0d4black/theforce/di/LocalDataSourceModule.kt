@@ -32,9 +32,9 @@ val localDataSourceModule = module {
             .build()
     }
 
-    single { provideLeagueDao(db = get()) }
+    single { provideFavoritesDao(db = get()) }
 
 
 }
 
-fun provideLeagueDao(db: CharactersDatabase): FavoritesDao = db.favoritesDao()
+internal fun provideFavoritesDao(db: CharactersDatabase): FavoritesDao = db.favoritesDao()

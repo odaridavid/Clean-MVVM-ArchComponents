@@ -23,9 +23,12 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fav_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_default"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 

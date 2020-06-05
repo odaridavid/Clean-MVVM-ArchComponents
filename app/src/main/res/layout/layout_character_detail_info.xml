@@ -32,9 +32,9 @@
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_birth"
             android:drawablePadding="@dimen/drawable_padding"
-            app:drawableTint="@color/colorSecondaryVariant"
             android:text="@string/title_birth_year"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,9 +43,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:textSize="15sp"
             android:fontFamily="@font/roboto_light"
             android:text="@{character.birthYear}"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
             app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
             tools:text="BBY 13" />
@@ -57,9 +57,9 @@
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_height"
             android:drawablePadding="@dimen/drawable_padding"
-            app:drawableTint="@color/colorSecondaryVariant"
             android:text="@string/title_height"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:fontFamily="@font/roboto_light"
-            android:textSize="15sp"
             android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
             tools:text="123 cm" />
@@ -80,9 +80,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:textSize="15sp"
             android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
             tools:text="123 cm" />

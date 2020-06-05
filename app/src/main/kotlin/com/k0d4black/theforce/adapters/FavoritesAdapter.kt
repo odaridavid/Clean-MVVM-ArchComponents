@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemFavoriteBinding
 import com.k0d4black.theforce.models.FavoritePresentation
+import kotlinx.android.synthetic.main.item_favorite.view.*
 
 /**
  *
@@ -41,7 +42,7 @@ internal class FavoritesAdapter(
         fun bind(favoritePresentation: FavoritePresentation) {
             binding.favorite = favoritePresentation
             binding.executePendingBindings()
-            binding.root.setOnClickListener {
+            binding.favCard.setOnClickListener {
                 onClick(favoritePresentation)
             }
         }

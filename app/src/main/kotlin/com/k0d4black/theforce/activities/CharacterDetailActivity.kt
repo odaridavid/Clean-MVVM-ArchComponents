@@ -29,8 +29,10 @@ internal class CharacterDetailActivity : BaseActivity() {
 
     private var isFavorite = false
 
+    //Used to check if is favorite on init
     private var characterName = ""
 
+    //For Save/Delete convenience
     private var favoritePresentation: FavoritePresentation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

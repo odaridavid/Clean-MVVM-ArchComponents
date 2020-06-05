@@ -18,8 +18,6 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 internal class CharacterDetailActivityIntegrationTest : BaseTest() {
 
-    //TODO Test for Adding/Removing from favorites
-
     @get:Rule
     var activityRule: ActivityTestRule<CharacterDetailActivity> =
         ActivityTestRule(CharacterDetailActivity::class.java, false, false)

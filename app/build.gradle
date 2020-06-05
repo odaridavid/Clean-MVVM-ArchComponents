@@ -159,5 +159,6 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
+    androidTestImplementation testDependencies.koinTest
 }
 apply plugin: 'com.google.gms.google-services'

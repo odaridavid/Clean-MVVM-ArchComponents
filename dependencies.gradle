@@ -26,6 +26,7 @@ ext {
     lifecycleExtensionsVersion = '2.1.0'
     recyclerviewAnimationVersion = '3.0.0'
     aboutLibsVersion = '8.0.0-rc01'
+    stethoVersion = '1.5.1'
 
     //Data
     retrofitVersion = '2.7.0'
@@ -67,7 +68,8 @@ ext {
             aboutLibraryUi        : "com.mikepenz:aboutlibraries:$aboutLibsVersion",
             koinAndroid           : "org.koin:koin-android:$koinVersion",
             koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
-            koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion"
+            koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion",
+            stetho                : "com.facebook.stetho:stetho:$stethoVersion"
     ]
 
     dataDependencies = [
@@ -88,9 +90,7 @@ ext {
             junit            : "junit:junit:$junitVersion",
             androidxJunit    : "androidx.test.ext:junit:$androidxJunitVersion",
             espressoCore     : "androidx.test.espresso:espresso-core:$espressoVersion",
-            mockito          : "org.mockito:mockito-core:$mockitoVersion",
             googleTruth      : "com.google.truth:truth:$truthVersion",
-            mockitoInline    : "org.mockito:mockito-inline:$mockitoInlineVersion",
             mockWebServer    : "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion",
             robolectric      : "org.robolectric:robolectric:$robolectricVersion",
             androidxCoreTest : "androidx.test:core:$androidxTestCoreVersion",

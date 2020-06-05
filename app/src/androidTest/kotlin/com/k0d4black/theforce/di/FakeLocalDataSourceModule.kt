@@ -15,7 +15,6 @@ package com.k0d4black.theforce.di
 
 import androidx.room.Room
 import com.github.odaridavid.data.local.CharactersDatabase
-import com.github.odaridavid.data.local.dao.FavoritesDao
 import com.github.odaridavid.data.local.repository.FavoritesRepository
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import org.koin.android.ext.koin.androidContext
@@ -29,9 +28,10 @@ val fakeLocalDataSourceModule = module {
     single {
         Room
             .inMemoryDatabaseBuilder(androidContext(), CharactersDatabase::class.java)
+            .allowMainThreadQueries()
             .build()
     }
 
-    single { provideLeagueDao(db = get()) }
+    single { provideFavoritesDao(db = get()) }
 
 }
