@@ -19,17 +19,16 @@ import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.FilmPresentation
 
 internal fun FavoritePresentation.toDomain(): Favorite {
-    val favId = if (id > 0) id else 0
-    val population = if (planetPopulation == 0L) "unknown" else planetPopulation.toString()
+    val population =
+        if (planetPresentation.population == 0L) "unknown" else planetPresentation.population.toString()
     return Favorite(
-        favId,
-        name,
-        birthYear,
-        height,
-        planetName,
+        characterPresentation.name,
+        characterPresentation.birthYear,
+        characterPresentation.heightInCm,
+        planetPresentation.name,
         population,
-        specieName,
-        specieLanguage,
+        speciePresentation.name,
+        speciePresentation.language,
         films.map { it.toDomain() })
 }
 

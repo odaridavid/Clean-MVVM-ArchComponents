@@ -21,11 +21,7 @@ interface IFavoritesRepository {
 
     fun getAllFavorites(): Flow<List<Favorite>>
 
-    fun getFavoriteById(id: Int): Flow<Favorite>
-
-    fun getFavoriteByName(name: String): Flow<Favorite>
-
-    fun deleteFavoriteById(id: Int): Flow<Int>
+    fun getFavoriteByName(name: String): Flow<Favorite?>
 
     fun deleteFavoriteByName(name: String): Flow<Int>
 

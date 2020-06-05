@@ -123,6 +123,9 @@ dependencies {
     implementation appDependencies.firebaseAnalytics
     implementation appDependencies.crashlytics
 
+    //Stetho
+    implementation appDependencies.stetho
+
     //Animations
     implementation appDependencies.recyclerviewAnimations
 

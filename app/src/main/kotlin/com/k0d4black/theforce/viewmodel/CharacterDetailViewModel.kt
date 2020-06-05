@@ -5,14 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
-import com.k0d4black.theforce.domain.models.Favorite
 import com.k0d4black.theforce.domain.usecases.*
 import com.k0d4black.theforce.mappers.toDomain
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
-import com.k0d4black.theforce.models.PlanetPresentation
-import com.k0d4black.theforce.models.SpeciePresentation
+import com.k0d4black.theforce.models.states.CharacterDetailsFavoriteViewState
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.models.states.Error
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -34,15 +31,26 @@ internal class CharacterDetailViewModel(
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
+    val detailFavoriteViewState: LiveData<CharacterDetailsFavoriteViewState>
+        get() = _detailFavoriteViewState
+
+    private var _detailFavoriteViewState = MutableLiveData<CharacterDetailsFavoriteViewState>()
+
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
+    private val characterDetailFavoriteExceptionHandler =
+        CoroutineExceptionHandler { _, exception ->
+            val message = ExceptionHandler.parse(exception)
+            _detailFavoriteViewState.value =
+                _detailFavoriteViewState.value?.copy(error = Error(message))
+        }
+
     init {
         _detailViewState.value =
             CharacterDetailsViewState(
-                isFavorite = false,
                 isComplete = false,
                 error = null,
                 planet = null,
@@ -50,6 +58,8 @@ internal class CharacterDetailViewModel(
                 specie = null,
                 info = null
             )
+        _detailFavoriteViewState.value =
+            CharacterDetailsFavoriteViewState(isFavorite = false, error = null)
     }
 
     fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
@@ -85,29 +95,34 @@ internal class CharacterDetailViewModel(
         }
     }
 
-    fun deleteFavorite(name: String) {
-        viewModelScope.launch(characterDetailExceptionHandler) {
-            deleteFavoriteByNameUseCase(name).collect { row ->
-                if (row == 1) {
-                    _detailViewState.value = _detailViewState.value?.copy(isFavorite = false)
+    fun getFavorite(name: String) {
+        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
+            getFavoriteByNameUseCase(name).collect { fav ->
+                fav?.run {
+                    _detailFavoriteViewState.value =
+                        _detailFavoriteViewState.value?.copy(isFavorite = true)
                 }
             }
         }
     }
 
-    fun getFavorite(name: String) {
-        viewModelScope.launch(characterDetailExceptionHandler) {
-            getFavoriteByNameUseCase(name).collect { favorite ->
-                favoriteToPresentation(favorite)
+    fun deleteFavorite(name: String) {
+        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
+            deleteFavoriteByNameUseCase(name).collect { row ->
+                if (row == 1) {
+                    _detailFavoriteViewState.value =
+                        _detailFavoriteViewState.value?.copy(isFavorite = false)
+                }
             }
         }
     }
 
     fun saveFavorite(favoritePresentation: FavoritePresentation) {
-        viewModelScope.launch(characterDetailExceptionHandler) {
+        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
             insertFavoriteUseCase(favoritePresentation.toDomain()).collect { result ->
                 if (result.contentEquals("Done")) {
-                    _detailViewState.value = _detailViewState.value?.copy(isFavorite = true)
+                    _detailFavoriteViewState.value =
+                        _detailFavoriteViewState.value?.copy(isFavorite = true)
                 }
             }
         }
@@ -117,35 +132,6 @@ internal class CharacterDetailViewModel(
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
-    private fun favoriteToPresentation(favorite: Favorite) {
-        //TODO Move to mappers
-        val favoritePresentation = favorite.toPresentation()
-        val planet = PlanetPresentation(
-            favoritePresentation.planetName,
-            favoritePresentation.planetPopulation
-        )
-        val specie = SpeciePresentation(
-            favoritePresentation.specieName,
-            favoritePresentation.specieLanguage
-        )
-        val films = favoritePresentation.films
-        val info = CharacterPresentation(
-            favoritePresentation.name,
-            favoritePresentation.birthYear,
-            favoritePresentation.height,
-            favoritePresentation.heightInInches,
-            favoritePresentation.id.toString()
-        )
-
-        _detailViewState.value = _detailViewState.value?.copy(
-            isComplete = true,
-            isFavorite = true,
-            planet = planet,
-            specie = listOf(specie),
-            films = films,
-            info = info
-        )
-    }
 }
 
 

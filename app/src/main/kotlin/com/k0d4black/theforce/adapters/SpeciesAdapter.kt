@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemSpecieBinding
 import com.k0d4black.theforce.models.SpeciePresentation
 
-internal class SpeciesAdapter : ListAdapter<SpeciePresentation,
-        SpeciesAdapter.SpecieViewHolder>(SearchedCharacterDiffUtil) {
+internal class SpeciesAdapter :
+    ListAdapter<SpeciePresentation, SpeciesAdapter.SpecieViewHolder>(DiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecieViewHolder {
         val context = parent.context
@@ -20,17 +20,18 @@ internal class SpeciesAdapter : ListAdapter<SpeciePresentation,
     override fun onBindViewHolder(holder: SpecieViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class SpecieViewHolder(private val binding: ItemSpecieBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class SpecieViewHolder(
+        private val binding: ItemSpecieBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelStarWarsCharacter: SpeciePresentation) {
-            binding.species = modelStarWarsCharacter
+        fun bind(speciePresentation: SpeciePresentation) {
+            binding.species = speciePresentation
             binding.executePendingBindings()
         }
     }
 
     companion object {
-        val SearchedCharacterDiffUtil =
+        val DiffUtil =
             object : DiffUtil.ItemCallback<SpeciePresentation>() {
                 override fun areItemsTheSame(
                     oldItem: SpeciePresentation,

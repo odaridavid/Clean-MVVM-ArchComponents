@@ -19,27 +19,27 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.DeleteAllFavoritesBaseUseCase
-import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByIdBaseUseCase
+import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetAllFavoritesBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.Error
-import com.k0d4black.theforce.models.states.FavoritesViewState
+import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
 internal class DashboardFavoritesViewModel(
-    private val deleteFavoriteByIdUseCase: DeleteFavoriteByIdBaseUseCase,
+    private val deleteFavoriteByNameUseCase: DeleteFavoriteByNameBaseUseCase,
     private val getAllFavoritesUseCase: GetAllFavoritesBaseUseCase,
     private val deleteAllFavoritesUseCase: DeleteAllFavoritesBaseUseCase
 ) : ViewModel() {
 
-    val favoritesViewState: LiveData<FavoritesViewState>
+    val dashboardFavoritesViewState: LiveData<DashboardFavoritesViewState>
         get() = _favoriteViewState
 
-    private var _favoriteViewState = MutableLiveData<FavoritesViewState>()
+    private var _favoriteViewState = MutableLiveData<DashboardFavoritesViewState>()
 
     private val favoritesExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
@@ -49,7 +49,7 @@ internal class DashboardFavoritesViewModel(
 
     init {
         _favoriteViewState.value =
-            FavoritesViewState(isLoading = true, error = null, favorites = null)
+            DashboardFavoritesViewState(isLoading = true, error = null, favorites = null)
         getAllFavorites()
     }
 
@@ -63,7 +63,7 @@ internal class DashboardFavoritesViewModel(
     }
 
 
-    private fun getAllFavorites() {
+    fun getAllFavorites() {
         viewModelScope.launch(favoritesExceptionHandler) {
             onFavsLoading()
             loadFavorites()
@@ -88,10 +88,9 @@ internal class DashboardFavoritesViewModel(
         }
     }
 
-    //TODO Use Delete by Name
-    fun deleteFavorite(id: Int) {
+    fun deleteFavorite(name: String) {
         viewModelScope.launch(favoritesExceptionHandler) {
-            deleteFavoriteByIdUseCase(id).collect { row ->
+            deleteFavoriteByNameUseCase(name).collect { row ->
                 if (row > 0) {
                     loadFavorites()
                 }

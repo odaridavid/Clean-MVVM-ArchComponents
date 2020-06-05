@@ -11,12 +11,13 @@ import com.k0d4black.theforce.adapters.SpeciesAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
-import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
-import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
-import kotlinx.android.synthetic.main.activity_character_detail.*
+import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+//TODO Disable Saving favs till everything is ready
+//TODO Some Characters not bloody saving
 internal class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -27,69 +28,164 @@ internal class CharacterDetailActivity : BaseActivity() {
 
     private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
 
+    private var isFavorite = false
+
+    private var characterName = ""
+
+    private var favoritePresentation: FavoritePresentation? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
 
         setSupportActionBar(binding.detailsToolbar)
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val character = intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
+        val character =
+            intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
 
-        character?.let { characterInfo ->
-            characterDetailViewModel.getCharacterDetails(characterInfo.url)
-            renderCharacterInfo(characterInfo)
-            observeNetworkChanges(characterInfo.url)
-        } ?: characterDetailViewModel
-            .displayCharacterError(R.string.error_loading_character_details)
+        val favorite =
+            intent.getParcelableExtra<FavoritePresentation>(NavigationUtils.FAVORITE_PARCEL_KEY)
+
+        if (character == null && favorite == null) {
+            characterDetailViewModel
+                .displayCharacterError(R.string.error_loading_character_details)
+        }
+
+        character?.let { characterPresentation ->
+            characterName = characterPresentation.name
+            characterDetailViewModel.getCharacterDetails(characterPresentation.url)
+            onInitCheckIfFavorite()
+            handleCharacterInfo(characterPresentation)
+            observeNetworkChanges(characterPresentation.url)
+        }
+
+        favorite?.let { favoritePresentation ->
+            bindFavorite(favoritePresentation)
+            characterName = favoritePresentation.characterPresentation.name
+            this.favoritePresentation = favoritePresentation
+            onInitCheckIfFavorite()
+        }
 
         observeDetailViewState()
+        observeDetailFavoriteViewState()
+    }
+
+    private fun onInitCheckIfFavorite() {
+        characterDetailViewModel.getFavorite(characterName)
+    }
+
+    private fun bindFavorite(favoritePresentation: FavoritePresentation) {
+        handleCharacterInfo(favoritePresentation.characterPresentation)
+        handleSpecies(listOf(favoritePresentation.speciePresentation))
+        handleFilms(favoritePresentation.films)
+        handlePlanet(favoritePresentation.planetPresentation)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
+        val menuItem = menu?.getItem(0)
+        if (isFavorite)
+            menuItem?.setIcon(R.drawable.ic_fav_on)
+        else
+            menuItem?.setIcon(R.drawable.ic_fav_off)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_alter_favorites -> {
-                //TODO Save and remove to db and update action bar icon as needed
+                isFavorite =
+                    if (isFavorite) {
+                        removeFromFavorites()
+                        false
+                    } else {
+                        favoritePresentation?.let { favorite ->
+                            addToFavorites(favorite)
+                            true
+                        } ?: false
+                    }
+                invalidateOptionsMenu()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
 
+    private fun addToFavorites(favorite: FavoritePresentation) {
+        characterDetailViewModel.saveFavorite(favorite)
+        showSnackbar(
+            binding.characterDetailsLayout,
+            getString(R.string.info_added_to_favs)
+        )
+    }
+
+    private fun removeFromFavorites() {
+        characterDetailViewModel.deleteFavorite(characterName)
+        showSnackbar(
+            binding.characterDetailsLayout,
+            getString(R.string.info_removed_from_favs)
+        )
     }
 
     private fun observeDetailViewState() {
         characterDetailViewModel.detailViewState.observe(this, Observer {
-            renderSpecies(it)
-
-            renderFilms(it)
-
-            renderPlanetDetails(it)
-
-            renderOnError(it)
-
-            renderOnComplete(it)
+            handleSpecies(it.specie)
+            handleFilms(it.films)
+            handlePlanet(it.planet)
+            it.error?.let { e ->
+                handleOnError(resources.getString(e.message))
+            }
+            if (it.isComplete) {
+                showSnackbar(
+                    binding.characterDetailsLayout,
+                    getString(R.string.info_loading_complete)
+                )
+                favoritePresentation = createFavoriteFromRemoteCharacter(it)
+            }
         })
     }
 
-    private fun renderCharacterInfo(character: CharacterPresentation) {
+    private fun observeDetailFavoriteViewState() {
+        characterDetailViewModel.detailFavoriteViewState.observe(this, Observer {
+            isFavorite = it.isFavorite
+            invalidateOptionsMenu()
+            it.error?.let { e ->
+                showSnackbar(binding.characterDetailsLayout, getString(e.message))
+            }
+        })
+    }
+
+    private fun createFavoriteFromRemoteCharacter(state: CharacterDetailsViewState): FavoritePresentation {
+        val characterPresentation = CharacterPresentation(
+            characterName,
+            binding.infoLayout.character?.birthYear ?: "Unknown",
+            binding.infoLayout.character?.heightInCm ?: "Unknown",
+            binding.infoLayout.character?.heightInInches ?: "Unknown",
+            ""
+        )
+        val planetPresentation =
+            PlanetPresentation(state.planet?.name ?: "Unknown", state.planet?.population ?: 0L)
+        val speciePresentation = SpeciePresentation(
+            state.specie?.get(0)?.name ?: "Unknown",
+            state.specie?.get(0)?.language ?: "Unknown"
+        )
+        return FavoritePresentation(
+            characterPresentation = characterPresentation,
+            planetPresentation = planetPresentation,
+            speciePresentation = speciePresentation,
+            films = state.films ?: emptyList()
+        )
+    }
+
+    private fun handleCharacterInfo(character: CharacterPresentation) {
         supportActionBar?.title = character.name
         binding.infoLayout.character = character
     }
 
-    private fun renderOnComplete(it: CharacterDetailsViewState) {
-        if (it.isComplete)
-            showSnackbar(binding.characterDetailsLayout, getString(R.string.info_loading_complete))
-    }
-
-    private fun renderSpecies(it: CharacterDetailsViewState) {
-        it.specie?.let { species ->
+    private fun handleSpecies(species: List<SpeciePresentation>?) {
+        species?.let {
             with(binding.specieLayout) {
                 speciesProgressBar.remove()
                 if (species.isNotEmpty()) {
@@ -101,15 +197,8 @@ internal class CharacterDetailActivity : BaseActivity() {
         }
     }
 
-    private fun renderOnError(it: CharacterDetailsViewState) {
-        it.error?.let { e ->
-            displayErrorState(resources.getString(e.message))
-        }
-    }
-
-
-    private fun renderFilms(it: CharacterDetailsViewState) {
-        it.films?.let { films ->
+    private fun handleFilms(films: List<FilmPresentation>?) {
+        films?.let {
             with(binding.filmsLayout) {
                 filmsProgressBar.remove()
                 characterDetailsFilmsRecyclerView.apply {
@@ -119,8 +208,8 @@ internal class CharacterDetailActivity : BaseActivity() {
         }
     }
 
-    private fun renderPlanetDetails(it: CharacterDetailsViewState) {
-        it.planet?.let { planet ->
+    private fun handlePlanet(planet: PlanetPresentation?) {
+        planet?.let {
             with(binding.planetLayout) {
                 planetProgressBar.remove()
                 this.planet = planet
@@ -130,28 +219,17 @@ internal class CharacterDetailActivity : BaseActivity() {
         }
     }
 
-    private fun displayErrorState(message: String) {
+    private fun handleOnError(message: String) {
         binding.filmsLayout.filmsProgressBar.hide()
         binding.planetLayout.planetProgressBar.hide()
         binding.specieLayout.speciesProgressBar.hide()
         binding.filmsLayout.filmsErrorTextView.show()
         binding.planetLayout.planetErrorTextView.show()
         binding.specieLayout.specieErrorTextView.show()
-        showSnackbar(character_details_layout, message, isError = true)
+        showSnackbar(binding.characterDetailsLayout, message, isError = true)
     }
 
-    private fun observeNetworkChanges(characterUrl: String) {
-        onNetworkChange { isConnected ->
-            characterDetailViewModel.detailViewState.value?.let { viewState ->
-                if (isConnected && viewState.error != null) {
-                    resolveErrorViewState()
-                    characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
-                }
-            }
-        }
-    }
-
-    private fun resolveErrorViewState() {
+    private fun resolveError() {
         binding.filmsLayout.filmsErrorTextView.remove()
         binding.planetLayout.planetErrorTextView.remove()
         binding.specieLayout.specieErrorTextView.remove()
@@ -160,10 +238,15 @@ internal class CharacterDetailActivity : BaseActivity() {
         binding.specieLayout.speciesProgressBar.show()
     }
 
-    private fun onNetworkChange(block: (Boolean) -> Unit) {
-        NetworkUtils.getNetworkStatus(this)
-            .observe(this, Observer { isConnected ->
-                block(isConnected)
-            })
+    private fun observeNetworkChanges(characterUrl: String) {
+        onNetworkChange { isConnected ->
+            characterDetailViewModel.detailViewState.value?.let { viewState ->
+                if (isConnected && viewState.error != null) {
+                    resolveError()
+                    characterDetailViewModel.getCharacterDetails(characterUrl, isRetry = true)
+                }
+            }
+        }
     }
+
 }

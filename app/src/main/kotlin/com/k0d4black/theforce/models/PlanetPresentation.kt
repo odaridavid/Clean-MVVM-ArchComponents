@@ -1,3 +1,7 @@
 package com.k0d4black.theforce.models
 
-internal data class PlanetPresentation(val name: String, val population: Long)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+internal data class PlanetPresentation(val name: String, val population: Long) : Parcelable

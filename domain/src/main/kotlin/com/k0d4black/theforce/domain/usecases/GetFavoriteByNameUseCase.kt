@@ -17,7 +17,7 @@ import com.k0d4black.theforce.domain.models.Favorite
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias GetFavoriteByNameBaseUseCase = BaseUseCase<String, Flow<Favorite>>
+typealias GetFavoriteByNameBaseUseCase = BaseUseCase<String, Flow<Favorite?>>
 
 class GetFavoriteByNameUseCase(
     private val favoritesRepository: IFavoritesRepository

@@ -28,15 +28,4 @@ internal object SampleData {
         specieLanguage = "English",
         films = listOf(Film("title", "crawl"))
     )
-    val favoriteWithDbIds = Favorite(
-        id = 1,
-        name = "Hans",
-        birthYear = "12 BBY",
-        height = "123",
-        planetName = "Tatooine",
-        planetPopulation = "1000",
-        specieName = "Galactic",
-        specieLanguage = "English",
-        films = listOf(Film("title", "crawl"))
-    )
 }

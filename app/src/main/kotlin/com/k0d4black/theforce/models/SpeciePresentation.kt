@@ -1,3 +1,7 @@
 package com.k0d4black.theforce.models
 
-internal data class SpeciePresentation(val name: String, val language: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+internal data class SpeciePresentation(val name: String, val language: String) : Parcelable

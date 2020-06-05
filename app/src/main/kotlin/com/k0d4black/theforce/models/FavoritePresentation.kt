@@ -18,14 +18,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 internal data class FavoritePresentation(
-    val id: Int,
-    val name: String,
-    val birthYear: String,
-    val height: String,
-    val heightInInches:String,
-    val planetName: String,
-    val planetPopulation: Long,
-    val specieName: String,
-    val specieLanguage: String,
+    val characterPresentation: CharacterPresentation,
+    val planetPresentation: PlanetPresentation,
+    val speciePresentation: SpeciePresentation,
     val films: List<FilmPresentation>
 ) : Parcelable

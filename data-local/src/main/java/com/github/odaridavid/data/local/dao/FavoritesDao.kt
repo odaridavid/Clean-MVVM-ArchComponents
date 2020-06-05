@@ -26,15 +26,8 @@ interface FavoritesDao {
     @Query("DELETE FROM favorites")
     suspend fun deleteAll(): Int
 
-    @Query("DELETE FROM favorites WHERE id=:id")
-    suspend fun deleteById(id: Int): Int
-
     @Query("DELETE FROM favorites WHERE name=:name")
     suspend fun deleteByName(name: String): Int
-
-    @Transaction
-    @Query("SELECT * FROM favorites WHERE id=:id")
-    suspend fun getById(id: Int): FavoriteWithFilms
 
     @Transaction
     @Query("SELECT * FROM favorites WHERE name=:name")

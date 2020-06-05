@@ -8,28 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemFilmBinding
 import com.k0d4black.theforce.models.FilmPresentation
 
-internal class FilmsAdapter : ListAdapter<FilmPresentation,
-        FilmsAdapter.FilmViewHolder>(SearchedCharacterDiffUtil) {
+internal class FilmsAdapter : ListAdapter<FilmPresentation, FilmsAdapter.FilmViewHolder>(DiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
+        val context = parent.context
+        val inflater = LayoutInflater.from(context)
         return FilmViewHolder(ItemFilmBinding.inflate(inflater))
     }
 
     override fun onBindViewHolder(holder: FilmViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class FilmViewHolder(private val binding: ItemFilmBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class FilmViewHolder(
+        private val binding: ItemFilmBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelStarWarsCharacter: FilmPresentation) {
-            binding.film = modelStarWarsCharacter
+        fun bind(filmPresentation: FilmPresentation) {
+            binding.film = filmPresentation
             binding.executePendingBindings()
         }
     }
 
     companion object {
-        val SearchedCharacterDiffUtil =
+        val DiffUtil =
             object : DiffUtil.ItemCallback<FilmPresentation>() {
                 override fun areItemsTheSame(
                     oldItem: FilmPresentation,

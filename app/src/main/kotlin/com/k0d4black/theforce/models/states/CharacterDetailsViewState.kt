@@ -6,7 +6,6 @@ import com.k0d4black.theforce.models.PlanetPresentation
 import com.k0d4black.theforce.models.SpeciePresentation
 
 internal data class CharacterDetailsViewState(
-    val isFavorite: Boolean,
     val isComplete: Boolean,
     val error: Error?,
     val planet: PlanetPresentation?,

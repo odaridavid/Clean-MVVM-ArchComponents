@@ -14,7 +14,6 @@
 package com.k0d4black.theforce.domain.models
 
 data class Favorite(
-    val id: Int = 0,
     val name: String,
     val birthYear: String,
     val height: String,

@@ -11,18 +11,10 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.domain.usecases
+package com.k0d4black.theforce.models.states
 
-import com.k0d4black.theforce.domain.models.Favorite
-import com.k0d4black.theforce.domain.repository.IFavoritesRepository
-import kotlinx.coroutines.flow.Flow
 
-typealias GetFavoriteByIdBaseUseCase = BaseUseCase<Int, Flow<Favorite>>
-
-class GetFavoriteByIdUseCase(
-    private val favoritesRepository: IFavoritesRepository
-) : GetFavoriteByIdBaseUseCase {
-
-    override suspend fun invoke(params: Int) = favoritesRepository.getFavoriteById(params)
-
-}
+internal data class CharacterDetailsFavoriteViewState(
+    val isFavorite: Boolean,
+    val error: Error?
+)

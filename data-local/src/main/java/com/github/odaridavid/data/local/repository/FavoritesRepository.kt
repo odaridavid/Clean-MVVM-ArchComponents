@@ -28,20 +28,16 @@ class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRe
         emit(favs.map { it.toDomain() })
     }
 
-    override fun getFavoriteById(id: Int): Flow<Favorite> = flow {
-        val fav = favoritesDao.getById(id)
-        emit(fav.toDomain())
-    }
-
-    override fun getFavoriteByName(name: String): Flow<Favorite> = flow {
+    @Suppress("SENSELESS_COMPARISON")
+    override fun getFavoriteByName(name: String): Flow<Favorite?> = flow {
         val fav = favoritesDao.getByName(name)
-        emit(fav.toDomain())
+        //If value not in table will be null
+        if (fav != null)
+            emit(fav.toDomain())
+        else
+            emit(null)
     }
 
-    override fun deleteFavoriteById(id: Int): Flow<Int> = flow {
-        val rowsAffected = favoritesDao.deleteById(id)
-        emit(rowsAffected)
-    }
 
     override fun deleteFavoriteByName(name: String): Flow<Int> = flow {
         val rowsAffected = favoritesDao.deleteByName(name)

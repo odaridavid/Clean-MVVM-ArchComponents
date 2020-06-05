@@ -10,7 +10,6 @@ internal fun FilmEntity.toDomain(): Film = Film(title, openingCrawl)
 
 internal fun FavoriteWithFilms.toDomain(): Favorite =
     Favorite(
-        id = favoriteEntity.id,
         name = favoriteEntity.name,
         birthYear = favoriteEntity.birthYear,
         height = favoriteEntity.height,

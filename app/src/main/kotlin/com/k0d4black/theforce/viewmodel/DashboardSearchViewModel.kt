@@ -8,9 +8,8 @@ import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.Error
-import com.k0d4black.theforce.models.states.SearchViewState
+import com.k0d4black.theforce.models.states.DashboardSearchViewState
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -23,14 +22,14 @@ internal class DashboardSearchViewModel(
 
     private var searchJob: Job? = null
 
-    val searchViewState: LiveData<SearchViewState>
+    val dashboardSearchViewState: LiveData<DashboardSearchViewState>
         get() = _searchViewState
 
-    private var _searchViewState = MutableLiveData<SearchViewState>()
+    private var _searchViewState = MutableLiveData<DashboardSearchViewState>()
 
     init {
         _searchViewState.value =
-            SearchViewState(isLoading = false, error = null, searchResults = null)
+            DashboardSearchViewState(isLoading = false, error = null, searchResults = null)
     }
 
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->

@@ -1,12 +1,11 @@
 package com.k0d4black.theforce.adapters;
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.k0d4black.theforce.R
+import com.k0d4black.theforce.databinding.ItemFavoriteBinding
 import com.k0d4black.theforce.models.FavoritePresentation
 
 /**
@@ -22,24 +21,29 @@ import com.k0d4black.theforce.models.FavoritePresentation
  * the License.
  *
  **/
-internal class FavoritesAdapter :
-    ListAdapter<FavoritePresentation, FavoritesAdapter.FavoriteViewHolder>(
-        DiffUtil
-    ) {
+internal class FavoritesAdapter(
+    val onClick: (FavoritePresentation) -> (Unit)
+) : ListAdapter<FavoritePresentation, FavoritesAdapter.FavoriteViewHolder>(DiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val context = parent.context
-        val view = LayoutInflater.from(context).inflate(R.layout.item_favorite, parent, false)
-        return FavoriteViewHolder(view)
+        val inflater = LayoutInflater.from(context)
+        return FavoriteViewHolder(ItemFavoriteBinding.inflate(inflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class FavoriteViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    inner class FavoriteViewHolder(
+        private val binding: ItemFavoriteBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: FavoritePresentation) {
-            TODO("Implementation")
+        fun bind(favoritePresentation: FavoritePresentation) {
+            binding.favorite = favoritePresentation
+            binding.executePendingBindings()
+            binding.root.setOnClickListener {
+                onClick(favoritePresentation)
+            }
         }
     }
 
@@ -48,15 +52,15 @@ internal class FavoritesAdapter :
             override fun areItemsTheSame(
                 oldItem: FavoritePresentation,
                 newItem: FavoritePresentation
-            ): Boolean {
-                TODO("Implementation")
-            }
+            ): Boolean = oldItem == newItem
 
             override fun areContentsTheSame(
                 oldItem: FavoritePresentation,
                 newItem: FavoritePresentation
             ): Boolean {
-                TODO("Implementation")
+                return oldItem.characterPresentation.name == newItem.characterPresentation.name &&
+                        oldItem.characterPresentation.birthYear == newItem.characterPresentation.birthYear &&
+                        oldItem.characterPresentation.heightInCm == newItem.characterPresentation.heightInCm
             }
         }
     }

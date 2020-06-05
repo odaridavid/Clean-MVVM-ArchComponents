@@ -29,16 +29,14 @@ internal fun Specie.toPresentation(): SpeciePresentation {
 }
 
 internal fun Favorite.toPresentation(): FavoritePresentation {
+    val characterPresentation =
+        CharacterPresentation(name, birthYear, height, convertToInches(height), "")
+    val planetPresentation = PlanetPresentation(planetName, populationToLong(planetPopulation))
+    val speciePresentation = SpeciePresentation(specieName, specieLanguage)
     return FavoritePresentation(
-        id = id,
-        name = name,
-        birthYear = birthYear,
-        height = height,
-        heightInInches = convertToInches(height),
-        planetName = planetName,
-        planetPopulation = populationToLong(planetPopulation),
-        specieName = specieName,
-        specieLanguage = specieLanguage,
+        characterPresentation = characterPresentation,
+        planetPresentation = planetPresentation,
+        speciePresentation = speciePresentation,
         films = films.map { it.toPresentation() }
     )
 }

@@ -12,8 +12,7 @@ import kotlinx.android.synthetic.main.item_search.view.*
 
 internal class SearchResultAdapter(
     val onClick: (CharacterPresentation) -> Unit
-) : ListAdapter<CharacterPresentation,
-        SearchResultAdapter.SearchedCharacterViewHolder>(SearchedCharacterDiffUtil) {
+) : ListAdapter<CharacterPresentation, SearchResultAdapter.SearchedCharacterViewHolder>(DiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchedCharacterViewHolder {
         val context = parent.context
@@ -24,21 +23,22 @@ internal class SearchResultAdapter(
     override fun onBindViewHolder(holder: SearchedCharacterViewHolder, position: Int): Unit =
         getItem(position).let { holder.bind(it) }
 
-    inner class SearchedCharacterViewHolder(private val binding: ItemSearchBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class SearchedCharacterViewHolder(
+        private val binding: ItemSearchBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(modelSearch: CharacterPresentation) {
-            binding.searchedCharacter = modelSearch
+        fun bind(characterPresentation: CharacterPresentation) {
+            binding.searchedCharacter = characterPresentation
             binding.executePendingBindings()
 
             binding.root.more_info_arrow_image_button.setOnClickListener {
-                onClick(modelSearch)
+                onClick(characterPresentation)
             }
         }
     }
 
     companion object {
-        val SearchedCharacterDiffUtil =
+        val DiffUtil =
             object : DiffUtil.ItemCallback<CharacterPresentation>() {
                 override fun areItemsTheSame(
                     oldItem: CharacterPresentation,

@@ -8,12 +8,15 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.adapters.FavoritesAdapter
 import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
 import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.states.SearchViewState
+import com.k0d4black.theforce.models.FavoritePresentation
+import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
+import com.k0d4black.theforce.models.states.DashboardSearchViewState
 import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
 import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
@@ -22,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 internal class DashboardActivity : BaseActivity() {
 
     private val characterSearchViewModel by viewModel<DashboardSearchViewModel>()
-//    private val favoritesViewModel by viewModel<DashboardFavoritesViewModel>()
+    private val favoritesViewModel by viewModel<DashboardFavoritesViewModel>()
 
     private lateinit var binding: ActivityDashboardBinding
 
@@ -34,17 +37,32 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
+    private val favoritesAdapter: FavoritesAdapter by lazy {
+        FavoritesAdapter { favorite ->
+            startActivity<CharacterDetailActivity> {
+                putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, favorite)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
         configSupportActionBar()
 
         observeSearchViewState()
-//        observeFavoritesViewState()
+        observeFavoritesViewState()
 
         onInitialEditTextClick()
 
         handleTextChanges()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (binding.dashboardLayout.currentState == binding.dashboardLayout.startState) {
+            favoritesViewModel.getAllFavorites()
+        }
     }
 
     private fun configSupportActionBar() {
@@ -85,14 +103,28 @@ internal class DashboardActivity : BaseActivity() {
         } else super.onOptionsItemSelected(item)
     }
 
-//    private fun observeFavoritesViewState() {
-//        favoritesViewModel.favoritesViewState.observe(this, Observer { state ->
-//
-//        })
-//    }
+    private fun observeFavoritesViewState() {
+        favoritesViewModel.dashboardFavoritesViewState.observe(this, Observer { state ->
+
+            handleFavoritesLoading(state)
+
+            state.favorites?.let { favorites ->
+                if (favorites.isNotEmpty()) {
+                    handleFavorites(favorites)
+                } else {
+                    binding.noFavoritesTextView.show()
+                }
+            }
+
+            handleFavoritesError(state)
+        })
+    }
 
     private fun observeSearchViewState() {
-        characterSearchViewModel.searchViewState.observe(this, Observer { state ->
+        characterSearchViewModel.dashboardSearchViewState.observe(this, Observer { state ->
+
+            handleSearchLoading(state)
+
             state.searchResults?.let { searchResults ->
                 if (searchResults.isEmpty()) {
                     handleNoSearchResults()
@@ -103,17 +135,24 @@ internal class DashboardActivity : BaseActivity() {
 
             handleSearchError(state)
 
-            handleSearchLoading(state)
         })
     }
 
-    private fun handleSearchLoading(state: SearchViewState) {
-        if (state.isLoading) {
+    private fun handleSearchLoading(stateDashboard: DashboardSearchViewState) {
+        if (stateDashboard.isLoading) {
             binding.searchResultsRecyclerView.hide()
             binding.searchResultsProgressBar.show()
         } else {
             binding.searchResultsProgressBar.hide()
             binding.searchResultsRecyclerView.show()
+        }
+    }
+
+    private fun handleFavoritesLoading(stateDashboard: DashboardFavoritesViewState) {
+        if (stateDashboard.isLoading) {
+            binding.favoritesProgressBar.show()
+        } else {
+            binding.favoritesProgressBar.hide()
         }
     }
 
@@ -130,6 +169,16 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
+    private fun handleFavorites(favorites: List<FavoritePresentation>) {
+        binding.noFavoritesTextView.hide()
+        binding.favoritesRecyclerView.show()
+        binding.favoritesRecyclerView.apply {
+            adapter = ScaleInAnimationAdapter(favoritesAdapter.apply {
+                submitList(favorites)
+            })
+        }
+    }
+
     private fun handleNoSearchResults() {
         binding.searchResultsRecyclerView.hide()
         showSnackbar(
@@ -138,8 +187,8 @@ internal class DashboardActivity : BaseActivity() {
         )
     }
 
-    private fun handleSearchError(state: SearchViewState) {
-        state.error?.run {
+    private fun handleSearchError(stateDashboard: DashboardSearchViewState) {
+        stateDashboard.error?.run {
             showSnackbar(
                 binding.searchResultsRecyclerView,
                 getString(this.message),
@@ -148,4 +197,13 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
+    private fun handleFavoritesError(stateDashboard: DashboardFavoritesViewState) {
+        stateDashboard.error?.run {
+            showSnackbar(
+                binding.favoritesRecyclerView,
+                getString(this.message),
+                isError = true
+            )
+        }
+    }
 }

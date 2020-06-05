@@ -29,7 +29,7 @@ val viewModelsModule = module {
     viewModel {
         DashboardFavoritesViewModel(
             deleteAllFavoritesUseCase = get(named("delete_all_favorites")),
-            deleteFavoriteByIdUseCase = get(named("delete_favorite_by_id")),
+            deleteFavoriteByNameUseCase = get(named("delete_favorite_by_name")),
             getAllFavoritesUseCase = get(named("get_all_favorites"))
         )
     }

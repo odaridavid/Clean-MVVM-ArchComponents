@@ -46,14 +46,13 @@ internal class FavoritesRepositoryTest : BaseTest() {
                 Truth.assertThat(result).isEqualTo("Done")
             }
 
-
             val index = 0
             //Retrieve saved values
             val favorites = favoriteRepository.getAllFavorites()
             favorites.collect { favs ->
                 Truth.assertThat(favs).hasSize(1)
                 with(favs[index]) {
-                    Truth.assertThat(id).isEqualTo(1)
+                    Truth.assertThat(name).isEqualTo(SampleData.favorite.name)
                     Truth.assertThat(films[index].title)
                         .isEqualTo(SampleData.favorite.films[index].title)
                 }
@@ -63,33 +62,6 @@ internal class FavoritesRepositoryTest : BaseTest() {
             db.clearAllTables()
         }
 
-    @Test
-    fun `given a single favorite id when deleted from db then return one affected row`() =
-        runBlocking(Dispatchers.IO) {
-            //Id of favorite to be deleted
-            var favId: Int = 0
-
-            //Save to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-
-            //Assign id of created row
-            favoriteRepository.getAllFavorites().collect { favs ->
-                favId = favs[0].id
-            }
-
-            //Delete Item with specified id
-            favoriteRepository.deleteFavoriteById(favId).collect { rowsAffected ->
-                Truth.assertThat(rowsAffected).isAtMost(1)
-            }
-
-            //Verify Item Deleted
-            favoriteRepository.getAllFavorites().collect { favs ->
-                Truth.assertThat(favs).isEmpty()
-            }
-
-            //Clear data from tables
-            db.clearAllTables()
-        }
 
     @Test
     fun `given all entries must be deleted when deleted from db then return no of affected row`() =
@@ -121,22 +93,6 @@ internal class FavoritesRepositoryTest : BaseTest() {
             db.clearAllTables()
         }
 
-    @Test
-    fun `given a favorite id when queried then return a specific favorite`() =
-        runBlocking(Dispatchers.IO) {
-
-            //Save values to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-
-            //Check if fav exists using id
-            val favorite = favoriteRepository.getFavoriteById(1)
-            favorite.collect { favs ->
-                Truth.assertThat(favs).isEqualTo(SampleData.favoriteWithDbIds)
-            }
-
-            //Clear data from tables
-            db.clearAllTables()
-        }
 
     @Test
     fun `given a favorite name when queried then return a specific favorite`() =
@@ -148,7 +104,7 @@ internal class FavoritesRepositoryTest : BaseTest() {
             //Check if fav exists using name
             val favorite = favoriteRepository.getFavoriteByName(SampleData.favorite.name)
             favorite.collect { favs ->
-                Truth.assertThat(favs).isEqualTo(SampleData.favoriteWithDbIds)
+                Truth.assertThat(favs).isEqualTo(SampleData.favorite)
             }
 
             //Clear data from tables
