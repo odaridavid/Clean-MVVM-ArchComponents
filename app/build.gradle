@@ -56,9 +56,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [
-                    crashlyticsEnabled     : true,
-                    appIcon                : "@mipmap/ic_launcher",
-                    appIconRound           : "@mipmap/ic_launcher_round"
+                    crashlyticsEnabled: true,
+                    appIcon           : "@mipmap/ic_launcher",
+                    appIconRound      : "@mipmap/ic_launcher_round"
             ]
             signingConfig signingConfigs.release
         }
@@ -67,9 +67,9 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
             manifestPlaceholders = [
-                    crashlyticsEnabled     : false,
-                    appIcon                : "@mipmap/ic_debug_launcher",
-                    appIconRound           : "@mipmap/ic_debug_launcher_round"
+                    crashlyticsEnabled: false,
+                    appIcon           : "@mipmap/ic_debug_launcher",
+                    appIconRound      : "@mipmap/ic_debug_launcher_round"
             ]
             testCoverageEnabled true
         }
@@ -103,7 +103,9 @@ dependencies {
 
     //Local Libs
     implementation project(':domain')
-    implementation project(':di')
+    implementation project(':data-local')
+    implementation project(':data-remote')
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Jetpack
@@ -121,6 +123,9 @@ dependencies {
     implementation appDependencies.firebaseAnalytics
     implementation appDependencies.crashlytics
 
+    //Stetho
+    implementation appDependencies.stetho
+
     //Animations
     implementation appDependencies.recyclerviewAnimations
 
@@ -133,7 +138,6 @@ dependencies {
 
     // Koin
     implementation appDependencies.koinAndroid
-    implementation appDependencies.koinLifeCycleScope
     implementation appDependencies.koinAndroidViewModel
 
     //Test Libs
@@ -155,8 +159,6 @@ dependencies {
     androidTestImplementation testDependencies.mockWebServer
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
-    //For Fake Network Module
-    androidTestImplementation project(":data")
-
+    androidTestImplementation testDependencies.koinTest
 }
 apply plugin: 'com.google.gms.google-services'

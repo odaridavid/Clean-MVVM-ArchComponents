@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CharacterPresentation(
+internal data class CharacterPresentation(
     val name: String,
     val birthYear: String,
     val heightInCm: String,

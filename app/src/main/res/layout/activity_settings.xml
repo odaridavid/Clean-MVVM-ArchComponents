@@ -1,49 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".features.settings.SettingsActivity">
+<layout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/about_card_view"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default"
-        android:clickable="true"
-        android:focusable="true"
-        android:onClick="openAboutActivity"
-        app:cardBackgroundColor="?android:colorBackground"
-        app:cardCornerRadius="0dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".activities.SettingsActivity">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/settings_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:title="@string/title_settings"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/about_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_margin="@dimen/margin_default"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="openAboutActivity"
+            app:cardBackgroundColor="?android:colorBackground"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
 
-            <TextView
-                android:id="@+id/about_text_view"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_info_black_24dp"
-                android:drawablePadding="@dimen/padding_default"
-                android:padding="@dimen/padding_default"
-                android:text="@string/title_about"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                app:drawableTint="?colorSecondary" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:text="@string/star_wars_copyright"
-                android:layout_margin="@dimen/margin_default"
-                android:padding="@dimen/padding_default"/>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/about_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_default"
+                    android:drawableStart="@drawable/ic_info_black_24dp"
+                    android:drawablePadding="@dimen/padding_default"
+                    android:padding="@dimen/padding_default"
+                    android:text="@string/title_about"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                    app:drawableTint="?colorSecondary" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_default"
+                    android:padding="@dimen/padding_default"
+                    android:text="@string/star_wars_copyright"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

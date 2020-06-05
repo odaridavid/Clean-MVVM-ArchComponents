@@ -1,30 +1,32 @@
 package com.k0d4black.theforce
 
 import android.app.Application
-import com.k0d4black.theforce.modules.repositoriesModule
-import com.k0d4black.theforce.di.modules.viewModelsModule
-import com.k0d4black.theforce.modules.dataSourceModule
-import com.k0d4black.theforce.modules.networkModule
-import com.k0d4black.theforce.modules.useCasesModule
+import com.facebook.stetho.Stetho
+import com.k0d4black.theforce.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
-class TheForceApplication : Application() {
+internal class TheForceApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
+        Stetho.initializeWithDefaults(this)
+
         startKoin {
-            androidLogger()
+            androidLogger(Level.DEBUG)
             androidContext(this@TheForceApplication)
             modules(
                 networkModule,
                 viewModelsModule,
-                repositoriesModule,
-                dataSourceModule,
+                localDataSourceModule,
+                remoteDataSourceModule,
                 useCasesModule
             )
         }
+
     }
+
 }

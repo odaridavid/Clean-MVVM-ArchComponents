@@ -21,11 +21,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 
-object NetworkUtils {
+internal object NetworkUtils {
 
-    fun getNetworkStatus(
-        context: Context
-    ): LiveData<Boolean> {
+    fun getNetworkStatus(context: Context): LiveData<Boolean> {
         val isAvailableLiveData = MutableLiveData<Boolean>()
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val nr = NetworkRequest.Builder()

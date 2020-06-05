@@ -11,7 +11,6 @@ import java.net.HttpURLConnection
  */
 internal class StarWarsRequestDispatcher : Dispatcher() {
 
-    //TODO Create shared test utils module
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
             "/people?search=$EXISTING_SEARCH_PARAMS" -> {
@@ -23,6 +22,11 @@ internal class StarWarsRequestDispatcher : Dispatcher() {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(searchNoMatch)
+            }
+            "/people?search=$ERROR_SEARCH_PARAMS" -> {
+                MockResponse()
+                    .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
+                    .setBody(notFound)
             }
             NON_EXISTANT_CHARACTER_URL -> {
                 MockResponse()

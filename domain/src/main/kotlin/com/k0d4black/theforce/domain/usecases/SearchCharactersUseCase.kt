@@ -4,13 +4,12 @@ import com.k0d4black.theforce.domain.models.Character
 import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias SearchUseCase = BaseUseCase<String, Flow<List<Character>>>
+typealias SearchCharactersBaseUseCase = BaseUseCase<String, Flow<List<Character>>>
 
 class SearchCharactersUseCase(
     private val searchRepository: ICharacterSearchRepository
-) : SearchUseCase {
+) : SearchCharactersBaseUseCase {
 
-    override suspend operator fun invoke(params: String) =
-        searchRepository.searchCharacters(params)
+    override suspend operator fun invoke(params: String) = searchRepository.searchCharacters(params)
 
 }

@@ -85,91 +85,62 @@ that should scale.
 The 3 layered architectural approach is majorly guided by clean architecture which provides
 a clear separation of concerns with its Abstraction Principle.
 
-The `domain` and `data` layers are java module libraries as the business 
-logic does not rely on the Android frameworks concrete implementations.
-
 #### Presentation
 
-The application presentation layer contains the Activity,Fragments and 
-Viewmodels and handles Dependency Injection.
-
-The UI layer `feature` package contains `character_detail` and 
-`character_search` which contain an activity and corresponding 
-viewmodel as well as other UI related classes.
-
-The viewmodels are provided by the Koin that uses Kotlin's DSLs
-to lazily resolve dependency graph at runtime
-
-The ViewModel then receives data from the use case and updates the 
-LiveData being observed by the activity,the Activity then makes updates 
-to the UI as need be depending on the current view state.
-
-The UI utilises a **State pattern** by representing expected view states using sealed classes.
-This aids with delegating logic operations  to the Viewmodel and makes testing in isolation
-easier.
+```app``` contains the UI files and handles binding of DI components from other modules.
+Binding of data is facilitated by jetpacks data binding by serving data from the viewmodel
+to the UI.The data being received is part of a viewstate class that has properties contained in the
+relevant state.
 
 #### Domain
 
-The domain layer contains domain model classes which represent the
+The ```domain``` module contains domain model classes which represent the
 data we will be handling across presentation and data layer.
 
 Use cases are also provided in the domain layer and orchestrate the flow 
 of data from the data layer onto the presentation layer and a split into
 modular pieces serving one particular purpose.
 
-The UseCases use a ```BaseUseCase``` interface that defines the parameters its taking in and output
-this helps in creating fakes using in testing.
+The UseCases use a ```BaseUseCase``` interface that defines the parameters its taking in and 
+output this helps in creating fakes using in testing.
 
 #### Data
 
-The Data layer using the **Repository Pattern**  will be able to 
-provide data to the defined use cases which in this case is searching
-for characters and viewing details of selected characters.The use-cases
-are based on the single responsibility rule.
+- ```data-remote```
 
-This provides a more decoupled system,as it is isolated from changes to the 
-db by abstracting low level implementation details of data sources and
-changes to the UI.
+Handles data interacting with the network and is later serverd up to the presentation layer through 
+domain object
 
-The repository classes delegate access of data to the data source of 
-interest either local data source or a remote data source.
+- ```data-local```
 
-This layer also handles mapping of data entities to their domain 
-representations which when eventually passed to the presentation layer the
-domain will be mapped to the presentation model.
+Handles persistence of object with Room ORM from.This module is responsible for handling all local related
+logic and serves up data to and from the presentation layer through domain objects.
+
+With this separation we can easily swap in new or replace the database being used without causeing
+major ripples across the codebase.
 
 ## Testing
 
-Testing has been done based on the architectural layers.
+Each module has its own tests except for the ```domain``` module which is catered for since its
+part of the behavior under test.
 
-1.Domain
+All server responses in the tests are served by mock web server by appending relative urls to
+the localhost and the connected port as the base url.
 
-Contains tests that encompass domain models and uses mockito to verify 
-use case behavior.
+In the ``data-remote`` module the responses are mocked using the mockwebserver and verified that they
+are what we expect.
 
-2.Data
+In the ```data-local``` module an in  memory database is being used to run the tests,this makes it a 
+little faster compared to an actual db.
 
-Tests in the data inherit from a base test that provides a mock web server 
-with the api interface to request paths the routing of paths to responses 
-is handled by a custom mock web server dispatcher.
+In the ```app``` module there are unit tests for the viewmodels and util classes 
+and connected tests for the UI Screens.
 
-Json responses have also been provided in the test resource folder they 
-are similar to the response that will be received from the api
-The repository tests serve as integration tests between the data sources
-and mappers to the domain models.
-Currently the data source tests serve as unit tests verifying the appropriate
-responses are received from remote source.
-
-3.Presentation
-
-The Presentation layer contains robolectric jvm tests on for menu items 
-and instrumentation tests checking on system behaviour as per user
-expectation.
-
-The UI tests display data served from a mock web server running from the
-devices localhost,this removes flakiness compared to relying on actual 
-data from the real server aspects such as internet connection or 
-network service might bring up issues.
+The test instrumentation app uses modules that have been swaped with fakes for
+the network module so as to run requests on localhost with mockwebserver,this removes flakiness 
+compared to relying on actual  data from the real server aspects such as internet connection or
+network service might bring up issues and an in memory database for local data that also allows 
+main thread queries since tests should also be fast and we are just asserting stuff works.
 
 View models testing on live data were guided by this [article](https://proandroiddev.com/how-to-easily-test-a-viewmodel-with-livedata-and-coroutines-230c74416047)
  
@@ -181,13 +152,13 @@ Libraries used in the whole application are:
   - [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) - Manage UI related data in a lifecycle conscious way 
   and act as a channel between use cases and ui
   - [Data Binding](https://developer.android.com/topic/libraries/data-binding) - support library that allows binding of UI components in  layouts to data sources,binds character details and search results to UI
+  - [Room](https://developer.android.com/training/data-storage/room) - Provides abstraction layer over SQLite
 - [Retrofit](https://square.github.io/retrofit/) - type safe http client 
 and supports coroutines out of the box.  
 - [Moshi](https://github.com/square/moshi) - JSON Parser,used to parse 
 requests on the data layer for Entities and understands Kotlin non-nullable 
 and default parameters
 - [okhttp-logging-interceptor](https://github.com/square/okhttp/blob/master/okhttp-logging-interceptor/README.md) - logs HTTP request and response data.
-- [Mockito](https://site.mockito.org/) - Mocking framework used to provide mocks to verify behaviour in domain usecases tests.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines,provides `runBlocking` coroutine builder used in tests
 - [Truth](https://truth.dev/) - Assertions Library,provides readability as far as assertions are concerned
 - [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver) - web server for testing HTTP clients ,verify requests and responses on the star wars api with the retrofit client.
@@ -200,18 +171,23 @@ and default parameters
 - [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 - [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
+- [Stetho](https://github.com/facebook/stetho) - debug bridge
 
 ## Contributors
 
 - Thanks to [Zafer Celaloglu](https://github.com/zfrc) for the Dagger to Koin Refactor and additional test cases.
 
-Feel free to contribute in any way to the project.
+Feel free to contribute in any way to the project from typos in docs to code review are all welcome.
 
 ## Demo
 
-|<img src="art/s1.png" width=200/>|<img src="art/s2.png" width=200/>|
-|:----:|:----:|
+The codebase in most cases will be ahead of whats on the store.
 
+|<img src="art/sh1.png" width=200/>|<img src="art/sh2.png" width=200/>|<img src="art/sh3.png" width=200/>|<img src="art/sh4.png" width=200/>|
+|:----:|:----:|:----:|:----:|
+
+|<img src="art/app.gif" width=200/>|
+|:----:|
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
 
@@ -242,5 +218,3 @@ Star Wars and all associated names are copyright Lucasfilm ltd.
    See the License for the specific language governing permissions and
    limitations under the License.
  ```
-
-

@@ -14,18 +14,21 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Film
-import com.k0d4black.theforce.domain.usecases.FilmsUseCase
+import com.k0d4black.theforce.domain.usecases.GetFilmsBaseUseCase
+import com.k0d4black.theforce.utils.Data
+import com.k0d4black.theforce.utils.Data.CHARACTER_URL
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
 
-class FakeGetFilmsUseCase(private val uiState: UiState) : FilmsUseCase {
-    override suspend fun invoke(params: String): Flow<List<Film>> = flow {
-        when (uiState) {
-            UiState.SUCCESS -> emit(listOf(Film(title = "title", openingCrawl = "opening crawl")))
-            UiState.ERROR -> throw Throwable()
-        }
+class FakeGetFilmsUseCase(
+    uiState: UiState
+) : BaseTestUseCase<List<Film>, String>(uiState), GetFilmsBaseUseCase {
 
+    override suspend fun invoke(params: String): Flow<List<Film>> = execute(params)
+
+    override fun getValue(params: String): List<Film> {
+        return if (params.contentEquals(CHARACTER_URL)) Data.films else emptyList()
     }
+
 }
