@@ -17,7 +17,6 @@ import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 //TODO Disable Saving favs for remote till everything is done
-//TODO Some Characters not bloody saving
 internal class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()

@@ -60,22 +60,22 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
             characterDetailViewModel.saveFavorite(Data.favorite.toPresentation())
 
-            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
-                Truth.assertThat(detailViewState.isFavorite).isTrue()
+            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
+                Truth.assertThat(state.isFavorite).isTrue()
                 Truth.assertThat(Data.favorites.size).isEqualTo(1)
             }
 
             characterDetailViewModel.deleteFavorite(Data.favorite.name)
 
-            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
-                Truth.assertThat(detailViewState.isFavorite).isFalse()
+            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
+                Truth.assertThat(state.isFavorite).isFalse()
                 Truth.assertThat(Data.favorites.size).isEqualTo(0)
             }
         }
     }
 
     @Test
-    fun `given a characters name when queried for favorite get character details`() {
+    fun `given a characters name that exists when db query executed then get character`() {
         coroutineTestRule.dispatcher.runBlockingTest {
 
             prepareViewModel(UiState.SUCCESS)
@@ -84,13 +84,8 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
             characterDetailViewModel.getFavorite(Data.favorite.name)
 
-            characterDetailViewModel.detailViewState.observeOnce { detailViewState ->
-                Truth.assertThat(detailViewState.isFavorite).isTrue()
-                Truth.assertThat(detailViewState.isComplete).isTrue()
-                Truth.assertThat(detailViewState.films).isNotEmpty()
-                Truth.assertThat(detailViewState.info).isNotNull()
-                Truth.assertThat(detailViewState.planet).isNotNull()
-                Truth.assertThat(detailViewState.specie).isNotNull()
+            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
+                Truth.assertThat(state.isFavorite).isTrue()
             }
         }
     }

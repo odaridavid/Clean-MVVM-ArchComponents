@@ -17,17 +17,16 @@ import com.k0d4black.theforce.domain.models.Favorite
 import com.k0d4black.theforce.domain.usecases.GetFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
-import kotlinx.coroutines.flow.Flow
 
 
 class FakeGetFavoriteByNameUseCase(
     uiState: UiState
-) : BaseTestUseCase<Favorite, String>(uiState), GetFavoriteByNameBaseUseCase {
+) : BaseTestUseCase<Favorite?, String>(uiState), GetFavoriteByNameBaseUseCase {
 
-    override suspend fun invoke(params: String): Flow<Favorite> = execute(params)
+    override suspend fun invoke(params: String) = execute(params)
 
-    override fun getValue(params: String): Favorite {
-        return Data.favorites.filter { it.name == params }.first()
+    override fun getValue(params: String): Favorite? {
+        return Data.favorites.filter { it.name == params }.firstOrNull()
     }
 
 

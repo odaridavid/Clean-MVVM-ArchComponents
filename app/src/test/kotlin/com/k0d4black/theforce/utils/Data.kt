@@ -18,7 +18,6 @@ import com.k0d4black.theforce.domain.models.*
 
 object Data {
     val favorite = Favorite(
-        1,
         "Hans",
         "12 BBY",
         "123",
