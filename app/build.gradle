@@ -21,9 +21,9 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'jacoco-android'
 
-apply plugin: 'io.fabric'
-
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
+
+apply plugin: 'com.google.firebase.crashlytics'
 
 jacoco {
     toolVersion = "0.8.4"
@@ -66,13 +66,15 @@ android {
     buildTypes {
 
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [crashlyticsEnabled: true]
             signingConfig signingConfigs.release
         }
 
         debug {
+            minifyEnabled false
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
             manifestPlaceholders = [crashlyticsEnabled: false]
@@ -126,7 +128,7 @@ dependencies {
 
     //Firebase
     implementation appDependencies.firebaseAnalytics
-    implementation appDependencies.crashlytics
+    implementation appDependencies.firebaseCrashlytics
 
     //Stetho
     implementation appDependencies.stetho

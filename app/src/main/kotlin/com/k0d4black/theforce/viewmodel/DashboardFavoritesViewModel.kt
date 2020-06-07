@@ -17,6 +17,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.DeleteAllFavoritesBaseUseCase
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
@@ -42,6 +43,7 @@ internal class DashboardFavoritesViewModel(
     private var _favoriteViewState = MutableLiveData<DashboardFavoritesViewState>()
 
     private val favoritesExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         _favoriteViewState.value =
             _favoriteViewState.value?.copy(isLoading = false, error = Error(message))

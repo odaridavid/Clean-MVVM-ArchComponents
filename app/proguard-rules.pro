@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#Exclude R from ProGuard to enable the libraries auto detection[AboutLibraries]
+-keep class **.R$* {
+    <fields>;
+}
+
+-printusage build/outputs/mapping/release/usage.txt
+
+-keep class com.k0d4black.theforce.** { *; }

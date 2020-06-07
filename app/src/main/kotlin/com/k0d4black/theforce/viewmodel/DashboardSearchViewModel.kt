@@ -17,12 +17,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.states.Error
 import com.k0d4black.theforce.models.states.DashboardSearchViewState
+import com.k0d4black.theforce.models.states.Error
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -46,6 +47,7 @@ internal class DashboardSearchViewModel(
     }
 
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         onSearchError(message)
     }

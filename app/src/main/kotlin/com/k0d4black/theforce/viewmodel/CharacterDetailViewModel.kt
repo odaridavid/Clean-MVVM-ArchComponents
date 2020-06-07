@@ -17,6 +17,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.*
 import com.k0d4black.theforce.mappers.toDomain
@@ -50,12 +51,14 @@ internal class CharacterDetailViewModel(
     private var _detailFavoriteViewState = MutableLiveData<CharacterDetailsFavoriteViewState>()
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
     private val characterDetailFavoriteExceptionHandler =
         CoroutineExceptionHandler { _, exception ->
+            FirebaseCrashlytics.getInstance().recordException(exception)
             val message = ExceptionHandler.parse(exception)
             _detailFavoriteViewState.value =
                 _detailFavoriteViewState.value?.copy(error = Error(message))
