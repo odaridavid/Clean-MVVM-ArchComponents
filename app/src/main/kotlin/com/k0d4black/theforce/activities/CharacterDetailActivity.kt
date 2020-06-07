@@ -52,6 +52,9 @@ internal class CharacterDetailActivity : BaseActivity() {
         if (character == null && favorite == null) {
             characterDetailViewModel
                 .displayCharacterError(R.string.error_loading_character_details)
+        } else {
+            observeDetailViewState()
+            observeDetailFavoriteViewState()
         }
 
         character?.let { characterPresentation ->
@@ -68,9 +71,6 @@ internal class CharacterDetailActivity : BaseActivity() {
             this.favoritePresentation = favoritePresentation
             onInitCheckIfFavorite()
         }
-
-        observeDetailViewState()
-        observeDetailFavoriteViewState()
     }
 
     private fun onInitCheckIfFavorite() {
