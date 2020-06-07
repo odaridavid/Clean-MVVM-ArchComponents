@@ -96,6 +96,7 @@
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/ic_no_favs_96dp"
             android:drawablePadding="@dimen/drawable_padding"
+            android:gravity="center_horizontal"
             android:text="@string/info_no_favorite_characters"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"

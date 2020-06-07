@@ -68,22 +68,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [
-                    crashlyticsEnabled: true,
-                    appIcon           : "@mipmap/ic_launcher",
-                    appIconRound      : "@mipmap/ic_launcher_round"
-            ]
+            manifestPlaceholders = [crashlyticsEnabled: true]
             signingConfig signingConfigs.release
         }
 
         debug {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
-            manifestPlaceholders = [
-                    crashlyticsEnabled: false,
-                    appIcon           : "@mipmap/ic_debug_launcher",
-                    appIconRound      : "@mipmap/ic_debug_launcher_round"
-            ]
+            manifestPlaceholders = [crashlyticsEnabled: false]
             testCoverageEnabled true
         }
     }
