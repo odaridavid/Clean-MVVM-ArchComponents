@@ -13,6 +13,7 @@ import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
@@ -164,6 +165,7 @@ internal class DashboardActivity : BaseActivity() {
         binding.searchResultsRecyclerView.apply {
             adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
                 submitList(searchResults)
+                EspressoIdlingResource.decrement()
             })
             initRecyclerViewWithLineDecoration(this@DashboardActivity)
         }
@@ -175,6 +177,7 @@ internal class DashboardActivity : BaseActivity() {
         binding.favoritesRecyclerView.apply {
             adapter = ScaleInAnimationAdapter(favoritesAdapter.apply {
                 submitList(favorites)
+                EspressoIdlingResource.decrement()
             })
         }
     }

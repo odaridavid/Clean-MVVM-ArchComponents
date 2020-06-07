@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.states.Error
@@ -55,6 +56,7 @@ internal class DashboardSearchViewModel(
     }
 
     private fun onSearchLoading() {
+        EspressoIdlingResource.increment()
         _searchViewState.value = _searchViewState.value?.copy(isLoading = true)
     }
 
