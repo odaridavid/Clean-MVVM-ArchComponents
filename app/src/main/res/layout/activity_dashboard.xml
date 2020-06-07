@@ -70,7 +70,7 @@
             android:id="@+id/favorites_title_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_fav_off"
+            android:drawableStart="@drawable/ic_fav_on"
             android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_favorites"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
