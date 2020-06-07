@@ -1,7 +1,6 @@
 package com.k0d4black.theforce
 
 import android.content.Intent
-import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
@@ -26,7 +25,6 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
     fun shouldDisplayErrorOnLaunchWithDefaultId() {
         val intent = Intent()
         activityRule.launchActivity(intent)
-        SystemClock.sleep(2000)
         onView(withId(com.google.android.material.R.id.snackbar_text))
             .check(matches(withText(activityRule.activity.resources.getString(R.string.error_loading_character_details))))
     }
@@ -44,7 +42,6 @@ internal class CharacterDetailActivityIntegrationTest : BaseTest() {
             )
         )
         activityRule.launchActivity(intent)
-        SystemClock.sleep(2000)
         onView(withId(R.id.character_details_birth_year_title_text_view)).check(matches(isDisplayed()))
     }
 

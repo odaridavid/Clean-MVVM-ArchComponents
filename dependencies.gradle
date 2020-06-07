@@ -98,6 +98,7 @@ ext {
             rules            : "androidx.test:rules:$rulesVersion",
             espressoIntents  : "androidx.test.espresso:espresso-intents:$espressoVersion",
             espressoContrib  : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+            IdlingResource   : "androidx.test.espresso:espresso-idling-resource:$espressoVersion",
             archComponentTest: "androidx.arch.core:core-testing:$archComponentTestVersion",
             coroutinesTest   : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesCoreVersion",
             koinTest         : "org.koin:koin-test:$koinVersion",
