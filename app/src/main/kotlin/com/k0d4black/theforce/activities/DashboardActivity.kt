@@ -138,8 +138,8 @@ internal class DashboardActivity : BaseActivity() {
         })
     }
 
-    private fun handleSearchLoading(stateDashboard: DashboardSearchViewState) {
-        if (stateDashboard.isLoading) {
+    private fun handleSearchLoading(state: DashboardSearchViewState) {
+        if (state.isLoading) {
             binding.searchResultsRecyclerView.hide()
             binding.searchResultsProgressBar.show()
         } else {
@@ -148,8 +148,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun handleFavoritesLoading(stateDashboard: DashboardFavoritesViewState) {
-        if (stateDashboard.isLoading) {
+    private fun handleFavoritesLoading(state: DashboardFavoritesViewState) {
+        if (state.isLoading) {
             binding.favoritesProgressBar.show()
         } else {
             binding.favoritesProgressBar.hide()
@@ -187,8 +187,8 @@ internal class DashboardActivity : BaseActivity() {
         )
     }
 
-    private fun handleSearchError(stateDashboard: DashboardSearchViewState) {
-        stateDashboard.error?.run {
+    private fun handleSearchError(state: DashboardSearchViewState) {
+        state.error?.run {
             showSnackbar(
                 binding.searchResultsRecyclerView,
                 getString(this.message),
@@ -197,8 +197,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun handleFavoritesError(stateDashboard: DashboardFavoritesViewState) {
-        stateDashboard.error?.run {
+    private fun handleFavoritesError(state: DashboardFavoritesViewState) {
+        state.error?.run {
             showSnackbar(
                 binding.favoritesRecyclerView,
                 getString(this.message),
