@@ -29,7 +29,7 @@ import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Disable Saving favs for remote till everything is done
+//TODO Disable Saving favs for remote till everything is done and is not error
 internal class CharacterDetailActivity : BaseActivity() {
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
@@ -101,9 +101,9 @@ internal class CharacterDetailActivity : BaseActivity() {
         menuInflater.inflate(R.menu.details_menu, menu)
         val menuItem = menu?.getItem(0)
         if (isFavorite)
-            menuItem?.setIcon(R.drawable.ic_fav_on)
+            menuItem?.setIcon(R.drawable.ic_favs_24dp)
         else
-            menuItem?.setIcon(R.drawable.ic_fav_off)
+            menuItem?.setIcon(R.drawable.ic_no_favs_24dp)
         return super.onCreateOptionsMenu(menu)
     }
 

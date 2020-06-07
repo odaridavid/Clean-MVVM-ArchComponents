@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_default"
-                    android:drawableStart="@drawable/ic_info_black_24dp"
+                    android:drawableStart="@drawable/ic_info_24dp"
                     android:drawablePadding="@dimen/padding_default"
                     android:padding="@dimen/padding_default"
                     android:text="@string/title_about"

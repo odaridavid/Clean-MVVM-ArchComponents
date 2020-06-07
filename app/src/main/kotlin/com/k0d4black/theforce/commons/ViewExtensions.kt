@@ -54,7 +54,7 @@ internal fun Activity.showSnackbar(view: View, message: String, isError: Boolean
 internal fun RecyclerView.initRecyclerViewWithLineDecoration(context: Context) {
     val linearLayoutManager = LinearLayoutManager(context)
     val itemDecoration = DividerItemDecoration(context, linearLayoutManager.orientation).apply {
-        setDrawable(context.getDrawable(R.drawable.view_divider)!!)
+        setDrawable(context.getDrawable(R.drawable.line_divider)!!)
     }
     layoutManager = linearLayoutManager
     addItemDecoration(itemDecoration)
