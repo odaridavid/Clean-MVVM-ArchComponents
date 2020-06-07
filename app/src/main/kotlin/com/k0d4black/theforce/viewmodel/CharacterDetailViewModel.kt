@@ -51,14 +51,12 @@ internal class CharacterDetailViewModel(
     private var _detailFavoriteViewState = MutableLiveData<CharacterDetailsFavoriteViewState>()
 
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
     private val characterDetailFavoriteExceptionHandler =
         CoroutineExceptionHandler { _, exception ->
-            FirebaseCrashlytics.getInstance().recordException(exception)
             val message = ExceptionHandler.parse(exception)
             _detailFavoriteViewState.value =
                 _detailFavoriteViewState.value?.copy(error = Error(message))

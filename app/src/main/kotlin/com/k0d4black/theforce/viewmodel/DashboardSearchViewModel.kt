@@ -47,7 +47,6 @@ internal class DashboardSearchViewModel(
     }
 
     private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         onSearchError(message)
     }

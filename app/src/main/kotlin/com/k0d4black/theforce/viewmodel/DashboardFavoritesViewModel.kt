@@ -43,7 +43,6 @@ internal class DashboardFavoritesViewModel(
     private var _favoriteViewState = MutableLiveData<DashboardFavoritesViewState>()
 
     private val favoritesExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        FirebaseCrashlytics.getInstance().recordException(exception)
         val message = ExceptionHandler.parse(exception)
         _favoriteViewState.value =
             _favoriteViewState.value?.copy(isLoading = false, error = Error(message))
