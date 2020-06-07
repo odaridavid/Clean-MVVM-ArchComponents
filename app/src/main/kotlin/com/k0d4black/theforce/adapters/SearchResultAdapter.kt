@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.k0d4black.theforce.databinding.ItemSearchBinding
 import com.k0d4black.theforce.models.CharacterPresentation
-import kotlinx.android.synthetic.main.item_search.view.*
 
 
 internal class SearchResultAdapter(
@@ -44,7 +43,7 @@ internal class SearchResultAdapter(
             binding.searchedCharacter = characterPresentation
             binding.executePendingBindings()
 
-            binding.root.more_info_arrow_image_button.setOnClickListener {
+            binding.moreInfoArrowImageButton.setOnClickListener {
                 onClick(characterPresentation)
             }
         }
