@@ -68,6 +68,8 @@ keystore.properties
 
 If you encounter any error check [this site](https://docs.travis-ci.com/user/encrypting-files/) out.
 
+To setup the Travis CLI tools see [this](https://github.com/travis-ci/travis.rb#installation) 
+
 ## Architecture
 
 The Application is split into a three layer architecture:
