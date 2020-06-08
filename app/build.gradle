@@ -160,5 +160,6 @@ dependencies {
     androidTestImplementation testDependencies.espressoContrib
     androidTestImplementation testDependencies.espressoIntents
     androidTestImplementation testDependencies.koinTest
+    implementation testDependencies.espressoIdlingResource
 }
 apply plugin: 'com.google.gms.google-services'

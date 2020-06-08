@@ -1,6 +1,5 @@
 package com.k0d4black.theforce
 
-import android.os.SystemClock
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
@@ -24,7 +23,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 internal class DashboardActivityIntegrationTest : BaseTest() {
@@ -39,20 +37,17 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
     @Test
     fun shouldDisplayDataOnSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        SystemClock.sleep(1500)
         onView(withId(R.id.search_results_recycler_view)).check(matches(isDisplayed()))
     }
 
     @Test
     fun shouldNavigateToCharacterDetailOnItemClickFromSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        SystemClock.sleep(1500)
         onView(withId(R.id.search_results_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<SearchResultAdapter.SearchedCharacterViewHolder>(
                 0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
             )
         )
-        SystemClock.sleep(1500)
         intended(hasComponent(CHARACTER_DETAIL_ACTIVITY_COMPONENT))
     }
 
@@ -60,14 +55,12 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
     @Test
     fun shouldDisplayNoFoundMatchesSnackbarOnSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))
-        SystemClock.sleep(1500)
         onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(isDisplayed()))
     }
 
     @Test
     fun shouldDisplayErrorSnackbarOnSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(ERROR_SEARCH_PARAMS))
-        SystemClock.sleep(1500)
         onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(isDisplayed()))
     }
 
@@ -81,16 +74,13 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
     @Test
     fun verifyFavoritesFeatureAddsAndRemoves() {
         onView(withId(R.id.search_edit_text)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        SystemClock.sleep(1500)
         onView(withId(R.id.search_results_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<SearchResultAdapter.SearchedCharacterViewHolder>(
                 0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
             )
         )
-        SystemClock.sleep(2000)
         onView(withContentDescription("Favorites")).perform(click())
         onView(withContentDescription("Navigate up")).perform(click())
-        SystemClock.sleep(1000)
         onView(withId(R.id.favorites_recycler_view)).check(matches(isDisplayed()))
         onView(withId(R.id.favorites_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<FavoritesAdapter.FavoriteViewHolder>(
@@ -99,7 +89,6 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
         )
         onView(withId(R.id.action_alter_favorites)).perform(click())
         onView(withContentDescription("Navigate up")).perform(click())
-        SystemClock.sleep(1000)
         onView(withId(R.id.no_favorites_text_view)).check(matches(isDisplayed()))
     }
 
