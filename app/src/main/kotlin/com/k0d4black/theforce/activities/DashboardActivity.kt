@@ -1,3 +1,16 @@
+/**
+ *
+ * Copyright 2020 David Odari
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ *
+ **/
 package com.k0d4black.theforce.activities
 
 import android.os.Bundle
@@ -138,8 +151,8 @@ internal class DashboardActivity : BaseActivity() {
         })
     }
 
-    private fun handleSearchLoading(stateDashboard: DashboardSearchViewState) {
-        if (stateDashboard.isLoading) {
+    private fun handleSearchLoading(state: DashboardSearchViewState) {
+        if (state.isLoading) {
             binding.searchResultsRecyclerView.hide()
             binding.searchResultsProgressBar.show()
         } else {
@@ -148,8 +161,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun handleFavoritesLoading(stateDashboard: DashboardFavoritesViewState) {
-        if (stateDashboard.isLoading) {
+    private fun handleFavoritesLoading(state: DashboardFavoritesViewState) {
+        if (state.isLoading) {
             binding.favoritesProgressBar.show()
         } else {
             binding.favoritesProgressBar.hide()
@@ -187,8 +200,8 @@ internal class DashboardActivity : BaseActivity() {
         )
     }
 
-    private fun handleSearchError(stateDashboard: DashboardSearchViewState) {
-        stateDashboard.error?.run {
+    private fun handleSearchError(state: DashboardSearchViewState) {
+        state.error?.run {
             showSnackbar(
                 binding.searchResultsRecyclerView,
                 getString(this.message),
@@ -197,8 +210,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    private fun handleFavoritesError(stateDashboard: DashboardFavoritesViewState) {
-        stateDashboard.error?.run {
+    private fun handleFavoritesError(state: DashboardFavoritesViewState) {
+        state.error?.run {
             showSnackbar(
                 binding.favoritesRecyclerView,
                 getString(this.message),
