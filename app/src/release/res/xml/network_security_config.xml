@@ -12,7 +12,7 @@
 
 -->
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
+    <domain-config cleartextTrafficPermitted="false">
         <domain includeSubdomains="true">swapi.dev</domain>
     </domain-config>
 </network-security-config>

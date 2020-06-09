@@ -32,12 +32,12 @@ internal class StarWarsRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
-            "/people?search=$EXISTING_SEARCH_PARAMS" -> {
+            "/people/?search=$EXISTING_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(getJson("json/character_search.json"))
             }
-            "/people?search=$NON_EXISTENT_SEARCH_PARAMS" -> {
+            "/people/?search=$NON_EXISTENT_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(
