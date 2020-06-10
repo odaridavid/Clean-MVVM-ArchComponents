@@ -15,10 +15,7 @@ import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.activities.DashboardActivity
 import com.k0d4black.theforce.adapters.FavoritesAdapter
 import com.k0d4black.theforce.adapters.SearchResultAdapter
-import com.k0d4black.theforce.helpers.ERROR_SEARCH_PARAMS
-import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
-import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
-import com.k0d4black.theforce.helpers.ViewAction
+import com.k0d4black.theforce.helpers.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
