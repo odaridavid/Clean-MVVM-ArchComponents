@@ -1,71 +1,34 @@
 {
   "project_info": {
-    "project_number": "564324081859",
-    "firebase_url": "https://the-force-b9484.firebaseio.com",
-    "project_id": "the-force-b9484",
-    "storage_bucket": "the-force-b9484.appspot.com"
+    "project_number": "705482711090",
+    "firebase_url": "https://clean-mvvm-archcomponents.firebaseio.com",
+    "project_id": "clean-mvvm-archcomponents",
+    "storage_bucket": "clean-mvvm-archcomponents.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:564324081859:android:85e07b296b4841632c0276",
+        "mobilesdk_app_id": "1:705482711090:android:8495fb0bd06880161c9c2b",
         "android_client_info": {
           "package_name": "com.k0d4black.theforce"
         }
       },
       "oauth_client": [
         {
-          "client_id": "564324081859-pp0b62lk19reni5p538ckse2dr6dr3li.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.k0d4black.theforce",
-            "certificate_hash": "113cb837d7d15580c33a4d642ff301877a14b840"
-          }
-        },
-        {
-          "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
+          "client_id": "705482711090-eg0r9atsh2f9r121lk7q2noks2c35opm.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCkLJkxrsNwL0pbQvhrBsDe6H8_DCKDQww"
+          "current_key": "AIzaSyDDh9MbsXv3GUIYia1dRF_rA9yqSxmtWXo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:564324081859:android:cc3edad1da49d75c2c0276",
-        "android_client_info": {
-          "package_name": "com.k0d4black.theforce.debug"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCkLJkxrsNwL0pbQvhrBsDe6H8_DCKDQww"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "564324081859-4udbte4ljtq9upkgevouj8rf32albjbr.apps.googleusercontent.com",
+              "client_id": "705482711090-eg0r9atsh2f9r121lk7q2noks2c35opm.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
