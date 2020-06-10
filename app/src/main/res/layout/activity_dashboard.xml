@@ -45,7 +45,7 @@
             android:id="@+id/search_tagline_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/explore_starwars_characters"
+            android:text="@string/info_explore"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
         <EditText
