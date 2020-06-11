@@ -7,7 +7,7 @@ import retrofit2.http.Url
 
 interface StarWarsApiService {
 
-    @GET("people")
+    @GET("people/")
     suspend fun searchCharacters(@Query("search") params: String): SearchResponse
 
     @GET

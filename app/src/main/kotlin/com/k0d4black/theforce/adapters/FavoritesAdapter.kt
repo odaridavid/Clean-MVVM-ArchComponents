@@ -1,14 +1,3 @@
-package com.k0d4black.theforce.adapters;
-
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.k0d4black.theforce.databinding.ItemFavoriteBinding
-import com.k0d4black.theforce.models.FavoritePresentation
-import kotlinx.android.synthetic.main.item_favorite.view.*
-
 /**
  *
  * Copyright 2020 David Odari
@@ -22,6 +11,17 @@ import kotlinx.android.synthetic.main.item_favorite.view.*
  * the License.
  *
  **/
+package com.k0d4black.theforce.adapters;
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.k0d4black.theforce.databinding.ItemFavoriteBinding
+import com.k0d4black.theforce.models.FavoritePresentation
+import kotlinx.android.synthetic.main.item_favorite.view.*
+
 internal class FavoritesAdapter(
     val onClick: (FavoritePresentation) -> (Unit)
 ) : ListAdapter<FavoritePresentation, FavoritesAdapter.FavoriteViewHolder>(DiffUtil) {

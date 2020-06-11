@@ -1,3 +1,16 @@
+/**
+ *
+ * Copyright 2020 David Odari
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ *
+ **/
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -8,9 +21,9 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'jacoco-android'
 
-apply plugin: 'io.fabric'
-
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
+
+apply plugin: 'com.google.firebase.crashlytics'
 
 jacoco {
     toolVersion = "0.8.4"
@@ -53,24 +66,18 @@ android {
     buildTypes {
 
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [
-                    crashlyticsEnabled: true,
-                    appIcon           : "@mipmap/ic_launcher",
-                    appIconRound      : "@mipmap/ic_launcher_round"
-            ]
+            manifestPlaceholders = [crashlyticsEnabled: true]
             signingConfig signingConfigs.release
         }
 
         debug {
+            minifyEnabled false
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
-            manifestPlaceholders = [
-                    crashlyticsEnabled: false,
-                    appIcon           : "@mipmap/ic_debug_launcher",
-                    appIconRound      : "@mipmap/ic_debug_launcher_round"
-            ]
+            manifestPlaceholders = [crashlyticsEnabled: false]
             testCoverageEnabled true
         }
     }
@@ -121,7 +128,7 @@ dependencies {
 
     //Firebase
     implementation appDependencies.firebaseAnalytics
-    implementation appDependencies.crashlytics
+    implementation appDependencies.firebaseCrashlytics
 
     //Stetho
     implementation appDependencies.stetho
