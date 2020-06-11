@@ -8,7 +8,7 @@ ext {
     //App Versioning
     versionCodeMajor = 2
     versionCodeMinor = 1
-    versionCodePatch = 0
+    versionCodePatch = 1
     versionName = "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
 
     //Dependencies Version - Presentation
@@ -18,11 +18,11 @@ ext {
     supportV4Version = '1.0.0'
     navVersion = '2.1.0'
     materialVersion = '1.1.0-beta02'
-    analyticsVersion = '17.2.0'
+    analyticsVersion = '17.4.3'
     fragmentKtxVersion = '1.1.0'
     leakCanaryVersion = '2.0'
     koinVersion = '2.1.5'
-    crashlyticsVersion = '2.10.1'
+    crashlyticsVersion = '17.0.1'
     lifecycleExtensionsVersion = '2.1.0'
     recyclerviewAnimationVersion = '3.0.0'
     aboutLibsVersion = '8.0.0-rc01'
@@ -59,9 +59,9 @@ ext {
             supportV4             : "androidx.legacy:legacy-support-v4:$supportV4Version",
             leakCanary            : "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion",
             material              : "com.google.android.material:material:$materialVersion",
-            firebaseAnalytics     : "com.google.firebase:firebase-analytics:$analyticsVersion",
+            firebaseAnalytics     : "com.google.firebase:firebase-analytics-ktx:$analyticsVersion",
             fragmentKtx           : "androidx.fragment:fragment-ktx:$fragmentKtxVersion",
-            crashlytics           : "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion",
+            firebaseCrashlytics   : "com.google.firebase:firebase-crashlytics:$crashlyticsVersion",
             lifecycleExtensions   : "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensionsVersion",
             recyclerviewAnimations: "jp.wasabeef:recyclerview-animators:$recyclerviewAnimationVersion",
             aboutLibraryCore      : "com.mikepenz:aboutlibraries-core:$aboutLibsVersion",

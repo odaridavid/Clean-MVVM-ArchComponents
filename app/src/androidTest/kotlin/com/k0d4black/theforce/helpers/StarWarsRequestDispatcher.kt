@@ -13,17 +13,17 @@ internal class StarWarsRequestDispatcher : Dispatcher() {
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
-            "/people?search=$EXISTING_SEARCH_PARAMS" -> {
+            "/people/?search=$EXISTING_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(searchSuccess)
             }
-            "/people?search=$NON_EXISTENT_SEARCH_PARAMS" -> {
+            "/people/?search=$NON_EXISTENT_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_OK)
                     .setBody(searchNoMatch)
             }
-            "/people?search=$ERROR_SEARCH_PARAMS" -> {
+            "/people/?search=$ERROR_SEARCH_PARAMS" -> {
                 MockResponse()
                     .setResponseCode(HttpURLConnection.HTTP_NOT_FOUND)
                     .setBody(notFound)
