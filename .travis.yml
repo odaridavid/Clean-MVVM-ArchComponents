@@ -17,10 +17,10 @@ android:
     - android-sdk-preview-license-.+
     - android-sdk-license-.+
     - google-gdk-license-.+
-before_install:
-  - openssl aes-256-cbc -K $encrypted_50477c21cd2c_key -iv $encrypted_50477c21cd2c_iv
-    -in secrets.tar.enc -out secrets.tar -d
-  - tar xvf secrets.tar
+#before_install:
+#  - openssl aes-256-cbc -K $encrypted_50477c21cd2c_key -iv $encrypted_50477c21cd2c_iv
+#    -in secrets.tar.enc -out secrets.tar -d
+#  - tar xvf secrets.tar
 script:
   - "./gradlew build jacocoTestReport assembleAndroidTest"
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
