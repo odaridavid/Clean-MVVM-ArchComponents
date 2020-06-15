@@ -23,7 +23,7 @@
     <string name="hint_character_name">Character Name</string>
     <string name="title_favorites">Favorites</string>
     <string name="menu_title_favorites">Favorites</string>
-    <string name="explore_starwars_characters">Explore StarWars Characters.</string>
+    <string name="info_explore">Explore</string>
 
     <!-- DashboardSearchViewState Activity Menu -->
     <string name="menu_title_settings">Settings</string>
