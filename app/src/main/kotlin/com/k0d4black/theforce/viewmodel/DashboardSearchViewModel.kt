@@ -20,6 +20,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.states.DashboardSearchViewState
@@ -52,6 +53,7 @@ internal class DashboardSearchViewModel(
     }
 
     fun executeCharacterSearch(characterName: String) {
+        EspressoIdlingResource.increment()
         searchJob?.cancel()
         searchJob = viewModelScope.launch(searchExceptionHandler) {
             delay(500)
@@ -64,15 +66,18 @@ internal class DashboardSearchViewModel(
     }
 
     private fun onSearchComplete(characters: List<CharacterPresentation>) {
+        EspressoIdlingResource.increment()
         _searchViewState.value =
             _searchViewState.value?.copy(isLoading = false, searchResults = characters)
     }
 
     private fun onSearchLoading() {
+        EspressoIdlingResource.increment()
         _searchViewState.value = _searchViewState.value?.copy(isLoading = true)
     }
 
     private fun onSearchError(message: Int) {
+        EspressoIdlingResource.increment()
         _searchViewState.value =
             _searchViewState.value?.copy(isLoading = false, error = Error(message))
     }

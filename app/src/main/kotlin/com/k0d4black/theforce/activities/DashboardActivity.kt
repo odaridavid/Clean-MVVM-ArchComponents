@@ -26,6 +26,7 @@ import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
@@ -152,6 +153,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchLoading(state: DashboardSearchViewState) {
+        EspressoIdlingResource.decrement()
         if (state.isLoading) {
             binding.searchResultsRecyclerView.hide()
             binding.searchResultsProgressBar.show()
@@ -162,6 +164,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleFavoritesLoading(state: DashboardFavoritesViewState) {
+        EspressoIdlingResource.decrement()
         if (state.isLoading) {
             binding.favoritesProgressBar.show()
         } else {
@@ -170,6 +173,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchResults(searchResults: List<CharacterPresentation>) {
+        EspressoIdlingResource.decrement()
         showSnackbar(
             binding.searchResultsRecyclerView,
             getString(R.string.info_search_done)
@@ -177,6 +181,7 @@ internal class DashboardActivity : BaseActivity() {
         binding.searchResultsRecyclerView.apply {
             adapter = ScaleInAnimationAdapter(searchResultAdapter.apply {
                 submitList(searchResults)
+                EspressoIdlingResource.decrement()
             })
             initRecyclerViewWithLineDecoration(this@DashboardActivity)
         }
@@ -188,11 +193,13 @@ internal class DashboardActivity : BaseActivity() {
         binding.favoritesRecyclerView.apply {
             adapter = ScaleInAnimationAdapter(favoritesAdapter.apply {
                 submitList(favorites)
+                EspressoIdlingResource.decrement()
             })
         }
     }
 
     private fun handleNoSearchResults() {
+        EspressoIdlingResource.decrement()
         binding.searchResultsRecyclerView.hide()
         showSnackbar(
             binding.searchResultsRecyclerView,
@@ -201,6 +208,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchError(state: DashboardSearchViewState) {
+        EspressoIdlingResource.decrement()
         state.error?.run {
             showSnackbar(
                 binding.searchResultsRecyclerView,
@@ -211,6 +219,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleFavoritesError(state: DashboardFavoritesViewState) {
+        EspressoIdlingResource.decrement()
         state.error?.run {
             showSnackbar(
                 binding.favoritesRecyclerView,
