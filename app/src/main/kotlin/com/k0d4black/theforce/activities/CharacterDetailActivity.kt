@@ -24,6 +24,7 @@ import com.k0d4black.theforce.adapters.SpeciesAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
@@ -205,6 +206,7 @@ internal class CharacterDetailActivity : BaseActivity() {
                 if (species.isNotEmpty()) {
                     characterDetailsSpeciesRecyclerView.apply {
                         adapter = speciesAdapter.apply { submitList(species) }
+                        EspressoIdlingResource.decrement()
                     }
                 } else noSpeciesTextView.show()
             }
@@ -217,6 +219,7 @@ internal class CharacterDetailActivity : BaseActivity() {
                 filmsProgressBar.remove()
                 characterDetailsFilmsRecyclerView.apply {
                     adapter = filmsAdapter.apply { submitList(films) }
+                    EspressoIdlingResource.decrement()
                 }
             }
         }

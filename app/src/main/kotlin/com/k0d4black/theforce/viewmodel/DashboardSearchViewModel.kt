@@ -53,6 +53,7 @@ internal class DashboardSearchViewModel(
     }
 
     fun executeCharacterSearch(characterName: String) {
+        EspressoIdlingResource.increment()
         searchJob?.cancel()
         searchJob = viewModelScope.launch(searchExceptionHandler) {
             delay(500)
@@ -65,6 +66,7 @@ internal class DashboardSearchViewModel(
     }
 
     private fun onSearchComplete(characters: List<CharacterPresentation>) {
+        EspressoIdlingResource.increment()
         _searchViewState.value =
             _searchViewState.value?.copy(isLoading = false, searchResults = characters)
     }
@@ -75,6 +77,7 @@ internal class DashboardSearchViewModel(
     }
 
     private fun onSearchError(message: Int) {
+        EspressoIdlingResource.increment()
         _searchViewState.value =
             _searchViewState.value?.copy(isLoading = false, error = Error(message))
     }
