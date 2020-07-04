@@ -27,22 +27,20 @@
         android:orientation="vertical"
         android:padding="@dimen/padding_default">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/film_title_text_view"
+            style="@style/TheForce.TextView.Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
             android:text="@{film.title}"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             tools:text="Film Name" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/film_opening_crawl_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
             android:text="@{film.openingCrawl}"
-            android:textSize="15sp"
             tools:text="Film Opening Crawl" />
 
     </LinearLayout>

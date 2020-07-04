@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
                 android:text="@{favorite.characterPresentation.name}"
-                android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
+                style="@style/TheForce.TextView.HeadLine"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/character_image_view"
                 app:layout_constraintTop_toTopOf="parent"

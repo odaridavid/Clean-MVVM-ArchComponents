@@ -27,62 +27,55 @@
 
         <TextView
             android:id="@+id/character_details_birth_year_title_text_view"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_birth_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_birth_year"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_details_birth_year_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:fontFamily="@font/roboto_light"
             android:text="@{character.birthYear}"
-            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
             app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
             tools:text="BBY 13" />
 
         <TextView
             android:id="@+id/character_details_height_title_text_view"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_height_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_height"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_details_height_in_cm_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
-            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
             tools:text="123 cm" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_details_height_in_inches_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
-            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
             tools:text="123 cm" />

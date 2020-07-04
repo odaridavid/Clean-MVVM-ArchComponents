@@ -23,13 +23,13 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/about_toolbar"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/title_about"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+            app:title="@string/title_about" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
