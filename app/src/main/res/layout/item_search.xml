@@ -44,18 +44,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{searchedCharacter.name}'
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            style="@style/TheForce.TextView.HeadLine"
             app:layout_constraintStart_toEndOf="@id/character_image_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Darth Vader" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/character_birth_year_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
             android:text='@{searchedCharacter.birthYear}'
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             app:layout_constraintStart_toStartOf="@id/character_name_text_view"
             app:layout_constraintTop_toBottomOf="@id/character_name_text_view"
             tools:text="BBY 14" />

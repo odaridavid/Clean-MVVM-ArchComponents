@@ -11,22 +11,20 @@
  ~ or implied. See the License for the specific language governing permissions and limitations under
  ~ the License.
 -->
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <merge xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    <merge>
 
         <TextView
             android:id="@+id/character_details_films_title_text_view"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             android:drawableStart="@drawable/ic_film_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
             android:text="@string/title_films"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:drawableTint="@color/colorSecondaryVariant"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specie_card_container" />
 
@@ -43,7 +41,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/character_details_films_recycler_view"
@@ -67,13 +66,11 @@
 
                 <TextView
                     android:id="@+id/films_error_text_view"
+                    style="@style/TheForce.TextView.Error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
-                    android:drawableTop="@drawable/ic_error_24dp"
-                    android:text="Error Loading Films"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:text="@string/error_loading_films"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

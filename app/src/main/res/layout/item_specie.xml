@@ -25,22 +25,20 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/species_name_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_species_name,species.name)}"
-            android:textSize="15sp"
             tools:text="Species Name" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/species_language_text_view"
+            style="@style/TheForce.TextView.Info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
             android:text="@{String.format(@string/template_species_language,species.language)}"
-            android:textSize="15sp"
             tools:text="Language" />
 
     </LinearLayout>
