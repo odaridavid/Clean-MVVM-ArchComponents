@@ -11,19 +11,15 @@
  * the License.
  *
  **/
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
-apply plugin: 'kotlin-kapt'
-
-apply plugin: 'jacoco-android'
-
-apply plugin: 'com.mikepenz.aboutlibraries.plugin'
-
-apply plugin: 'com.google.firebase.crashlytics'
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("kotlin-kapt")
+    id("jacoco-android")
+    id("com.mikepenz.aboutlibraries.plugin")
+    id("com.google.firebase.crashlytics")
+}
 
 jacoco {
     toolVersion = "0.8.4"
@@ -37,30 +33,30 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
-//def keystorePropertiesFile = rootProject.file("keystore.properties")
-//def keystoreProperties = new Properties()
-//keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion compileSdk
+    buildToolsVersion buildTools
 
-//    signingConfigs {
-//        release {
-//            keyAlias keystoreProperties['keyAlias']
-//            keyPassword keystoreProperties['keyPassword']
-//            storeFile file(keystoreProperties['storeFile'])
-//            storePassword keystoreProperties['storePassword']
-//        }
-//    }
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCodeMajor * 10000 + rootProject.ext.versionCodeMinor * 100 + rootProject.ext.versionCodePatch
-        versionName rootProject.ext.versionName
+        minSdkVersion minSdk
+        targetSdkVersion targetSdk
+        versionCode versionCodeMajor * 10000 + versionCodeMinor * 100 + versionCodePatch
+        versionName versionName
         testInstrumentationRunner "com.k0d4black.theforce.runner.MockTestRunner"
     }
     buildTypes {
@@ -70,7 +66,7 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [crashlyticsEnabled: true]
-//            signingConfig signingConfigs.release
+            signingConfig signingConfigs.release
         }
 
         debug {
@@ -105,15 +101,10 @@ android {
 
 dependencies {
 
-    def appDependencies = rootProject.ext.appDependencies
-    def testDependencies = rootProject.ext.testDependencies
-
     //Local Libs
     implementation project(':domain')
     implementation project(':data-local')
     implementation project(':data-remote')
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Jetpack
     implementation appDependencies.appCompat
