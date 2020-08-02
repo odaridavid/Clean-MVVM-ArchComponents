@@ -131,7 +131,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun observeFavoritesViewState() {
-        favoritesViewModel.dashboardFavoritesViewState.observe(this, Observer { state ->
+        favoritesViewModel.favoritesViewState.observe(this, Observer { state ->
 
             handleFavoritesLoading(state)
 
@@ -148,7 +148,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun observeSearchViewState() {
-        characterSearchViewModel.dashboardSearchViewState.observe(this, Observer { state ->
+        characterSearchViewModel.searchViewState.observe(this, Observer { state ->
 
             handleSearchLoading(state)
 

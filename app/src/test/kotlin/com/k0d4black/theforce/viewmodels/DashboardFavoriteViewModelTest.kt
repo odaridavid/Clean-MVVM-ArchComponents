@@ -48,7 +48,7 @@ internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
         coroutineTestRule.dispatcher.runBlockingTest {
             prepareViewModel(UiState.SUCCESS)
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isNotNull()
@@ -66,7 +66,7 @@ internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
 
             dashboardFavoritesViewModel.deleteAllFavorites()
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isEmpty()
@@ -84,7 +84,7 @@ internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
 
             dashboardFavoritesViewModel.deleteFavorite(Data.favorite.name)
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isEmpty()
