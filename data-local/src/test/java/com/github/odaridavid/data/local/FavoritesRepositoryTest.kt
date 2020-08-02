@@ -16,6 +16,7 @@ package com.github.odaridavid.data.local
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.odaridavid.data.local.repository.FavoritesRepository
 import com.google.common.truth.Truth
+import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -43,7 +44,7 @@ internal class FavoritesRepositoryTest : BaseTest() {
 
             //Save to db with insert transaction
             favoriteRepository.insertFavorite(SampleData.favorite).collect { result ->
-                Truth.assertThat(result).isEqualTo("Done")
+                Truth.assertThat(result).isEqualTo(Result.SUCCESS)
             }
 
             val index = 0

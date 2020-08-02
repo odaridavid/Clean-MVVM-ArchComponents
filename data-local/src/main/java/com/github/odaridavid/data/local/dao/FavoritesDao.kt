@@ -19,6 +19,7 @@ import com.github.odaridavid.data.local.models.FavoriteEntity
 import com.github.odaridavid.data.local.models.FavoriteWithFilms
 import com.github.odaridavid.data.local.models.FilmEntity
 import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Result
 
 @Dao
 interface FavoritesDao {
@@ -44,12 +45,14 @@ interface FavoritesDao {
     suspend fun insert(filmEntity: FilmEntity): Long
 
     @Transaction
-    suspend fun insert(favorite: Favorite) {
+    suspend fun insert(favorite: Favorite):Result {
         val favId = insert(favorite.toEntity())
         for (film in favorite.films) {
             val filmEntity = film.toEntity(favId)
             insert(filmEntity)
+            return Result.SUCCESS
         }
+        return Result.FAILURE
     }
 
 }

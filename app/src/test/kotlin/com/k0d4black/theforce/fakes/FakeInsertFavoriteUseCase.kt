@@ -14,23 +14,23 @@
 package com.k0d4black.theforce.fakes
 
 import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.usecases.InsertFavoriteBaseUseCase
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import kotlinx.coroutines.flow.Flow
 
-
 class FakeInsertFavoriteUseCase(
     uiState: UiState
-) : BaseTestUseCase<String, Favorite>(uiState), InsertFavoriteBaseUseCase {
+) : BaseTestUseCase<Result, Favorite>(uiState), InsertFavoriteBaseUseCase {
 
-    override suspend fun invoke(params: Favorite): Flow<String> {
+    override suspend fun invoke(params: Favorite): Flow<Result> {
         Data.favorites.add(params)
         return execute(params)
     }
 
-    override fun getValue(params: Favorite): String {
-        return if (Data.favorites.size == 1) "Done" else "Failed"
+    override fun getValue(params: Favorite): Result {
+        return if (Data.favorites.size == 1) Result.SUCCESS else Result.FAILURE
     }
 
 }

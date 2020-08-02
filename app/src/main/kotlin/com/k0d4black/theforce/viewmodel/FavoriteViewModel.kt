@@ -15,11 +15,11 @@
 */
 package com.k0d4black.theforce.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
+import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.InsertFavoriteBaseUseCase
@@ -28,23 +28,27 @@ import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.Error
 import com.k0d4black.theforce.models.states.FavoriteViewState
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 internal class FavoriteViewModel(
     private val deleteFavoriteByNameUseCase: DeleteFavoriteByNameBaseUseCase,
     private val insertFavoriteUseCase: InsertFavoriteBaseUseCase,
     private val getFavoriteByNameUseCase: GetFavoriteByNameBaseUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     // region Members
+
+    private var saveFavoriteJob: Job? = null
+    private var deleteFavoriteJob: Job? = null
+    private var getFavoriteJob: Job? = null
 
     val favoriteViewState: LiveData<FavoriteViewState>
         get() = _favoriteViewState
 
     private var _favoriteViewState = MutableLiveData<FavoriteViewState>()
 
-    private val favoritesExceptionHandler =
+    override val coroutineExceptionHandler =
         CoroutineExceptionHandler { _, exception ->
             val message = ExceptionHandler.parse(exception)
             _favoriteViewState.value = _favoriteViewState.value?.copy(error = Error(message))
@@ -55,44 +59,51 @@ internal class FavoriteViewModel(
     // region Constructor
 
     init {
-        _favoriteViewState.value =
-            FavoriteViewState(isFavorite = false, error = null)
+        _favoriteViewState.value = FavoriteViewState(isFavorite = false, error = null)
     }
 
     // endregion
 
+    // region Android API
+
+    override fun onCleared() {
+        super.onCleared()
+        saveFavoriteJob?.cancel()
+        getFavoriteJob?.cancel()
+        deleteFavoriteJob?.cancel()
+    }
+
+    // endregion
 
     // region Public API
 
     fun saveFavorite(favoritePresentation: FavoritePresentation) {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        saveFavoriteJob = launchCoroutine {
             insertFavoriteUseCase(favoritePresentation.toDomain()).collect { result ->
-                if (result.contentEquals("Done")) {
-                    _favoriteViewState.value =
-                        _favoriteViewState.value?.copy(isFavorite = true)
+                if (result == Result.SUCCESS) {
+                    _favoriteViewState.value = _favoriteViewState.value?.copy(isFavorite = true)
+                } else {
+                    Log.i(this.javaClass.simpleName, "Saving Favorites Failed")
                 }
-
             }
         }
     }
 
     fun deleteFavorite(name: String) {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        deleteFavoriteJob = launchCoroutine {
             deleteFavoriteByNameUseCase(name).collect { row ->
                 if (row == 1) {
-                    _favoriteViewState.value =
-                        _favoriteViewState.value?.copy(isFavorite = false)
+                    _favoriteViewState.value = _favoriteViewState.value?.copy(isFavorite = false)
                 }
             }
         }
     }
 
     fun getFavorite(name: String) {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        getFavoriteJob = launchCoroutine {
             getFavoriteByNameUseCase(name).collect { fav ->
                 fav?.run {
-                    _favoriteViewState.value =
-                        _favoriteViewState.value?.copy(isFavorite = true)
+                    _favoriteViewState.value = _favoriteViewState.value?.copy(isFavorite = true)
                 }
             }
         }
