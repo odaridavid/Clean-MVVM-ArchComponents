@@ -17,13 +17,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.*
 import com.k0d4black.theforce.mappers.toDomain
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
-import com.k0d4black.theforce.models.states.CharacterDetailsFavoriteViewState
+import com.k0d4black.theforce.models.states.FavoriteViewState
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.models.states.Error
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -34,33 +33,24 @@ import kotlinx.coroutines.launch
 internal class CharacterDetailViewModel(
     private val getSpeciesUseCase: GetSpeciesBaseUseCase,
     private val getPlanetUseCase: GetPlanetBaseUseCase,
-    private val getFilmsUseCase: GetFilmsBaseUseCase,
-    private val deleteFavoriteByNameUseCase: DeleteFavoriteByNameBaseUseCase,
-    private val insertFavoriteUseCase: InsertFavoriteBaseUseCase,
-    private val getFavoriteByNameUseCase: GetFavoriteByNameBaseUseCase
+    private val getFilmsUseCase: GetFilmsBaseUseCase
 ) : ViewModel() {
+
+    // region Members
 
     val detailViewState: LiveData<CharacterDetailsViewState>
         get() = _detailViewState
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
-    val detailFavoriteViewState: LiveData<CharacterDetailsFavoriteViewState>
-        get() = _detailFavoriteViewState
-
-    private var _detailFavoriteViewState = MutableLiveData<CharacterDetailsFavoriteViewState>()
-
     private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
-    private val characterDetailFavoriteExceptionHandler =
-        CoroutineExceptionHandler { _, exception ->
-            val message = ExceptionHandler.parse(exception)
-            _detailFavoriteViewState.value =
-                _detailFavoriteViewState.value?.copy(error = Error(message))
-        }
+    // endregion
+
+    // region Constructor
 
     init {
         _detailViewState.value =
@@ -72,9 +62,11 @@ internal class CharacterDetailViewModel(
                 specie = null,
                 info = null
             )
-        _detailFavoriteViewState.value =
-            CharacterDetailsFavoriteViewState(isFavorite = false, error = null)
     }
+
+    // endregion
+
+    // region Public API
 
     fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
         if (isRetry) {
@@ -109,43 +101,11 @@ internal class CharacterDetailViewModel(
         }
     }
 
-    fun getFavorite(name: String) {
-        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
-            getFavoriteByNameUseCase(name).collect { fav ->
-                fav?.run {
-                    _detailFavoriteViewState.value =
-                        _detailFavoriteViewState.value?.copy(isFavorite = true)
-                }
-            }
-        }
-    }
-
-    fun deleteFavorite(name: String) {
-        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
-            deleteFavoriteByNameUseCase(name).collect { row ->
-                if (row == 1) {
-                    _detailFavoriteViewState.value =
-                        _detailFavoriteViewState.value?.copy(isFavorite = false)
-                }
-            }
-        }
-    }
-
-    fun saveFavorite(favoritePresentation: FavoritePresentation) {
-        viewModelScope.launch(characterDetailFavoriteExceptionHandler) {
-            insertFavoriteUseCase(favoritePresentation.toDomain()).collect { result ->
-                if (result.contentEquals("Done")) {
-                    _detailFavoriteViewState.value =
-                        _detailFavoriteViewState.value?.copy(isFavorite = true)
-                }
-            }
-        }
-    }
-
     fun displayCharacterError(message: Int) {
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
+    // endregion
 }
 
 

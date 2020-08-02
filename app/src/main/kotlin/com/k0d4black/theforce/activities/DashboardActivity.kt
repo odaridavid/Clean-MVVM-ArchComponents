@@ -47,7 +47,7 @@ internal class DashboardActivity : BaseActivity() {
 
     private val searchResultAdapter: SearchResultAdapter by lazy {
         SearchResultAdapter { character ->
-            startActivity<CharacterDetailActivity> {
+            startActivity<CharacterDetailsActivity> {
                 putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, character)
             }
         }
@@ -55,7 +55,7 @@ internal class DashboardActivity : BaseActivity() {
 
     private val favoritesAdapter: FavoritesAdapter by lazy {
         FavoritesAdapter { favorite ->
-            startActivity<CharacterDetailActivity> {
+            startActivity<FavoriteDetailsActivity> {
                 putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, favorite)
             }
         }

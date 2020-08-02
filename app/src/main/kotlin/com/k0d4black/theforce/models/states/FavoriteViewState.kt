@@ -14,7 +14,7 @@
 package com.k0d4black.theforce.models.states
 
 
-internal data class CharacterDetailsFavoriteViewState(
+internal data class FavoriteViewState(
     val isFavorite: Boolean,
     val error: Error?
 )
