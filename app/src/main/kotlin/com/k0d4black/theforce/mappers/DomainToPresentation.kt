@@ -49,7 +49,7 @@ internal fun Favorite.toPresentation(): FavoritePresentation {
     return FavoritePresentation(
         characterPresentation = characterPresentation,
         planetPresentation = planetPresentation,
-        speciePresentation = speciePresentation,
+        speciePresentation = listOf(speciePresentation),
         films = films.map { it.toPresentation() }
     )
 }

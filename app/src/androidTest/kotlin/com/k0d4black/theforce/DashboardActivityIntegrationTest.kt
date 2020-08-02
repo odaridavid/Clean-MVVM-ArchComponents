@@ -75,7 +75,7 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
         private const val ABOUT_ACTIVITY_COMPONENT =
             "com.k0d4black.theforce.activities.AboutActivity"
         private const val CHARACTER_DETAIL_ACTIVITY_COMPONENT =
-            "com.k0d4black.theforce.activities.CharacterDetailActivity"
+            "com.k0d4black.theforce.activities.CharacterDetailsActivity"
     }
 
 }
