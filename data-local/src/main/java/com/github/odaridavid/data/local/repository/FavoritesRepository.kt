@@ -16,10 +16,10 @@ package com.github.odaridavid.data.local.repository
 import com.github.odaridavid.data.local.dao.FavoritesDao
 import com.github.odaridavid.data.local.mappers.toDomain
 import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-
 
 class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRepository {
 
@@ -38,7 +38,6 @@ class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRe
             emit(null)
     }
 
-
     override fun deleteFavoriteByName(name: String): Flow<Int> = flow {
         val rowsAffected = favoritesDao.deleteByName(name)
         emit(rowsAffected)
@@ -49,9 +48,9 @@ class FavoritesRepository(private val favoritesDao: FavoritesDao) : IFavoritesRe
         emit(rowsAffected)
     }
 
-    override fun insertFavorite(favorite: Favorite): Flow<String> = flow {
-        favoritesDao.insert(favorite)
-        emit("Done")
+    override fun insertFavorite(favorite: Favorite): Flow<Result> = flow {
+        val result = favoritesDao.insert(favorite)
+        emit(result)
     }
 
 }

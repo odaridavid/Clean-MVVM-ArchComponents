@@ -14,10 +14,11 @@
 package com.k0d4black.theforce.domain.usecases
 
 import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import kotlinx.coroutines.flow.Flow
 
-typealias InsertFavoriteBaseUseCase = BaseUseCase<Favorite, Flow<String>>
+typealias InsertFavoriteBaseUseCase = BaseUseCase<Favorite, Flow<Result>>
 
 class InsertFavoriteUseCase(
     private val favoritesRepository: IFavoritesRepository
