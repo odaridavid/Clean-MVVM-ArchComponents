@@ -11,17 +11,14 @@
  * the License.
  *
  **/
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
+plugins {
+    id("java-library")
+    id("kotlin")
+}
 
 dependencies {
-
-    def domainDependencies = rootProject.ext.domainDependencies
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api domainDependencies.kotlin
     api domainDependencies.coroutinesCore
-
 }
 
 sourceCompatibility = "8"

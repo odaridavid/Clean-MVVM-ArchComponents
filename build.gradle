@@ -11,12 +11,8 @@
  * the License.
  *
  **/
-apply from: 'dependencies.gradle'
-
 buildscript {
-    ext {
-        kotlinVersion = '1.3.72'
-    }
+    apply from: 'dependencies.gradle'
     repositories {
         google()
         jcenter()

@@ -11,18 +11,16 @@
  * the License.
  *
  **/
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
-apply plugin: 'kotlin-kapt'
-
+plugins {
+    id("java-library")
+    id("kotlin")
+    id("kotlin-kapt")
+}
 
 dependencies {
 
-    def dataDependencies = rootProject.ext.dataDependencies
-    def testDependencies = rootProject.ext.testDependencies
-
     implementation project(':domain')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     api dataDependencies.retrofit
     api dataDependencies.moshiConverter
     api dataDependencies.loggingInterceptor
