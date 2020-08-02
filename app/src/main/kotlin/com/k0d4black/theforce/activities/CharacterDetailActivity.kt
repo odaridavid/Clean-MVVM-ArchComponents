@@ -33,6 +33,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 //TODO Disable Saving favs for remote till everything is done and is not error
 internal class CharacterDetailActivity : BaseActivity() {
 
+    // region Members
+
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
 
     private lateinit var binding: ActivityCharacterDetailBinding
@@ -48,6 +50,10 @@ internal class CharacterDetailActivity : BaseActivity() {
 
     //For Save/Delete convenience
     private var favoritePresentation: FavoritePresentation? = null
+
+    // endregion
+
+    // region Android API
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,17 +93,6 @@ internal class CharacterDetailActivity : BaseActivity() {
         observeDetailFavoriteViewState()
     }
 
-    private fun onInitCheckIfFavorite() {
-        characterDetailViewModel.getFavorite(characterName)
-    }
-
-    private fun bindFavorite(favoritePresentation: FavoritePresentation) {
-        handleCharacterInfo(favoritePresentation.characterPresentation)
-        handleSpecies(listOf(favoritePresentation.speciePresentation))
-        handleFilms(favoritePresentation.films)
-        handlePlanet(favoritePresentation.planetPresentation)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         val menuItem = menu?.getItem(0)
@@ -126,6 +121,21 @@ internal class CharacterDetailActivity : BaseActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    // endregion
+
+    // region Private API
+
+    private fun onInitCheckIfFavorite() {
+        characterDetailViewModel.getFavorite(characterName)
+    }
+
+    private fun bindFavorite(favoritePresentation: FavoritePresentation) {
+        handleCharacterInfo(favoritePresentation.characterPresentation)
+        handleSpecies(listOf(favoritePresentation.speciePresentation))
+        handleFilms(favoritePresentation.films)
+        handlePlanet(favoritePresentation.planetPresentation)
     }
 
     private fun addToFavorites(favorite: FavoritePresentation) {
@@ -266,4 +276,5 @@ internal class CharacterDetailActivity : BaseActivity() {
         }
     }
 
+    // endregion
 }
