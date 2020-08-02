@@ -15,9 +15,6 @@ package com.k0d4black.theforce.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
@@ -29,33 +26,55 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 internal class DashboardSearchViewModel(
     private val searchCharactersUseCase: SearchCharactersBaseUseCase
-) : ViewModel() {
+) : BaseViewModel() {
+
+    // region Members
 
     private var searchJob: Job? = null
 
-    val dashboardSearchViewState: LiveData<DashboardSearchViewState>
+    val searchViewState: LiveData<DashboardSearchViewState>
         get() = _searchViewState
 
     private var _searchViewState = MutableLiveData<DashboardSearchViewState>()
 
-    init {
-        _searchViewState.value =
-            DashboardSearchViewState(isLoading = false, error = null, searchResults = null)
-    }
-
-    private val searchExceptionHandler = CoroutineExceptionHandler { _, exception ->
+    override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
         onSearchError(message)
     }
 
+    // endregion
+
+    // region Constructor
+
+    init {
+        _searchViewState.value =
+            DashboardSearchViewState(
+                isLoading = false,
+                error = null,
+                searchResults = null
+            )
+    }
+
+    // endregion
+
+    // region Android API
+
+    override fun onCleared() {
+        super.onCleared()
+        searchJob?.cancel()
+    }
+
+    // endregion
+
+    // region Public API
+
     fun executeCharacterSearch(characterName: String) {
         EspressoIdlingResource.increment()
         searchJob?.cancel()
-        searchJob = viewModelScope.launch(searchExceptionHandler) {
+        searchJob = launchCoroutine {
             delay(500)
             onSearchLoading()
             searchCharactersUseCase(characterName).collect { results ->
@@ -64,6 +83,10 @@ internal class DashboardSearchViewModel(
             }
         }
     }
+
+    // endregion
+
+    // region Private API
 
     private fun onSearchComplete(characters: List<CharacterPresentation>) {
         EspressoIdlingResource.increment()
@@ -82,6 +105,7 @@ internal class DashboardSearchViewModel(
             _searchViewState.value?.copy(isLoading = false, error = Error(message))
     }
 
+    // endregion
 }
 
 

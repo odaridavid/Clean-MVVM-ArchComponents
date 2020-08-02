@@ -15,35 +15,34 @@ package com.k0d4black.theforce.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.commons.ExceptionHandler
-import com.k0d4black.theforce.domain.usecases.*
-import com.k0d4black.theforce.mappers.toDomain
+import com.k0d4black.theforce.domain.usecases.GetFilmsBaseUseCase
+import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
+import com.k0d4black.theforce.domain.usecases.GetSpeciesBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
-import com.k0d4black.theforce.models.FavoritePresentation
-import com.k0d4black.theforce.models.states.FavoriteViewState
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.models.states.Error
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 internal class CharacterDetailViewModel(
     private val getSpeciesUseCase: GetSpeciesBaseUseCase,
     private val getPlanetUseCase: GetPlanetBaseUseCase,
     private val getFilmsUseCase: GetFilmsBaseUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     // region Members
+
+    private var characterDetailsJob: Job? = null
 
     val detailViewState: LiveData<CharacterDetailsViewState>
         get() = _detailViewState
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
 
-    private val characterDetailExceptionHandler = CoroutineExceptionHandler { _, exception ->
+    override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
@@ -66,19 +65,36 @@ internal class CharacterDetailViewModel(
 
     // endregion
 
+    // region Android API
+
+    override fun onCleared() {
+        super.onCleared()
+        characterDetailsJob?.cancel()
+    }
+
+    // endregion
+
     // region Public API
 
     fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
         if (isRetry) {
             _detailViewState.value = _detailViewState.value?.copy(error = null)
         }
-        viewModelScope.launch(characterDetailExceptionHandler) {
+        characterDetailsJob = launchCoroutine {
             async { loadPlanet(characterUrl) }.await()
             async { loadFilms(characterUrl) }.await()
             async { loadSpecies(characterUrl) }.await()
             _detailViewState.value = _detailViewState.value?.copy(isComplete = true)
         }
     }
+
+    fun displayCharacterError(message: Int) {
+        _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
+    }
+
+    // endregion
+
+    // region Private API
 
     private suspend fun loadPlanet(characterUrl: String) {
         getPlanetUseCase(characterUrl).collect { planet ->
@@ -99,10 +115,6 @@ internal class CharacterDetailViewModel(
             val speciesPresentation = species.map { specie -> specie.toPresentation() }
             _detailViewState.value = _detailViewState.value?.copy(specie = speciesPresentation)
         }
-    }
-
-    fun displayCharacterError(message: Int) {
-        _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 
     // endregion

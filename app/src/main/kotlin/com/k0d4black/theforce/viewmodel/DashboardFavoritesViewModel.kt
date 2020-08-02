@@ -15,38 +15,44 @@ package com.k0d4black.theforce.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.k0d4black.theforce.commons.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.DeleteAllFavoritesBaseUseCase
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetAllFavoritesBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
-import com.k0d4black.theforce.models.states.Error
 import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
+import com.k0d4black.theforce.models.states.Error
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
-
 
 internal class DashboardFavoritesViewModel(
     private val deleteFavoriteByNameUseCase: DeleteFavoriteByNameBaseUseCase,
     private val getAllFavoritesUseCase: GetAllFavoritesBaseUseCase,
     private val deleteAllFavoritesUseCase: DeleteAllFavoritesBaseUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
-    val dashboardFavoritesViewState: LiveData<DashboardFavoritesViewState>
+    // region Members
+
+    private var getAllFavoriteJob: Job? = null
+    private var deleteAllFavoriteJob: Job? = null
+    private var deleteFavoriteJob: Job? = null
+
+    val favoritesViewState: LiveData<DashboardFavoritesViewState>
         get() = _favoriteViewState
 
     private var _favoriteViewState = MutableLiveData<DashboardFavoritesViewState>()
 
-    private val favoritesExceptionHandler = CoroutineExceptionHandler { _, exception ->
+    override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
         _favoriteViewState.value =
             _favoriteViewState.value?.copy(isLoading = false, error = Error(message))
     }
+
+    // endregion
+
+    // region Constructors
 
     init {
         _favoriteViewState.value =
@@ -54,32 +60,30 @@ internal class DashboardFavoritesViewModel(
         getAllFavorites()
     }
 
-    private fun onFavsLoading() {
-        _favoriteViewState.value = _favoriteViewState.value?.copy(isLoading = true)
+    // endregion
+
+    // region Android API
+
+    override fun onCleared() {
+        super.onCleared()
+        getAllFavoriteJob?.cancel()
+        deleteAllFavoriteJob?.cancel()
+        deleteFavoriteJob?.cancel()
     }
 
-    private fun onFavsLoadingComplete(favs: List<FavoritePresentation>) {
-        _favoriteViewState.value =
-            _favoriteViewState.value?.copy(isLoading = false, favorites = favs)
-    }
+    // endregion
 
+    // region Public API
 
     fun getAllFavorites() {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        getAllFavoriteJob = launchCoroutine {
             onFavsLoading()
             loadFavorites()
         }
     }
 
-    private suspend fun loadFavorites() {
-        getAllFavoritesUseCase(Unit).collect { favorites ->
-            val favs = favorites.map { it.toPresentation() }
-            onFavsLoadingComplete(favs)
-        }
-    }
-
     fun deleteAllFavorites() {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        deleteAllFavoriteJob = launchCoroutine {
             deleteAllFavoritesUseCase(Unit).collect { rows ->
                 if (rows > 0) {
                     _favoriteViewState.value =
@@ -90,7 +94,7 @@ internal class DashboardFavoritesViewModel(
     }
 
     fun deleteFavorite(name: String) {
-        viewModelScope.launch(favoritesExceptionHandler) {
+        deleteFavoriteJob = launchCoroutine {
             deleteFavoriteByNameUseCase(name).collect { row ->
                 if (row > 0) {
                     loadFavorites()
@@ -99,4 +103,25 @@ internal class DashboardFavoritesViewModel(
         }
     }
 
+    // endregion
+
+    // region Private API
+
+    private fun onFavsLoading() {
+        _favoriteViewState.value = _favoriteViewState.value?.copy(isLoading = true)
+    }
+
+    private fun onFavsLoadingComplete(favs: List<FavoritePresentation>) {
+        _favoriteViewState.value =
+            _favoriteViewState.value?.copy(isLoading = false, favorites = favs)
+    }
+
+    private suspend fun loadFavorites() {
+        getAllFavoritesUseCase(Unit).collect { favorites ->
+            val favs = favorites.map { it.toPresentation() }
+            onFavsLoadingComplete(favs)
+        }
+    }
+
+    // endregion
 }
