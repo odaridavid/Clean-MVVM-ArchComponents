@@ -8,14 +8,17 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.activities.DashboardActivity
-import com.k0d4black.theforce.adapters.FavoritesAdapter
 import com.k0d4black.theforce.adapters.SearchResultAdapter
-import com.k0d4black.theforce.helpers.*
+import com.k0d4black.theforce.helpers.ERROR_SEARCH_PARAMS
+import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
+import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
+import com.k0d4black.theforce.helpers.ViewAction
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -66,27 +69,6 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
         onView(withId(R.id.action_settings)).perform(click())
         onView(withId(R.id.about_card_view)).perform(click())
         intended(hasComponent(ABOUT_ACTIVITY_COMPONENT))
-    }
-
-    @Test
-    fun verifyFavoritesFeatureAddsAndRemoves() {
-        onView(withId(R.id.search_edit_text)).perform(typeText(EXISTING_SEARCH_PARAMS))
-        onView(withId(R.id.search_results_recycler_view)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<SearchResultAdapter.SearchedCharacterViewHolder>(
-                0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
-            )
-        )
-        onView(withContentDescription("Favorites")).perform(click())
-        onView(withContentDescription("Navigate up")).perform(click())
-        onView(withId(R.id.favorites_recycler_view)).check(matches(isDisplayed()))
-        onView(withId(R.id.favorites_recycler_view)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<FavoritesAdapter.FavoriteViewHolder>(
-                0, ViewAction.clickChildViewWithId(R.id.fav_card)
-            )
-        )
-        onView(withId(R.id.action_alter_favorites)).perform(click())
-        onView(withContentDescription("Navigate up")).perform(click())
-        onView(withId(R.id.no_favorites_text_view)).check(matches(isDisplayed()))
     }
 
     companion object {
