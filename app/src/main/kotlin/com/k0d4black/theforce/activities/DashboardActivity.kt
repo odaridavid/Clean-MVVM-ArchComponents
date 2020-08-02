@@ -36,8 +36,9 @@ import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Favorites text view dissappears on transition to end and back
 internal class DashboardActivity : BaseActivity() {
+
+    // region Members
 
     private val characterSearchViewModel by viewModel<DashboardSearchViewModel>()
     private val favoritesViewModel by viewModel<DashboardFavoritesViewModel>()
@@ -60,6 +61,10 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
+    //endregion
+
+    // region Android API
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
@@ -78,6 +83,30 @@ internal class DashboardActivity : BaseActivity() {
         if (binding.dashboardLayout.currentState == binding.dashboardLayout.startState)
             favoritesViewModel.getAllFavorites()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_settings) {
+            startActivity<SettingsActivity>()
+            true
+        } else super.onOptionsItemSelected(item)
+    }
+
+    // endregion
+
+    // region Public API
+
+    fun handleUpButtonClick(view: View) {
+        binding.dashboardLayout.transitionToStart()
+    }
+
+    // endregion
+
+    // region Private API
 
     private fun configSupportActionBar() {
         setSupportActionBar(binding.searchToolbar)
@@ -99,22 +128,6 @@ internal class DashboardActivity : BaseActivity() {
                 }
             }
         }
-    }
-
-    fun handleUpButtonClick(view: View) {
-        binding.dashboardLayout.transitionToStart()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_settings) {
-            startActivity<SettingsActivity>()
-            true
-        } else super.onOptionsItemSelected(item)
     }
 
     private fun observeFavoritesViewState() {
@@ -228,4 +241,6 @@ internal class DashboardActivity : BaseActivity() {
             )
         }
     }
+
+    // endregion
 }
