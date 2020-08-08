@@ -10,7 +10,6 @@ import com.k0d4black.theforce.base.BaseFavoritesActivity
 import com.k0d4black.theforce.commons.remove
 import com.k0d4black.theforce.commons.show
 import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
-import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
 
 internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
