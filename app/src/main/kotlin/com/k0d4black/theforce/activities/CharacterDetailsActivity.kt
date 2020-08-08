@@ -25,7 +25,6 @@ import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
-import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -62,10 +61,11 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
                 .displayCharacterError(R.string.error_loading_character_details)
         } else {
             characterName = character.name
-            characterDetailViewModel.getCharacterDetails(character.url)
+            characterDetailViewModel.initView(character)
             checkIfFavorite()
-            bindCharacterBasicInfo(character)
             observeNetworkChanges(character.url)
+            characterDetailViewModel.getCharacterDetails(character.url)
+            observeFavoritePresentationCreationFromRemote()
         }
 
         observeDetailViewState()
@@ -75,7 +75,7 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
     // region BaseFavoritesActivity
 
-    override fun bindFavorite(favorite: FavoritePresentation) {
+    override fun bindFavorite(favoritePresentation: FavoritePresentation) {
         //no-op ,this activity addresses only remote character data
     }
 
@@ -88,6 +88,7 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
     private fun observeDetailViewState() {
         characterDetailViewModel.detailViewState.observe(this, Observer {
+            bindCharacterBasicInfo(it.info)
             bindSpecies(it.specie)
             bindFilms(it.films)
             bindPlanet(it.planet)
@@ -99,32 +100,16 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
                     binding.characterDetailsLayout,
                     getString(R.string.info_loading_complete)
                 )
-                favoritePresentation = createFavoriteFromRemoteCharacter(it)
+                characterDetailViewModel.createFavoritePresentationFromRemoteCharacter()
             }
         })
     }
 
-    //TODO Move this logic to mappers
-    private fun createFavoriteFromRemoteCharacter(state: CharacterDetailsViewState): FavoritePresentation {
-        val characterPresentation = CharacterPresentation(
-            characterName,
-            binding.infoLayout.character?.birthYear ?: "Unknown",
-            binding.infoLayout.character?.heightInCm ?: "Unknown",
-            binding.infoLayout.character?.heightInInches ?: "Unknown",
-            ""
-        )
-        val planetPresentation =
-            PlanetPresentation(state.planet?.name ?: "Unknown", state.planet?.population ?: 0L)
-        val speciePresentation = SpeciePresentation(
-            state.specie?.get(0)?.name ?: "Unknown",
-            state.specie?.get(0)?.language ?: "Unknown"
-        )
-        return FavoritePresentation(
-            characterPresentation = characterPresentation,
-            planetPresentation = planetPresentation,
-            speciePresentation = listOf(speciePresentation),
-            films = state.films ?: emptyList()
-        )
+    private fun observeFavoritePresentationCreationFromRemote() {
+        characterDetailViewModel.remoteToFavoritePresentation
+            .observe(this, Observer { favPresentation ->
+                favoritePresentation = favPresentation
+            })
     }
 
     private fun onError(message: String) {

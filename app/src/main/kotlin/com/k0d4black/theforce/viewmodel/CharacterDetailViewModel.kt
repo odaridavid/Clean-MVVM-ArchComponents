@@ -13,6 +13,7 @@
  **/
 package com.k0d4black.theforce.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.k0d4black.theforce.commons.ExceptionHandler
@@ -20,11 +21,11 @@ import com.k0d4black.theforce.domain.usecases.GetFilmsBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetSpeciesBaseUseCase
 import com.k0d4black.theforce.mappers.toPresentation
+import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.CharacterDetailsViewState
 import com.k0d4black.theforce.models.states.Error
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
 internal class CharacterDetailViewModel(
@@ -41,6 +42,11 @@ internal class CharacterDetailViewModel(
         get() = _detailViewState
 
     private var _detailViewState = MutableLiveData<CharacterDetailsViewState>()
+
+    val remoteToFavoritePresentation: LiveData<FavoritePresentation>
+        get() = _remoteToFavoritePresentation
+
+    private var _remoteToFavoritePresentation = MutableLiveData<FavoritePresentation>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
         val message = ExceptionHandler.parse(exception)
@@ -76,6 +82,10 @@ internal class CharacterDetailViewModel(
 
     // region Public API
 
+    fun initView(character: CharacterPresentation) {
+        _detailViewState.value = _detailViewState.value?.copy(info = character)
+    }
+
     fun getCharacterDetails(characterUrl: String, isRetry: Boolean = false) {
         if (isRetry) {
             _detailViewState.value = _detailViewState.value?.copy(error = null)
@@ -90,6 +100,20 @@ internal class CharacterDetailViewModel(
 
     fun displayCharacterError(message: Int) {
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
+    }
+
+    fun createFavoritePresentationFromRemoteCharacter() {
+        val character = _detailViewState.value?.info ?: return
+        val planet = _detailViewState.value?.planet ?: return
+        val films = _detailViewState.value?.films ?: return
+        val species = _detailViewState.value?.specie ?: return
+        val favoritePresentation = FavoritePresentation(
+            characterPresentation = character,
+            planetPresentation = planet,
+            speciePresentation = species,
+            films = films
+        )
+        _remoteToFavoritePresentation.value = favoritePresentation
     }
 
     // endregion
@@ -119,7 +143,3 @@ internal class CharacterDetailViewModel(
 
     // endregion
 }
-
-
-
-
