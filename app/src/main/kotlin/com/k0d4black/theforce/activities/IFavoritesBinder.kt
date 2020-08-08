@@ -15,19 +15,10 @@
 */
 package com.k0d4black.theforce.activities
 
-import com.k0d4black.theforce.models.CharacterPresentation
-import com.k0d4black.theforce.models.FilmPresentation
-import com.k0d4black.theforce.models.PlanetPresentation
-import com.k0d4black.theforce.models.SpeciePresentation
+import com.k0d4black.theforce.models.FavoritePresentation
 
-internal interface ICharacterDetailsBinder {
+internal interface IFavoritesBinder {
 
-    fun bindCharacterBasicInfo(character: CharacterPresentation?)
-
-    fun bindFilms(films: List<FilmPresentation>?)
-
-    fun bindSpecies(species: List<SpeciePresentation>?)
-
-    fun bindPlanet(planet: PlanetPresentation?)
+    fun bindFavorite(favoritePresentation: FavoritePresentation)
 
 }

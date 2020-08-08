@@ -39,11 +39,11 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
 
     // region BaseFavoritesActivity
 
-    override fun bindFavorite(favorite: FavoritePresentation) {
-        bindCharacterBasicInfo(favorite.characterPresentation)
-        bindPlanet(favorite.planetPresentation)
-        bindSpecies(favorite.speciePresentation)
-        bindFilms(favorite.films)
+    override fun bindFavorite(favoritePresentation: FavoritePresentation) {
+        bindCharacterBasicInfo(favoritePresentation.characterPresentation)
+        bindPlanet(favoritePresentation.planetPresentation)
+        bindSpecies(favoritePresentation.speciePresentation)
+        bindFilms(favoritePresentation.films)
     }
 
     override val rootViewGroup: ViewGroup

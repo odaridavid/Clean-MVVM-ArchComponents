@@ -21,13 +21,14 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
+import com.k0d4black.theforce.activities.IFavoritesBinder
 import com.k0d4black.theforce.commons.NavigationUtils
 import com.k0d4black.theforce.commons.showSnackbar
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal abstract class BaseFavoritesActivity : BaseActivity() {
+internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder {
 
     // region Members
 
@@ -61,27 +62,30 @@ internal abstract class BaseFavoritesActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.favorites_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         val menuItem = menu?.getItem(0)
         if (isFavorite)
             menuItem?.setIcon(R.drawable.ic_favs_24dp)
         else
             menuItem?.setIcon(R.drawable.ic_no_favs_24dp)
-        return super.onCreateOptionsMenu(menu)
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_alter_favorites -> {
-                isFavorite =
-                    if (isFavorite) {
-                        removeFromFavorites()
-                        false
-                    } else {
-                        favoritePresentation?.let { favorite ->
-                            addToFavorites(favorite)
-                            true
-                        } ?: false
+                if (isFavorite) {
+                    removeFromFavorites()
+                    isFavorite = !isFavorite
+                } else {
+                    favoritePresentation?.let { favorite ->
+                        addToFavorites(favorite)
+                        isFavorite = !isFavorite
                     }
+                }
                 invalidateOptionsMenu()
                 true
             }
@@ -130,8 +134,6 @@ internal abstract class BaseFavoritesActivity : BaseActivity() {
     // endregion
 
     // region Abstract
-
-    abstract fun bindFavorite(favorite: FavoritePresentation)
 
     abstract val rootViewGroup: ViewGroup
 
