@@ -31,7 +31,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
         binding = DataBindingUtil.setContentView(this, R.layout.activity_favorites)
         setupToolbar()
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
     }
 
     // endregion
@@ -72,7 +71,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
                 filmsProgressBar.remove()
                 characterDetailsFilmsRecyclerView.apply {
                     adapter = filmsAdapter.apply { submitList(films) }
-                    EspressoIdlingResource.decrement()
                 }
             }
         }
@@ -85,7 +83,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
                 if (species.isNotEmpty()) {
                     characterDetailsSpeciesRecyclerView.apply {
                         adapter = speciesAdapter.apply { submitList(species) }
-                        EspressoIdlingResource.decrement()
                     }
                 } else noSpeciesTextView.show()
             }

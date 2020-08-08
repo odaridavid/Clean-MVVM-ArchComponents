@@ -61,7 +61,7 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    //endregion
+    // endregion
 
     // region Android API
 
