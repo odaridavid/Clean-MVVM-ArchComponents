@@ -13,10 +13,14 @@
  **/
 package com.k0d4black.theforce.commons
 
+import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import androidx.annotation.IntRange
 
+private const val minVersion = Build.VERSION_CODES.LOLLIPOP.toLong()
+private const val maxVersion = Build.VERSION_CODES.Q.toLong()
 
-internal fun versionFrom(@IntRange(from = 1, to = 29) version: Int): Boolean {
-    return SDK_INT >= version
-}
+fun versionFrom(@IntRange(from = minVersion, to = maxVersion) versionCode: Int): Boolean =
+    SDK_INT >= versionCode
+
+

@@ -14,7 +14,7 @@
 package com.k0d4black.theforce.data.remote
 
 
-fun String.enforceHttps(): String =
+internal fun String.enforceHttps(): String =
     if (!this.contains("https"))
         this.replace("http", "https")
     else this
