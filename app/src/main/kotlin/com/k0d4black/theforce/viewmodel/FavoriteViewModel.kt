@@ -49,7 +49,6 @@ internal class FavoriteViewModel(
     private var _favoriteViewState = MutableLiveData<FavoriteViewState>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        Log.d("CharacterDetailVM", "$exception")
         val message = ExceptionHandler.parse(exception)
         _favoriteViewState.value = _favoriteViewState.value?.copy(error = Error(message))
     }
