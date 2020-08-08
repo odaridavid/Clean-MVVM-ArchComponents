@@ -42,19 +42,19 @@
 
                 <include
                     android:id="@+id/info_layout"
-                    layout="@layout/layout_character_detail_info" />
+                    layout="@layout/layout_info" />
 
                 <include
                     android:id="@+id/planet_layout"
-                    layout="@layout/layout_character_detail_planet" />
+                    layout="@layout/layout_planet" />
 
                 <include
                     android:id="@+id/films_layout"
-                    layout="@layout/layout_character_detail_films" />
+                    layout="@layout/layout_films" />
 
                 <include
                     android:id="@+id/specie_layout"
-                    layout="@layout/layout_character_detail_specie" />
+                    layout="@layout/layout_specie" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

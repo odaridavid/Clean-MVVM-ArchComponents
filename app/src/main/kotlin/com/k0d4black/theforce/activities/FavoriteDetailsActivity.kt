@@ -10,7 +10,6 @@ import com.k0d4black.theforce.base.BaseFavoritesActivity
 import com.k0d4black.theforce.commons.remove
 import com.k0d4black.theforce.commons.show
 import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
-import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
 
 internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
@@ -31,7 +30,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
         binding = DataBindingUtil.setContentView(this, R.layout.activity_favorites)
         setupToolbar()
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
     }
 
     // endregion
@@ -72,7 +70,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
                 filmsProgressBar.remove()
                 characterDetailsFilmsRecyclerView.apply {
                     adapter = filmsAdapter.apply { submitList(films) }
-                    EspressoIdlingResource.decrement()
                 }
             }
         }
@@ -85,7 +82,6 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
                 if (species.isNotEmpty()) {
                     characterDetailsSpeciesRecyclerView.apply {
                         adapter = speciesAdapter.apply { submitList(species) }
-                        EspressoIdlingResource.decrement()
                     }
                 } else noSpeciesTextView.show()
             }
