@@ -29,10 +29,9 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_favorites)
+        setupToolbar()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        setupToolbar()
     }
 
     // endregion
