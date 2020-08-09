@@ -3,10 +3,9 @@
 </p>
 <p align="center">
 <img  src="https://travis-ci.com/odaridavid/Clean-MVVM-ArchComponents.svg?branch=develop">&nbsp;
-<a href="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-">
-  <img  src="https://codecov.io/gh/Davidodari/The-Force-Clean-MVVM-ArchComponents-/branch/develop/graph/badge.svg?token=8kkIQYTrfQ" />
+<a href="https://codecov.io/gh/odaridavid/Clean-MVVM-ArchComponents">
+  <img src="https://codecov.io/gh/odaridavid/Clean-MVVM-ArchComponents/branch/develop/graph/badge.svg" />
 </a>&nbsp;
-<a href="https://codebeat.co/projects/github-com-odaridavid-clean-mvvm-archcomponents-develop"><img alt="codebeat badge" src="https://codebeat.co/badges/3032633f-5bec-413e-a5fa-b385fe7cc298" /></a>
 </p>
 
 # The-Force
@@ -30,13 +29,6 @@ Build System : [Gradle](https://gradle.org/)
 - [Demo](#demo)
 
 ## Prerequisite
-
-Before running the project create a [firebase project](https://firebase.google.com/) 
-and replace the **google-services.json** with yours in the `app` directory for a successful build and 
-enable crashlytics.
-```
-package-name: com.k0d4black.theforce
-```
 
 To run the release build successfully in travis you will need to replace the default values in 
 ```keystore.properties.sample```file with your own in a ```keystore.properties``` file.
