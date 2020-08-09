@@ -6,6 +6,7 @@
 <a href="https://codecov.io/gh/odaridavid/Clean-MVVM-ArchComponents">
   <img src="https://codecov.io/gh/odaridavid/Clean-MVVM-ArchComponents/branch/develop/graph/badge.svg" />
 </a>&nbsp;
+<a href="https://www.codacy.com/manual/odaridavid/Clean-MVVM-ArchComponents?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=odaridavid/Clean-MVVM-ArchComponents&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/e9536c1df39b482b863f152654e14fa5"/></a>
 </p>
 
 # The-Force
