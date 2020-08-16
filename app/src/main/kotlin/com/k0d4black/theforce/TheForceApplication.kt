@@ -26,7 +26,8 @@ internal class TheForceApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        Stetho.initializeWithDefaults(this)
+        if (BuildConfig.DEBUG)
+            Stetho.initializeWithDefaults(this)
 
         startKoin {
             androidLogger(Level.DEBUG)
