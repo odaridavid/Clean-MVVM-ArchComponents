@@ -21,8 +21,8 @@ dependencies {
     api domainDependencies.coroutinesCore
 }
 
-sourceCompatibility = "8"
-targetCompatibility = "8"
+sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+targetCompatibility = JavaVersion.VERSION_1_8.toString()
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'

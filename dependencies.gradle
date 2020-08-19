@@ -31,7 +31,7 @@ ext {
     recyclerviewAnimationVersion = '3.0.0'
     aboutLibsVersion = '8.0.0-rc01'
     stethoVersion = '1.5.1'
-
+    kielVersion = '1.2.0'
     //Data
     retrofitVersion = '2.7.0'
     moshiConverterVersion = '2.7.0'
@@ -74,7 +74,8 @@ ext {
             koinAndroid           : "org.koin:koin-android:$koinVersion",
             koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
             koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion",
-            stetho                : "com.facebook.stetho:stetho:$stethoVersion"
+            stetho                : "com.facebook.stetho:stetho:$stethoVersion",
+            kiel                  : "me.ibrahimyilmaz:kiel:$kielVersion"
     ]
 
     dataDependencies = [

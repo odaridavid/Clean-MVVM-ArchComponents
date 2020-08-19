@@ -21,8 +21,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.adapters.FavoritesAdapter
-import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
@@ -31,6 +29,8 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
 import com.k0d4black.theforce.models.states.DashboardSearchViewState
+import com.k0d4black.theforce.adapters.createFavoritesAdapter
+import com.k0d4black.theforce.adapters.createSearchResultAdapter
 import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
 import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
@@ -45,19 +45,15 @@ internal class DashboardActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDashboardBinding
 
-    private val searchResultAdapter: SearchResultAdapter by lazy {
-        SearchResultAdapter { character ->
-            startActivity<CharacterDetailsActivity> {
-                putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, character)
-            }
+    private val searchResultAdapter = createSearchResultAdapter {
+        startActivity<CharacterDetailsActivity> {
+            putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, it)
         }
     }
 
-    private val favoritesAdapter: FavoritesAdapter by lazy {
-        FavoritesAdapter { favorite ->
-            startActivity<FavoriteDetailsActivity> {
-                putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, favorite)
-            }
+    private val favoritesAdapter = createFavoritesAdapter {
+        startActivity<FavoriteDetailsActivity> {
+            putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, it)
         }
     }
 

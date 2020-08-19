@@ -14,11 +14,11 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.activities.DashboardActivity
-import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.helpers.ERROR_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.ViewAction
+import com.k0d4black.theforce.adapters.SearchedCharacterViewHolder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -44,7 +44,7 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
     fun shouldNavigateToCharacterDetailOnItemClickFromSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(EXISTING_SEARCH_PARAMS))
         onView(withId(R.id.search_results_recycler_view)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<SearchResultAdapter.SearchedCharacterViewHolder>(
+            RecyclerViewActions.actionOnItemAtPosition<SearchedCharacterViewHolder>(
                 0, ViewAction.clickChildViewWithId(R.id.more_info_arrow_image_button)
             )
         )
