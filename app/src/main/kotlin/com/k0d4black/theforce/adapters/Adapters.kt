@@ -15,7 +15,7 @@ internal inline fun createSpeciesAdapter() = adapterOf<SpeciePresentation> {
     register(
         layoutResource = R.layout.item_specie,
         viewHolder = ::SpecieViewHolder,
-        onBindBindViewHolder = { specieViewHolder, _, speciePresentation ->
+        onBindViewHolder = { specieViewHolder, _, speciePresentation ->
             specieViewHolder.binding.species = speciePresentation
         }
     )
@@ -29,7 +29,7 @@ internal inline fun createFilmsAdapter() = adapterOf<FilmPresentation> {
     register(
         layoutResource = R.layout.item_film,
         viewHolder = ::FilmViewHolder,
-        onBindBindViewHolder = { viewHolder, _, item ->
+        onBindViewHolder = { viewHolder, _, item ->
             viewHolder.binding.film = item
         }
     )
@@ -44,7 +44,7 @@ internal inline fun createSearchResultAdapter(noinline onClick: (CharacterPresen
         register(
             layoutResource = R.layout.item_search,
             viewHolder = ::SearchedCharacterViewHolder,
-            onBindBindViewHolder = { viewHolder, _, character ->
+            onBindViewHolder = { viewHolder, _, character ->
                 viewHolder.binding.searchedCharacter = character
                 viewHolder.binding.moreInfoArrowImageButton.setOnClickListener {
                     onClick(character)
@@ -66,7 +66,7 @@ internal inline fun createFavoritesAdapter(noinline onClick: (FavoritePresentati
         register(
             layoutResource = R.layout.item_favorite,
             viewHolder = ::FavoriteViewHolder,
-            onBindBindViewHolder = { vh, _, favoritePresentation ->
+            onBindViewHolder = { vh, _, favoritePresentation ->
                 vh.binding.favorite = favoritePresentation
                 vh.binding.favCard.setOnClickListener {
                     onClick(favoritePresentation)
