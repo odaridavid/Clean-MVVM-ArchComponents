@@ -23,8 +23,6 @@ import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
-import com.k0d4black.theforce.adapters.FilmViewHolder
-import com.k0d4black.theforce.adapters.SpecieViewHolder
 import com.k0d4black.theforce.adapters.createFilmsAdapter
 import com.k0d4black.theforce.adapters.createSpeciesAdapter
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
@@ -56,7 +54,6 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
         val character =
             intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
-
 
         if (character == null) {
             characterDetailViewModel

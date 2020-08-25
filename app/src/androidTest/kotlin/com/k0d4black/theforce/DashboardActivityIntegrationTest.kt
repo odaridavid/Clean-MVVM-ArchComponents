@@ -51,7 +51,6 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
         intended(hasComponent(CHARACTER_DETAIL_ACTIVITY_COMPONENT))
     }
 
-
     @Test
     fun shouldDisplayNoFoundMatchesSnackbarOnSearch() {
         onView(withId(R.id.search_edit_text)).perform(typeText(NON_EXISTENT_SEARCH_PARAMS))

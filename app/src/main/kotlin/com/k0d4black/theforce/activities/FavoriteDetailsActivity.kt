@@ -9,8 +9,6 @@ import com.k0d4black.theforce.commons.remove
 import com.k0d4black.theforce.commons.show
 import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
 import com.k0d4black.theforce.models.*
-import com.k0d4black.theforce.adapters.FilmViewHolder
-import com.k0d4black.theforce.adapters.SpecieViewHolder
 import com.k0d4black.theforce.adapters.createFilmsAdapter
 import com.k0d4black.theforce.adapters.createSpeciesAdapter
 
