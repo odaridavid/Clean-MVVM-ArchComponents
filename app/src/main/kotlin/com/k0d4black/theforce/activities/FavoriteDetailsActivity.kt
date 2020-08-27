@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.adapters.FilmsAdapter
-import com.k0d4black.theforce.adapters.SpeciesAdapter
 import com.k0d4black.theforce.base.BaseFavoritesActivity
 import com.k0d4black.theforce.commons.remove
 import com.k0d4black.theforce.commons.show
 import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
 import com.k0d4black.theforce.models.*
+import com.k0d4black.theforce.adapters.createFilmsAdapter
+import com.k0d4black.theforce.adapters.createSpeciesAdapter
 
 internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
 
@@ -18,9 +18,9 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
 
     private lateinit var binding: ActivityFavoritesBinding
 
-    private val filmsAdapter: FilmsAdapter by lazy { FilmsAdapter() }
+    private val filmsAdapter = createFilmsAdapter()
 
-    private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
+    private val speciesAdapter = createSpeciesAdapter()
 
     // endregion
 

@@ -15,11 +15,13 @@ package com.k0d4black.theforce
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import com.k0d4black.theforce.di.*
+import com.k0d4black.theforce.di.networkModule
+import com.k0d4black.theforce.di.viewModelsModule
+import com.k0d4black.theforce.di.localDataSourceModule
+import com.k0d4black.theforce.di.remoteDataSourceModule
+import com.k0d4black.theforce.di.useCasesModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.core.logger.Level
 
 internal class TheForceApplication : Application() {
 
@@ -30,7 +32,6 @@ internal class TheForceApplication : Application() {
             Stetho.initializeWithDefaults(this)
 
         startKoin {
-            androidLogger(Level.DEBUG)
             androidContext(this@TheForceApplication)
             modules(
                 networkModule,

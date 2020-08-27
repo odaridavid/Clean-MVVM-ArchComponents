@@ -18,13 +18,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.adapters.FilmsAdapter
-import com.k0d4black.theforce.adapters.SpeciesAdapter
 import com.k0d4black.theforce.base.BaseFavoritesActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
+import com.k0d4black.theforce.adapters.createFilmsAdapter
+import com.k0d4black.theforce.adapters.createSpeciesAdapter
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,9 +36,9 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
     private lateinit var binding: ActivityCharacterDetailBinding
 
-    private val filmsAdapter: FilmsAdapter by lazy { FilmsAdapter() }
+    private val filmsAdapter = createFilmsAdapter()
 
-    private val speciesAdapter: SpeciesAdapter by lazy { SpeciesAdapter() }
+    private val speciesAdapter = createSpeciesAdapter()
 
     // endregion
 
@@ -54,7 +54,6 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
         val character =
             intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
-
 
         if (character == null) {
             characterDetailViewModel

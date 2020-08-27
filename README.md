@@ -167,6 +167,7 @@ and default parameters
 - [recyclerview-animators](https://github.com/wasabeef/recyclerview-animators) - Recycler View Animations
 - [AboutLibraries](https://github.com/mikepenz/AboutLibraries) -provide info on used open source libraries.
 - [Stetho](https://github.com/facebook/stetho) - debug bridge
+- [Kiel](https://github.com/ibrahimyilmaz/kiel) - Kiel RecyclerView Adapter Builders
 
 ## Contributors
 
