@@ -26,7 +26,7 @@ import java.io.IOException
 
 internal open class BaseTest {
 
-    protected lateinit var db: CharactersDatabase
+    private lateinit var db: CharactersDatabase
     protected lateinit var favoritesDao: FavoritesDao
 
     @Before
