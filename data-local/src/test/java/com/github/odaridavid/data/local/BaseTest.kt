@@ -17,6 +17,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import com.github.odaridavid.data.local.dao.FavoritesDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import java.io.IOException
@@ -37,6 +39,10 @@ internal open class BaseTest {
     @After
     @Throws(IOException::class)
     fun tearDown() {
+        runBlocking(Dispatchers.IO) {
+            db.clearAllTables()
+        }
+
         db.close()
     }
 }
