@@ -23,6 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.Toolbar
@@ -37,23 +38,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/margin_default"
-                tools:context=".activities.CharacterDetailActivity">
+                tools:context=".activities.CharacterDetailsActivity">
 
                 <include
                     android:id="@+id/info_layout"
-                    layout="@layout/layout_character_detail_info" />
+                    layout="@layout/layout_info" />
 
                 <include
                     android:id="@+id/planet_layout"
-                    layout="@layout/layout_character_detail_planet" />
+                    layout="@layout/layout_planet" />
 
                 <include
                     android:id="@+id/films_layout"
-                    layout="@layout/layout_character_detail_films" />
+                    layout="@layout/layout_films" />
 
                 <include
                     android:id="@+id/specie_layout"
-                    layout="@layout/layout_character_detail_specie" />
+                    layout="@layout/layout_specie" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

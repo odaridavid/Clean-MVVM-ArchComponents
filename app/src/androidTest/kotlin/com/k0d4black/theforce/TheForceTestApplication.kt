@@ -12,7 +12,6 @@ class TheForceTestApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidLogger(Level.DEBUG)
             androidContext(this@TheForceTestApplication)
             modules(
                 fakeNetworkModule,

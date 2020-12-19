@@ -1,17 +1,21 @@
 ext {
-    //Android Core
-    compileSdkVersion = 29
-    targetSdkVersion = 29
-    minSdkVersion = 21
-    buildToolsVersion = "29.0.2"
 
-    //App Versioning
+    // Kotlin
+    kotlinVersion = '1.3.72'
+
+    // Android Core
+    compileSdk = 29
+    targetSdk = 29
+    minSdk = 21
+    buildTools = "29.0.2"
+
+    // App Versioning
     versionCodeMajor = 2
     versionCodeMinor = 1
-    versionCodePatch = 3
+    versionCodePatch = 4
     versionName = "$versionCodeMajor.$versionCodeMinor.$versionCodePatch"
 
-    //Dependencies Version - Presentation
+    // Dependencies Version - Presentation
     appcompatVersion = '1.1.0'
     androidxCoreKtxVersion = '1.1.0'
     constraintLayoutVersion = '1.1.3'
@@ -27,17 +31,18 @@ ext {
     recyclerviewAnimationVersion = '3.0.0'
     aboutLibsVersion = '8.0.0-rc01'
     stethoVersion = '1.5.1'
+    kielVersion = '1.2.1'
 
-    //Data
+    // Data
     retrofitVersion = '2.7.0'
     moshiConverterVersion = '2.7.0'
     loggingInterceptorVersion = '4.2.1'
     roomVersion = '2.2.5'
 
-    //Domain
+    // Domain
     coroutinesCoreVersion = '1.3.3'
 
-    //Testing
+    // Testing
     mockitoVersion = '3.2.4'
     junitVersion = '4.12'
     espressoVersion = '3.2.0'
@@ -52,7 +57,7 @@ ext {
     archComponentTestVersion = '2.1.0'
 
 
-    //App/Presentation Layer
+    // App/Presentation Layer
     appDependencies = [
             appCompat             : "androidx.appcompat:appcompat:$appcompatVersion",
             androidxKtx           : "androidx.core:core-ktx:$androidxCoreKtxVersion",
@@ -70,7 +75,8 @@ ext {
             koinAndroid           : "org.koin:koin-android:$koinVersion",
             koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
             koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion",
-            stetho                : "com.facebook.stetho:stetho:$stethoVersion"
+            stetho                : "com.facebook.stetho:stetho:$stethoVersion",
+            kiel                  : "me.ibrahimyilmaz:kiel:$kielVersion"
     ]
 
     dataDependencies = [

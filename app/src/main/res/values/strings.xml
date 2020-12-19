@@ -14,7 +14,7 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- DashboardSearchViewState Activity -->
+    <!-- Dashboard Activity -->
     <string name="info_no_matching_results">No matching results</string>
     <string name="info_no_results">No Matching Search Results</string>
     <string name="info_no_favorite_characters">No Favorite Characters</string>
@@ -23,9 +23,11 @@
     <string name="hint_character_name">Character Name</string>
     <string name="title_favorites">Favorites</string>
     <string name="menu_title_favorites">Favorites</string>
-    <string name="info_explore">Explore</string>
+    <string name="info_explore">Explore StarWars</string>
+    <string name="info_removed_from_favs">Removed From Favorites</string>
+    <string name="info_added_to_favs">Added To Favorites</string>
 
-    <!-- DashboardSearchViewState Activity Menu -->
+    <!-- Dashboard Activity Menu -->
     <string name="menu_title_settings">Settings</string>
 
     <!-- Character Detail Activity -->
@@ -36,6 +38,9 @@
     <string name="title_species">Species</string>
     <string name="info_loading_complete">Character Loaded Successfully</string>
     <string name="info_specie_information_unavailable">Specie information unavailable</string>
+    <string name="error_loading_films">Error Loading Films</string>
+    <string name="error_loading_planet"> Error Loading Planet</string>
+    <string name="error_loading_specie">Error Loading Specie</string>
 
     <!-- Data Binding String Templates -->
     <string name="template_planet_name">Name : %s</string>
@@ -57,7 +62,7 @@
     <string name="error_check_internet_connection">Check Internet Connection</string>
     <string name="error_oops_error_occured">Oops!! An Error Occurred</string>
     <string name="error_loading_character_details">Couldn\'t load character details</string>
-    <string name="info_removed_from_favs">Removed From Favorites</string>
-    <string name="info_added_to_favs">Added To Favorites</string>
+    <string name="back_to_home_dashboard_content_desc">Back to home dashboard</string>
+
 
 </resources>

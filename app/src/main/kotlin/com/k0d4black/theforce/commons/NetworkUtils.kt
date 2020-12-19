@@ -20,7 +20,6 @@ import android.net.NetworkRequest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-
 internal object NetworkUtils {
 
     fun getNetworkStatus(context: Context): LiveData<Boolean> {

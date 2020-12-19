@@ -45,7 +45,7 @@ class DashboardSearchViewModelTest : BaseViewModelTest() {
 
             advanceTimeBy(600)
 
-            dashboardSearchViewModel.dashboardSearchViewState.observeOnce { state ->
+            dashboardSearchViewModel.searchViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.searchResults).isNotEmpty()
             }
@@ -62,7 +62,7 @@ class DashboardSearchViewModelTest : BaseViewModelTest() {
 
             advanceTimeBy(600)
 
-            dashboardSearchViewModel.dashboardSearchViewState.observeOnce { state ->
+            dashboardSearchViewModel.searchViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNotNull()
             }
 

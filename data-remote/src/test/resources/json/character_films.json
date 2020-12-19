@@ -1,6 +1,6 @@
 {
   "characters": [
-    "https://swapi.co/api/people/1/"
+    "/api/people/1/"
   ],
   "created": "2014-12-10T14:23:31.880000Z",
   "director": "George Lucas",

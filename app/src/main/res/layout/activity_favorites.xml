@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/favorites_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/favorites_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/margin_default"
+                tools:context=".activities.FavoriteDetailsActivity">
+
+                <include
+                    android:id="@+id/info_layout"
+                    layout="@layout/layout_info" />
+
+                <include
+                    android:id="@+id/planet_layout"
+                    layout="@layout/layout_planet" />
+
+                <include
+                    android:id="@+id/films_layout"
+                    layout="@layout/layout_films" />
+
+                <include
+                    android:id="@+id/specie_layout"
+                    layout="@layout/layout_specie" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

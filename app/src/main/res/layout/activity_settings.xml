@@ -27,8 +27,8 @@
             android:layout_height="?actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:title="@string/title_settings"
             app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/title_settings"
             app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
         <androidx.cardview.widget.CardView
@@ -50,23 +50,21 @@
 
                 <TextView
                     android:id="@+id/about_text_view"
+                    style="@style/TheForce.TextView.HeadLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_default"
                     android:drawableStart="@drawable/ic_info_24dp"
-                    android:drawablePadding="@dimen/padding_default"
                     android:padding="@dimen/padding_default"
-                    android:text="@string/title_about"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-                    app:drawableTint="?colorSecondary" />
+                    android:text="@string/title_about" />
 
                 <TextView
+                    style="@style/TheForce.TextView.Info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
                     android:padding="@dimen/padding_default"
-                    android:text="@string/star_wars_copyright"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    android:text="@string/star_wars_copyright" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

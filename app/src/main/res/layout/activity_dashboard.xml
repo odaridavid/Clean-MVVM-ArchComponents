@@ -20,6 +20,7 @@
         android:id="@+id/dashboard_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         app:layoutDescription="@xml/search_motion_scene"
         tools:context=".activities.DashboardActivity"
         tools:menu="@menu/main_menu">
@@ -36,17 +37,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:contentDescription="Back to home dashboard"
+            android:contentDescription="@string/back_to_home_dashboard_content_desc"
             android:onClick="handleUpButtonClick"
             android:src="@drawable/ic_arrow_left_24dp"
             android:tint="@color/colorSecondaryVariant" />
 
         <TextView
             android:id="@+id/search_tagline_text_view"
+            style="@style/TheForce.TextView.HeadLine2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/info_explore"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+            android:text="@string/info_explore" />
 
         <EditText
             android:id="@+id/search_edit_text"
@@ -68,18 +69,16 @@
 
         <TextView
             android:id="@+id/favorites_title_text_view"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_favs_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:text="@string/title_favorites"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            app:drawableTint="@color/colorSecondaryVariant" />
+            android:text="@string/title_favorites" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorites_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="2"
@@ -92,15 +91,12 @@
 
         <TextView
             android:id="@+id/no_favorites_text_view"
+            style="@style/TheForce.TextView.Info.Icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/ic_no_favs_96dp"
-            android:drawablePadding="@dimen/drawable_padding"
             android:gravity="center_horizontal"
-            android:text="@string/info_no_favorite_characters"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:drawableTint="@color/colorSecondaryVariant" />
+            android:text="@string/info_no_favorite_characters" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_results_recycler_view"

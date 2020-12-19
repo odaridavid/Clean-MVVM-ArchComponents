@@ -35,7 +35,13 @@ import org.robolectric.annotation.Config
 @ExperimentalCoroutinesApi
 internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
+    // region Members
+
     private lateinit var characterDetailViewModel: CharacterDetailViewModel
+
+    // endregion
+
+    // region Tests
 
     @Test
     fun `given a character url when character details request sent then get character details`() {
@@ -65,66 +71,31 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
         }
     }
 
-    @Test
-    fun `given a characters' details when saved and removed from favorites add and remove character`() {
-        coroutineTestRule.dispatcher.runBlockingTest {
+    // endregion
 
-            prepareViewModel(UiState.SUCCESS)
-
-            characterDetailViewModel.saveFavorite(Data.favorite.toPresentation())
-
-            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
-                Truth.assertThat(state.isFavorite).isTrue()
-                Truth.assertThat(Data.favorites.size).isEqualTo(1)
-            }
-
-            characterDetailViewModel.deleteFavorite(Data.favorite.name)
-
-            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
-                Truth.assertThat(state.isFavorite).isFalse()
-                Truth.assertThat(Data.favorites.size).isEqualTo(0)
-            }
-        }
-    }
-
-    @Test
-    fun `given a characters name that exists when db query executed then get character`() {
-        coroutineTestRule.dispatcher.runBlockingTest {
-
-            prepareViewModel(UiState.SUCCESS)
-
-            characterDetailViewModel.saveFavorite(Data.favorite.toPresentation())
-
-            characterDetailViewModel.getFavorite(Data.favorite.name)
-
-            characterDetailViewModel.detailFavoriteViewState.observeOnce { state ->
-                Truth.assertThat(state.isFavorite).isTrue()
-            }
-        }
-    }
+    // region BaseViewModelTest
 
     override fun prepareViewModel(uiState: UiState) {
         val getFilmsUseCase = FakeGetFilmsUseCase(uiState)
         val getPlanetUseCase = FakeGetPlanetUseCase(uiState)
         val getSpeciesUseCase = FakeGetSpeciesUseCase(uiState)
-        val deleteFavoriteByNameUseCase = FakeDeleteFavoriteByNameUseCase(uiState)
-        val insertFavoriteUseCase = FakeInsertFavoriteUseCase(uiState)
-        val getFavoriteByNameUseCase = FakeGetFavoriteByNameUseCase(uiState)
 
         characterDetailViewModel =
             CharacterDetailViewModel(
                 getSpeciesUseCase,
                 getPlanetUseCase,
-                getFilmsUseCase,
-                deleteFavoriteByNameUseCase,
-                insertFavoriteUseCase,
-                getFavoriteByNameUseCase
+                getFilmsUseCase
             )
     }
+
+    // endregion
+
+    // region Helpers
 
     @After
     fun clear() {
         Data.favorites.clear()
     }
 
+    // endregion
 }

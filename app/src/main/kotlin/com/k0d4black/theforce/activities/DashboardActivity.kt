@@ -21,8 +21,6 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.adapters.FavoritesAdapter
-import com.k0d4black.theforce.adapters.SearchResultAdapter
 import com.k0d4black.theforce.base.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
@@ -31,34 +29,37 @@ import com.k0d4black.theforce.models.CharacterPresentation
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
 import com.k0d4black.theforce.models.states.DashboardSearchViewState
+import com.k0d4black.theforce.adapters.createFavoritesAdapter
+import com.k0d4black.theforce.adapters.createSearchResultAdapter
 import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
 import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-//TODO Favorites text view dissappears on transition to end and back
 internal class DashboardActivity : BaseActivity() {
+
+    // region Members
 
     private val characterSearchViewModel by viewModel<DashboardSearchViewModel>()
     private val favoritesViewModel by viewModel<DashboardFavoritesViewModel>()
 
     private lateinit var binding: ActivityDashboardBinding
 
-    private val searchResultAdapter: SearchResultAdapter by lazy {
-        SearchResultAdapter { character ->
-            startActivity<CharacterDetailActivity> {
-                putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, character)
-            }
+    private val searchResultAdapter = createSearchResultAdapter {
+        startActivity<CharacterDetailsActivity> {
+            putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, it)
         }
     }
 
-    private val favoritesAdapter: FavoritesAdapter by lazy {
-        FavoritesAdapter { favorite ->
-            startActivity<CharacterDetailActivity> {
-                putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, favorite)
-            }
+    private val favoritesAdapter = createFavoritesAdapter {
+        startActivity<FavoriteDetailsActivity> {
+            putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, it)
         }
     }
+
+    // endregion
+
+    // region Android API
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +79,30 @@ internal class DashboardActivity : BaseActivity() {
         if (binding.dashboardLayout.currentState == binding.dashboardLayout.startState)
             favoritesViewModel.getAllFavorites()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_settings) {
+            startActivity<SettingsActivity>()
+            true
+        } else super.onOptionsItemSelected(item)
+    }
+
+    // endregion
+
+    // region Public API
+
+    fun handleUpButtonClick(view: View) {
+        binding.dashboardLayout.transitionToStart()
+    }
+
+    // endregion
+
+    // region Private API
 
     private fun configSupportActionBar() {
         setSupportActionBar(binding.searchToolbar)
@@ -101,24 +126,8 @@ internal class DashboardActivity : BaseActivity() {
         }
     }
 
-    fun handleUpButtonClick(view: View) {
-        binding.dashboardLayout.transitionToStart()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == R.id.action_settings) {
-            startActivity<SettingsActivity>()
-            true
-        } else super.onOptionsItemSelected(item)
-    }
-
     private fun observeFavoritesViewState() {
-        favoritesViewModel.dashboardFavoritesViewState.observe(this, Observer { state ->
+        favoritesViewModel.favoritesViewState.observe(this, Observer { state ->
 
             handleFavoritesLoading(state)
 
@@ -135,7 +144,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun observeSearchViewState() {
-        characterSearchViewModel.dashboardSearchViewState.observe(this, Observer { state ->
+        characterSearchViewModel.searchViewState.observe(this, Observer { state ->
 
             handleSearchLoading(state)
 
@@ -153,6 +162,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchLoading(state: DashboardSearchViewState) {
+        EspressoIdlingResource.decrement()
         if (state.isLoading) {
             binding.searchResultsRecyclerView.hide()
             binding.searchResultsProgressBar.show()
@@ -163,6 +173,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleFavoritesLoading(state: DashboardFavoritesViewState) {
+        EspressoIdlingResource.decrement()
         if (state.isLoading) {
             binding.favoritesProgressBar.show()
         } else {
@@ -171,6 +182,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchResults(searchResults: List<CharacterPresentation>) {
+        EspressoIdlingResource.decrement()
         showSnackbar(
             binding.searchResultsRecyclerView,
             getString(R.string.info_search_done)
@@ -196,6 +208,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleNoSearchResults() {
+        EspressoIdlingResource.decrement()
         binding.searchResultsRecyclerView.hide()
         showSnackbar(
             binding.searchResultsRecyclerView,
@@ -204,6 +217,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleSearchError(state: DashboardSearchViewState) {
+        EspressoIdlingResource.decrement()
         state.error?.run {
             showSnackbar(
                 binding.searchResultsRecyclerView,
@@ -214,6 +228,7 @@ internal class DashboardActivity : BaseActivity() {
     }
 
     private fun handleFavoritesError(state: DashboardFavoritesViewState) {
+        EspressoIdlingResource.decrement()
         state.error?.run {
             showSnackbar(
                 binding.favoritesRecyclerView,
@@ -222,4 +237,6 @@ internal class DashboardActivity : BaseActivity() {
             )
         }
     }
+
+    // endregion
 }

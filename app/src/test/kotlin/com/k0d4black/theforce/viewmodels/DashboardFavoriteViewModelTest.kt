@@ -33,16 +33,22 @@ import org.robolectric.annotation.Config
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
 @ExperimentalCoroutinesApi
-internal class DashboardFavoritesViewModelTest : BaseViewModelTest() {
+internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
 
-    lateinit var dashboardFavoritesViewModel: DashboardFavoritesViewModel
+    // region Members
+
+    private lateinit var dashboardFavoritesViewModel: DashboardFavoritesViewModel
+
+    // endregion
+
+    // region Tests
 
     @Test
     fun `should get all saved favorites`() {
         coroutineTestRule.dispatcher.runBlockingTest {
             prepareViewModel(UiState.SUCCESS)
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isNotNull()
@@ -60,7 +66,7 @@ internal class DashboardFavoritesViewModelTest : BaseViewModelTest() {
 
             dashboardFavoritesViewModel.deleteAllFavorites()
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isEmpty()
@@ -78,13 +84,17 @@ internal class DashboardFavoritesViewModelTest : BaseViewModelTest() {
 
             dashboardFavoritesViewModel.deleteFavorite(Data.favorite.name)
 
-            dashboardFavoritesViewModel.dashboardFavoritesViewState.observeOnce { state ->
+            dashboardFavoritesViewModel.favoritesViewState.observeOnce { state ->
                 Truth.assertThat(state.error).isNull()
                 Truth.assertThat(state.isLoading).isFalse()
                 Truth.assertThat(state.favorites).isEmpty()
             }
         }
     }
+
+    // endregion
+
+    // region BaseViewModelTest
 
     override fun prepareViewModel(uiState: UiState) {
         val deleteFavoriteByNameUseCase = FakeDeleteFavoriteByNameUseCase(uiState)
@@ -98,5 +108,7 @@ internal class DashboardFavoritesViewModelTest : BaseViewModelTest() {
         )
 
     }
+
+    // endregion
 
 }

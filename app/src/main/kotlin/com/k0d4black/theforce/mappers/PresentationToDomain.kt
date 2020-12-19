@@ -20,15 +20,15 @@ import com.k0d4black.theforce.models.FilmPresentation
 
 internal fun FavoritePresentation.toDomain(): Favorite {
     val population =
-        if (planetPresentation.population == 0L) "unknown" else planetPresentation.population.toString()
+        if (planetPresentation.population == 0L) "Unknown" else planetPresentation.population.toString()
     return Favorite(
         characterPresentation.name,
         characterPresentation.birthYear,
         characterPresentation.heightInCm,
         planetPresentation.name,
         population,
-        speciePresentation.name,
-        speciePresentation.language,
+        if (speciePresentation.isNotEmpty()) speciePresentation[0].name else "Unknown",
+        if (speciePresentation.isNotEmpty()) speciePresentation[0].language else "Unknown",
         films.map { it.toDomain() })
 }
 

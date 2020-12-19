@@ -11,21 +11,18 @@
  * the License.
  *
  **/
-apply plugin: 'java-library'
-apply plugin: 'kotlin'
-
-dependencies {
-
-    def domainDependencies = rootProject.ext.domainDependencies
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api domainDependencies.kotlin
-    api domainDependencies.coroutinesCore
-
+plugins {
+    id("java-library")
+    id("kotlin")
 }
 
-sourceCompatibility = "8"
-targetCompatibility = "8"
+dependencies {
+    api domainDependencies.kotlin
+    api domainDependencies.coroutinesCore
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+targetCompatibility = JavaVersion.VERSION_1_8.toString()
 
 sourceSets {
     main.java.srcDirs += 'src/main/kotlin'

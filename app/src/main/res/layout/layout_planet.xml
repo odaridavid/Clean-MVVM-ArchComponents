@@ -13,50 +13,68 @@
 -->
 <layout>
 
+    <data>
+
+        <variable
+            name="planet"
+            type="com.k0d4black.theforce.models.PlanetPresentation" />
+
+    </data>
+
     <merge xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
         <TextView
-            android:id="@+id/character_details_films_title_text_view"
+            android:id="@+id/character_details_planet_title_text_view"
+            style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
-            android:drawableStart="@drawable/ic_film_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:text="@string/title_films"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:drawableTint="@color/colorSecondaryVariant"
+            android:drawableStart="@drawable/ic_planet_24dp"
+            android:text="@string/title_planet"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/specie_card_container" />
-
+            app:layout_constraintTop_toBottomOf="@id/character_details_height_in_inches_text_view" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/films_card_container"
+            android:id="@+id/planet_card_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_default"
             app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/cardview_elevation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view">
+            app:layout_constraintTop_toBottomOf="@+id/character_details_planet_title_text_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:padding="@dimen/padding_default">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/character_details_films_recycler_view"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/character_details_planet_name_text_view"
+                    style="@style/TheForce.TextView.Info"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:text="@{String.format(@string/template_planet_name,planet.name)}"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_film" />
+                    tools:text="Language : Blaa Blaa" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/character_details_planet_population_text_view"
+                    style="@style/TheForce.TextView.Info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.format(@string/template_planet_population,planet.population)}"
+                    android:visibility="invisible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/character_details_planet_name_text_view"
+                    tools:text="Population : 2340000" />
 
                 <ProgressBar
-                    android:id="@+id/films_progress_bar"
+                    android:id="@+id/planet_progress_bar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
@@ -66,19 +84,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/films_error_text_view"
+                    android:id="@+id/planet_error_text_view"
+                    style="@style/TheForce.TextView.Error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_default"
-                    android:drawableTop="@drawable/ic_error_24dp"
-                    android:text="Error Loading Films"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:text="@string/error_loading_planet"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
     </merge>

@@ -14,8 +14,8 @@
 package com.k0d4black.theforce.domain.repository
 
 import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.domain.models.Result
 import kotlinx.coroutines.flow.Flow
-
 
 interface IFavoritesRepository {
 
@@ -27,6 +27,6 @@ interface IFavoritesRepository {
 
     fun deleteAllFavorites(): Flow<Int>
 
-    fun insertFavorite(favorite: Favorite): Flow<String>
+    fun insertFavorite(favorite: Favorite): Flow<Result>
 
 }

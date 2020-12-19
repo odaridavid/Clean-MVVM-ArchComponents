@@ -38,93 +38,74 @@ internal class FavoritesRepositoryTest : BaseTest() {
     }
 
     @Test
-    fun `given favorite inputs when added to the db then return saved input`() =
-        runBlocking(Dispatchers.IO) {
+    fun `when all favorites are requested , then return all saved favorites`() =
+            runBlocking(Dispatchers.IO) {
 
-            //Save to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect { result ->
-                Truth.assertThat(result).isEqualTo("Done")
-            }
+                // Given we save a favorite item to the db
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
 
-            val index = 0
-            //Retrieve saved values
-            val favorites = favoriteRepository.getAllFavorites()
-            favorites.collect { favs ->
-                Truth.assertThat(favs).hasSize(1)
-                with(favs[index]) {
-                    Truth.assertThat(name).isEqualTo(SampleData.favorite.name)
-                    Truth.assertThat(films[index].title)
-                        .isEqualTo(SampleData.favorite.films[index].title)
+                // When we get all favorite items
+                val favorites = favoriteRepository.getAllFavorites()
+
+                // Then get saved favorite items
+                favorites.collect { favs ->
+                    Truth.assertThat(favs).isEqualTo(listOf(SampleData.favorite))
                 }
             }
 
-            //Clear data from tables
-            db.clearAllTables()
-        }
-
 
     @Test
-    fun `given all entries must be deleted when deleted from db then return no of affected row`() =
-        runBlocking(Dispatchers.IO) {
+    fun `when we delete all favorites,then return an empty list of favorites`() =
+            runBlocking(Dispatchers.IO) {
 
-            //Save multiple values to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
+                // Given we save multiple favorites to the database
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
 
-            //Check no of favorites in db
-            val favorites = favoriteRepository.getAllFavorites()
-            favorites.collect { favs ->
-                Truth.assertThat(favs).hasSize(4)
+                // When we delete all favorites from db
+                favoriteRepository.deleteAllFavorites().collect()
+
+                // Then assert all favorites were deleted
+                favoriteRepository.getAllFavorites().collect { favs ->
+                    Truth.assertThat(favs).isEmpty()
+                }
             }
 
-            //Delete all favorites from db
-            favoriteRepository.deleteAllFavorites().collect { rowsAffected ->
-                Truth.assertThat(rowsAffected).isAtMost(4)
+
+    //TODO Use JunitParams to assert negative path
+    @Test
+    fun `when queried for a specific favorite,then return the specific favorite`() =
+            runBlocking(Dispatchers.IO) {
+
+                // Given we save a favorite
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
+
+                // When we query for that specific favorite
+                val favorite = favoriteRepository.getFavoriteByName(SampleData.favorite.name)
+
+                // Then assert that favorite exists
+                favorite.collect { favs ->
+                    Truth.assertThat(favs).isEqualTo(SampleData.favorite)
+                }
             }
-
-            //Verify All Items Deleted
-            favorites.collect { favs ->
-                Truth.assertThat(favs).isEmpty()
-            }
-
-            //Clear data from tables
-            db.clearAllTables()
-        }
-
 
     @Test
-    fun `given a favorite name when queried then return a specific favorite`() =
-        runBlocking(Dispatchers.IO) {
+    fun `when a specific favorite is deleted, then no of affected rows should be one`() =
+            runBlocking(Dispatchers.IO) {
 
-            //Save values to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
+                // Given we save a favorite
+                favoriteRepository.insertFavorite(SampleData.favorite).collect()
 
-            //Check if fav exists using name
-            val favorite = favoriteRepository.getFavoriteByName(SampleData.favorite.name)
-            favorite.collect { favs ->
-                Truth.assertThat(favs).isEqualTo(SampleData.favorite)
+                // When we delete that specific favorite
+                val favorite = favoriteRepository.deleteFavoriteByName(SampleData.favorite.name)
+
+                // Then assert no of deleted rows was one
+                favorite.collect { rowsAffected ->
+                    Truth.assertThat(rowsAffected).isEqualTo(1)
+                }
+
             }
-
-            //Clear data from tables
-            db.clearAllTables()
-        }
-
-    @Test
-    fun `given a favorite name when deleted then return no of affected rows`() =
-        runBlocking(Dispatchers.IO) {
-            //Save values to db with insert transaction
-            favoriteRepository.insertFavorite(SampleData.favorite).collect()
-
-            //Check if fav exists using name
-            val favorite = favoriteRepository.deleteFavoriteByName(SampleData.favorite.name)
-            favorite.collect { rowsAffected ->
-                Truth.assertThat(rowsAffected).isEqualTo(1)
-            }
-
-            //Clear data from tables
-            db.clearAllTables()
-        }
 
 }
