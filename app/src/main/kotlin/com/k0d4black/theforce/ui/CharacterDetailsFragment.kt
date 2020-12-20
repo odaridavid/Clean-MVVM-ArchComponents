@@ -11,34 +11,44 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.activities
+package com.k0d4black.theforce.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.base.BaseFavoritesActivity
-import com.k0d4black.theforce.commons.*
-import com.k0d4black.theforce.databinding.ActivityCharacterDetailBinding
-import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
-import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.adapters.createFilmsAdapter
 import com.k0d4black.theforce.adapters.createSpeciesAdapter
+import com.k0d4black.theforce.base.BaseFavoritesFragment
+import com.k0d4black.theforce.commons.hide
+import com.k0d4black.theforce.commons.remove
+import com.k0d4black.theforce.commons.show
+import com.k0d4black.theforce.commons.showSnackbar
+import com.k0d4black.theforce.databinding.FragmentCharacterDetailBinding
+import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
+import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
+import kotlinx.android.synthetic.main.fragment_character_detail.*
+import kotlinx.android.synthetic.main.layout_films.view.*
+import kotlinx.android.synthetic.main.layout_planet.view.*
+import kotlinx.android.synthetic.main.layout_specie.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
+internal class CharacterDetailsFragment : BaseFavoritesFragment(R.layout.fragment_character_detail),
+    ICharacterDetailsBinder {
 
     // region Members
 
     private val characterDetailViewModel by viewModel<CharacterDetailViewModel>()
 
-    private lateinit var binding: ActivityCharacterDetailBinding
-
     private val filmsAdapter = createFilmsAdapter()
 
     private val speciesAdapter = createSpeciesAdapter()
+
+    private lateinit var binding: FragmentCharacterDetailBinding
 
     // endregion
 
@@ -46,14 +56,24 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (requireActivity() as DashboardActivity).setSupportActionBar(details_toolbar)
+        (requireActivity() as DashboardActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_character_detail)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_character_detail, container, false)
+        return binding.root
+    }
 
-        setSupportActionBar(binding.detailsToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val character =
-            intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
+        val character = CharacterDetailsFragmentArgs.fromBundle(requireArguments()).character
 
         if (character == null) {
             characterDetailViewModel
@@ -79,14 +99,14 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
     }
 
     override val rootViewGroup: ViewGroup
-        get() = binding.characterDetailsLayout
+        get() = character_details_layout
 
     // endregion
 
     // region Private API
 
     private fun observeDetailViewState() {
-        characterDetailViewModel.detailViewState.observe(this, Observer {
+        characterDetailViewModel.detailViewState.observe(viewLifecycleOwner, Observer {
             bindCharacterBasicInfo(it.info)
             bindSpecies(it.specie)
             bindFilms(it.films)
@@ -96,7 +116,7 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
             }
             if (it.isComplete) {
                 showSnackbar(
-                    binding.characterDetailsLayout,
+                    character_details_layout,
                     getString(R.string.info_loading_complete)
                 )
                 characterDetailViewModel.createFavoritePresentationFromRemoteCharacter()
@@ -106,28 +126,29 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
 
     private fun observeFavoritePresentationCreationFromRemote() {
         characterDetailViewModel.remoteToFavoritePresentation
-            .observe(this, Observer { favPresentation ->
+            .observe(viewLifecycleOwner, Observer { favPresentation ->
                 favoritePresentation = favPresentation
             })
     }
 
     private fun onError(message: String) {
-        binding.filmsLayout.filmsProgressBar.hide()
-        binding.planetLayout.planetProgressBar.hide()
-        binding.specieLayout.speciesProgressBar.hide()
-        binding.filmsLayout.filmsErrorTextView.show()
-        binding.planetLayout.planetErrorTextView.show()
-        binding.specieLayout.specieErrorTextView.show()
-        showSnackbar(binding.characterDetailsLayout, message, isError = true)
+        films_layout.films_progress_bar.hide()
+        planet_layout.planet_progress_bar.hide()
+        specie_layout.species_progress_bar.hide()
+        films_layout.films_error_text_view.show()
+        planet_layout.planet_error_text_view.show()
+        specie_layout.specie_error_text_view.show()
+        showSnackbar(character_details_layout, message, isError = true)
     }
 
     private fun onErrorResolved() {
-        binding.filmsLayout.filmsErrorTextView.remove()
-        binding.planetLayout.planetErrorTextView.remove()
-        binding.specieLayout.specieErrorTextView.remove()
-        binding.filmsLayout.filmsProgressBar.show()
-        binding.planetLayout.planetProgressBar.show()
-        binding.specieLayout.speciesProgressBar.show()
+        films_layout.films_error_text_view.remove()
+        planet_layout.planet_error_text_view.remove()
+        specie_layout.specie_error_text_view.remove()
+
+        films_layout.films_progress_bar.show()
+        planet_layout.planet_progress_bar.show()
+        specie_layout.species_progress_bar.show()
     }
 
     private fun observeNetworkChanges(characterUrl: String) {
@@ -146,7 +167,7 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
     // region ICharacterDetailsBinder
 
     override fun bindCharacterBasicInfo(character: CharacterPresentation?) {
-        supportActionBar?.title = character?.name ?: ""
+        requireActivity().actionBar?.title = character?.name ?: ""
         binding.infoLayout.character = character
     }
 

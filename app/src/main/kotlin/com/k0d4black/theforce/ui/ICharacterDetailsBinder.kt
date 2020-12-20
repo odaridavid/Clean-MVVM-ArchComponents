@@ -13,12 +13,21 @@
 * the License.
 *
 */
-package com.k0d4black.theforce.activities
+package com.k0d4black.theforce.ui
 
-import com.k0d4black.theforce.models.FavoritePresentation
+import com.k0d4black.theforce.models.CharacterPresentation
+import com.k0d4black.theforce.models.FilmPresentation
+import com.k0d4black.theforce.models.PlanetPresentation
+import com.k0d4black.theforce.models.SpeciePresentation
 
-internal interface IFavoritesBinder {
+internal interface ICharacterDetailsBinder {
 
-    fun bindFavorite(favoritePresentation: FavoritePresentation)
+    fun bindCharacterBasicInfo(character: CharacterPresentation?)
+
+    fun bindFilms(films: List<FilmPresentation>?)
+
+    fun bindSpecies(species: List<SpeciePresentation>?)
+
+    fun bindPlanet(planet: PlanetPresentation?)
 
 }

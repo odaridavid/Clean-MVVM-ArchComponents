@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/margin_default"
-                tools:context=".activities.FavoriteDetailsActivity">
+                tools:context=".ui.FavoriteDetailsFragment">
 
                 <include
                     android:id="@+id/info_layout"

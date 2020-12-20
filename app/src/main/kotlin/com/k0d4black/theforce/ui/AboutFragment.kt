@@ -11,28 +11,29 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.activities
+package com.k0d4black.theforce.ui
 
 import android.os.Bundle
+import android.view.View
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.base.BaseActivity
-import com.k0d4black.theforce.databinding.ActivityAboutBinding
+import com.k0d4black.theforce.base.BaseFragment
 import com.mikepenz.aboutlibraries.LibsBuilder
+import kotlinx.android.synthetic.main.fragment_about.*
 
-internal class AboutActivity : BaseActivity() {
+internal class AboutFragment : BaseFragment(R.layout.fragment_about) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityAboutBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.aboutToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity() as DashboardActivity).setSupportActionBar(about_toolbar)
+        (requireActivity() as DashboardActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val fragment = LibsBuilder()
             .withAboutIconShown(true)
             .supportFragment()
 
-        supportFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, fragment).commit()
     }
+
 }

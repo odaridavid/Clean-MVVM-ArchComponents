@@ -17,4 +17,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-internal data class SpeciePresentation(val name: String, val language: String) : Parcelable
+data class SpeciePresentation(val name: String, val language: String) : Parcelable
