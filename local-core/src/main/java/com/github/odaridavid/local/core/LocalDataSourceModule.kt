@@ -15,23 +15,26 @@ package com.k0d4black.theforce.di
 
 import androidx.room.Room
 import com.github.odaridavid.local.core.CharactersDatabase
-import com.github.odaridavid.local.favorites.repository.FavoritesRepository
+import com.k0d4black.theforce.data.local.dao.FavoritesDao
+import com.k0d4black.theforce.data.local.repository.FavoritesRepository
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 
-val fakeLocalDataSourceModule = module {
+val localDataSourceModule = module {
 
     single<IFavoritesRepository> { FavoritesRepository(favoritesDao = get()) }
 
     single {
         Room
-            .inMemoryDatabaseBuilder(androidContext(), com.github.odaridavid.local.core.CharactersDatabase::class.java)
-            .allowMainThreadQueries()
+            .databaseBuilder(androidContext(), com.github.odaridavid.local.core.CharactersDatabase::class.java, "character_db")
             .build()
     }
 
     single { provideFavoritesDao(db = get()) }
 
+
 }
+
+internal fun provideFavoritesDao(db: com.github.odaridavid.local.core.CharactersDatabase): FavoritesDao = db.favoritesDao()

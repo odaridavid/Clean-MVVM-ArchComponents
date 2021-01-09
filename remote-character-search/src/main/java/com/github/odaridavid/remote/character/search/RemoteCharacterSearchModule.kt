@@ -13,25 +13,12 @@
  **/
 package com.k0d4black.theforce.di
 
-import androidx.room.Room
-import com.github.odaridavid.local.core.CharactersDatabase
-import com.github.odaridavid.local.favorites.repository.FavoritesRepository
-import com.k0d4black.theforce.domain.repository.IFavoritesRepository
-import org.koin.android.ext.koin.androidContext
+import com.k0d4black.theforce.data.remote.repository.CharacterSearchRepository
+import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
 import org.koin.dsl.module
 
+val remoteDataSourceModule = module {
 
-val fakeLocalDataSourceModule = module {
-
-    single<IFavoritesRepository> { FavoritesRepository(favoritesDao = get()) }
-
-    single {
-        Room
-            .inMemoryDatabaseBuilder(androidContext(), com.github.odaridavid.local.core.CharactersDatabase::class.java)
-            .allowMainThreadQueries()
-            .build()
-    }
-
-    single { provideFavoritesDao(db = get()) }
+    single<ICharacterSearchRepository> { CharacterSearchRepository(apiService = get()) }
 
 }
