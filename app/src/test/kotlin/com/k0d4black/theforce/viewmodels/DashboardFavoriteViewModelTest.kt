@@ -22,8 +22,7 @@ import com.k0d4black.theforce.fakes.FakeDeleteFavoriteByNameUseCase
 import com.k0d4black.theforce.fakes.FakeGetAllFavoritesUseCase
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
-import com.k0d4black.theforce.utils.observeOnce
-import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
+import com.k0d4black.theforce.feature.favorites.DashboardFavoritesViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -37,7 +36,7 @@ internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
 
     // region Members
 
-    private lateinit var dashboardFavoritesViewModel: DashboardFavoritesViewModel
+    private lateinit var dashboardFavoritesViewModel: com.k0d4black.theforce.feature.favorites.DashboardFavoritesViewModel
 
     // endregion
 
@@ -101,11 +100,12 @@ internal class DashboardFavoriteViewModelTest : BaseViewModelTest() {
         val getAllFavoritesUseCase = FakeGetAllFavoritesUseCase(uiState)
         val deleteAllFavoritesUseCase = FakeDeleteAllFavoritesUseCase(uiState)
 
-        dashboardFavoritesViewModel = DashboardFavoritesViewModel(
-            deleteFavoriteByNameUseCase,
-            getAllFavoritesUseCase,
-            deleteAllFavoritesUseCase
-        )
+        dashboardFavoritesViewModel =
+            com.k0d4black.theforce.feature.favorites.DashboardFavoritesViewModel(
+                deleteFavoriteByNameUseCase,
+                getAllFavoritesUseCase,
+                deleteAllFavoritesUseCase
+            )
 
     }
 

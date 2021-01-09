@@ -21,7 +21,7 @@ import com.k0d4black.theforce.fakes.FakeSearchCharactersUseCase
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
 import com.k0d4black.theforce.utils.observeOnce
-import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
+import com.k0d4black.theforce.feature.character.DashboardSearchViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test

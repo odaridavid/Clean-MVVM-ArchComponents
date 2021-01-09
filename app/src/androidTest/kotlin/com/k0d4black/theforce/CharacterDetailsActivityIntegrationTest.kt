@@ -7,7 +7,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.k0d4black.theforce.shared.android.NavigationUtils
-import com.k0d4black.theforce.activities.CharacterDetailsActivity
+import com.k0d4black.theforce.feature.character.details.CharacterDetailsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import org.junit.After
 import org.junit.Rule
@@ -18,8 +18,8 @@ import org.junit.runner.RunWith
 internal class CharacterDetailsActivityIntegrationTest : BaseTest() {
 
     @get:Rule
-    var activityRule: ActivityTestRule<CharacterDetailsActivity> =
-        ActivityTestRule(CharacterDetailsActivity::class.java, false, false)
+    var activityRule: ActivityTestRule<com.k0d4black.theforce.feature.character.details.CharacterDetailsActivity> =
+        ActivityTestRule(com.k0d4black.theforce.feature.character.details.CharacterDetailsActivity::class.java, false, false)
 
     @Test
     fun shouldDisplayErrorOnLaunchWithDefaultId() {

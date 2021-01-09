@@ -2,7 +2,7 @@ package com.k0d4black.theforce
 
 import androidx.test.espresso.IdlingRegistry
 import com.k0d4black.theforce.helpers.StarWarsRequestDispatcher
-import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
+import com.k0d4black.theforce.test.utils.EspressoIdlingResource
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
@@ -18,12 +18,12 @@ open class BaseTest : KoinTest {
             dispatcher = StarWarsRequestDispatcher()
             start(8080)
         }
-        IdlingRegistry.getInstance().register(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().register(com.k0d4black.theforce.test.utils.EspressoIdlingResource.countingIdlingResource)
     }
 
     @After
     open fun tearDown() {
         mockWebServer.shutdown()
-        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.countingIdlingResource)
+        IdlingRegistry.getInstance().unregister(com.k0d4black.theforce.test.utils.EspressoIdlingResource.countingIdlingResource)
     }
 }

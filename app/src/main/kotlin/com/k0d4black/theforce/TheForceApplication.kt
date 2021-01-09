@@ -15,11 +15,11 @@ package com.k0d4black.theforce
 
 import android.app.Application
 import com.facebook.stetho.Stetho
-import com.k0d4black.theforce.di.networkModule
-import com.k0d4black.theforce.di.viewModelsModule
 import com.k0d4black.theforce.di.localDataSourceModule
+import com.k0d4black.theforce.di.networkModule
 import com.k0d4black.theforce.di.remoteDataSourceModule
 import com.k0d4black.theforce.di.useCasesModule
+import com.k0d4black.theforce.di.viewModelsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -35,7 +35,6 @@ internal class TheForceApplication : Application() {
             androidContext(this@TheForceApplication)
             modules(
                 networkModule,
-                viewModelsModule,
                 localDataSourceModule,
                 remoteDataSourceModule,
                 useCasesModule

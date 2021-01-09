@@ -19,7 +19,7 @@
 
         <variable
             name="favorite"
-            type="com.k0d4black.theforce.models.FavoritePresentation" />
+            type="com.k0d4black.theforce.feature.character.details.FavoritePresentation" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

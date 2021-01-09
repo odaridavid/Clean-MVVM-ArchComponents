@@ -18,11 +18,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth
 import com.k0d4black.theforce.BaseViewModelTest
 import com.k0d4black.theforce.fakes.*
-import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
-import com.k0d4black.theforce.utils.observeOnce
-import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
+import com.k0d4black.theforce.feature.character.details.CharacterDetailViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -37,7 +35,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
 
     // region Members
 
-    private lateinit var characterDetailViewModel: CharacterDetailViewModel
+    private lateinit var characterDetailViewModel: com.k0d4black.theforce.feature.character.details.CharacterDetailViewModel
 
     // endregion
 
@@ -81,7 +79,7 @@ internal class CharacterDetailViewModelTest : BaseViewModelTest() {
         val getSpeciesUseCase = FakeGetSpeciesUseCase(uiState)
 
         characterDetailViewModel =
-            CharacterDetailViewModel(
+            com.k0d4black.theforce.feature.character.details.CharacterDetailViewModel(
                 getSpeciesUseCase,
                 getPlanetUseCase,
                 getFilmsUseCase

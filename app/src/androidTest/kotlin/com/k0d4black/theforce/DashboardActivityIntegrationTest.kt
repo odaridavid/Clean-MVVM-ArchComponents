@@ -13,12 +13,12 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import com.k0d4black.theforce.activities.DashboardActivity
+import com.github.odaridavid.feature.home.HomeActivity
 import com.k0d4black.theforce.helpers.ERROR_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.EXISTING_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.NON_EXISTENT_SEARCH_PARAMS
 import com.k0d4black.theforce.helpers.ViewAction
-import com.k0d4black.theforce.adapters.SearchedCharacterViewHolder
+import com.k0d4black.theforce.feature.character.SearchedCharacterViewHolder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,11 +28,11 @@ import org.junit.runner.RunWith
 internal class DashboardActivityIntegrationTest : BaseTest() {
 
     @get:Rule
-    var activityRule: ActivityTestRule<DashboardActivity> =
-        ActivityTestRule(DashboardActivity::class.java, false, false)
+    var activityRule: ActivityTestRule<HomeActivity> =
+        ActivityTestRule(HomeActivity::class.java, false, false)
 
     @get:Rule
-    val intentsTestRule = IntentsTestRule(DashboardActivity::class.java)
+    val intentsTestRule = IntentsTestRule(HomeActivity::class.java)
 
     @Test
     fun shouldDisplayDataOnSearch() {
@@ -74,7 +74,7 @@ internal class DashboardActivityIntegrationTest : BaseTest() {
         private const val ABOUT_ACTIVITY_COMPONENT =
             "com.k0d4black.theforce.activities.AboutActivity"
         private const val CHARACTER_DETAIL_ACTIVITY_COMPONENT =
-            "com.k0d4black.theforce.activities.CharacterDetailsActivity"
+            "com.k0d4black.theforce.feature.character.details.CharacterDetailsActivity"
     }
 
 }

@@ -13,24 +13,24 @@
         <activity android:name=".shared.android.base.BaseActivity" />
 
         <activity
-            android:name=".activities.FavoriteDetailsActivity"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:name=".feature.character.details.FavoriteDetailsActivity"
+            android:parentActivityName="com.github.odaridavid.feature.home.HomeActivity" />
         <activity
             android:name=".feature.about.AboutActivity"
             android:label="@string/title_about"
-            android:parentActivityName=".activities.SettingsActivity" />
+            android:parentActivityName=".feature.settings.SettingsActivity" />
 
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".feature.settings.SettingsActivity"
             android:label="@string/title_settings"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.github.odaridavid.feature.home.HomeActivity" />
         <activity
-            android:name=".activities.CharacterDetailsActivity"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:name=".feature.character.details.CharacterDetailsActivity"
+            android:parentActivityName="com.github.odaridavid.feature.home.HomeActivity" />
 
         <!-- TODO Use singletop though seems tricky given the UI is using motion layout -->
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name="com.github.odaridavid.feature.home.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

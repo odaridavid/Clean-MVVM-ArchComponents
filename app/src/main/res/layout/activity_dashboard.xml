@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         app:layoutDescription="@xml/search_motion_scene"
-        tools:context=".activities.DashboardActivity"
+        tools:context="com.github.odaridavid.feature.home.HomeActivity"
         tools:menu="@menu/main_menu">
 
         <androidx.appcompat.widget.Toolbar

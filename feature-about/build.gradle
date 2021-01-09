@@ -1,9 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-android-extensions")
     id("com.mikepenz.aboutlibraries.plugin")
-    id("kotlin-kapt")
 }
 
 android {

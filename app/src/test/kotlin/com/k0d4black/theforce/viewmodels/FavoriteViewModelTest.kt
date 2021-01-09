@@ -25,8 +25,7 @@ import com.k0d4black.theforce.fakes.FakeInsertFavoriteUseCase
 import com.k0d4black.theforce.mappers.toPresentation
 import com.k0d4black.theforce.utils.Data
 import com.k0d4black.theforce.utils.UiState
-import com.k0d4black.theforce.utils.observeOnce
-import com.k0d4black.theforce.viewmodel.FavoriteViewModel
+import com.k0d4black.theforce.feature.favorites.FavoriteViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -41,7 +40,7 @@ internal class FavoriteViewModelTest : BaseViewModelTest() {
 
     // region Members
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
+    private lateinit var favoriteViewModel: com.k0d4black.theforce.feature.favorites.FavoriteViewModel
 
     // endregion
 
@@ -94,7 +93,7 @@ internal class FavoriteViewModelTest : BaseViewModelTest() {
         val deleteFavoriteByNameUseCase = FakeDeleteFavoriteByNameUseCase(uiState)
         val insertFavoriteUseCase = FakeInsertFavoriteUseCase(uiState)
         val getFavoriteByNameUseCase = FakeGetFavoriteByNameUseCase(uiState)
-        favoriteViewModel = FavoriteViewModel(
+        favoriteViewModel = com.k0d4black.theforce.feature.favorites.FavoriteViewModel(
             deleteFavoriteByNameUseCase,
             insertFavoriteUseCase,
             getFavoriteByNameUseCase
