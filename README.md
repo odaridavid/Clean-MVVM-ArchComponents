@@ -65,6 +65,8 @@ To setup the Travis CLI tools see [this](https://github.com/travis-ci/travis.rb#
 
 ## Architecture
 
+NB: Work in Progress - [Feature Modularisation](https://github.com/odaridavid/Clean-MVVM-ArchComponents/tree/feature-modularisation) 🚧 
+
 The Application is split into a three layer architecture:
 - Presentation
 - Domain
