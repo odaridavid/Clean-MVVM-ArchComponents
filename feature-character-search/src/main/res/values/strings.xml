@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="info_no_results">No Matching Search Results</string>
+    <string name="info_explore">Explore StarWars</string>
+    <string name="info_search_done">Search Done</string>
+    <string name="content_description_more_info_arrow">View Character Details</string>
+    <string name="hint_character_name">Character Name</string>
+</resources>

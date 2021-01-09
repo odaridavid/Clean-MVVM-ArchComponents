@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_settings">Settings</string>
+    <string name="star_wars_copyright">
+        Star Wars and all associated names are copyright Lucasfilm ltd.
+    </string>
+</resources>

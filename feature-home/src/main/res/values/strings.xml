@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Nav titles-->
+    <string name="menu_title_favorites">Favorites</string>
+    <string name="menu_title_settings">Settings</string>
+</resources>

@@ -10,4 +10,7 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.googleTruth
 }

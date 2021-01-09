@@ -81,7 +81,7 @@ internal class HomeActivity : com.k0d4black.theforce.shared.android.BaseActivity
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.home_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

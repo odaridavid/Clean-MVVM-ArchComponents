@@ -97,57 +97,13 @@ dependencies {
     implementation project(':feature-settings')
     implementation project(':shared-android')
 
-    //Jetpack
-    implementation appDependencies.appCompat
-    implementation appDependencies.androidxKtx
-    implementation appDependencies.constraintLayout
-    implementation appDependencies.supportV4
-    implementation appDependencies.fragmentKtx
-    implementation appDependencies.lifecycleExtensions
-
-    //Material
-    implementation appDependencies.material
-
-    //Firebase
-    implementation appDependencies.firebaseAnalytics
-    implementation appDependencies.firebaseCrashlytics
-
     //Stetho
     implementation appDependencies.stetho
-
-    //Animations
-    implementation appDependencies.recyclerviewAnimations
 
     //Memory leaks
     debugImplementation appDependencies.leakCanary
 
-    // kiel
-    implementation appDependencies.kiel
-
     // Koin
     implementation appDependencies.koinAndroid
-    implementation appDependencies.koinAndroidViewModel
-
-    //Test Libs
-    testImplementation testDependencies.junit
-    testImplementation testDependencies.robolectric
-    testImplementation testDependencies.androidxJunit
-    testImplementation testDependencies.espressoCore
-    testImplementation testDependencies.runner
-    testImplementation testDependencies.rules
-    testImplementation testDependencies.googleTruth
-    testImplementation testDependencies.archComponentTest
-    testImplementation testDependencies.coroutinesTest
-    testImplementation testDependencies.koinTest
-    androidTestImplementation testDependencies.espressoCore
-    androidTestImplementation testDependencies.runner
-    androidTestImplementation testDependencies.rules
-    androidTestImplementation testDependencies.androidxJunit
-    androidTestImplementation testDependencies.androidxCoreTest
-    androidTestImplementation testDependencies.mockWebServer
-    androidTestImplementation testDependencies.espressoContrib
-    androidTestImplementation testDependencies.espressoIntents
-    androidTestImplementation testDependencies.koinTest
-    implementation testDependencies.espressoIdlingResource
 }
 apply plugin: 'com.google.gms.google-services'

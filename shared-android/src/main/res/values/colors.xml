@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorError">#d32f2f</color>
-    <color name="colorOnError">#ffffff</color>
+    <color name="colorPrimary">#fafafa</color>
+    <color name="colorPrimaryVariant">#c7c7c7</color>
+    <color name="colorPrimaryLight">#ffffff</color>
+
     <color name="colorSecondary">#ffd600</color>
+    <color name="colorSecondaryVariant">#c7a500</color>
+    <color name="colorSecondaryLight">#ffff52</color>
+
+    <color name="colorOnPrimary">#000000</color>
     <color name="colorOnSecondary">#000000</color>
+    <color name="colorOnError">#ffffff</color>
+    <color name="colorOnBackground">#000000</color>
+
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorError">#d32f2f</color>
+
+    <color name="colorGrey">#808080</color>
     <color name="white">#ffffff</color>
 </resources>

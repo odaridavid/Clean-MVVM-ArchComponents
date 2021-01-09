@@ -23,7 +23,7 @@
         android:animateLayoutChanges="true"
         app:layoutDescription="@xml/search_motion_scene"
         tools:context="com.github.odaridavid.feature.home.HomeActivity"
-        tools:menu="@menu/main_menu">
+        tools:menu="@menu/home_menu">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/search_toolbar"

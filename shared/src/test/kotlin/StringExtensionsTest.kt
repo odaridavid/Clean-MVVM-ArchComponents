@@ -11,34 +11,32 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.android
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.shared.android.convertToInches
-import com.k0d4black.theforce.shared.android.populationToLong
+import com.k0d4black.theforce.shared.convertCentimetresToInches
+import com.k0d4black.theforce.shared.convertPopulationToLong
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-
 @RunWith(JUnit4::class)
-class ConvertersTest {
+class StringExtensionsTest {
 
     @Test
     fun `given centimeters value then convert to inches `() {
-        val inches = com.k0d4black.theforce.shared.android.convertToInches("120")
+        val inches = "120".convertCentimetresToInches()
         Truth.assertThat(inches).isEqualTo("47.244")
     }
 
     @Test
     fun `given unknown population then return zero`() {
-        val population = com.k0d4black.theforce.shared.android.populationToLong("unknown")
+        val population = "unknown".convertPopulationToLong()
         Truth.assertThat(population).isEqualTo(0L)
     }
 
     @Test
     fun `given a population with integral value then return population`() {
-        val population = com.k0d4black.theforce.shared.android.populationToLong("100000")
+        val population = "100000".convertPopulationToLong()
         Truth.assertThat(population).isEqualTo(100000L)
     }
 }
