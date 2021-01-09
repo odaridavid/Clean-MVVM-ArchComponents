@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_check_internet_connection">Check Internet Connection</string>
+    <string name="error_oops_error_occured">Oops!! An Error Occurred</string>
+</resources>

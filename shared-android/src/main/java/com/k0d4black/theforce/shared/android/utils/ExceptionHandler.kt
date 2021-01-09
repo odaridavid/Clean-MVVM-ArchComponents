@@ -11,16 +11,19 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.commons
+package com.k0d4black.theforce.shared.android.utils
 
-import android.os.Build
-import android.os.Build.VERSION.SDK_INT
-import androidx.annotation.IntRange
+import androidx.annotation.StringRes
+import com.k0d4black.theforce.shared.android.R
+import java.net.UnknownHostException
 
-private const val minVersion = Build.VERSION_CODES.LOLLIPOP.toLong()
-private const val maxVersion = Build.VERSION_CODES.Q.toLong()
+internal object ExceptionHandler {
 
-fun versionFrom(@IntRange(from = minVersion, to = maxVersion) versionCode: Int): Boolean =
-    SDK_INT >= versionCode
-
-
+    @StringRes
+    fun parse(t: Throwable): Int {
+        return when (t) {
+            is UnknownHostException -> R.string.error_check_internet_connection
+            else -> R.string.error_oops_error_occured
+        }
+    }
+}

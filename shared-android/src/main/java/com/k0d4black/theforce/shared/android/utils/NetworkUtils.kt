@@ -11,7 +11,7 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.commons
+package com.k0d4black.theforce.shared.android.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
