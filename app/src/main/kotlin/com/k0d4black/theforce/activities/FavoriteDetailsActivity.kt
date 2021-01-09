@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.base.BaseFavoritesActivity
-import com.k0d4black.theforce.commons.remove
-import com.k0d4black.theforce.commons.show
+import com.k0d4black.theforce.shared.android.remove
+import com.k0d4black.theforce.shared.android.show
 import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
 import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.adapters.createFilmsAdapter

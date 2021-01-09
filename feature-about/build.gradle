@@ -1,6 +1,9 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-android-extensions")
+    id("com.mikepenz.aboutlibraries.plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -21,12 +24,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    dataBinding {
+        enabled true
     }
 }
 
@@ -36,6 +45,13 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
+
+    implementation project(':shared-android')
+
+    //About Libraries
+    implementation appDependencies.aboutLibraryCore
+    implementation appDependencies.aboutLibraryUi
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

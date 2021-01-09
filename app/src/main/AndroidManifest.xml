@@ -10,14 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".shared.android.base.BaseActivity" />
+
         <activity
             android:name=".activities.FavoriteDetailsActivity"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".activities.AboutActivity"
+            android:name=".feature.about.AboutActivity"
             android:label="@string/title_about"
             android:parentActivityName=".activities.SettingsActivity" />
+
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_settings"

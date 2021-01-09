@@ -18,7 +18,7 @@ package com.k0d4black.theforce.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.k0d4black.theforce.commons.ExceptionHandler
+import com.k0d4black.theforce.shared.android.ExceptionHandler
 import com.k0d4black.theforce.domain.models.Result
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetFavoriteByNameBaseUseCase
@@ -49,7 +49,7 @@ internal class FavoriteViewModel(
     private var _favoriteViewState = MutableLiveData<FavoriteViewState>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(exception)
+        val message = com.k0d4black.theforce.shared.android.ExceptionHandler.parse(exception)
         _favoriteViewState.value = _favoriteViewState.value?.copy(error = Error(message))
     }
 

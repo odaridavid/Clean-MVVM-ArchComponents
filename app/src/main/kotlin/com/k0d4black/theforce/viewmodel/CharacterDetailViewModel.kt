@@ -13,10 +13,9 @@
  **/
 package com.k0d4black.theforce.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.k0d4black.theforce.commons.ExceptionHandler
+import com.k0d4black.theforce.shared.android.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.GetFilmsBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetPlanetBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetSpeciesBaseUseCase
@@ -49,7 +48,7 @@ internal class CharacterDetailViewModel(
     private var _remoteToFavoritePresentation = MutableLiveData<FavoritePresentation>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(exception)
+        val message = com.k0d4black.theforce.shared.android.ExceptionHandler.parse(exception)
         _detailViewState.value = _detailViewState.value?.copy(error = Error(message))
     }
 

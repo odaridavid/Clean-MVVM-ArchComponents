@@ -14,8 +14,8 @@
 package com.k0d4black.theforce
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.commons.convertToInches
-import com.k0d4black.theforce.commons.populationToLong
+import com.k0d4black.theforce.shared.android.convertToInches
+import com.k0d4black.theforce.shared.android.populationToLong
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -26,19 +26,19 @@ class ConvertersTest {
 
     @Test
     fun `given centimeters value then convert to inches `() {
-        val inches = convertToInches("120")
+        val inches = com.k0d4black.theforce.shared.android.convertToInches("120")
         Truth.assertThat(inches).isEqualTo("47.244")
     }
 
     @Test
     fun `given unknown population then return zero`() {
-        val population = populationToLong("unknown")
+        val population = com.k0d4black.theforce.shared.android.populationToLong("unknown")
         Truth.assertThat(population).isEqualTo(0L)
     }
 
     @Test
     fun `given a population with integral value then return population`() {
-        val population = populationToLong("100000")
+        val population = com.k0d4black.theforce.shared.android.populationToLong("100000")
         Truth.assertThat(population).isEqualTo(100000L)
     }
 }

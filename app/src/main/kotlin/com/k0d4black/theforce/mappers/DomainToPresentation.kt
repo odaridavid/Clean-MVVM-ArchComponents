@@ -13,8 +13,8 @@
  **/
 package com.k0d4black.theforce.mappers
 
-import com.k0d4black.theforce.commons.convertToInches
-import com.k0d4black.theforce.commons.populationToLong
+import com.k0d4black.theforce.shared.android.convertToInches
+import com.k0d4black.theforce.shared.android.populationToLong
 import com.k0d4black.theforce.domain.models.*
 import com.k0d4black.theforce.models.*
 
@@ -24,13 +24,15 @@ internal fun Character.toPresentation(): CharacterPresentation {
         name,
         birthYear,
         height,
-        convertToInches(height),
+        com.k0d4black.theforce.shared.android.convertToInches(height),
         url
     )
 }
 
 internal fun Planet.toPresentation(): PlanetPresentation {
-    return PlanetPresentation(name, populationToLong(population))
+    return PlanetPresentation(name,
+        com.k0d4black.theforce.shared.android.populationToLong(population)
+    )
 }
 
 internal fun Film.toPresentation(): FilmPresentation {
@@ -43,8 +45,11 @@ internal fun Specie.toPresentation(): SpeciePresentation {
 
 internal fun Favorite.toPresentation(): FavoritePresentation {
     val characterPresentation =
-        CharacterPresentation(name, birthYear, height, convertToInches(height), "")
-    val planetPresentation = PlanetPresentation(planetName, populationToLong(planetPopulation))
+        CharacterPresentation(name, birthYear, height,
+            com.k0d4black.theforce.shared.android.convertToInches(height), "")
+    val planetPresentation = PlanetPresentation(planetName,
+        com.k0d4black.theforce.shared.android.populationToLong(planetPopulation)
+    )
     val speciePresentation = SpeciePresentation(specieName, specieLanguage)
     return FavoritePresentation(
         characterPresentation = characterPresentation,

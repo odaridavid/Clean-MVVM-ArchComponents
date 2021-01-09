@@ -15,7 +15,7 @@ package com.k0d4black.theforce.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.k0d4black.theforce.commons.ExceptionHandler
+import com.k0d4black.theforce.shared.android.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.SearchCharactersBaseUseCase
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.mappers.toPresentation
@@ -41,7 +41,7 @@ internal class DashboardSearchViewModel(
     private var _searchViewState = MutableLiveData<DashboardSearchViewState>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(exception)
+        val message = com.k0d4black.theforce.shared.android.ExceptionHandler.parse(exception)
         onSearchError(message)
     }
 

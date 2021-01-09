@@ -15,7 +15,7 @@ package com.k0d4black.theforce.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.k0d4black.theforce.commons.ExceptionHandler
+import com.k0d4black.theforce.shared.android.ExceptionHandler
 import com.k0d4black.theforce.domain.usecases.DeleteAllFavoritesBaseUseCase
 import com.k0d4black.theforce.domain.usecases.DeleteFavoriteByNameBaseUseCase
 import com.k0d4black.theforce.domain.usecases.GetAllFavoritesBaseUseCase
@@ -45,7 +45,7 @@ internal class DashboardFavoritesViewModel(
     private var _favoriteViewState = MutableLiveData<DashboardFavoritesViewState>()
 
     override val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
-        val message = ExceptionHandler.parse(exception)
+        val message = com.k0d4black.theforce.shared.android.ExceptionHandler.parse(exception)
         _favoriteViewState.value =
             _favoriteViewState.value?.copy(isLoading = false, error = Error(message))
     }

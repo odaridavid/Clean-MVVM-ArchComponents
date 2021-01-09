@@ -22,13 +22,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
 import com.k0d4black.theforce.activities.IFavoritesBinder
-import com.k0d4black.theforce.commons.NavigationUtils
-import com.k0d4black.theforce.commons.showSnackbar
+import com.k0d4black.theforce.shared.android.NavigationUtils
 import com.k0d4black.theforce.models.FavoritePresentation
 import com.k0d4black.theforce.viewmodel.FavoriteViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder {
+internal abstract class BaseFavoritesActivity : com.k0d4black.theforce.shared.android.BaseActivity(), IFavoritesBinder {
 
     // region Members
 
@@ -47,7 +45,7 @@ internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val favorite =
-            intent.getParcelableExtra<FavoritePresentation>(NavigationUtils.FAVORITE_PARCEL_KEY)
+            intent.getParcelableExtra<FavoritePresentation>(com.k0d4black.theforce.shared.android.NavigationUtils.FAVORITE_PARCEL_KEY)
 
         favorite?.let { favoritePresentation ->
             bindFavorite(favoritePresentation)

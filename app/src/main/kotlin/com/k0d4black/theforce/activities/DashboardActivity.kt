@@ -21,7 +21,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.base.BaseActivity
+import com.k0d4black.theforce.shared.android.BaseActivity
 import com.k0d4black.theforce.commons.*
 import com.k0d4black.theforce.databinding.ActivityDashboardBinding
 import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
@@ -31,12 +31,14 @@ import com.k0d4black.theforce.models.states.DashboardFavoritesViewState
 import com.k0d4black.theforce.models.states.DashboardSearchViewState
 import com.k0d4black.theforce.adapters.createFavoritesAdapter
 import com.k0d4black.theforce.adapters.createSearchResultAdapter
+import com.k0d4black.theforce.shared.android.hide
+import com.k0d4black.theforce.shared.android.initRecyclerViewWithLineDecoration
+import com.k0d4black.theforce.shared.android.show
 import com.k0d4black.theforce.viewmodel.DashboardFavoritesViewModel
 import com.k0d4black.theforce.viewmodel.DashboardSearchViewModel
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal class DashboardActivity : BaseActivity() {
+internal class DashboardActivity : com.k0d4black.theforce.shared.android.BaseActivity() {
 
     // region Members
 
@@ -47,13 +49,13 @@ internal class DashboardActivity : BaseActivity() {
 
     private val searchResultAdapter = createSearchResultAdapter {
         startActivity<CharacterDetailsActivity> {
-            putExtra(NavigationUtils.CHARACTER_PARCEL_KEY, it)
+            putExtra(com.k0d4black.theforce.shared.android.NavigationUtils.CHARACTER_PARCEL_KEY, it)
         }
     }
 
     private val favoritesAdapter = createFavoritesAdapter {
         startActivity<FavoriteDetailsActivity> {
-            putExtra(NavigationUtils.FAVORITE_PARCEL_KEY, it)
+            putExtra(com.k0d4black.theforce.shared.android.NavigationUtils.FAVORITE_PARCEL_KEY, it)
         }
     }
 

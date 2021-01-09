@@ -17,7 +17,6 @@ plugins {
     id("kotlin-android-extensions")
     id("kotlin-kapt")
     id("jacoco-android")
-    id("com.mikepenz.aboutlibraries.plugin")
     id("com.google.firebase.crashlytics")
 }
 
@@ -33,23 +32,10 @@ jacocoAndroidUnitTestReport {
     xml.enabled true
 }
 
-//def keystorePropertiesFile = rootProject.file("keystore.properties")
-//def keystoreProperties = new Properties()
-//keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 android {
 
     compileSdkVersion compileSdk
     buildToolsVersion buildTools
-
-//    signingConfigs {
-//        release {
-//            keyAlias keystoreProperties['keyAlias']
-//            keyPassword keystoreProperties['keyPassword']
-//            storeFile file(keystoreProperties['storeFile'])
-//            storePassword keystoreProperties['storePassword']
-//        }
-//    }
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
@@ -60,13 +46,11 @@ android {
         testInstrumentationRunner "com.k0d4black.theforce.runner.MockTestRunner"
     }
     buildTypes {
-
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [crashlyticsEnabled: true]
-//            signingConfig signingConfigs.release
         }
 
         debug {
@@ -109,6 +93,10 @@ dependencies {
     implementation project(':data-local')
     implementation project(':data-remote')
 
+    // Features
+    implementation project(':feature-about')
+    implementation project(':shared-android')
+
     //Jetpack
     implementation appDependencies.appCompat
     implementation appDependencies.androidxKtx
@@ -132,10 +120,6 @@ dependencies {
 
     //Memory leaks
     debugImplementation appDependencies.leakCanary
-
-    //About Libraries
-    implementation appDependencies.aboutLibraryCore
-    implementation appDependencies.aboutLibraryUi
 
     // kiel
     implementation appDependencies.kiel

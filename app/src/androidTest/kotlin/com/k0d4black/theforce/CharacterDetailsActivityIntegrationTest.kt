@@ -6,7 +6,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.k0d4black.theforce.commons.NavigationUtils
+import com.k0d4black.theforce.shared.android.NavigationUtils
 import com.k0d4black.theforce.activities.CharacterDetailsActivity
 import com.k0d4black.theforce.models.CharacterPresentation
 import org.junit.After
@@ -32,7 +32,7 @@ internal class CharacterDetailsActivityIntegrationTest : BaseTest() {
     @Test
     fun shouldLoadDataOnLaunchWithValidCharacterId() {
         val intent = Intent().putExtra(
-            NavigationUtils.CHARACTER_PARCEL_KEY,
+            com.k0d4black.theforce.shared.android.NavigationUtils.CHARACTER_PARCEL_KEY,
             CharacterPresentation(
                 name = "Luke",
                 birthYear = "12BBY",

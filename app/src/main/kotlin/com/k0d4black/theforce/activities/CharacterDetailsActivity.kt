@@ -25,8 +25,10 @@ import com.k0d4black.theforce.idlingresource.EspressoIdlingResource
 import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.adapters.createFilmsAdapter
 import com.k0d4black.theforce.adapters.createSpeciesAdapter
+import com.k0d4black.theforce.shared.android.hide
+import com.k0d4black.theforce.shared.android.remove
+import com.k0d4black.theforce.shared.android.show
 import com.k0d4black.theforce.viewmodel.CharacterDetailViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
 
@@ -53,7 +55,7 @@ internal class CharacterDetailsActivity : BaseFavoritesActivity(), ICharacterDet
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val character =
-            intent.getParcelableExtra<CharacterPresentation>(NavigationUtils.CHARACTER_PARCEL_KEY)
+            intent.getParcelableExtra<CharacterPresentation>(com.k0d4black.theforce.shared.android.NavigationUtils.CHARACTER_PARCEL_KEY)
 
         if (character == null) {
             characterDetailViewModel

@@ -14,9 +14,9 @@
 package com.k0d4black.theforce.di
 
 import androidx.room.Room
-import com.github.odaridavid.data.local.CharactersDatabase
-import com.github.odaridavid.data.local.dao.FavoritesDao
-import com.github.odaridavid.data.local.repository.FavoritesRepository
+import com.k0d4black.theforce.data.local.CharactersDatabase
+import com.k0d4black.theforce.data.local.dao.FavoritesDao
+import com.k0d4black.theforce.data.local.repository.FavoritesRepository
 import com.k0d4black.theforce.domain.repository.IFavoritesRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module

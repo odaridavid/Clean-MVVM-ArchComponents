@@ -11,23 +11,27 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.activities
+package com.k0d4black.theforce.feature.about
 
 import android.os.Bundle
-import android.view.View
-import com.k0d4black.theforce.shared.android.BaseActivity
-import com.k0d4black.theforce.databinding.ActivitySettingsBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.k0d4black.theforce.feature.about.databinding.ActivityAboutBinding
+import com.mikepenz.aboutlibraries.LibsBuilder
 
-class SettingsActivity : com.k0d4black.theforce.shared.android.BaseActivity() {
+class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySettingsBinding.inflate(layoutInflater)
+        val binding = ActivityAboutBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(binding.settingsToolbar)
+        setSupportActionBar(binding.aboutToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val fragment = LibsBuilder()
+            .withAboutIconShown(true)
+            .supportFragment()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_container, fragment).commit()
     }
-
-    fun openAboutActivity(view: View) = startActivity<AboutActivity>()
-
 }
