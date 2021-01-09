@@ -88,10 +88,6 @@ android {
 
 dependencies {
 
-    //Local Libs
-    implementation project(':domain')
-    implementation project(':data-local')
-
     // Features
     implementation project(':feature-about')
     implementation project(':feature-home')
