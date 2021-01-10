@@ -19,6 +19,7 @@ plugins {
     id("jacoco-android")
     id("com.mikepenz.aboutlibraries.plugin")
     id("com.google.firebase.crashlytics")
+    id("androidx.navigation.safeargs")
 }
 
 jacoco {
@@ -143,6 +144,10 @@ dependencies {
     // Koin
     implementation appDependencies.koinAndroid
     implementation appDependencies.koinAndroidViewModel
+
+    //navigation
+    implementation appDependencies.navigationFragment
+    implementation appDependencies.navigationUi
 
     //Test Libs
     testImplementation testDependencies.junit

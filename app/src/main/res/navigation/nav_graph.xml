@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.k0d4black.theforce.ui.DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_to_settings_fragment"
+            app:destination="@id/settingsFragment" />
+
+        <action
+            android:id="@+id/action_to_character_details_fragment"
+            app:destination="@id/characterDetailsFragment" />
+
+        <action
+            android:id="@+id/action_to_favorite_details_fragment"
+            app:destination="@id/favoriteDetailsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.k0d4black.theforce.ui.SettingsFragment">
+
+        <action
+            android:id="@+id/action_to_about_fragment"
+            app:destination="@id/aboutFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.k0d4black.theforce.ui.AboutFragment" />
+
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.k0d4black.theforce.ui.CharacterDetailsFragment">
+
+        <argument
+            android:name="character"
+            app:argType="com.k0d4black.theforce.models.CharacterPresentation"
+            app:nullable="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteDetailsFragment"
+        android:name="com.k0d4black.theforce.ui.FavoriteDetailsFragment">
+
+        <argument
+            android:name="favorite"
+            app:argType="com.k0d4black.theforce.models.FavoritePresentation"
+            app:nullable="true" />
+
+    </fragment>
+
+</navigation>

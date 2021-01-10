@@ -16,19 +16,19 @@
 package com.k0d4black.theforce.base
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.ViewGroup
+import android.view.*
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.Observer
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.activities.IFavoritesBinder
 import com.k0d4black.theforce.commons.NavigationUtils
 import com.k0d4black.theforce.commons.showSnackbar
 import com.k0d4black.theforce.models.FavoritePresentation
+import com.k0d4black.theforce.ui.IFavoritesBinder
 import com.k0d4black.theforce.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder {
+internal abstract class BaseFavoritesFragment(@LayoutRes contentLayoutId: Int) :
+    BaseFragment(contentLayoutId), IFavoritesBinder {
 
     // region Members
 
@@ -44,34 +44,35 @@ internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder
 
     // region Android API
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val favorite =
-            intent.getParcelableExtra<FavoritePresentation>(NavigationUtils.FAVORITE_PARCEL_KEY)
+            requireArguments().get(NavigationUtils.FAVORITE_PARCEL_KEY) as FavoritePresentation?
 
         favorite?.let { favoritePresentation ->
             bindFavorite(favoritePresentation)
             characterName = favoritePresentation.characterPresentation.name
             this.favoritePresentation = favoritePresentation
             checkIfFavorite()
-            invalidateOptionsMenu()
+            requireActivity().invalidateOptionsMenu()
         }
 
         observeFavoriteViewState()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.favorites_menu, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.favorites_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val menuItem = menu?.getItem(0)
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val menuItem = menu.getItem(0)
         if (isFavorite)
             menuItem?.setIcon(R.drawable.ic_favs_24dp)
         else
             menuItem?.setIcon(R.drawable.ic_no_favs_24dp)
-        return super.onPrepareOptionsMenu(menu)
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -86,7 +87,7 @@ internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder
                         isFavorite = !isFavorite
                     }
                 }
-                invalidateOptionsMenu()
+                requireActivity().invalidateOptionsMenu()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -122,9 +123,9 @@ internal abstract class BaseFavoritesActivity : BaseActivity(), IFavoritesBinder
     }
 
     private fun observeFavoriteViewState() {
-        favoritesViewModel.favoriteViewState.observe(this, Observer {
+        favoritesViewModel.favoriteViewState.observe(viewLifecycleOwner, Observer {
             isFavorite = it.isFavorite
-            invalidateOptionsMenu()
+            requireActivity().invalidateOptionsMenu()
             it.error?.let { e ->
                 showSnackbar(rootViewGroup, getString(e.message))
             }

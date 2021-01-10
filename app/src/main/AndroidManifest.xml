@@ -10,25 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".base.BaseActivity" />
-        <activity
-            android:name=".activities.FavoriteDetailsActivity"
-            android:parentActivityName=".activities.DashboardActivity" />
-        <activity
-            android:name=".activities.AboutActivity"
-            android:label="@string/title_about"
-            android:parentActivityName=".activities.SettingsActivity" />
-        <activity
-            android:name=".activities.SettingsActivity"
-            android:label="@string/title_settings"
-            android:parentActivityName=".activities.DashboardActivity" />
-        <activity
-            android:name=".activities.CharacterDetailsActivity"
-            android:parentActivityName=".activities.DashboardActivity" />
-
         <!-- TODO Use singletop though seems tricky given the UI is using motion layout -->
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".ui.DashboardActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

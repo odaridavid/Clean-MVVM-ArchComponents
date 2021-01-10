@@ -24,6 +24,7 @@ buildscript {
         classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.1'
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:8.1.2"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
     }
 }
 

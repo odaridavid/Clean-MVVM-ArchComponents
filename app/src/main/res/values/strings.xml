@@ -14,7 +14,7 @@
 <resources>
     <string name="app_name">The Force</string>
 
-    <!-- Dashboard Activity -->
+    <!-- Dashboard Fragment -->
     <string name="info_no_matching_results">No matching results</string>
     <string name="info_no_results">No Matching Search Results</string>
     <string name="info_no_favorite_characters">No Favorite Characters</string>
@@ -27,10 +27,10 @@
     <string name="info_removed_from_favs">Removed From Favorites</string>
     <string name="info_added_to_favs">Added To Favorites</string>
 
-    <!-- Dashboard Activity Menu -->
+    <!-- Dashboard Fragment Menu -->
     <string name="menu_title_settings">Settings</string>
 
-    <!-- Character Detail Activity -->
+    <!-- Character Detail Fragment -->
     <string name="title_birth_year">Birth Year</string>
     <string name="title_height">Height</string>
     <string name="title_planet">Planet</string>
@@ -50,11 +50,11 @@
     <string name="template_height_inches">%s inches</string>
     <string name="template_species_language">Language : %s</string>
 
-    <!-- Settings Activity -->
+    <!-- Settings Fragment -->
     <string name="title_settings">Settings</string>
     <string name="star_wars_copyright">Star Wars and all associated names are copyright Lucasfilm ltd.</string>
 
-    <!-- About Activity -->
+    <!-- About Fragment -->
     <string name="title_about">About</string>
     <string name="info_app_version">Version %s</string>
 

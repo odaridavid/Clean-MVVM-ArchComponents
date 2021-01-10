@@ -17,7 +17,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-internal data class FavoritePresentation(
+data class FavoritePresentation(
     val characterPresentation: CharacterPresentation,
     val planetPresentation: PlanetPresentation,
     val speciePresentation: List<SpeciePresentation>,

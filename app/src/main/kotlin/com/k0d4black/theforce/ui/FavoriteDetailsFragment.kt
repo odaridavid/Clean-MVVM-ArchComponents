@@ -1,22 +1,26 @@
-package com.k0d4black.theforce.activities
+package com.k0d4black.theforce.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.k0d4black.theforce.R
-import com.k0d4black.theforce.base.BaseFavoritesActivity
-import com.k0d4black.theforce.commons.remove
-import com.k0d4black.theforce.commons.show
-import com.k0d4black.theforce.databinding.ActivityFavoritesBinding
-import com.k0d4black.theforce.models.*
 import com.k0d4black.theforce.adapters.createFilmsAdapter
 import com.k0d4black.theforce.adapters.createSpeciesAdapter
+import com.k0d4black.theforce.base.BaseFavoritesFragment
+import com.k0d4black.theforce.commons.remove
+import com.k0d4black.theforce.commons.show
+import com.k0d4black.theforce.databinding.FragmentFavoritesBinding
+import com.k0d4black.theforce.models.*
+import kotlinx.android.synthetic.main.fragment_favorites.*
 
-internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDetailsBinder {
+internal class FavoriteDetailsFragment : BaseFavoritesFragment(R.layout.fragment_favorites),
+    ICharacterDetailsBinder {
 
     // region Members
 
-    private lateinit var binding: ActivityFavoritesBinding
+    private lateinit var binding: FragmentFavoritesBinding
 
     private val filmsAdapter = createFilmsAdapter()
 
@@ -27,14 +31,23 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
     // region Android API
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_favorites)
         setupToolbar()
         super.onCreate(savedInstanceState)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_favorites, container, false)
+        return binding.root
+    }
+
     // endregion
 
-    // region BaseFavoritesActivity
+    // region BaseFavoritesFragment
 
     override fun bindFavorite(favoritePresentation: FavoritePresentation) {
         bindCharacterBasicInfo(favoritePresentation.characterPresentation)
@@ -44,15 +57,15 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
     }
 
     override val rootViewGroup: ViewGroup
-        get() = binding.favoritesLayout
+        get() = favorites_layout
 
     // endregion
 
     // region Private API
 
     private fun setupToolbar() {
-        setSupportActionBar(binding.favoritesToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as DashboardActivity).setSupportActionBar(favorites_toolbar)
+        (requireActivity() as DashboardActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     // endregion
@@ -60,7 +73,7 @@ internal class FavoriteDetailsActivity : BaseFavoritesActivity(), ICharacterDeta
     // region ICharacterDetailsBinder
 
     override fun bindCharacterBasicInfo(character: CharacterPresentation?) {
-        supportActionBar?.title = character?.name ?: ""
+        (requireActivity() as DashboardActivity).supportActionBar?.title = character?.name ?: ""
         binding.infoLayout.character = character
     }
 
