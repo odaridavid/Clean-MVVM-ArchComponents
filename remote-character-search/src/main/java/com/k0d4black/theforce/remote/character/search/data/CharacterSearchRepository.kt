@@ -11,9 +11,11 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.remote.character.search.data
 
-data class Planet(
-    val name: String,
-    val population: String
-)
+import com.k0d4black.theforce.shared.model.Character
+import kotlinx.coroutines.flow.Flow
+
+interface CharacterSearchRepository {
+    suspend fun search(characterName: String): Flow<List<Character>>
+}

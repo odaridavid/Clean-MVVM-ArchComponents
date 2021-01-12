@@ -13,5 +13,4 @@
  **/
 package com.k0d4black.theforce.shared.model
 
-
 data class Film(val title: String, val openingCrawl: String)

@@ -13,7 +13,6 @@
  **/
 package com.k0d4black.theforce.shared.model
 
-
 data class Character(
     val name: String,
     val birthYear: String,

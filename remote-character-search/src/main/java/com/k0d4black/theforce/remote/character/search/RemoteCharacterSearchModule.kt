@@ -1,24 +1,24 @@
-/**
- *
- * Copyright 2020 David Odari
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *            http://www.apache.org/licenses/LICENSE-2.0
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- *
- **/
-package com.k0d4black.theforce.di
+package com.k0d4black.theforce.remote.character.search
 
-import com.k0d4black.theforce.data.remote.repository.CharacterSearchRepository
-import com.k0d4black.theforce.domain.repository.ICharacterSearchRepository
+import com.k0d4black.theforce.remote.character.search.data.CharacterSearchApiService
+import com.k0d4black.theforce.remote.character.search.data.CharacterSearchRepository
+import com.k0d4black.theforce.remote.character.search.data.CharacterSearchRepositoryImpl
+import com.k0d4black.theforce.remote.character.search.mappers.CharacterSearchResponseMapper
 import org.koin.dsl.module
+import retrofit2.Retrofit
 
-val remoteDataSourceModule = module {
+val remoteCharacterSearchModule = module {
 
-    single<ICharacterSearchRepository> { CharacterSearchRepository(apiService = get()) }
+    single {
+        provideCharacterSearchApiService(retrofit = get())
+    }
 
+    single<CharacterSearchRepository> {
+        CharacterSearchRepositoryImpl(apiService = get(), characterSearchResponseMapper = get())
+    }
+
+    single { CharacterSearchResponseMapper() }
 }
+
+private fun provideCharacterSearchApiService(retrofit: Retrofit): CharacterSearchApiService =
+    retrofit.create(CharacterSearchApiService::class.java)

@@ -90,7 +90,8 @@ ext {
 
     domainDependencies = [
             kotlin        : "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion"
+            coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion",
+            koinCore      : "org.koin:koin-core:$koinVersion"
     ]
 
     testDependencies = [
