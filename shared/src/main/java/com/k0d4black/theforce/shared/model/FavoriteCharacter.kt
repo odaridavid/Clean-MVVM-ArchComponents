@@ -13,7 +13,7 @@
  **/
 package com.k0d4black.theforce.shared.model
 
-data class Favorite(
+data class FavoriteCharacter(
     val name: String,
     val birthYear: String,
     val height: String,
