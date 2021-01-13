@@ -11,16 +11,13 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.favorites.dao
+package com.k0d4black.theforce.local.core.favoritecharacters.data
 
 import androidx.room.*
-import com.k0d4black.theforce.local.favorites.models.FavoriteEntity
-import com.k0d4black.theforce.local.favorites.models.FavoriteWithFilms
-import com.k0d4black.theforce.local.favorites.models.FilmEntity
-import com.k0d4black.theforce.domain.models.Favorite
+import com.k0d4black.theforce.local.core.favoritecharacters.models.FavoriteCharacterEntity
 
 @Dao
-interface FavoritesDao {
+interface FavoriteCharactersDao {
 
     @Query("DELETE FROM favorites")
     suspend fun deleteAll(): Int
@@ -30,27 +27,12 @@ interface FavoritesDao {
 
     @Transaction
     @Query("SELECT * FROM favorites WHERE name=:name")
-    suspend fun getByName(name: String): FavoriteWithFilms
+    suspend fun getByName(name: String): FavoriteCharacterEntity
 
     @Transaction
     @Query("SELECT * FROM favorites")
-    suspend fun getAll(): List<FavoriteWithFilms>
+    suspend fun getAll(): List<FavoriteCharacterEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(favoriteEntity: FavoriteEntity): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(filmEntity: FilmEntity): Long
-
-    @Transaction
-    suspend fun insert(favorite: Favorite):Result {
-        val favId = insert(favorite.toEntity())
-        for (film in favorite.films) {
-            val filmEntity = film.toEntity(favId)
-            insert(filmEntity)
-            return Result.SUCCESS
-        }
-        return Result.FAILURE
-    }
-
+    suspend fun insert(favoriteCharacterEntity: FavoriteCharacterEntity): Long
 }

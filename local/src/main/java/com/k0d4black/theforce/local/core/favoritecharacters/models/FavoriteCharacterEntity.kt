@@ -11,14 +11,14 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.favorites.models
+package com.k0d4black.theforce.local.core.favoritecharacters.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorites")
-data class FavoriteEntity(
+data class FavoriteCharacterEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     @ColumnInfo(name = "birth_year") val birthYear: String,
@@ -26,5 +26,6 @@ data class FavoriteEntity(
     @ColumnInfo(name = "planet_name") val planetName: String,
     @ColumnInfo(name = "planet_population") val planetPopulation: String,
     @ColumnInfo(name = "specie_name") val specieName: String,
-    @ColumnInfo(name = "specie_language") val specieLanguage: String
+    @ColumnInfo(name = "specie_language") val specieLanguage: String,
+    @ColumnInfo(name = "films") val filmsJson: String
 )

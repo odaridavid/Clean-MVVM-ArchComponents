@@ -16,24 +16,20 @@ package com.k0d4black.theforce.local.core
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.k0d4black.theforce.local.favorites.dao.FavoritesDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import java.io.IOException
 
+open class BaseTest {
 
-internal open class BaseTest {
-
-    private lateinit var db: com.k0d4black.theforce.local.core.CharactersDatabase
-    protected lateinit var favoritesDao: FavoritesDao
+    private lateinit var db: TheForceDatabase
 
     @Before
     open fun setup() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, com.k0d4black.theforce.local.core.CharactersDatabase::class.java).build()
-        favoritesDao = db.favoritesDao()
+        db = Room.inMemoryDatabaseBuilder(context, TheForceDatabase::class.java).build()
     }
 
     @After

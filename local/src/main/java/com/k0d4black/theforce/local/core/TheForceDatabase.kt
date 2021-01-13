@@ -11,21 +11,14 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.favorites.repository
+package com.k0d4black.theforce.local.core
 
-import com.k0d4black.theforce.domain.models.Favorite
-import kotlinx.coroutines.flow.Flow
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.k0d4black.theforce.local.core.favoritecharacters.models.FavoriteCharacterEntity
+import com.k0d4black.theforce.local.core.favoritecharacters.data.FavoriteCharactersDao
 
-interface IFavoritesRepository {
-
-    fun getAllFavorites(): Flow<List<Favorite>>
-
-    fun getFavoriteByName(name: String): Flow<Favorite?>
-
-    fun deleteFavoriteByName(name: String): Flow<Int>
-
-    fun deleteAllFavorites(): Flow<Int>
-
-    fun insertFavorite(favorite: Favorite): Flow<Result>
-
+@Database(entities = [FavoriteCharacterEntity::class], version = 1, exportSchema = false)
+abstract class TheForceDatabase : RoomDatabase() {
+    abstract fun favoritesDao(): FavoriteCharactersDao
 }

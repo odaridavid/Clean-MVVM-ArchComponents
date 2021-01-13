@@ -11,17 +11,20 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.favorites.models
+package com.k0d4black.theforce.local.core.favoritecharacters.data
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import com.k0d4black.theforce.shared.model.FavoriteCharacter
+import kotlinx.coroutines.flow.Flow
 
+interface FavoriteCharactersRepository {
 
-data class FavoriteWithFilms(
-    @Embedded val favoriteEntity: FavoriteEntity,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "fav_id"
-    )
-    val filmEntities: List<FilmEntity>
-)
+    fun getAllFavorites(): Flow<List<FavoriteCharacter>>
+
+    fun getFavoriteByName(name: String): Flow<FavoriteCharacter>
+
+    fun deleteFavoriteByName(name: String): Flow<Int>
+
+    fun deleteAllFavorites(): Flow<Int>
+
+    fun insertFavorite(favoriteCharacter: FavoriteCharacter): Flow<Long>
+}

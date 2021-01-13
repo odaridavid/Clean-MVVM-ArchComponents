@@ -13,14 +13,20 @@
  **/
 package com.k0d4black.theforce.local.core
 
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import com.k0d4black.theforce.data.local.dao.FavoritesDao
-import com.k0d4black.theforce.data.local.models.FavoriteEntity
-import com.k0d4black.theforce.data.local.models.FilmEntity
+import androidx.room.Room
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
+val localCoreModule = module {
 
-@Database(entities = [FavoriteEntity::class, FilmEntity::class], version = 1, exportSchema = false)
-abstract class CharactersDatabase : RoomDatabase() {
-    abstract fun favoritesDao(): FavoritesDao
+    single {
+        Room
+            .databaseBuilder(
+                androidContext(),
+                TheForceDatabase::class.java,
+                "the_force_database"
+            )
+            .build()
+    }
+
 }
