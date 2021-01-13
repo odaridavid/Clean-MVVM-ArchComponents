@@ -1,5 +1,7 @@
-package com.k0d4black.theforce.remote.films
+package com.k0d4black.theforce.remote.films.data
 
+import com.k0d4black.theforce.remote.films.models.FilmDetailsResponse
+import com.k0d4black.theforce.remote.films.models.FilmUrlsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Url

@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.remote.planet
+package com.k0d4black.theforce.remote.planet.models
 
 import com.squareup.moshi.Json
 

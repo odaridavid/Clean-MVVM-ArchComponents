@@ -1,5 +1,6 @@
-package com.k0d4black.theforce.remote.films
+package com.k0d4black.theforce.remote.films.mappers
 
+import com.k0d4black.theforce.remote.films.models.FilmDetailsResponse
 import com.k0d4black.theforce.shared.model.Film
 
 class FilmDetailsResponseMapper {

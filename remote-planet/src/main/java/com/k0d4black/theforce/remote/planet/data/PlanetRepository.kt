@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.remote.planet
+package com.k0d4black.theforce.remote.planet.data
 
 import com.k0d4black.theforce.shared.model.Planet
 import kotlinx.coroutines.flow.Flow

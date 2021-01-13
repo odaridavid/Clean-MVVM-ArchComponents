@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.remote.films
+package com.k0d4black.theforce.remote.films.models
 
 import com.squareup.moshi.Json
 

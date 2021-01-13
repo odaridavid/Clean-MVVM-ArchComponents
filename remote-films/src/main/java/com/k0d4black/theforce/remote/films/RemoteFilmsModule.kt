@@ -1,5 +1,9 @@
 package com.k0d4black.theforce.remote.films
 
+import com.k0d4black.theforce.remote.films.data.FilmRepository
+import com.k0d4black.theforce.remote.films.data.FilmRepositoryImpl
+import com.k0d4black.theforce.remote.films.data.FilmsApiService
+import com.k0d4black.theforce.remote.films.mappers.FilmDetailsResponseMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 

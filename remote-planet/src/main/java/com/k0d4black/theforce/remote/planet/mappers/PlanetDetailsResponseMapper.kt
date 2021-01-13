@@ -1,5 +1,6 @@
-package com.k0d4black.theforce.remote.planet
+package com.k0d4black.theforce.remote.planet.mappers
 
+import com.k0d4black.theforce.remote.planet.models.PlanetDetailsResponse
 import com.k0d4black.theforce.shared.model.Planet
 
 class PlanetDetailsResponseMapper {
