@@ -18,6 +18,7 @@ plugins {
     id("kotlin-kapt")
     id("jacoco-android")
     id("com.google.firebase.crashlytics")
+    id("com.mikepenz.aboutlibraries.plugin")
 }
 
 jacoco {

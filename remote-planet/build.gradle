@@ -17,4 +17,6 @@ dependencies {
 
     implementation dataDependencies.retrofit
     implementation dataDependencies.moshiConverter
+
+    testImplementation testDependencies.junit
 }
