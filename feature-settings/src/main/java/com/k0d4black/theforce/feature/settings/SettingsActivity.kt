@@ -15,19 +15,30 @@ package com.k0d4black.theforce.feature.settings
 
 import android.os.Bundle
 import android.view.View
-import com.k0d4black.theforce.shared.android.BaseActivity
-import com.k0d4black.theforce.databinding.ActivitySettingsBinding
+import com.github.odaridavid.feature.settings.databinding.ActivitySettingsBinding
+import com.k0d4black.theforce.shared.android.AppScreen
+import com.k0d4black.theforce.shared.android.base.BaseActivity
+import com.k0d4black.theforce.shared.android.extensions.navigateTo
 
-class SettingsActivity : com.k0d4black.theforce.shared.android.BaseActivity() {
+class SettingsActivity : BaseActivity() {
+
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivitySettingsBinding.inflate(layoutInflater)
+        initBinding()
+        setupActionBar()
+    }
+
+    fun openAboutActivity(view: View) = navigateTo(appScreen = AppScreen.ABOUT)
+
+    private fun initBinding() {
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    private fun setupActionBar() {
         setSupportActionBar(binding.settingsToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
-    fun openAboutActivity(view: View) = startActivity<AboutActivity>()
-
 }

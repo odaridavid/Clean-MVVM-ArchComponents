@@ -35,7 +35,7 @@
             android:id="@+id/about_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="16dp"
             android:clickable="true"
             android:focusable="true"
             android:onClick="openAboutActivity"
@@ -53,17 +53,17 @@
                     style="@style/TheForce.TextView.HeadLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_default"
-                    android:drawableStart="@drawable/ic_info_24dp"
-                    android:padding="@dimen/padding_default"
-                    android:text="@string/title_about" />
+                    android:layout_marginBottom="16dp"
+                    android:padding="16dp"
+                    android:text="About"
+                    app:drawableStartCompat="@drawable/ic_info_24dp" />
 
                 <TextView
                     style="@style/TheForce.TextView.Info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
-                    android:padding="@dimen/padding_default"
+                    android:layout_margin="16dp"
+                    android:padding="16dp"
                     android:text="@string/star_wars_copyright" />
             </LinearLayout>
 
