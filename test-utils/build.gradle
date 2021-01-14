@@ -37,6 +37,5 @@ dependencies {
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockWebServer
-    implementation testDependencies.espressoIdlingResource
     testImplementation testDependencies.googleTruth
 }

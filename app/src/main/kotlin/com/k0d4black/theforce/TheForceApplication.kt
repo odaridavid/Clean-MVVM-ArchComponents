@@ -14,8 +14,7 @@
 package com.k0d4black.theforce
 
 import android.app.Application
-import com.facebook.stetho.Stetho
-import com.k0d4black.theforce.feature.charactersearch.featureCharacterDetailsModule
+import com.k0d4black.theforce.feature.characterdetails.featureCharacterDetailsModule
 import com.k0d4black.theforce.feature.charactersearch.featureCharacterSearchModule
 import com.k0d4black.theforce.feature.home.featureHomeModule
 import org.koin.android.ext.koin.androidContext
@@ -26,12 +25,13 @@ internal class TheForceApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        if (BuildConfig.DEBUG)
-            Stetho.initializeWithDefaults(this)
-
         startKoin {
             androidContext(this@TheForceApplication)
-            modules(featureCharacterSearchModule, featureCharacterDetailsModule, featureHomeModule)
+            modules(
+                featureCharacterSearchModule,
+                featureCharacterDetailsModule,
+                featureHomeModule
+            )
         }
     }
 }

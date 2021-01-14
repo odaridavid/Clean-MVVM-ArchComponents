@@ -98,9 +98,6 @@ dependencies {
     implementation project(':feature-settings')
     implementation project(':shared-android')
 
-    //Stetho
-    implementation appDependencies.stetho
-
     //Memory leaks
     debugImplementation appDependencies.leakCanary
 
