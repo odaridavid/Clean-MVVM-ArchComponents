@@ -14,23 +14,32 @@
 package com.k0d4black.theforce.shared.android
 
 import com.google.common.truth.Truth
+import com.k0d4black.theforce.shared.android.utils.ExceptionHandler
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.net.UnknownHostException
 
 @RunWith(JUnit4::class)
-class ExceptionHandlerTest {
+internal class ExceptionHandlerTest {
 
     @Test
-    fun `given an exception when is instance of UnknownHostException then get No Internet Connection string `() {
-        val message = com.k0d4black.theforce.shared.android.utils.ExceptionHandler.parse(UnknownHostException())
+    fun `when is instance of UnknownHostException then get No Internet Connection string `() {
+        // given an Unknown Host Exception
+        val exception = UnknownHostException()
+        // when we parse it
+        val message = ExceptionHandler.parse(UnknownHostException())
+        //then the correct string is returned
         Truth.assertThat(message).isEqualTo(R.string.error_check_internet_connection)
     }
 
     @Test
-    fun `given an exception when is unknown instance then get default string`() {
-        val message = com.k0d4black.theforce.shared.android.utils.ExceptionHandler.parse(Exception())
+    fun `when we parse a generic exception is unknown instance then get default string`() {
+        //given a generic exception
+        val exception = Exception()
+        // when we parse the exception
+        val message = ExceptionHandler.parse(exception)
+        // then the correct string is returned
         Truth.assertThat(message).isEqualTo(R.string.error_oops_error_occured)
     }
 }

@@ -14,11 +14,13 @@
 package com.k0d4black.theforce.shared.android.extensions
 
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import com.k0d4black.theforce.shared.android.AppScreen
 
 fun Context.loadColor(@ColorRes colorRes: Int): Int = ContextCompat.getColor(this, colorRes)
 
@@ -26,8 +28,20 @@ fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 
-inline fun <reified T : Activity> Context.startActivity(block: Intent.() -> Unit = {}) {
-    val intent = Intent(this, T::class.java)
-    block(intent)
+fun Activity.navigateTo(
+    appScreen: AppScreen,
+    intentExtras: ((Intent) -> Unit)? = null
+) {
+    val intent = Intent(Intent.ACTION_MAIN).apply {
+        addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.component = ComponentName(
+            packageName,
+            "$packageName${appScreen.className}"
+        )
+    }
+
+    intentExtras?.run {
+        intentExtras(intent)
+    }
     startActivity(intent)
 }
