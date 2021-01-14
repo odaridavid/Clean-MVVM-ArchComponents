@@ -17,7 +17,7 @@
 
         <variable
             name="planet"
-            type="com.k0d4black.theforce.feature.character.details.PlanetPresentation" />
+            type="com.k0d4black.theforce.feature.characterdetails.PlanetPresentation" />
 
     </data>
 

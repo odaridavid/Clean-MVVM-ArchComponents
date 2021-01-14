@@ -14,24 +14,39 @@
 package com.k0d4black.theforce.feature.about
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.k0d4black.theforce.feature.about.databinding.ActivityAboutBinding
+import com.k0d4black.theforce.shared.android.base.BaseActivity
 import com.mikepenz.aboutlibraries.LibsBuilder
 
-class AboutActivity : AppCompatActivity() {
+class AboutActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAboutBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.aboutToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        initBinding()
+        setupActionBar()
+        setupAboutLibrariesFragment()
+    }
 
+    private fun setupAboutLibrariesFragment() {
         val fragment = LibsBuilder()
             .withAboutIconShown(true)
             .supportFragment()
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container, fragment).commit()
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    private fun initBinding() {
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+    }
+
+    private fun setupActionBar() {
+        setSupportActionBar(binding.aboutToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

@@ -11,14 +11,14 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.feature.home
+package com.k0d4black.theforce.feature.charactersearch.ui
 
-import android.os.Bundle
-import com.k0d4black.theforce.shared.android.base.BaseActivity
+import androidx.lifecycle.ViewModel
+import com.k0d4black.theforce.remote.character.search.data.CharacterSearchRepository
 
-internal class HomeActivity : BaseActivity() {
+internal class CharacterSearchViewModel(
+    private val characterSearchRepository: CharacterSearchRepository
+) : ViewModel() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 }

@@ -13,23 +13,6 @@
         <activity android:name=".shared.android.base.BaseActivity" />
 
         <activity
-            android:name=".feature.character.details.FavoriteDetailsActivity"
-            android:parentActivityName=".feature.home.HomeActivity" />
-        <activity
-            android:name=".feature.about.AboutActivity"
-            android:label="@string/title_about"
-            android:parentActivityName=".feature.settings.SettingsActivity" />
-
-        <activity
-            android:name=".feature.settings.SettingsActivity"
-            android:label="@string/title_settings"
-            android:parentActivityName=".feature.home.HomeActivity" />
-        <activity
-            android:name=".feature.character.details.CharacterDetailsActivity"
-            android:parentActivityName=".feature.home.HomeActivity" />
-
-        <!-- TODO Use singletop though seems tricky given the UI is using motion layout -->
-        <activity
             android:name=".feature.home.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
@@ -40,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".feature.characterdetails.ui.CharacterDetailsActivity"
+            android:parentActivityName=".feature.home.HomeActivity" />
+
+        <activity
+            android:name=".feature.settings.SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName=".feature.home.HomeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

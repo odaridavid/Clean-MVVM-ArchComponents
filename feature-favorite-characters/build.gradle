@@ -1,10 +1,10 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
-
     compileSdkVersion compileSdk
     buildToolsVersion buildTools
 
@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -38,9 +42,6 @@ dependencies {
     implementation domainDependencies.koinCore
 
     implementation project(':shared-android')
-    implementation project(':remote-planet')
-    implementation project(':remote-films')
-    implementation project(':remote-species')
     implementation project(':local')
 
     implementation appDependencies.androidxKtx

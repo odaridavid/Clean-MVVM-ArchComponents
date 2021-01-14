@@ -18,7 +18,7 @@
 
         <variable
             name="film"
-            type="com.k0d4black.theforce.feature.character.details.FilmPresentation" />
+            type="com.k0d4black.theforce.feature.characterdetails.FilmPresentation" />
     </data>
 
     <LinearLayout

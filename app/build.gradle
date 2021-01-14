@@ -94,7 +94,7 @@ dependencies {
     implementation project(':feature-home')
     implementation project(':feature-character-search')
     implementation project(':feature-character-details')
-    implementation project(':feature-favorites')
+    implementation project(':feature-favorite-characters')
     implementation project(':feature-settings')
     implementation project(':shared-android')
 
