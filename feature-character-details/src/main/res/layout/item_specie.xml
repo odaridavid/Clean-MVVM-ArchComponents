@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
  ~ Copyright 2020 David Odari
  ~
@@ -17,7 +16,7 @@
 
         <variable
             name="species"
-            type="com.k0d4black.theforce.feature.characterdetails.SpeciePresentation" />
+            type="com.k0d4black.theforce.shared.model.Specie" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

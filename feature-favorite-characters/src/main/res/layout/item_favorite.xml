@@ -19,16 +19,16 @@
 
         <variable
             name="favorite"
-            type="com.k0d4black.theforce.feature.characterdetails.FavoritePresentation" />
+            type="com.k0d4black.theforce.shared.model.FavoriteCharacter" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/fav_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_default"
-        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:clickable="true"
         android:focusable="true"
         app:cardCornerRadius="0dp"
@@ -42,20 +42,20 @@
                 android:id="@+id/character_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/drawable_padding"
+                android:padding="16dp"
                 android:src="@drawable/ic_character_24dp"
-                android:tint="@color/colorOnBackground"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorOnBackground" />
 
             <TextView
                 android:id="@+id/favorite_name_text_view"
+                style="@style/TheForce.TextView.HeadLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default"
-                android:text="@{favorite.characterPresentation.name}"
-                style="@style/TheForce.TextView.HeadLine"
+                android:layout_marginStart="16dp"
+                android:text="@{favorite.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/character_image_view"
                 app:layout_constraintTop_toTopOf="parent"

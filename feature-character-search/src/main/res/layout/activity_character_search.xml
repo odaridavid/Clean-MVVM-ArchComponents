@@ -16,31 +16,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dashboard_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
-        app:layoutDescription="@xml/search_motion_scene"
-        tools:context="com.k0d4black.theforce.feature.home.HomeActivity"
-        tools:menu="@menu/home_menu">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/search_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
-
-        <ImageButton
-            android:id="@+id/back_to_start_state_image_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/back_to_home_dashboard_content_desc"
-            android:onClick="handleUpButtonClick"
-            android:src="@drawable/ic_arrow_left_24dp"
-            android:tint="@color/colorSecondaryVariant" />
+        tools:context="com.k0d4black.theforce.feature.home.HomeActivity">
 
         <TextView
             android:id="@+id/search_tagline_text_view"
@@ -56,47 +36,21 @@
             android:background="@drawable/bg_search_edit_text"
             android:clickable="true"
             android:drawableStart="@drawable/ic_search_24dp"
-            android:drawablePadding="@dimen/drawable_padding"
+            android:drawablePadding="16dp"
             android:focusable="true"
             android:hint="@string/hint_character_name"
             android:inputType="text"
-            android:padding="@dimen/padding_default" />
+            android:padding="16dp" />
 
         <ProgressBar
             android:id="@+id/search_results_progress_bar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/favorites_title_text_view"
-            style="@style/TheForce.TextView.HeadLine"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_favs_24dp"
-            android:text="@string/title_favorites" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/favorites_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_favorite" />
-
-        <ProgressBar
-            android:id="@+id/favorites_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/no_favorites_text_view"
-            style="@style/TheForce.TextView.Info.Icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_no_favs_96dp"
-            android:gravity="center_horizontal"
-            android:text="@string/info_no_favorite_characters" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_results_recycler_view"
@@ -108,5 +62,5 @@
             tools:itemCount="2"
             tools:listitem="@layout/item_search" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

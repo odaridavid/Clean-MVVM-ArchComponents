@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
  ~ Copyright 2020 David Odari
  ~
@@ -37,7 +36,7 @@
                 android:id="@+id/character_details_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/margin_default"
+                android:paddingBottom="16dp"
                 tools:context=".feature.character.details.CharacterDetailsActivity">
 
                 <include

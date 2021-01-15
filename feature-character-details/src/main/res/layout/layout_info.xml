@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
  ~ Copyright 2020 David Odari
  ~
@@ -17,7 +16,7 @@
 
         <variable
             name="character"
-            type="com.k0d4black.theforce.models.CharacterPresentation" />
+            type="com.k0d4black.theforce.shared.model.Character" />
 
     </data>
 
@@ -30,9 +29,9 @@
             style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:drawableStart="@drawable/ic_birth_24dp"
+            android:layout_margin="16dp"
             android:text="@string/title_birth_year"
+            app:drawableStartCompat="@drawable/ic_birth_24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +40,7 @@
             style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="16dp"
             android:text="@{character.birthYear}"
             app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
             app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
@@ -52,32 +51,22 @@
             style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:drawableStart="@drawable/ic_height_24dp"
+            android:layout_margin="16dp"
             android:text="@string/title_height"
+            app:drawableStartCompat="@drawable/ic_height_24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- TODO Determine what metric to use depending on preference-->
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/character_details_height_in_cm_text_view"
+            android:id="@+id/character_details_height_text_view"
             style="@style/TheForce.TextView.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:text="@{String.format(@string/template_height_cm,character.heightInCm)}"
+            android:layout_margin="16dp"
+            android:text="@{String.format(@string/template_height_cm,character.height)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
-            tools:text="123 cm" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/character_details_height_in_inches_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:text="@{String.format(@string/template_height_inches,character.heightInInches)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/character_details_height_in_cm_text_view"
             tools:text="123 cm" />
     </merge>
 </layout>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
  ~ Copyright 2020 David Odari
  ~
@@ -22,9 +21,9 @@
             style="@style/TheForce.TextView.HeadLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
-            android:drawableStart="@drawable/ic_film_24dp"
+            android:layout_margin="16dp"
             android:text="@string/title_films"
+            app:drawableStartCompat="@drawable/ic_film_24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/specie_card_container" />
 
@@ -33,9 +32,9 @@
             android:id="@+id/films_card_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_default"
+            android:layout_margin="16dp"
             app:cardCornerRadius="0dp"
-            app:cardElevation="@dimen/cardview_elevation"
+            app:cardElevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/character_details_films_title_text_view">
 
@@ -58,7 +57,7 @@
                     android:id="@+id/films_progress_bar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
+                    android:layout_margin="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -69,7 +68,7 @@
                     style="@style/TheForce.TextView.Error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_default"
+                    android:layout_margin="16dp"
                     android:text="@string/error_loading_films"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"

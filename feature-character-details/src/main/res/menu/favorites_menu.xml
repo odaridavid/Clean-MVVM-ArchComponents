@@ -17,6 +17,6 @@
         android:id="@+id/action_alter_favorites"
         android:icon="@drawable/ic_no_favs_24dp"
         android:orderInCategory="1"
-        android:title="@string/menu_title_favorites"
+        android:title="Favorites"
         app:showAsAction="ifRoom" />
 </menu>
