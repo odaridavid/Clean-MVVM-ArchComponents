@@ -16,21 +16,8 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("jacoco-android")
     id("com.google.firebase.crashlytics")
     id("com.mikepenz.aboutlibraries.plugin")
-}
-
-jacoco {
-    toolVersion = "0.8.4"
-}
-
-tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
-}
-
-jacocoAndroidUnitTestReport {
-    xml.enabled true
 }
 
 android {
@@ -66,11 +53,6 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
-    }
-
-    dataBinding {
-        enabled true
     }
 
     testOptions.unitTests {
