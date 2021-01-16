@@ -15,7 +15,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_alter_favorites"
-        android:icon="@drawable/ic_no_favs_24dp"
+        android:icon="@drawable/ic_no_favorites_24dp"
         android:orderInCategory="1"
         android:title="Favorites"
         app:showAsAction="ifRoom" />

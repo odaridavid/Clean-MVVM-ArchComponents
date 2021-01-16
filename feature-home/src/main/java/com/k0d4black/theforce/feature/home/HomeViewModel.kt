@@ -1,3 +1,5 @@
 package com.k0d4black.theforce.feature.home
 
-class HomeViewModel
+import androidx.lifecycle.ViewModel
+
+internal class HomeViewModel : ViewModel()

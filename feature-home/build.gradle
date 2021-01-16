@@ -42,4 +42,5 @@ dependencies {
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
+    implementation appDependencies.constraintLayout
 }
