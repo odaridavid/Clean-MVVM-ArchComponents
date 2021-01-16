@@ -15,7 +15,6 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-android-extensions")
-    id("kotlin-kapt")
     id("com.google.firebase.crashlytics")
     id("com.mikepenz.aboutlibraries.plugin")
 }

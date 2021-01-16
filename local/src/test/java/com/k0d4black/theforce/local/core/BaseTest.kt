@@ -22,12 +22,12 @@ import org.junit.After
 import org.junit.Before
 import java.io.IOException
 
-open class BaseTest {
+internal class BaseTest {
 
     private lateinit var db: TheForceDatabase
 
     @Before
-    open fun setup() {
+    fun setup() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, TheForceDatabase::class.java).build()
     }

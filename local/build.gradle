@@ -43,5 +43,7 @@ dependencies {
     implementation dataDependencies.roomKtx
 
     implementation project(':shared')
+
     testImplementation testDependencies.junit
+    testImplementation testDependencies.androidxCoreTest
 }

@@ -37,6 +37,7 @@ dependencies {
     implementation domainDependencies.kotlin
     implementation domainDependencies.koinCore
 
+    implementation project(':shared')
     implementation project(':shared-android')
     implementation project(':remote-planet')
     implementation project(':remote-films')
@@ -46,4 +47,5 @@ dependencies {
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
+    implementation appDependencies.constraintLayout
 }
