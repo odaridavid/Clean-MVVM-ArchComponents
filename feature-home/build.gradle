@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-kapt")
 }
 
 android {
@@ -9,6 +8,7 @@ android {
     buildToolsVersion buildTools
 
     defaultConfig {
+
         minSdkVersion minSdk
         targetSdkVersion targetSdk
 
@@ -30,10 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    dataBinding {
-        enabled true
-    }
 }
 
 dependencies {
@@ -41,8 +37,9 @@ dependencies {
     implementation domainDependencies.kotlin
     implementation domainDependencies.koinCore
 
+    implementation project(':shared-android')
+
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
-    implementation project(':shared-android')
 }

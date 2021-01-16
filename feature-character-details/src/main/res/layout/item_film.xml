@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ~ Copyright 2020 David Odari
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -10,37 +9,25 @@
  ~ or implied. See the License for the specific language governing permissions and limitations under
  ~ the License.
 -->
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <data>
-
-        <variable
-            name="film"
-            type="com.k0d4black.theforce.shared.model.Film" />
-    </data>
-
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/film_title_text_view"
+        style="@style/TheForce.TextView.Subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        tools:text="Film Name" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/film_title_text_view"
-            style="@style/TheForce.TextView.Subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{film.title}"
-            tools:text="Film Name" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/film_opening_crawl_text_view"
+        style="@style/TheForce.TextView.Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Film Opening Crawl" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/film_opening_crawl_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{film.openingCrawl}"
-            tools:text="Film Opening Crawl" />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ~ Copyright 2020 David Odari
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -10,63 +9,50 @@
  ~ or implied. See the License for the specific language governing permissions and limitations under
  ~ the License.
 -->
-<layout>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <TextView
+        android:id="@+id/character_details_birth_year_title_text_view"
+        style="@style/TheForce.TextView.HeadLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/title_birth_year"
+        app:drawableStartCompat="@drawable/ic_birth_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <variable
-            name="character"
-            type="com.k0d4black.theforce.shared.model.Character" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/character_details_birth_year_text_view"
+        style="@style/TheForce.TextView.Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
+        app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
+        tools:text="BBY 13" />
 
-    </data>
+    <TextView
+        android:id="@+id/character_details_height_title_text_view"
+        style="@style/TheForce.TextView.HeadLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/title_height"
+        app:drawableStartCompat="@drawable/ic_height_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <merge xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
-
-        <TextView
-            android:id="@+id/character_details_birth_year_title_text_view"
-            style="@style/TheForce.TextView.HeadLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/title_birth_year"
-            app:drawableStartCompat="@drawable/ic_birth_24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/character_details_birth_year_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@{character.birthYear}"
-            app:layout_constraintStart_toStartOf="@id/character_details_birth_year_title_text_view"
-            app:layout_constraintTop_toBottomOf="@id/character_details_birth_year_title_text_view"
-            tools:text="BBY 13" />
-
-        <TextView
-            android:id="@+id/character_details_height_title_text_view"
-            style="@style/TheForce.TextView.HeadLine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/title_height"
-            app:drawableStartCompat="@drawable/ic_height_24dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- TODO Determine what metric to use depending on preference-->
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/character_details_height_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@{String.format(@string/template_height_cm,character.height)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
-            tools:text="123 cm" />
-    </merge>
-</layout>
+    <!-- TODO Determine what metric to use depending on preference-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/character_details_height_text_view"
+        style="@style/TheForce.TextView.Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/character_details_height_title_text_view"
+        tools:text="123 cm" />
+</merge>

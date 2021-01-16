@@ -11,63 +11,59 @@
  ~ or implied. See the License for the specific language governing permissions and limitations under
  ~ the License.
 -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.k0d4black.theforce.feature.settings.SettingsActivity">
 
-<layout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/settings_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".feature.settings.SettingsActivity">
+        android:layout_height="?actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/title_settings"
+        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/settings_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/title_settings"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/about_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openAboutActivity"
+        app:cardBackgroundColor="?android:colorBackground"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/about_card_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:onClick="openAboutActivity"
-            app:cardBackgroundColor="?android:colorBackground"
-            app:cardCornerRadius="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/about_text_view"
+                style="@style/TheForce.TextView.HeadLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="16dp"
+                android:padding="16dp"
+                android:text="About"
+                app:drawableStartCompat="@drawable/ic_info_24dp" />
 
-                <TextView
-                    android:id="@+id/about_text_view"
-                    style="@style/TheForce.TextView.HeadLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:padding="16dp"
-                    android:text="About"
-                    app:drawableStartCompat="@drawable/ic_info_24dp" />
+            <TextView
+                style="@style/TheForce.TextView.Info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                android:text="@string/star_wars_copyright" />
+        </LinearLayout>
 
-                <TextView
-                    style="@style/TheForce.TextView.Info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:padding="16dp"
-                    android:text="@string/star_wars_copyright" />
-            </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

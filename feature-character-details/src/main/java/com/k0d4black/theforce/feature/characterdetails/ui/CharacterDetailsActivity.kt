@@ -13,8 +13,15 @@
  **/
 package com.k0d4black.theforce.feature.characterdetails.ui
 
+import android.os.Bundle
+import com.k0d4black.theforce.feature.characterdetails.R
 import com.k0d4black.theforce.shared.android.base.BaseActivity
 
 class CharacterDetailsActivity : BaseActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_character_details)
+    }
 
 }

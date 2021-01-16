@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-kapt")
+    id("kotlin-android-extensions")
 }
 
 android {
@@ -9,6 +9,7 @@ android {
     buildToolsVersion buildTools
 
     defaultConfig {
+
         minSdkVersion minSdk
         targetSdkVersion targetSdk
 
@@ -30,10 +31,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    dataBinding {
-        enabled true
-    }
 }
 
 dependencies {
@@ -48,4 +45,5 @@ dependencies {
     //About Libraries
     implementation appDependencies.aboutLibraryCore
     implementation appDependencies.aboutLibraryUi
+    implementation appDependencies.constraintLayout
 }

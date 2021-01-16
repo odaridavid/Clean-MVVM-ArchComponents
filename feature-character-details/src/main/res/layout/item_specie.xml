@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  ~ Copyright 2020 David Odari
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
@@ -10,35 +9,26 @@
  ~ or implied. See the License for the specific language governing permissions and limitations under
  ~ the License.
 -->
-<layout xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <data>
-
-        <variable
-            name="species"
-            type="com.k0d4black.theforce.shared.model.Specie" />
-    </data>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/species_name_text_view"
+        style="@style/TheForce.TextView.Info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="@{String.format(@string/template_species_name,species.name)}"
+        tools:text="Species Name" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/species_name_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{String.format(@string/template_species_name,species.name)}"
-            tools:text="Species Name" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/species_language_text_view"
+        style="@style/TheForce.TextView.Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@{String.format(@string/template_species_language,species.language)}"
+        tools:text="Language" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/species_language_text_view"
-            style="@style/TheForce.TextView.Info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{String.format(@string/template_species_language,species.language)}"
-            tools:text="Language" />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

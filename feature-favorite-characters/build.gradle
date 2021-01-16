@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
-    id("kotlin-kapt")
 }
 
 android {
@@ -30,10 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
-    dataBinding {
-        enabled true
-    }
 }
 
 dependencies {
@@ -41,10 +36,12 @@ dependencies {
     implementation domainDependencies.kotlin
     implementation domainDependencies.koinCore
 
+    implementation project(':shared')
     implementation project(':shared-android')
     implementation project(':local')
 
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
+    implementation appDependencies.constraintLayout
 }
