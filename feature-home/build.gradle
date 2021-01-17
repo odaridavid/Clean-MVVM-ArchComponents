@@ -40,7 +40,9 @@ dependencies {
     implementation project(':shared-android')
 
     implementation appDependencies.androidxKtx
+    implementation appDependencies.liveDataKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
     implementation appDependencies.constraintLayout
+    implementation appDependencies.koinAndroidViewModel
 }

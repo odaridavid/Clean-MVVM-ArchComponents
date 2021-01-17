@@ -20,6 +20,13 @@ import com.k0d4black.theforce.feature.home.featureHomeModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
+//TODO Cleanup gradle files
+//TODO Setup Unit testing coverage
+//TODO Setup Github action + Bitrise with ktlint code check and detekt and deploy to app store
+//TODO Create a mindblowing UI
+//TODO Write Unit tests and UI tests
+//TODO Use Result class
+//TODO Better Error Handling and logging of errors
 internal class TheForceApplication : Application() {
 
     override fun onCreate() {

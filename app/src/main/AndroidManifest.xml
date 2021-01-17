@@ -13,7 +13,7 @@
         <activity android:name=".shared.android.base.BaseActivity" />
 
         <activity
-            android:name=".feature.home.HomeActivity"
+            android:name=".feature.home.ui.HomeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -26,12 +26,7 @@
 
         <activity
             android:name=".feature.characterdetails.ui.CharacterDetailsActivity"
-            android:parentActivityName=".feature.home.HomeActivity" />
-
-        <activity
-            android:name=".feature.settings.SettingsActivity"
-            android:label="Settings"
-            android:parentActivityName=".feature.home.HomeActivity" />
+            android:parentActivityName=".feature.home.ui.HomeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

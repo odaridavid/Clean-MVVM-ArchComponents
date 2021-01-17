@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
  ~ Copyright 2020 David Odari
  ~
@@ -23,12 +22,16 @@
         style="@style/TheForce.TextView.HeadLine2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/info_explore" />
+        android:text="@string/info_explore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/search_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:background="@drawable/bg_search_edit_text"
         android:clickable="true"
         android:drawableStart="@drawable/ic_search_24dp"
@@ -36,7 +39,10 @@
         android:focusable="true"
         android:hint="@string/hint_character_name"
         android:inputType="text"
-        android:padding="16dp" />
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_tagline_text_view" />
 
     <ProgressBar
         android:id="@+id/search_results_progress_bar"

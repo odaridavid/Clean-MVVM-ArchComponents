@@ -14,8 +14,14 @@
 package com.k0d4black.theforce.shared.android.extensions
 
 import android.app.Activity
+import android.content.ComponentName
+import android.content.Intent
 import android.view.View
+import androidx.annotation.IdRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.R
 
 fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
@@ -29,4 +35,33 @@ fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false)
             .setTextColor(loadColor(R.color.colorOnSecondary))
             .show()
 
+}
+
+fun Activity.navigateToActivity(
+    appScreen: AppScreen,
+    intentExtras: ((Intent) -> Unit)? = null
+) {
+    val intent = Intent(Intent.ACTION_MAIN).apply {
+        addCategory(Intent.CATEGORY_LAUNCHER)
+        intent.component = ComponentName(
+            packageName,
+            "$packageName${appScreen.classPath}"
+        )
+    }
+
+    intentExtras?.run {
+        intentExtras(intent)
+    }
+    startActivity(intent)
+}
+
+fun AppCompatActivity.navigateToFragment(
+    appScreen: AppScreen,
+    @IdRes fragmentContainer: Int
+) {
+    val fragmentTransaction = supportFragmentManager.beginTransaction()
+    val fragment = Class.forName(appScreen.classPath).newInstance() as Fragment
+    fragmentTransaction.replace(fragmentContainer, fragment)
+    fragmentTransaction.addToBackStack(null)
+    fragmentTransaction.commit()
 }

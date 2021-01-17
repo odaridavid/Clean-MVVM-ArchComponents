@@ -13,25 +13,15 @@
  **/
 package com.k0d4black.theforce.feature.settings
 
-import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import com.github.odaridavid.feature.settings.R
 import com.k0d4black.theforce.shared.android.AppScreen
-import com.k0d4black.theforce.shared.android.base.BaseActivity
-import com.k0d4black.theforce.shared.android.extensions.navigateTo
+import com.k0d4black.theforce.shared.android.extensions.navigateToActivity
 
-class SettingsActivity : BaseActivity() {
+class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_settings)
-        setupActionBar()
-    }
+    fun openAboutActivity(view: View) =
+        requireActivity().navigateToActivity(appScreen = AppScreen.ABOUT)
 
-    fun openAboutActivity(view: View) = navigateTo(appScreen = AppScreen.ABOUT)
-
-    private fun setupActionBar() {
-        setSupportActionBar(findViewById(R.id.settings_toolbar))
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
 }

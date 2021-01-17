@@ -23,6 +23,7 @@ ext {
     materialVersion = '1.1.0-beta02'
     analyticsVersion = '17.4.3'
     fragmentKtxVersion = '1.1.0'
+    liveDataKtxVersion = '2.2.0'
     leakCanaryVersion = '2.0'
     koinVersion = '2.1.5'
     crashlyticsVersion = '17.0.1'
@@ -70,7 +71,8 @@ ext {
             aboutLibraryUi        : "com.mikepenz:aboutlibraries:$aboutLibsVersion",
             koinAndroid           : "org.koin:koin-android:$koinVersion",
             koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
-            koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion"
+            koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion",
+            liveDataKtx           : "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
     ]
 
     dataDependencies = [
