@@ -15,7 +15,7 @@ package com.k0d4black.theforce.feature.settings
 
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.github.odaridavid.feature.settings.R
+import com.kod4black.theforce.feature.settings.R
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.extensions.navigateToActivity
 
