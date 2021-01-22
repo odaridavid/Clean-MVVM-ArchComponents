@@ -14,7 +14,6 @@
 
         <activity
             android:name=".feature.home.ui.HomeActivity"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -25,7 +24,15 @@
         </activity>
 
         <activity
+            android:name=".feature.charactersearchresults.ui.CharacterSearchResultsActivity"
+            android:parentActivityName=".feature.home.ui.HomeActivity" />
+
+        <activity
             android:name=".feature.characterdetails.ui.CharacterDetailsActivity"
+            android:parentActivityName=".feature.home.ui.HomeActivity" />
+
+        <activity
+            android:name=".feature.about.ui.AboutActivity"
             android:parentActivityName=".feature.home.ui.HomeActivity" />
 
         <meta-data
