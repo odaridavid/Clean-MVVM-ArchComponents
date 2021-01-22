@@ -11,13 +11,16 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.feature.about
+package com.k0d4black.theforce.feature.about.ui
 
 import android.os.Bundle
+import com.k0d4black.theforce.feature.about.R
 import com.k0d4black.theforce.shared.android.base.BaseActivity
 import com.mikepenz.aboutlibraries.LibsBuilder
 
 class AboutActivity : BaseActivity() {
+
+    // region Android Api
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,14 +29,18 @@ class AboutActivity : BaseActivity() {
         setupAboutLibrariesFragment()
     }
 
+    // endregion
+
+    // region Private Api
+
     private fun setupAboutLibrariesFragment() {
-        val fragment = LibsBuilder()
+        val aboutLibraryFragment = LibsBuilder()
             .withAboutIconShown(true)
             .supportFragment()
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fragment_container, fragment)
+            .add(R.id.fragment_container, aboutLibraryFragment)
             .commit()
     }
 
@@ -41,4 +48,6 @@ class AboutActivity : BaseActivity() {
         setSupportActionBar(findViewById(R.id.about_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
+    // endregion
 }

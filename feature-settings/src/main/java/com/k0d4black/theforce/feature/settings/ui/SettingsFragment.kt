@@ -11,17 +11,31 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.feature.settings
+package com.k0d4black.theforce.feature.settings.ui
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.kod4black.theforce.feature.settings.R
+import com.k0d4black.theforce.feature.settings.R
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.extensions.navigateToActivity
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
-    fun openAboutActivity(view: View) =
+    // region Android Api
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //TODO Open About Activity with View Binding
+    }
+
+    // endregion
+
+    // region Private Api
+
+    private fun openAboutActivity() =
         requireActivity().navigateToActivity(appScreen = AppScreen.ABOUT)
+
+    // endregion
 
 }
