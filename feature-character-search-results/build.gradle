@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
+
     compileSdkVersion compileSdk
     buildToolsVersion buildTools
 
     defaultConfig {
-
         minSdkVersion minSdk
         targetSdkVersion targetSdk
 
@@ -35,7 +35,15 @@ android {
 dependencies {
 
     implementation domainDependencies.kotlin
+    implementation domainDependencies.koinCore
+
+    implementation project(':shared-android')
+    implementation project(':shared')
+    implementation project(':remote-character-search')
+
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
+    implementation appDependencies.constraintLayout
+
 }
