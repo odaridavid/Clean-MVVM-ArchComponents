@@ -23,7 +23,7 @@ import org.koin.core.context.startKoin
 //TODO Cleanup gradle files
 //TODO Setup Unit testing coverage
 //TODO Setup Github action + Bitrise with ktlint code check and detekt and deploy to app store
-//TODO Create a mindblowing UI
+//TODO Create a nice UI
 //TODO Write Unit tests and UI tests
 //TODO Use Result class
 //TODO Better Error Handling and logging of errors
