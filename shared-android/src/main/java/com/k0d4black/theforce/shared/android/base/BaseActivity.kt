@@ -18,12 +18,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.k0d4black.theforce.shared.android.R
-import com.k0d4black.theforce.shared.android.utils.NetworkUtils
 import com.k0d4black.theforce.shared.android.utils.SdkUtils
 
-open class BaseActivity : AppCompatActivity(), NetworkChangeListener {
+open class BaseActivity : AppCompatActivity() {
 
     // region Android Api
 
@@ -49,18 +47,4 @@ open class BaseActivity : AppCompatActivity(), NetworkChangeListener {
     }
 
     // endRegion
-
-    // region NetworkChangeListener
-
-    override fun onNetworkChange(onChange: (Boolean) -> Unit) {
-        NetworkUtils.getNetworkStatus(this)
-            .observe(
-                this,
-                Observer { isConnected ->
-                    onChange(isConnected)
-                }
-            )
-    }
-
-    // endregion
 }
