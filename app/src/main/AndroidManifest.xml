@@ -10,8 +10,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".shared.android.base.BaseActivity" />
-
         <activity
             android:name=".feature.home.ui.HomeActivity"
             android:windowSoftInputMode="adjustResize">
