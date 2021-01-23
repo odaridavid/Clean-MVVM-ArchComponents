@@ -16,16 +16,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/settings_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/title_settings"
-        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/about_card_view"
         android:layout_width="match_parent"
@@ -35,7 +25,7 @@
         android:focusable="true"
         app:cardBackgroundColor="?android:colorBackground"
         app:cardCornerRadius="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/settings_toolbar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
