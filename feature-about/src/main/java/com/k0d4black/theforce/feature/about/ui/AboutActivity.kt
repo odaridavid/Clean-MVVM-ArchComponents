@@ -14,11 +14,11 @@
 package com.k0d4black.theforce.feature.about.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.k0d4black.theforce.feature.about.R
-import com.k0d4black.theforce.shared.android.base.BaseActivity
 import com.mikepenz.aboutlibraries.LibsBuilder
 
-class AboutActivity : BaseActivity() {
+class AboutActivity : AppCompatActivity() {
 
     // region Android Api
 

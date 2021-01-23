@@ -14,8 +14,8 @@
 package com.k0d4black.theforce.shared.android.extensions
 
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.R
+import com.k0d4black.theforce.shared.android.utils.SdkUtils
 
 fun Activity.showSnackbar(view: View, message: String, isError: Boolean = false) {
     val sb = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
@@ -61,4 +62,11 @@ fun AppCompatActivity.navigateToFragment(
     fragmentTransaction.replace(fragmentContainer, fragment)
     fragmentTransaction.addToBackStack(null)
     fragmentTransaction.commit()
+}
+
+fun Activity.setupLightThemeSystemBarsFromApi23() {
+    if (SdkUtils.versionFrom(Build.VERSION_CODES.M)) {
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.statusBarColor = getColor(R.color.white)
+    }
 }

@@ -15,16 +15,16 @@ package com.k0d4black.theforce.feature.home.ui
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.k0d4black.theforce.feature.home.R
 import com.k0d4black.theforce.shared.android.AppScreen
-import com.k0d4black.theforce.shared.android.base.BaseActivity
 import com.k0d4black.theforce.shared.android.extensions.navigateToFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     // region Members
 

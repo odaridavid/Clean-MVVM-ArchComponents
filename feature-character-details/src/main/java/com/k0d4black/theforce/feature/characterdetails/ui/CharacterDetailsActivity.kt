@@ -14,10 +14,10 @@
 package com.k0d4black.theforce.feature.characterdetails.ui
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.k0d4black.theforce.feature.characterdetails.R
-import com.k0d4black.theforce.shared.android.base.BaseActivity
 
-class CharacterDetailsActivity : BaseActivity() {
+class CharacterDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
