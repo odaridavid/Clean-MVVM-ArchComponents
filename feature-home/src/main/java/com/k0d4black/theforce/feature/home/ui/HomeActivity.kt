@@ -16,7 +16,6 @@ package com.k0d4black.theforce.feature.home.ui
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.k0d4black.theforce.feature.home.R
@@ -70,22 +69,19 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private fun bindViewModel() {
         homeViewModel.onNavigateToFavorites().observe(this) {
-            navigateToFragment(
-                appScreen = AppScreen.FAVORITES,
-                fragmentContainer = R.id.fragment_container
-            )
+            navigateToFragment(appScreen = AppScreen.FAVORITES) { favoritesFragment ->
+                replace(R.id.fragment_container, favoritesFragment)
+            }
         }
         homeViewModel.onNavigateToSearch().observe(this) {
-            navigateToFragment(
-                appScreen = AppScreen.CHARACTER_SEARCH,
-                fragmentContainer = R.id.fragment_container
-            )
+            navigateToFragment(appScreen = AppScreen.CHARACTER_SEARCH) { searchFragment ->
+                replace(R.id.fragment_container, searchFragment)
+            }
         }
         homeViewModel.onNavigateToSettings().observe(this) {
-            navigateToFragment(
-                appScreen = AppScreen.SETTINGS,
-                fragmentContainer = R.id.fragment_container
-            )
+            navigateToFragment(appScreen = AppScreen.SETTINGS) { settingsFragment ->
+                replace(R.id.fragment_container, settingsFragment)
+            }
         }
     }
 
@@ -96,11 +92,9 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
     private fun setupDefaultScreen() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val fragment = Class.forName(AppScreen.CHARACTER_SEARCH.classPath).newInstance() as Fragment
-        fragmentTransaction.add(R.id.fragment_container, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        navigateToFragment(appScreen = AppScreen.CHARACTER_SEARCH) { searchFragment ->
+            add(R.id.fragment_container, searchFragment)
+        }
     }
 
     // endregion

@@ -17,9 +17,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.view.View
-import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.R
@@ -55,13 +55,13 @@ fun Activity.navigateToActivity(
 
 fun AppCompatActivity.navigateToFragment(
     appScreen: AppScreen,
-    @IdRes fragmentContainer: Int
+    fragmentTransaction: FragmentTransaction.(Fragment) -> Unit
 ) {
-    val fragmentTransaction = supportFragmentManager.beginTransaction()
-    val fragment = Class.forName(appScreen.classPath).newInstance() as Fragment
-    fragmentTransaction.replace(fragmentContainer, fragment)
-    fragmentTransaction.addToBackStack(null)
-    fragmentTransaction.commit()
+    supportFragmentManager
+        .beginTransaction()
+        .commitFragment(appScreen = appScreen) { fragment ->
+            fragmentTransaction(fragment)
+        }
 }
 
 fun Activity.setupLightThemeSystemBarsFromApi23() {
