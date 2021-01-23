@@ -68,17 +68,19 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     // region Private Api
 
     private fun bindViewModel() {
-        homeViewModel.onNavigateToFavorites().observe(this) {
+        homeViewModel.onFavoritesClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.FAVORITES) { favoritesFragment ->
                 replace(R.id.fragment_container, favoritesFragment)
             }
         }
-        homeViewModel.onNavigateToSearch().observe(this) {
+
+        homeViewModel.onSearchClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.CHARACTER_SEARCH) { searchFragment ->
                 replace(R.id.fragment_container, searchFragment)
             }
         }
-        homeViewModel.onNavigateToSettings().observe(this) {
+
+        homeViewModel.onSettingsClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.SETTINGS) { settingsFragment ->
                 replace(R.id.fragment_container, settingsFragment)
             }

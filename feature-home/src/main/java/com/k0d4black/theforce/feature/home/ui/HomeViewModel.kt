@@ -6,15 +6,16 @@ import androidx.lifecycle.ViewModel
 
 internal class HomeViewModel : ViewModel() {
 
+    //TODO Replace with flows
     private val _navigateToFavorites = MutableLiveData<Unit>()
     private val _navigateToSearch = MutableLiveData<Unit>()
     private val _navigateToSettings = MutableLiveData<Unit>()
 
-    fun onNavigateToFavorites(): LiveData<Unit> = _navigateToFavorites
+    fun onFavoritesClicked(): LiveData<Unit> = _navigateToFavorites
 
-    fun onNavigateToSearch(): LiveData<Unit> = _navigateToSearch
+    fun onSearchClicked(): LiveData<Unit> = _navigateToSearch
 
-    fun onNavigateToSettings(): LiveData<Unit> = _navigateToSettings
+    fun onSettingsClicked(): LiveData<Unit> = _navigateToSettings
 
     fun navigateToFavorites() {
         _navigateToFavorites.value = Unit
