@@ -34,11 +34,22 @@ Android Studio 4.0 +
 
 ## Architecture
 
-TODO
+🏗️ 🚧 This Branch is still work in progress
+
+[To See Previous Implementation](https://github.com/odaridavid/Clean-MVVM-ArchComponents/tree/develop) - Modularised by layer
+
+First of I believe the best code is the simplest code,no need to be all smart because maintainig it
+is a pain.
+
+This is an attempt to modularize by feature which in my opinion makes working with the codebase much
+easier as its more organized and the structure reduces stepping over each other if you are working on the
+codebase with other people.
+
+More Content to be added soon...
 
 ## Testing
 
-TODO
+TODO :)
 
 ## Libraries
 
