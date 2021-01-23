@@ -14,11 +14,5 @@
 package com.k0d4black.theforce.feature.charactersearch.ui
 
 import androidx.lifecycle.ViewModel
-import com.k0d4black.theforce.remote.character.search.data.CharacterSearchRepository
 
-internal class CharacterSearchViewModel(
-    private val characterSearchRepository: CharacterSearchRepository
-) : ViewModel() {
-
-
-}
+internal class CharacterSearchViewModel() : ViewModel()

@@ -14,9 +14,12 @@
 package com.k0d4black.theforce
 
 import android.app.Application
-import com.k0d4black.theforce.feature.characterdetails.featureCharacterDetailsModule
-import com.k0d4black.theforce.feature.charactersearch.featureCharacterSearchModule
-import com.k0d4black.theforce.feature.home.featureHomeModule
+import com.k0d4black.theforce.feature.characterdetails.di.featureCharacterDetailsModule
+import com.k0d4black.theforce.feature.charactersearch.di.featureCharacterSearchModule
+import com.k0d4black.theforce.feature.charactersearchresults.di.featureCharacterSearchResultsModule
+import com.k0d4black.theforce.feature.favoritecharacters.di.featureFavoritesModule
+import com.k0d4black.theforce.feature.home.di.featureHomeModule
+import com.k0d4black.theforce.feature.recentcharactersearch.di.featureRecentCharacterSearchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -27,6 +30,7 @@ import org.koin.core.context.startKoin
 //TODO Write Unit tests and UI tests
 //TODO Use Result class
 //TODO Better Error Handling and logging of errors
+//TODO Try out fast lane
 internal class TheForceApplication : Application() {
 
     override fun onCreate() {
@@ -37,7 +41,10 @@ internal class TheForceApplication : Application() {
             modules(
                 featureCharacterSearchModule,
                 featureCharacterDetailsModule,
-                featureHomeModule
+                featureHomeModule,
+                featureFavoritesModule,
+                featureRecentCharacterSearchModule,
+                featureCharacterSearchResultsModule
             )
         }
     }

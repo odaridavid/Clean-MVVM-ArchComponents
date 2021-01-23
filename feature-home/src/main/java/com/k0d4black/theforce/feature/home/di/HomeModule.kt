@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.feature.home
+package com.k0d4black.theforce.feature.home.di
 
 import com.k0d4black.theforce.feature.home.ui.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
