@@ -31,6 +31,7 @@ import org.koin.core.context.startKoin
 //TODO Use Result class
 //TODO Better Error Handling and logging of errors
 //TODO Try out fast lane
+//TODO Update Project Readme
 internal class TheForceApplication : Application() {
 
     override fun onCreate() {

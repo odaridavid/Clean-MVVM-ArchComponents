@@ -14,20 +14,33 @@
 package com.k0d4black.theforce.feature.settings.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
-import com.k0d4black.theforce.feature.settings.R
+import android.view.ViewGroup
+import com.k0d4black.theforce.feature.settings.databinding.FragmentSettingsBinding
 import com.k0d4black.theforce.shared.android.AppScreen
+import com.k0d4black.theforce.shared.android.base.BindingFragment
 import com.k0d4black.theforce.shared.android.extensions.navigateToActivity
 
-class SettingsFragment : Fragment(R.layout.fragment_settings) {
+class SettingsFragment : BindingFragment<FragmentSettingsBinding>() {
 
     // region Android Api
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //TODO Open About Activity with View Binding
+        bindViewActions()
     }
+
+    // endregion
+
+    // region BindingFragment
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentSettingsBinding =
+        FragmentSettingsBinding.inflate(inflater, container, false)
 
     // endregion
 
@@ -36,6 +49,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun openAboutActivity() =
         requireActivity().navigateToActivity(appScreen = AppScreen.ABOUT)
 
-    // endregion
+    private fun bindViewActions() {
+        binding.aboutTextView.setOnClickListener {
+            openAboutActivity()
+        }
+    }
 
+    // endregion
 }

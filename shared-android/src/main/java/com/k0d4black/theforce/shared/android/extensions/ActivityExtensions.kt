@@ -41,13 +41,10 @@ fun Activity.navigateToActivity(
     appScreen: AppScreen,
     intentExtras: ((Intent) -> Unit)? = null
 ) {
-    val intent = Intent(Intent.ACTION_MAIN).apply {
-        addCategory(Intent.CATEGORY_LAUNCHER)
-        intent.component = ComponentName(
-            packageName,
-            "$packageName${appScreen.classPath}"
-        )
-    }
+    val intent = Intent(Intent.ACTION_VIEW).setClassName(
+        this,
+        appScreen.classPath
+    )
 
     intentExtras?.run {
         intentExtras(intent)
