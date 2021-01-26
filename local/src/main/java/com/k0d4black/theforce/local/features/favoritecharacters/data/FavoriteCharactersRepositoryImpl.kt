@@ -11,9 +11,9 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.core.favoritecharacters.data
+package com.k0d4black.theforce.local.features.favoritecharacters.data
 
-import com.k0d4black.theforce.local.core.favoritecharacters.mappers.FavoriteCharacterMapper
+import com.k0d4black.theforce.local.features.favoritecharacters.mappers.FavoriteCharacterMapper
 import com.k0d4black.theforce.shared.model.FavoriteCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
