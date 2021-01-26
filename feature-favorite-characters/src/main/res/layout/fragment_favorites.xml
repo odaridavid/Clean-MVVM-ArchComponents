@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/favorites_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/title_favorites"
-        android:textAppearance="@style/TheForce.TextView.HeadLine2" />
+        android:textAppearance="@style/TheForce.TextView.HeadLine2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/no_favorites_text_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:padding="16dp"
         android:text="No favorites available"
-        android:textAppearance="@style/TheForce.TextView.Info" />
+        android:textAppearance="@style/TheForce.TextView.Info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_title_text_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favorites_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorites_title_text_view"
         tools:itemCount="3"
         tools:listitem="@layout/item_favorite" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,14 +16,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    TODO Ripple on card click-->
     <androidx.cardview.widget.CardView
-        android:id="@+id/about_card_view"
+        android:id="@+id/preferences_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="?android:colorBackground"
         app:cardCornerRadius="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -33,24 +33,54 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/about_text_view"
-                style="@style/TheForce.TextView.HeadLine"
+                android:id="@+id/preferences_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
                 android:padding="16dp"
-                android:text="@string/title_about"
-                app:drawableStartCompat="@drawable/ic_info_24dp" />
-
-            <TextView
-                style="@style/TheForce.TextView.Info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:padding="16dp"
-                android:text="@string/star_wars_copyright" />
+                android:text="Preferences"
+                android:drawableTint="@color/colorGrey"
+                android:drawablePadding="8dp"
+                style="@style/TheForce.TextView.Subtitle"
+                app:drawableStartCompat="@drawable/ic_baseline_toggle_on_24" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/about_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_card_view">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/about_text_view"
+                style="@style/TheForce.TextView.Subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:drawableTint="@color/colorGrey"
+                android:drawablePadding="8dp"
+                android:text="@string/title_about"
+                app:drawableStartCompat="@drawable/ic_info_24dp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        style="@style/TheForce.TextView.Info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/about_card_view"
+        android:text="@string/star_wars_copyright" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
