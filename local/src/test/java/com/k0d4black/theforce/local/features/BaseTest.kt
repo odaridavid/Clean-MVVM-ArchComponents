@@ -11,11 +11,12 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.core
+package com.k0d4black.theforce.local.features
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.k0d4black.theforce.local.TheForceDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.After

@@ -77,7 +77,6 @@ dependencies {
     implementation project(':feature-character-search-results')
     implementation project(':feature-favorite-characters')
     implementation project(':feature-home')
-    implementation project(':feature-recent-character-search')
     implementation project(':feature-settings')
     implementation project(':shared-android')
 

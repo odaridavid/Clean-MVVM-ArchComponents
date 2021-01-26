@@ -19,7 +19,6 @@ import com.k0d4black.theforce.feature.charactersearch.di.featureCharacterSearchM
 import com.k0d4black.theforce.feature.charactersearchresults.di.featureCharacterSearchResultsModule
 import com.k0d4black.theforce.feature.favoritecharacters.di.featureFavoritesModule
 import com.k0d4black.theforce.feature.home.di.featureHomeModule
-import com.k0d4black.theforce.feature.recentcharactersearch.di.featureRecentCharacterSearchModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -32,6 +31,7 @@ import org.koin.core.context.startKoin
 //TODO Better Error Handling and logging of errors
 //TODO Try out fast lane
 //TODO Update Project Readme
+//TODO Animation and navigation transitions
 internal class TheForceApplication : Application() {
 
     override fun onCreate() {
@@ -44,7 +44,6 @@ internal class TheForceApplication : Application() {
                 featureCharacterDetailsModule,
                 featureHomeModule,
                 featureFavoritesModule,
-                featureRecentCharacterSearchModule,
                 featureCharacterSearchResultsModule
             )
         }

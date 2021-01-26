@@ -11,13 +11,13 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.core
+package com.k0d4black.theforce.local
 
 import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val localCoreModule = module {
+val localModule = module {
 
     single {
         Room
