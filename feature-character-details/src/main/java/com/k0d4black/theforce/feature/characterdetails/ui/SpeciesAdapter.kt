@@ -5,7 +5,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.k0d4black.theforce.shared.model.Specie
 
-internal class SpeciesAdapter : ListAdapter<Specie, SpecieViewHolder>(speciesAdapterDiffUtil) {
+internal class SpeciesAdapter : ListAdapter<Specie, SpecieViewHolder>(speciesDiffUtil) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecieViewHolder {
         TODO("Not yet implemented")
     }
@@ -13,10 +14,9 @@ internal class SpeciesAdapter : ListAdapter<Specie, SpecieViewHolder>(speciesAda
     override fun onBindViewHolder(holder: SpecieViewHolder, position: Int) {
         TODO("Not yet implemented")
     }
-
 }
 
-private val speciesAdapterDiffUtil = object : DiffUtil.ItemCallback<Specie>() {
+private val speciesDiffUtil = object : DiffUtil.ItemCallback<Specie>() {
     override fun areItemsTheSame(oldItem: Specie, newItem: Specie): Boolean {
         TODO("Not yet implemented")
     }

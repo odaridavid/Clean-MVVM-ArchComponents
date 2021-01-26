@@ -28,7 +28,7 @@ class SettingsFragment : BindingFragment<FragmentSettingsBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindViewActions()
+        bindEvents()
     }
 
     // endregion
@@ -49,7 +49,7 @@ class SettingsFragment : BindingFragment<FragmentSettingsBinding>() {
     private fun openAboutActivity() =
         requireActivity().navigateToActivity(appScreen = AppScreen.ABOUT)
 
-    private fun bindViewActions() {
+    private fun bindEvents() {
         binding.aboutTextView.setOnClickListener {
             openAboutActivity()
         }

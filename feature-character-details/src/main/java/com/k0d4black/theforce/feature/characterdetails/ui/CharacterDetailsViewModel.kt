@@ -14,7 +14,7 @@
 package com.k0d4black.theforce.feature.characterdetails.ui
 
 import androidx.lifecycle.ViewModel
-import com.k0d4black.theforce.local.core.favoritecharacters.data.FavoriteCharactersRepository
+import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersRepository
 import com.k0d4black.theforce.remote.films.data.FilmRepository
 import com.k0d4black.theforce.remote.planet.data.PlanetRepository
 import com.k0d4black.theforce.remote.species.data.SpecieRepository

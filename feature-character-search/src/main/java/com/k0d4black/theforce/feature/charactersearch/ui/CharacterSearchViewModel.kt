@@ -15,4 +15,9 @@ package com.k0d4black.theforce.feature.charactersearch.ui
 
 import androidx.lifecycle.ViewModel
 
-internal class CharacterSearchViewModel() : ViewModel()
+internal class CharacterSearchViewModel : ViewModel() {
+
+    fun onSearchQueryFormClicked() {
+        // TODO Navigate to Search Results
+    }
+}

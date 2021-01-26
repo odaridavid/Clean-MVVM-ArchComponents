@@ -1,4 +1,6 @@
 package com.k0d4black.theforce.feature.charactersearchresults.ui
 
-class CharacterSearchResultViewHolder {
-}
+import android.view.View
+import androidx.recyclerview.widget.RecyclerView
+
+class CharacterSearchResultViewHolder(view: View) : RecyclerView.ViewHolder(view)

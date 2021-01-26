@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.k0d4black.theforce.shared.model.Film
 
-internal class FilmsAdapter : ListAdapter<Film, FilmViewHolder>(filmAdapterDiffUtil) {
+internal class FilmsAdapter : ListAdapter<Film, FilmViewHolder>(filmsDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {
         TODO("Not yet implemented")
     }
@@ -16,7 +16,7 @@ internal class FilmsAdapter : ListAdapter<Film, FilmViewHolder>(filmAdapterDiffU
 
 }
 
-private val filmAdapterDiffUtil = object : DiffUtil.ItemCallback<Film>() {
+private val filmsDiffUtil = object : DiffUtil.ItemCallback<Film>() {
     override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {
         TODO("Not yet implemented")
     }
