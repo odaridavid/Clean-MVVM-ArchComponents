@@ -91,11 +91,8 @@ If its a major refactor open up an issue first and lets chat first about it :)
 
 The codebase in most cases will be ahead of whats on the store.
 
-|<img src="art/sh1.png" width=200/>|<img src="art/sh2.png" width=200/>|<img src="art/sh3.png" width=200/>|<img src="art/sh4.png" width=200/>|
-|:----:|:----:|:----:|:----:|
-
-|<img src="art/app.gif" width=200/>|
-|:----:|
+|<img src="art/2021_search.png" width=200/>|<img src="art/2021_favs.png" width=200/>|<img src="art/2021_settings.png" width=200/>|
+|:----:|:----:|:----:|
 
 <a href='https://play.google.com/store/apps/details?id=com.k0d4black.theforce&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width='170'/></a>
 
