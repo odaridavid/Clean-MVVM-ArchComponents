@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -37,6 +41,7 @@ dependencies {
     implementation domainDependencies.kotlin
     implementation domainDependencies.koinCore
 
+    implementation project(':local')
     implementation project(':shared-android')
     implementation project(':shared')
 
