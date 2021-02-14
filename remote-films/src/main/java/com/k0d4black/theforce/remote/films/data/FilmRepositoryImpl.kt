@@ -23,7 +23,7 @@ class FilmRepositoryImpl(
                     filmUrl = filmUrl.enforceHttps()
                 )
                 if (!filmDetailsResponse.isSuccessfulAndNotNull()) return@run
-                val film = filmDetailsResponseMapper.toDomain(
+                val film = filmDetailsResponseMapper.mapToDomain(
                     filmDetailsResponse = filmDetailsResponse.body()!!
                 )
                 films.add(film)

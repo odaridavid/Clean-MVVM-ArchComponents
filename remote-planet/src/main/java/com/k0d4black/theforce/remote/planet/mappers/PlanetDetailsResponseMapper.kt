@@ -5,7 +5,7 @@ import com.k0d4black.theforce.shared.model.Planet
 
 class PlanetDetailsResponseMapper {
 
-    fun toDomain(planetDetailsResponse: PlanetDetailsResponse): Planet =
+    fun mapToDomain(planetDetailsResponse: PlanetDetailsResponse): Planet =
         with(planetDetailsResponse) { Planet(name = name, population = population) }
 
 }

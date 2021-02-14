@@ -26,7 +26,7 @@ class SpecieRepositoryImpl(
                     specieUrl = specieUrl.enforceHttps()
                 )
                 if (!specieDetailsResponse.isSuccessfulAndNotNull()) return@run
-                val specie = specieDetailsResponseMapper.toDomain(
+                val specie = specieDetailsResponseMapper.mapToDomain(
                     specieDetailsResponse = specieDetailsResponse.body()!!
                 )
                 species.add(specie)

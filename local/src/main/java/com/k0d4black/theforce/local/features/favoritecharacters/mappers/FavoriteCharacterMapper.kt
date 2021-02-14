@@ -5,7 +5,7 @@ import com.k0d4black.theforce.shared.model.FavoriteCharacter
 
 class FavoriteCharacterMapper {
 
-    fun toDbEntity(favoriteCharacter: FavoriteCharacter): FavoriteCharacterEntity =
+    fun mapToDbEntity(favoriteCharacter: FavoriteCharacter): FavoriteCharacterEntity =
         with(favoriteCharacter) {
             FavoriteCharacterEntity(
                 name = name,
@@ -19,7 +19,7 @@ class FavoriteCharacterMapper {
             )
         }
 
-    fun toDomain(favoriteCharacterEntity: FavoriteCharacterEntity): FavoriteCharacter =
+    fun mapToDomain(favoriteCharacterEntity: FavoriteCharacterEntity): FavoriteCharacter =
         with(favoriteCharacterEntity) {
             FavoriteCharacter(
                 name = name,

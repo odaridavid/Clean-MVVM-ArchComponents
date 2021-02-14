@@ -18,7 +18,7 @@ class CharacterSearchRepositoryImpl(
         val characters = mutableListOf<Character>()
         searchResponse.body()?.run {
             for (characterResponse in results) {
-                val character = characterSearchResponseMapper.toDomain(
+                val character = characterSearchResponseMapper.mapToDomain(
                     characterResponse = characterResponse
                 )
                 characters.add(character)

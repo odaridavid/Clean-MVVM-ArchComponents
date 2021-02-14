@@ -5,7 +5,7 @@ import com.k0d4black.theforce.shared.model.Film
 
 class FilmDetailsResponseMapper {
 
-    fun toDomain(filmDetailsResponse: FilmDetailsResponse): Film =
+    fun mapToDomain(filmDetailsResponse: FilmDetailsResponse): Film =
         with(filmDetailsResponse) { Film(title = title, openingCrawl = openingCrawl) }
 
 }

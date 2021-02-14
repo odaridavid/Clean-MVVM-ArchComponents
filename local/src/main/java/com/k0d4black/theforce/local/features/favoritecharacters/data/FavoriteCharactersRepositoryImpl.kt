@@ -26,14 +26,14 @@ class FavoriteCharactersRepositoryImpl(
     override fun getAllFavorites(): Flow<List<FavoriteCharacter>> = flow {
         val favoriteCharactersEntities = favoriteCharactersDao.getAll()
         val favoriteCharacters = favoriteCharactersEntities.map { favoriteCharacterEntity ->
-            favoriteCharacterMapper.toDomain(favoriteCharacterEntity = favoriteCharacterEntity)
+            favoriteCharacterMapper.mapToDomain(favoriteCharacterEntity = favoriteCharacterEntity)
         }
         emit(favoriteCharacters)
     }
 
     override fun getFavoriteByName(name: String): Flow<FavoriteCharacter> = flow {
         val favoriteCharacterEntity = favoriteCharactersDao.getByName(name = name)
-        val favoriteCharacter = favoriteCharacterMapper.toDomain(
+        val favoriteCharacter = favoriteCharacterMapper.mapToDomain(
             favoriteCharacterEntity = favoriteCharacterEntity
         )
         emit(value = favoriteCharacter)
@@ -50,7 +50,7 @@ class FavoriteCharactersRepositoryImpl(
     }
 
     override fun insertFavorite(favoriteCharacter: FavoriteCharacter): Flow<Long> = flow {
-        val favoriteCharacterEntity = favoriteCharacterMapper.toDbEntity(
+        val favoriteCharacterEntity = favoriteCharacterMapper.mapToDbEntity(
             favoriteCharacter = favoriteCharacter
         )
         val rowsAffected = favoriteCharactersDao.insert(

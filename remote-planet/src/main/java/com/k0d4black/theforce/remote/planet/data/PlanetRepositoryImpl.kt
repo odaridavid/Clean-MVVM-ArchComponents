@@ -21,7 +21,7 @@ class PlanetRepositoryImpl(
         )
         if (!planetDetailsResponse.isSuccessfulAndNotNull()) return@flow
 
-        val planet = planetDetailsResponseMapper.toDomain(
+        val planet = planetDetailsResponseMapper.mapToDomain(
             planetDetailsResponse = planetDetailsResponse.body()!!
         )
         emit(value = planet)
