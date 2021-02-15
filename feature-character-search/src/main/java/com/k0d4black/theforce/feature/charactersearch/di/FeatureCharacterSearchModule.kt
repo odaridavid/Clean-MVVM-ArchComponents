@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 val featureCharacterSearchModule = module {
     viewModel {
-        CharacterSearchViewModel()
+        CharacterSearchViewModel(recentSearchRepository = get())
     }
 }
