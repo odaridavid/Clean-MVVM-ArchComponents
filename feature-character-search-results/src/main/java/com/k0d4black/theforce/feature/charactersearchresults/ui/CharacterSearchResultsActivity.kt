@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.k0d4black.theforce.feature.charactersearchresults.R
+import com.k0d4black.theforce.feature.charactersearchresults.databinding.ActivityCharacterSearchResultsBinding
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultPresentation
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -12,6 +13,7 @@ class CharacterSearchResultsActivity : AppCompatActivity() {
     // region Members
 
     private val characterSearchResultsViewModel: CharacterSearchResultsViewModel by viewModel()
+    private lateinit var binding: ActivityCharacterSearchResultsBinding
 
     // endregion
 
@@ -28,7 +30,8 @@ class CharacterSearchResultsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_character_search_results)
+        binding = ActivityCharacterSearchResultsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val characterName = savedInstanceState?.getString(CHARACTER_NAME) ?: ""
         observeViewState()
         characterSearchResultsViewModel.executeCharacterSearch(characterName = characterName)

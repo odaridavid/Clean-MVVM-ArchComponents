@@ -15,13 +15,23 @@ package com.k0d4black.theforce.feature.characterdetails.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.k0d4black.theforce.feature.characterdetails.R
+import com.k0d4black.theforce.feature.characterdetails.databinding.ActivityCharacterDetailsBinding
 
 class CharacterDetailsActivity : AppCompatActivity() {
 
+    // region Members
+
+    private lateinit var binding: ActivityCharacterDetailsBinding
+
+    // endregion
+
+    // region Android Api
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_character_details)
+        binding = ActivityCharacterDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
+    // endregion
 }

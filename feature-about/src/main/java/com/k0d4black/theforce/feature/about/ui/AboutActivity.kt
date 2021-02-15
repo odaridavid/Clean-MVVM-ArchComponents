@@ -16,15 +16,23 @@ package com.k0d4black.theforce.feature.about.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.k0d4black.theforce.feature.about.R
+import com.k0d4black.theforce.feature.about.databinding.ActivityAboutBinding
 import com.mikepenz.aboutlibraries.LibsBuilder
 
 class AboutActivity : AppCompatActivity() {
+
+    // region Members
+
+    private lateinit var binding: ActivityAboutBinding
+
+    // endregion
 
     // region Android Api
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupActionBar()
         setupAboutLibrariesFragment()
     }
@@ -45,7 +53,7 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(findViewById(R.id.about_toolbar))
+        setSupportActionBar(binding.aboutToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

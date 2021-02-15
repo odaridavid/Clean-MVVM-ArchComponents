@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.k0d4black.theforce.feature.home.R
+import com.k0d4black.theforce.feature.home.databinding.ActivityHomeBinding
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.extensions.navigateToFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,6 +29,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     // region Members
 
     private val homeViewModel: HomeViewModel by viewModel()
+    private lateinit var binding: ActivityHomeBinding
 
     // endregion
 
@@ -35,7 +37,8 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setUpBottomNavigationView()
         bindViewModel()
