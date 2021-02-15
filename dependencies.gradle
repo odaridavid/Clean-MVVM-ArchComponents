@@ -24,6 +24,7 @@ ext {
     analyticsVersion = '17.4.3'
     fragmentKtxVersion = '1.1.0'
     liveDataKtxVersion = '2.2.0'
+    viewModelKtxVersion = '2.3.0'
     leakCanaryVersion = '2.0'
     koinVersion = '2.1.5'
     crashlyticsVersion = '17.0.1'
@@ -72,7 +73,8 @@ ext {
             koinAndroid           : "org.koin:koin-android:$koinVersion",
             koinLifeCycleScope    : "org.koin:koin-android-scope:$koinVersion",
             koinAndroidViewModel  : "org.koin:koin-androidx-viewmodel:$koinVersion",
-            liveDataKtx           : "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion"
+            liveDataKtx           : "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataKtxVersion",
+            viewModelKtx          : "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelKtxVersion"
     ]
 
     dataDependencies = [

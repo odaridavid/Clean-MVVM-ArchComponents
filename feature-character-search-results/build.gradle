@@ -45,6 +45,8 @@ dependencies {
     implementation appDependencies.appCompat
     implementation appDependencies.material
     implementation appDependencies.constraintLayout
+    implementation appDependencies.viewModelKtx
     implementation appDependencies.koinAndroidViewModel
+    implementation appDependencies.liveDataKtx
 
 }
