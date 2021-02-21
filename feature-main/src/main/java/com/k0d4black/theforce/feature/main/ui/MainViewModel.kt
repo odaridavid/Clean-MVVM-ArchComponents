@@ -1,10 +1,10 @@
-package com.k0d4black.theforce.feature.home.ui
+package com.k0d4black.theforce.feature.main.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-internal class HomeViewModel : ViewModel() {
+internal class MainViewModel : ViewModel() {
 
     //TODO Replace with flows
     private val _navigateToFavorites = MutableLiveData<Unit>()

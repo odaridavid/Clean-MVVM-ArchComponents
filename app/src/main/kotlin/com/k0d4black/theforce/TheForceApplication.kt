@@ -18,7 +18,7 @@ import com.k0d4black.theforce.feature.characterdetails.di.featureCharacterDetail
 import com.k0d4black.theforce.feature.charactersearch.di.featureCharacterSearchModule
 import com.k0d4black.theforce.feature.charactersearchresults.di.featureCharacterSearchResultsModule
 import com.k0d4black.theforce.feature.favoritecharacters.di.featureFavoritesModule
-import com.k0d4black.theforce.feature.home.di.featureHomeModule
+import com.k0d4black.theforce.feature.main.di.featureMainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -42,7 +42,7 @@ internal class TheForceApplication : Application() {
             modules(
                 featureCharacterSearchModule,
                 featureCharacterDetailsModule,
-                featureHomeModule,
+                featureMainModule,
                 featureFavoritesModule,
                 featureCharacterSearchResultsModule
             )
