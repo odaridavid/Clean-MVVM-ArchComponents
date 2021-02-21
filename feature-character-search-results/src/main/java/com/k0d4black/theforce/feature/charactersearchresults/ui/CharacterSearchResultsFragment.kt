@@ -1,19 +1,20 @@
 package com.k0d4black.theforce.feature.charactersearchresults.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.observe
-import com.k0d4black.theforce.feature.charactersearchresults.R
-import com.k0d4black.theforce.feature.charactersearchresults.databinding.ActivityCharacterSearchResultsBinding
+import com.k0d4black.theforce.feature.charactersearchresults.databinding.FragmentCharacterSearchResultsBinding
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultPresentation
+import com.k0d4black.theforce.shared.android.base.BindingFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CharacterSearchResultsActivity : AppCompatActivity() {
+class CharacterSearchResultsFragment : BindingFragment<FragmentCharacterSearchResultsBinding>() {
 
     // region Members
 
     private val characterSearchResultsViewModel: CharacterSearchResultsViewModel by viewModel()
-    private lateinit var binding: ActivityCharacterSearchResultsBinding
 
     // endregion
 
@@ -26,12 +27,21 @@ class CharacterSearchResultsActivity : AppCompatActivity() {
 
     // endregion
 
+    // region Binding Fragment
+
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentCharacterSearchResultsBinding =
+        FragmentCharacterSearchResultsBinding.inflate(inflater, container, false)
+
+    // endregion
+
     // region Android Api
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityCharacterSearchResultsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val characterName = savedInstanceState?.getString(CHARACTER_NAME) ?: ""
         observeViewState()
         characterSearchResultsViewModel.executeCharacterSearch(characterName = characterName)

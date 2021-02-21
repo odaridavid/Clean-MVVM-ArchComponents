@@ -14,24 +14,21 @@
 package com.k0d4black.theforce.feature.characterdetails.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.k0d4black.theforce.feature.characterdetails.databinding.ActivityCharacterDetailsBinding
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import com.k0d4black.theforce.feature.characterdetails.databinding.FragmentCharacterDetailsBinding
+import com.k0d4black.theforce.shared.android.base.BindingFragment
 
-class CharacterDetailsActivity : AppCompatActivity() {
+class CharacterDetailsFragment : BindingFragment<FragmentCharacterDetailsBinding>() {
 
-    // region Members
+    // region Binding Fragment
 
-    private lateinit var binding: ActivityCharacterDetailsBinding
-
-    // endregion
-
-    // region Android Api
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityCharacterDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentCharacterDetailsBinding =
+        FragmentCharacterDetailsBinding.inflate(inflater, container, false)
 
     // endregion
 }

@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.k0d4black.theforce.feature.main.R
-import com.k0d4black.theforce.feature.main.databinding.ActivityHomeBinding
+import com.k0d4black.theforce.feature.main.databinding.ActivityMainBinding
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.extensions.navigateToFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     // region Members
 
     private val mainViewModel: MainViewModel by viewModel()
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: ActivityMainBinding
 
     // endregion
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setUpBottomNavigationView()
