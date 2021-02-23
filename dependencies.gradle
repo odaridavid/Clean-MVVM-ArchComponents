@@ -26,7 +26,7 @@ ext {
     liveDataKtxVersion = '2.2.0'
     viewModelKtxVersion = '2.3.0'
     leakCanaryVersion = '2.0'
-    koinVersion = '2.1.5'
+    koinVersion = '2.2.2'
     crashlyticsVersion = '17.0.1'
     lifecycleExtensionsVersion = '2.1.0'
     recyclerviewAnimationVersion = '3.0.0'

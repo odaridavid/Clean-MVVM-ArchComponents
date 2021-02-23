@@ -7,7 +7,7 @@ import com.k0d4black.theforce.remote.species.mappers.SpecieDetailsResponseMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val remoteSpeciesModule = module {
+internal val remoteSpeciesModule = module {
 
     single {
         provideSpeciesApiService(retrofit = get())

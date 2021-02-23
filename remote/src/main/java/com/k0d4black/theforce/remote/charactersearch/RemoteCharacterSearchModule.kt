@@ -7,7 +7,7 @@ import com.k0d4black.theforce.remote.charactersearch.mappers.CharacterSearchResp
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val remoteCharacterSearchModule = module {
+internal val remoteCharacterSearchModule = module {
 
     single {
         provideCharacterSearchApiService(retrofit = get())

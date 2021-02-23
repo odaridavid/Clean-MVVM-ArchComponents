@@ -7,7 +7,7 @@ import com.k0d4black.theforce.remote.films.mappers.FilmDetailsResponseMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val remoteFilmsModule = module {
+internal val remoteFilmsModule = module {
 
     single {
         provideFilmsApiService(retrofit = get())

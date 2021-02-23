@@ -13,11 +13,24 @@
  **/
 package com.k0d4black.theforce.remote
 
+import com.k0d4black.theforce.remote.charactersearch.remoteCharacterSearchModule
+import com.k0d4black.theforce.remote.films.remoteFilmsModule
+import com.k0d4black.theforce.remote.planet.remotePlanetModule
+import com.k0d4black.theforce.remote.species.remoteSpeciesModule
 import org.koin.dsl.module
 
-val remoteCoreModule = module {
+internal val remoteCoreModule = module {
 
     single { RemoteUtils.provideRetrofit(okHttpClient = get(), url = RemoteConstants.BASE_URL) }
 
     single { RemoteUtils.provideOkHttpClient() }
 }
+
+val remoteModules = listOf(
+    remoteCoreModule,
+    remoteCharacterSearchModule,
+    remoteFilmsModule,
+    remotePlanetModule,
+    remotePlanetModule,
+    remoteSpeciesModule
+)
