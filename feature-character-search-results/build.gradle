@@ -43,7 +43,7 @@ dependencies {
 
     implementation project(':shared-android')
     implementation project(':shared')
-    implementation project(':remote-character-search')
+    implementation project(':remote')
 
     implementation appDependencies.androidxKtx
     implementation appDependencies.appCompat
