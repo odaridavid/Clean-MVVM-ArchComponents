@@ -43,9 +43,7 @@ dependencies {
 
     implementation project(':shared')
     implementation project(':shared-android')
-    implementation project(':remote-planet')
-    implementation project(':remote-films')
-    implementation project(':remote-species')
+    implementation project(':remote')
     implementation project(':local')
 
     implementation appDependencies.androidxKtx

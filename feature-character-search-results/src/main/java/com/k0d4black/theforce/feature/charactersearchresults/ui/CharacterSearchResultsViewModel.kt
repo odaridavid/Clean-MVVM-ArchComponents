@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.feature.charactersearchresults.mappers.CharacterPresentationMapper
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultViewState
-import com.k0d4black.theforce.remote.character.search.data.CharacterSearchRepository
+import com.k0d4black.theforce.remote.search.data.CharacterSearchRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class CharacterSearchResultsViewModel(
-    private val characterSearchRepository: CharacterSearchRepository,
+    private val characterSearchRepository: com.k0d4black.theforce.remote.search.data.CharacterSearchRepository,
     private val characterPresentationMapper: CharacterPresentationMapper
 ) : ViewModel() {
 

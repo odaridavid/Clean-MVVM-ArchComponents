@@ -1,0 +1,23 @@
+plugins {
+    id("java-library")
+    id("kotlin")
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8.toString()
+targetCompatibility = JavaVersion.VERSION_1_8.toString()
+
+dependencies {
+
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutinesCore
+    implementation domainDependencies.koinCore
+
+    implementation project(':shared')
+
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.moshiConverter
+    implementation dataDependencies.loggingInterceptor
+
+    testImplementation testDependencies.junit
+    testImplementation project(':test-utils')
+}
