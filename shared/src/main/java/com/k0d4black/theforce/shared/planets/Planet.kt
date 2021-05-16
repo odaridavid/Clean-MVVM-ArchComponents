@@ -11,7 +11,7 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.shared.planets
 
 data class Planet(
     val name: String,

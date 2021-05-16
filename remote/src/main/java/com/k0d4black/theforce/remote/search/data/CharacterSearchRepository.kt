@@ -13,7 +13,7 @@
  **/
 package com.k0d4black.theforce.remote.search.data
 
-import com.k0d4black.theforce.shared.model.Character
+import com.k0d4black.theforce.shared.characters.Character
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterSearchRepository {

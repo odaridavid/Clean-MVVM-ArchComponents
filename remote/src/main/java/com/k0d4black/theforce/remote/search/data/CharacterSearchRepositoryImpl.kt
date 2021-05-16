@@ -2,7 +2,7 @@ package com.k0d4black.theforce.remote.search.data
 
 import com.k0d4black.theforce.remote.search.mappers.CharacterSearchResponseMapper
 import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
-import com.k0d4black.theforce.shared.model.Character
+import com.k0d4black.theforce.shared.characters.Character
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

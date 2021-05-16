@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.shared
 
 sealed class Result<out Type> {
 

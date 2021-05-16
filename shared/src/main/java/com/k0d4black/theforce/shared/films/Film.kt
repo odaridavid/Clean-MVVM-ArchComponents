@@ -11,11 +11,6 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.shared.films
 
-data class Character(
-    val name: String,
-    val birthYear: String,
-    val height: String,
-    val url: String
-)
+data class Film(val title: String, val openingCrawl: String)

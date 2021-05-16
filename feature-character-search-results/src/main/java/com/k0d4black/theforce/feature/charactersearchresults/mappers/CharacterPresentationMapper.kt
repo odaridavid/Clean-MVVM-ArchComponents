@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.feature.charactersearchresults.mappers
 
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultPresentation
-import com.k0d4black.theforce.shared.model.Character
+import com.k0d4black.theforce.shared.characters.Character
 
 class CharacterPresentationMapper {
 

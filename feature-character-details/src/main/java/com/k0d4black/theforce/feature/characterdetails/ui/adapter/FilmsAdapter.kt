@@ -3,7 +3,7 @@ package com.k0d4black.theforce.feature.characterdetails.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.k0d4black.theforce.shared.model.Film
+import com.k0d4black.theforce.shared.films.Film
 
 internal class FilmsAdapter : ListAdapter<Film, FilmViewHolder>(filmsDiffUtil) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilmViewHolder {

@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.local.features.favoritecharacters.mappers
 
 import com.k0d4black.theforce.local.features.favoritecharacters.models.FavoriteCharacterEntity
-import com.k0d4black.theforce.shared.model.FavoriteCharacter
+import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
 
 class FavoriteCharacterMapper {
 

@@ -14,14 +14,14 @@
 package com.k0d4black.theforce.local.features.favoritecharacters.data
 
 import com.k0d4black.theforce.local.features.favoritecharacters.mappers.FavoriteCharacterMapper
-import com.k0d4black.theforce.shared.model.FavoriteCharacter
+import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FavoriteCharactersRepositoryImpl(
+class FavoriteCharactersLocalDataSource(
     private val favoriteCharactersDao: FavoriteCharactersDao,
     private val favoriteCharacterMapper: FavoriteCharacterMapper
-) : FavoriteCharactersRepository {
+) : FavoriteCharactersDataSource {
 
     override fun getAllFavorites(): Flow<List<FavoriteCharacter>> = flow {
         val favoriteCharactersEntities = favoriteCharactersDao.getAll()

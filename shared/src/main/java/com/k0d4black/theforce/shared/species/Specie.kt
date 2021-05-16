@@ -11,6 +11,6 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.shared.species
 
-data class Film(val title: String, val openingCrawl: String)
+data class Specie(val name: String, val language: String)

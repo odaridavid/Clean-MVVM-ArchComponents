@@ -3,7 +3,7 @@ package com.k0d4black.theforce.feature.favoritecharacters.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.k0d4black.theforce.shared.model.FavoriteCharacter
+import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
 
 internal class FavoriteCharactersAdapter :
     ListAdapter<FavoriteCharacter, FavoriteCharacterViewHolder>(favoriteCharactersDiffUtil) {

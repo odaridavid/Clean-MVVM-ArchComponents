@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.remote.search.mappers
 
 import com.k0d4black.theforce.remote.search.models.CharacterResponse
-import com.k0d4black.theforce.shared.model.Character
+import com.k0d4black.theforce.shared.characters.Character
 
 class CharacterSearchResponseMapper {
 

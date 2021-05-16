@@ -3,7 +3,7 @@ package com.k0d4black.theforce.feature.characterdetails.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.k0d4black.theforce.shared.model.Specie
+import com.k0d4black.theforce.shared.species.Specie
 
 internal class SpeciesAdapter : ListAdapter<Specie, SpecieViewHolder>(speciesDiffUtil) {
 

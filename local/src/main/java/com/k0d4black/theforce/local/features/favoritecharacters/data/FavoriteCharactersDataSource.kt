@@ -11,15 +11,20 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared.model
+package com.k0d4black.theforce.local.features.favoritecharacters.data
 
-data class FavoriteCharacter(
-    val name: String,
-    val birthYear: String,
-    val height: String,
-    val planetName: String,
-    val planetPopulation: String,
-    val specieName: String,
-    val specieLanguage: String,
-    val films: List<Film>
-)
+import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
+import kotlinx.coroutines.flow.Flow
+
+interface FavoriteCharactersDataSource {
+
+    fun getAllFavorites(): Flow<List<FavoriteCharacter>>
+
+    fun getFavoriteByName(name: String): Flow<FavoriteCharacter>
+
+    fun deleteFavoriteByName(name: String): Flow<Int>
+
+    fun deleteAllFavorites(): Flow<Int>
+
+    fun insertFavorite(favoriteCharacter: FavoriteCharacter): Flow<Long>
+}

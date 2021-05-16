@@ -3,7 +3,7 @@ package com.k0d4black.theforce.remote.species.data
 import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
 import com.k0d4black.theforce.remote.species.mappers.SpecieDetailsResponseMapper
 import com.k0d4black.theforce.shared.extensions.enforceHttps
-import com.k0d4black.theforce.shared.model.Specie
+import com.k0d4black.theforce.shared.species.Specie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
