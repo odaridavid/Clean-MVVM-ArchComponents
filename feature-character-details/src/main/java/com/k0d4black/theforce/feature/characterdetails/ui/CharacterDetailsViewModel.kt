@@ -15,15 +15,15 @@ package com.k0d4black.theforce.feature.characterdetails.ui
 
 import androidx.lifecycle.ViewModel
 import com.k0d4black.theforce.shared.characters.FavoriteCharactersDataSource
-import com.k0d4black.theforce.remote.films.data.FilmRepository
-import com.k0d4black.theforce.remote.planet.data.PlanetRepository
-import com.k0d4black.theforce.remote.species.data.SpecieRepository
+import com.k0d4black.theforce.shared.films.FilmsDataSource
+import com.k0d4black.theforce.shared.planets.PlanetsDataSource
+import com.k0d4black.theforce.shared.species.SpeciesDataSource
 
 internal class CharacterDetailsViewModel(
-  private val planetRepository: PlanetRepository,
-  private val filmRepository: FilmRepository,
-  private val specieRepository: SpecieRepository,
-  private val favoriteCharactersDataSource: FavoriteCharactersDataSource
+    private val planetsDataSource: PlanetsDataSource,
+    private val filmsDataSource: FilmsDataSource,
+    private val speciesDataSource: SpeciesDataSource,
+    private val favoriteCharactersDataSource: FavoriteCharactersDataSource
 ) : ViewModel() {
 
 }

@@ -3,7 +3,7 @@ package com.k0d4black.theforce.remote.planet.data
 import com.k0d4black.theforce.remote.planet.mappers.PlanetDetailsResponseMapper
 import org.junit.Test
 
-class PlanetRepositoryTest {
+class PlanetsDataSourceTest {
     @Test
     fun `when we fetch character planet,then the expected result is returned`() {
         // given a planet mapper

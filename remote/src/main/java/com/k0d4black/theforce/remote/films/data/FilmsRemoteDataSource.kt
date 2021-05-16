@@ -1,16 +1,17 @@
 package com.k0d4black.theforce.remote.films.data
 
 import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
-import com.k0d4black.theforce.remote.films.mappers.FilmDetailsResponseMapper
+import com.k0d4black.theforce.remote.films.mappers.FilmResponseMapper
 import com.k0d4black.theforce.shared.extensions.enforceHttps
 import com.k0d4black.theforce.shared.films.Film
+import com.k0d4black.theforce.shared.films.FilmsDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class FilmRepositoryImpl(
+class FilmsRemoteDataSource(
     private val apiService: FilmsApiService,
-    private val filmDetailsResponseMapper: FilmDetailsResponseMapper
-) : FilmRepository {
+    private val filmResponseMapper: FilmResponseMapper
+) : FilmsDataSource {
 
     override suspend fun getCharacterFilms(characterUrl: String): Flow<List<Film>> = flow {
         val filmUrlsResponse = apiService.getFilmUrls(characterUrl = characterUrl.enforceHttps())
@@ -23,7 +24,7 @@ class FilmRepositoryImpl(
                     filmUrl = filmUrl.enforceHttps()
                 )
                 if (!filmDetailsResponse.isSuccessfulAndNotNull()) return@run
-                val film = filmDetailsResponseMapper.mapToDomain(
+                val film = filmResponseMapper.mapToDomain(
                     filmDetailsResponse = filmDetailsResponse.body()!!
                 )
                 films.add(film)

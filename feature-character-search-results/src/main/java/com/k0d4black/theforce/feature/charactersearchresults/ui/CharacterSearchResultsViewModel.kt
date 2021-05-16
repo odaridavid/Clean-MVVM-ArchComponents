@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.k0d4black.theforce.feature.charactersearchresults.mappers.CharacterPresentationMapper
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultViewState
-import com.k0d4black.theforce.remote.search.data.CharacterSearchRepository
+import com.k0d4black.theforce.shared.characters.CharacterSearchDataSource
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 internal class CharacterSearchResultsViewModel(
-    private val characterSearchRepository: com.k0d4black.theforce.remote.search.data.CharacterSearchRepository,
+    private val characterSearchDataSource: CharacterSearchDataSource,
     private val characterPresentationMapper: CharacterPresentationMapper
 ) : ViewModel() {
 
@@ -25,7 +25,7 @@ internal class CharacterSearchResultsViewModel(
 
         viewModelScope.launch {
 
-            characterSearchRepository.search(characterName).collect { characters ->
+            characterSearchDataSource.search(characterName).collect { characters ->
 
                 val characterPresentations = characters.map { character ->
                     characterPresentationMapper.mapFromDomain(character = character)

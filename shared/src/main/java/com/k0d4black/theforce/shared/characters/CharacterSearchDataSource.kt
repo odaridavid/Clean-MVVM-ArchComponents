@@ -11,11 +11,12 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.remote.search.data
+package com.k0d4black.theforce.shared.characters
 
-import com.k0d4black.theforce.shared.characters.Character
 import kotlinx.coroutines.flow.Flow
 
-interface CharacterSearchRepository {
+interface CharacterSearchDataSource {
+
     suspend fun search(characterName: String): Flow<List<Character>>
+
 }

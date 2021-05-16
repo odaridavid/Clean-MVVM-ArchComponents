@@ -4,13 +4,14 @@ import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
 import com.k0d4black.theforce.remote.species.mappers.SpecieDetailsResponseMapper
 import com.k0d4black.theforce.shared.extensions.enforceHttps
 import com.k0d4black.theforce.shared.species.Specie
+import com.k0d4black.theforce.shared.species.SpeciesDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class SpecieRepositoryImpl(
+class SpeciesRemoteDataSource(
     private val apiService: SpeciesApiService,
     private val specieDetailsResponseMapper: SpecieDetailsResponseMapper
-) : SpecieRepository {
+) : SpeciesDataSource {
 
 
     override suspend fun getCharacterSpecies(characterUrl: String): Flow<List<Specie>> = flow {

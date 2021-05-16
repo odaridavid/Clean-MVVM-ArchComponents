@@ -1,7 +1,7 @@
 package com.k0d4black.theforce.remote.species
 
-import com.k0d4black.theforce.remote.species.data.SpecieRepository
-import com.k0d4black.theforce.remote.species.data.SpecieRepositoryImpl
+import com.k0d4black.theforce.shared.species.SpeciesDataSource
+import com.k0d4black.theforce.remote.species.data.SpeciesRemoteDataSource
 import com.k0d4black.theforce.remote.species.data.SpeciesApiService
 import com.k0d4black.theforce.remote.species.mappers.SpecieDetailsResponseMapper
 import org.koin.dsl.module
@@ -13,8 +13,8 @@ val remoteSpeciesModule = module {
         provideSpeciesApiService(retrofit = get())
     }
 
-    single<SpecieRepository> {
-        SpecieRepositoryImpl(apiService = get(), specieDetailsResponseMapper = get())
+    single<SpeciesDataSource> {
+        SpeciesRemoteDataSource(apiService = get(), specieDetailsResponseMapper = get())
     }
 
     single { SpecieDetailsResponseMapper() }

@@ -1,9 +1,9 @@
 package com.k0d4black.theforce.remote.films
 
-import com.k0d4black.theforce.remote.films.data.FilmRepository
-import com.k0d4black.theforce.remote.films.data.FilmRepositoryImpl
+import com.k0d4black.theforce.shared.films.FilmsDataSource
+import com.k0d4black.theforce.remote.films.data.FilmsRemoteDataSource
 import com.k0d4black.theforce.remote.films.data.FilmsApiService
-import com.k0d4black.theforce.remote.films.mappers.FilmDetailsResponseMapper
+import com.k0d4black.theforce.remote.films.mappers.FilmResponseMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -13,14 +13,14 @@ val remoteFilmsModule = module {
         provideFilmsApiService(retrofit = get())
     }
 
-    single<FilmRepository> {
-        FilmRepositoryImpl(
+    single<FilmsDataSource> {
+        FilmsRemoteDataSource(
             apiService = get(),
-            filmDetailsResponseMapper = get()
+            filmResponseMapper = get()
         )
     }
 
-    single { FilmDetailsResponseMapper() }
+    single { FilmResponseMapper() }
 
 }
 

@@ -4,13 +4,14 @@ import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
 import com.k0d4black.theforce.remote.planet.mappers.PlanetDetailsResponseMapper
 import com.k0d4black.theforce.shared.extensions.enforceHttps
 import com.k0d4black.theforce.shared.planets.Planet
+import com.k0d4black.theforce.shared.planets.PlanetsDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class PlanetRepositoryImpl(
+class PlanetsRemoteDataSource(
     private val apiService: PlanetApiService,
     private val planetDetailsResponseMapper: PlanetDetailsResponseMapper
-) : PlanetRepository {
+) : PlanetsDataSource {
 
     override suspend fun getCharacterPlanet(characterUrl: String): Flow<Planet> = flow {
         val planetUrlResponse = apiService.getPlanetUrl(characterUrl = characterUrl.enforceHttps())
