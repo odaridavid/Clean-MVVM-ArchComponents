@@ -1,8 +1,8 @@
 package com.k0d4black.theforce.remote.films.data
 
-import com.k0d4black.theforce.remote.isSuccessfulAndNotNull
+import com.k0d4black.theforce.remote.core.isSuccessfulAndNotNull
 import com.k0d4black.theforce.remote.films.mappers.FilmDetailsResponseMapper
-import com.k0d4black.theforce.shared.enforceHttps
+import com.k0d4black.theforce.shared.extensions.enforceHttps
 import com.k0d4black.theforce.shared.model.Film
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

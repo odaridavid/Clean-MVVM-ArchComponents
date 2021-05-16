@@ -11,7 +11,7 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.shared
+package com.k0d4black.theforce.shared.extensions
 
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -22,7 +22,7 @@ fun String.convertCentimetresToInches(): String =
 fun String.convertPopulationToLong(): Long {
     return if (contains("unknown", ignoreCase = true)) 0L else toLong()
 }
-
+//TODO Use interceptor for this
 fun String.enforceHttps(): String =
     if (!this.contains("https"))
         this.replace("http", "https")

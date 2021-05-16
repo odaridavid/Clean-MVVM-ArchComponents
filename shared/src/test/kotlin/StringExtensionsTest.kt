@@ -13,8 +13,8 @@
  **/
 
 import com.google.common.truth.Truth
-import com.k0d4black.theforce.shared.convertCentimetresToInches
-import com.k0d4black.theforce.shared.convertPopulationToLong
+import com.k0d4black.theforce.shared.extensions.convertCentimetresToInches
+import com.k0d4black.theforce.shared.extensions.convertPopulationToLong
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
