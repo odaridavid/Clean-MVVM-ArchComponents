@@ -17,19 +17,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.k0d4black.theforce.feature.charactersearch.model.SearchViewState
-import com.k0d4black.theforce.local.features.recentsearch.data.RecentSearchRepository
 
-internal class CharacterSearchViewModel(
-    recentSearchRepository: RecentSearchRepository
-) : ViewModel() {
+internal class CharacterSearchViewModel : ViewModel() {
 
     private val _searchViewState = MutableLiveData<SearchViewState>()
     val searchViewState: LiveData<SearchViewState>
         get() = _searchViewState
-
-    init {
-        recentSearchRepository.getRecentSearch()
-    }
 
     fun onSearchQueryFormClicked() {
         // TODO Navigate to Search Results
