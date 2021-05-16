@@ -1,4 +1,4 @@
-package com.k0d4black.theforce.feature.favoritecharacters.ui
+package com.k0d4black.theforce.feature.favoritecharacters.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil

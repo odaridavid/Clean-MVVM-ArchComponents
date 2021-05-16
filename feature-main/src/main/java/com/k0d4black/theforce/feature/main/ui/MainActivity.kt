@@ -11,25 +11,25 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.feature.home.ui
+package com.k0d4black.theforce.feature.main.ui
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.k0d4black.theforce.feature.home.R
-import com.k0d4black.theforce.feature.home.databinding.ActivityHomeBinding
+import com.k0d4black.theforce.feature.main.R
+import com.k0d4black.theforce.feature.main.databinding.ActivityMainBinding
 import com.k0d4black.theforce.shared.android.AppScreen
 import com.k0d4black.theforce.shared.android.extensions.navigateToFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     // region Members
 
-    private val homeViewModel: HomeViewModel by viewModel()
-    private lateinit var binding: ActivityHomeBinding
+    private val mainViewModel: MainViewModel by viewModel()
+    private lateinit var binding: ActivityMainBinding
 
     // endregion
 
@@ -37,7 +37,7 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setUpBottomNavigationView()
@@ -52,15 +52,15 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onNavigationItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
             R.id.favorites -> {
-                homeViewModel.navigateToFavorites()
+                mainViewModel.navigateToFavorites()
                 true
             }
             R.id.search -> {
-                homeViewModel.navigateToSearch()
+                mainViewModel.navigateToSearch()
                 true
             }
             R.id.settings -> {
-                homeViewModel.navigateToSettings()
+                mainViewModel.navigateToSettings()
                 true
             }
             else -> false
@@ -71,19 +71,19 @@ class HomeActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     // region Private Api
 
     private fun bindViewModel() {
-        homeViewModel.onFavoritesClicked().observe(this) {
+        mainViewModel.onFavoritesClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.FAVORITES) { favoritesFragment ->
                 replace(R.id.fragment_container, favoritesFragment)
             }
         }
 
-        homeViewModel.onSearchClicked().observe(this) {
+        mainViewModel.onSearchClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.CHARACTER_SEARCH) { searchFragment ->
                 replace(R.id.fragment_container, searchFragment)
             }
         }
 
-        homeViewModel.onSettingsClicked().observe(this) {
+        mainViewModel.onSettingsClicked().observe(this) {
             navigateToFragment(appScreen = AppScreen.SETTINGS) { settingsFragment ->
                 replace(R.id.fragment_container, settingsFragment)
             }

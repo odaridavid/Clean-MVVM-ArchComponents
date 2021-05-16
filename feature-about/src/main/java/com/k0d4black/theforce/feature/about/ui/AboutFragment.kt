@@ -14,25 +14,32 @@
 package com.k0d4black.theforce.feature.about.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.k0d4black.theforce.feature.about.R
-import com.k0d4black.theforce.feature.about.databinding.ActivityAboutBinding
+import com.k0d4black.theforce.feature.about.databinding.FragmentAboutBinding
+import com.k0d4black.theforce.shared.android.base.BindingFragment
 import com.mikepenz.aboutlibraries.LibsBuilder
 
-class AboutActivity : AppCompatActivity() {
+class AboutFragment : BindingFragment<FragmentAboutBinding>() {
 
-    // region Members
+    // region Binding Fragment
 
-    private lateinit var binding: ActivityAboutBinding
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): FragmentAboutBinding =
+        FragmentAboutBinding.inflate(layoutInflater, container, false)
 
     // endregion
 
     // region Android Api
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityAboutBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupActionBar()
         setupAboutLibrariesFragment()
     }
@@ -46,15 +53,17 @@ class AboutActivity : AppCompatActivity() {
             .withAboutIconShown(true)
             .supportFragment()
 
-        supportFragmentManager
+        childFragmentManager
             .beginTransaction()
             .add(R.id.fragment_container, aboutLibraryFragment)
             .commit()
     }
 
     private fun setupActionBar() {
-        setSupportActionBar(binding.aboutToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        with(requireActivity() as AppCompatActivity) {
+            setSupportActionBar(binding.aboutToolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     // endregion

@@ -1,10 +1,10 @@
-package com.k0d4black.theforce.feature.charactersearchresults.ui
+package com.k0d4black.theforce.feature.charactersearchresults.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.k0d4black.theforce.feature.charactersearchresults.R
+import com.k0d4black.theforce.feature.charactersearchresults.databinding.ItemSearchBinding
 import com.k0d4black.theforce.feature.charactersearchresults.model.CharacterSearchResultPresentation
 
 internal class CharacterSearchResultsAdapter :
@@ -15,10 +15,16 @@ internal class CharacterSearchResultsAdapter :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CharacterSearchResultViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search, parent, false)
-        return CharacterSearchResultViewHolder(view)
-    }
+    ): CharacterSearchResultViewHolder =
+        CharacterSearchResultViewHolder(
+            binding = ItemSearchBinding.inflate(
+                LayoutInflater.from(
+                    parent.context
+                ),
+                parent,
+                false
+            )
+        )
 
     override fun onBindViewHolder(holder: CharacterSearchResultViewHolder, position: Int) {
         holder.bind(characterSearchResultPresentation = getItem(position))

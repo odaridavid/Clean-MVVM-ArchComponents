@@ -17,7 +17,7 @@ class CharacterSearchFragment : BindingFragment<FragmentCharacterSearchBinding>(
 
     // endregion
 
-    // region Android Api
+    // region Binding Fragment
 
     override fun inflateBinding(
         inflater: LayoutInflater,

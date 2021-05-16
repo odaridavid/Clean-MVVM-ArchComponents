@@ -70,15 +70,13 @@ android {
 
 dependencies {
 
-    // Features
-    implementation project(':feature-about')
     implementation project(':feature-character-details')
     implementation project(':feature-character-search')
     implementation project(':feature-character-search-results')
     implementation project(':feature-favorite-characters')
-    implementation project(':feature-home')
-    implementation project(':feature-settings')
-    implementation project(':shared-android')
+    implementation project(':feature-main')
+    implementation project(':remote')
+    implementation project(':local')
 
     //Memory leaks
     debugImplementation appDependencies.leakCanary

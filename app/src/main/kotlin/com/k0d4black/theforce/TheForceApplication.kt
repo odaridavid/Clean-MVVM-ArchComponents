@@ -18,7 +18,13 @@ import com.k0d4black.theforce.feature.characterdetails.di.featureCharacterDetail
 import com.k0d4black.theforce.feature.charactersearch.di.featureCharacterSearchModule
 import com.k0d4black.theforce.feature.charactersearchresults.di.featureCharacterSearchResultsModule
 import com.k0d4black.theforce.feature.favoritecharacters.di.featureFavoritesModule
-import com.k0d4black.theforce.feature.home.di.featureHomeModule
+import com.k0d4black.theforce.feature.main.di.featureMainModule
+import com.k0d4black.theforce.local.localModule
+import com.k0d4black.theforce.remote.core.remoteCoreModule
+import com.k0d4black.theforce.remote.films.remoteFilmsModule
+import com.k0d4black.theforce.remote.planet.remotePlanetModule
+import com.k0d4black.theforce.remote.search.remoteCharacterSearchModule
+import com.k0d4black.theforce.remote.species.remoteSpeciesModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -40,11 +46,17 @@ internal class TheForceApplication : Application() {
         startKoin {
             androidContext(this@TheForceApplication)
             modules(
-                featureCharacterSearchModule,
                 featureCharacterDetailsModule,
-                featureHomeModule,
+                featureCharacterSearchModule,
+                featureCharacterSearchResultsModule,
                 featureFavoritesModule,
-                featureCharacterSearchResultsModule
+                featureMainModule,
+                remoteCoreModule,
+                remoteCharacterSearchModule,
+                remoteFilmsModule,
+                remotePlanetModule,
+                remoteSpeciesModule,
+                localModule
             )
         }
     }
