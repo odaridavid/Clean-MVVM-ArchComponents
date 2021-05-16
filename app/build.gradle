@@ -71,7 +71,6 @@ android {
 dependencies {
 
     implementation project(':feature-character-details')
-    implementation project(':feature-character-search')
     implementation project(':feature-character-search-results')
     implementation project(':feature-favorite-characters')
     implementation project(':feature-main')
