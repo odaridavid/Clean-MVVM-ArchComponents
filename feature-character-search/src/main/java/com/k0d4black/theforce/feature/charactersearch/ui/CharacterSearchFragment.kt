@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.observe
 import com.k0d4black.theforce.feature.charactersearch.databinding.FragmentCharacterSearchBinding
-import com.k0d4black.theforce.feature.charactersearch.model.RecentSearchPresentation
 import com.k0d4black.theforce.shared.android.base.BindingFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,10 +40,6 @@ class CharacterSearchFragment : BindingFragment<FragmentCharacterSearchBinding>(
             )
 
             renderError()
-
-            renderRecentSearch(
-                recentSearch = characterSearchViewState.recentSearches
-            )
         }
     }
 
@@ -55,11 +50,6 @@ class CharacterSearchFragment : BindingFragment<FragmentCharacterSearchBinding>(
     private fun renderError() {
 
     }
-
-    private fun renderRecentSearch(recentSearch: List<RecentSearchPresentation>?) {
-
-    }
-
 
     // endregion
 
