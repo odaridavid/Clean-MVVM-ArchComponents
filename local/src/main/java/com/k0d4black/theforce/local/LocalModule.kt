@@ -17,7 +17,7 @@ import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val localModule = module {
+val localCoreModule = module {
 
     single {
         Room

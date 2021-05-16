@@ -11,10 +11,10 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.features.favoritecharacters.data
+package com.k0d4black.theforce.local.favoritecharacters.data
 
 import androidx.room.*
-import com.k0d4black.theforce.local.features.favoritecharacters.models.FavoriteCharacterEntity
+import com.k0d4black.theforce.local.favoritecharacters.models.FavoriteCharacterEntity
 
 @Dao
 interface FavoriteCharactersDao {

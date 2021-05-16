@@ -11,7 +11,7 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.features.favoritecharacters.models
+package com.k0d4black.theforce.local.favoritecharacters.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

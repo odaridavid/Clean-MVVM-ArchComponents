@@ -13,10 +13,17 @@
  **/
 package com.k0d4black.theforce.shared.characters
 
+import com.k0d4black.theforce.shared.films.Film
+import com.k0d4black.theforce.shared.planets.Planet
+import com.k0d4black.theforce.shared.species.Specie
+
 data class Character(
     val name: String,
     val birthYear: String,
     val height: String,
     val url: String,
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
+    val specie: Specie? = null,
+    val planet: Planet? = null,
+    val films: List<Film> = emptyList()
 )

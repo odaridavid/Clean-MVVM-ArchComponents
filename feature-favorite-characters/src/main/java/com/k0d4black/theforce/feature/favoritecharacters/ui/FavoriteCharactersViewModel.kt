@@ -16,7 +16,7 @@
 package com.k0d4black.theforce.feature.favoritecharacters.ui
 
 import androidx.lifecycle.ViewModel
-import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersDataSource
+import com.k0d4black.theforce.shared.characters.FavoriteCharactersDataSource
 
 internal class FavoriteCharactersViewModel(
     private val favoriteCharactersDataSource: FavoriteCharactersDataSource

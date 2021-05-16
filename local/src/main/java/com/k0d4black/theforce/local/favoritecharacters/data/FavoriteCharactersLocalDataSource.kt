@@ -11,10 +11,11 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.features.favoritecharacters.data
+package com.k0d4black.theforce.local.favoritecharacters.data
 
-import com.k0d4black.theforce.local.features.favoritecharacters.mappers.FavoriteCharacterMapper
-import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
+import com.k0d4black.theforce.local.favoritecharacters.mappers.FavoriteCharacterMapper
+import com.k0d4black.theforce.shared.characters.Character
+import com.k0d4black.theforce.shared.characters.FavoriteCharactersDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -23,7 +24,7 @@ class FavoriteCharactersLocalDataSource(
     private val favoriteCharacterMapper: FavoriteCharacterMapper
 ) : FavoriteCharactersDataSource {
 
-    override fun getAllFavorites(): Flow<List<FavoriteCharacter>> = flow {
+    override fun getAllFavorites(): Flow<List<Character>> = flow {
         val favoriteCharactersEntities = favoriteCharactersDao.getAll()
         val favoriteCharacters = favoriteCharactersEntities.map { favoriteCharacterEntity ->
             favoriteCharacterMapper.mapToDomain(favoriteCharacterEntity = favoriteCharacterEntity)
@@ -31,7 +32,7 @@ class FavoriteCharactersLocalDataSource(
         emit(favoriteCharacters)
     }
 
-    override fun getFavoriteByName(name: String): Flow<FavoriteCharacter> = flow {
+    override fun getFavoriteByName(name: String): Flow<Character> = flow {
         val favoriteCharacterEntity = favoriteCharactersDao.getByName(name = name)
         val favoriteCharacter = favoriteCharacterMapper.mapToDomain(
             favoriteCharacterEntity = favoriteCharacterEntity
@@ -49,7 +50,7 @@ class FavoriteCharactersLocalDataSource(
         emit(value = rowsAffected)
     }
 
-    override fun insertFavorite(favoriteCharacter: FavoriteCharacter): Flow<Long> = flow {
+    override fun insertFavorite(favoriteCharacter: Character): Flow<Long> = flow {
         val favoriteCharacterEntity = favoriteCharacterMapper.mapToDbEntity(
             favoriteCharacter = favoriteCharacter
         )

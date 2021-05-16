@@ -11,20 +11,19 @@
  * the License.
  *
  **/
-package com.k0d4black.theforce.local.features.favoritecharacters.data
+package com.k0d4black.theforce.shared.characters
 
-import com.k0d4black.theforce.shared.favorites.FavoriteCharacter
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteCharactersDataSource {
 
-    fun getAllFavorites(): Flow<List<FavoriteCharacter>>
+    fun getAllFavorites(): Flow<List<Character>>
 
-    fun getFavoriteByName(name: String): Flow<FavoriteCharacter>
+    fun getFavoriteByName(name: String): Flow<Character>
 
     fun deleteFavoriteByName(name: String): Flow<Int>
 
     fun deleteAllFavorites(): Flow<Int>
 
-    fun insertFavorite(favoriteCharacter: FavoriteCharacter): Flow<Long>
+    fun insertFavorite(favoriteCharacter: Character): Flow<Long>
 }

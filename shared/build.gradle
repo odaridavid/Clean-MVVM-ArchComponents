@@ -9,7 +9,8 @@ java {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutinesCore
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.googleTruth

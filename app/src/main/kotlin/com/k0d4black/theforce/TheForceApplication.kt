@@ -19,7 +19,8 @@ import com.k0d4black.theforce.feature.charactersearch.di.featureCharacterSearchM
 import com.k0d4black.theforce.feature.charactersearchresults.di.featureCharacterSearchResultsModule
 import com.k0d4black.theforce.feature.favoritecharacters.di.featureFavoritesModule
 import com.k0d4black.theforce.feature.main.di.featureMainModule
-import com.k0d4black.theforce.local.localModule
+import com.k0d4black.theforce.local.favoritecharacters.localFavoriteCharactersModule
+import com.k0d4black.theforce.local.localCoreModule
 import com.k0d4black.theforce.remote.core.remoteCoreModule
 import com.k0d4black.theforce.remote.films.remoteFilmsModule
 import com.k0d4black.theforce.remote.planet.remotePlanetModule
@@ -56,7 +57,8 @@ internal class TheForceApplication : Application() {
                 remoteFilmsModule,
                 remotePlanetModule,
                 remoteSpeciesModule,
-                localModule
+                localCoreModule,
+                localFavoriteCharactersModule
             )
         }
     }

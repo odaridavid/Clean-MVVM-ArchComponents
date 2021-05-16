@@ -15,8 +15,8 @@ package com.k0d4black.theforce.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.k0d4black.theforce.local.features.favoritecharacters.models.FavoriteCharacterEntity
-import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersDao
+import com.k0d4black.theforce.local.favoritecharacters.models.FavoriteCharacterEntity
+import com.k0d4black.theforce.local.favoritecharacters.data.FavoriteCharactersDao
 
 @Database(entities = [FavoriteCharacterEntity::class], version = 1, exportSchema = false)
 abstract class TheForceDatabase : RoomDatabase() {

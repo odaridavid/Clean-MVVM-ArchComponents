@@ -1,9 +1,9 @@
-package com.k0d4black.theforce.local.features.favoritecharacters
+package com.k0d4black.theforce.local.favoritecharacters
 
 import com.k0d4black.theforce.local.TheForceDatabase
-import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersDataSource
-import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersLocalDataSource
-import com.k0d4black.theforce.local.features.favoritecharacters.data.FavoriteCharactersDao
+import com.k0d4black.theforce.shared.characters.FavoriteCharactersDataSource
+import com.k0d4black.theforce.local.favoritecharacters.data.FavoriteCharactersLocalDataSource
+import com.k0d4black.theforce.local.favoritecharacters.data.FavoriteCharactersDao
 import org.koin.dsl.module
 
 val localFavoriteCharactersModule = module {
