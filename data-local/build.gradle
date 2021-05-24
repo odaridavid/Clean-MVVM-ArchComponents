@@ -62,4 +62,5 @@ dependencies {
     testImplementation testDependencies.androidxJunit
     testImplementation testDependencies.coroutinesTest
     testImplementation testDependencies.robolectric
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
