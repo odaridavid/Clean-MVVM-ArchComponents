@@ -16,7 +16,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-android-extensions")
     id("kotlin-kapt")
-    id("jacoco-android")
+    id ("com.hiya.jacoco-android")
     id("com.mikepenz.aboutlibraries.plugin")
     id("com.google.firebase.crashlytics")
 }
@@ -39,8 +39,8 @@ jacocoAndroidUnitTestReport {
 
 android {
 
-    compileSdkVersion compileSdk
-    buildToolsVersion buildTools
+    compileSdkVersion rootProject.ext.compileSdk
+    buildToolsVersion rootProject.ext.buildTools
 
 //    signingConfigs {
 //        release {
@@ -53,7 +53,7 @@ android {
 
     defaultConfig {
         applicationId "com.k0d4black.theforce"
-        minSdkVersion minSdk
+        minSdkVersion rootProject.ext.minSdk
         targetSdkVersion targetSdk
         versionCode versionCodeMajor * 10000 + versionCodeMinor * 100 + versionCodePatch
         versionName versionName

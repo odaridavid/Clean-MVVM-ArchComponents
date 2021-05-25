@@ -17,14 +17,18 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath 'com.google.gms:google-services:4.3.3'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
+//        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.4'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.1.1'
         classpath "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin:8.1.2"
+        classpath "com.hiya:jacoco-android:0.2"
     }
 }
 
