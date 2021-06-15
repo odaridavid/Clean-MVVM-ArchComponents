@@ -22,6 +22,7 @@ android:
 #    -in secrets.tar.enc -out secrets.tar -d
 #  - tar xvf secrets.tar
 script:
+  - yes | ~/Android/Sdk/tools/bin/sdkmanager --licenses
   - "./gradlew build jacocoTestReport assembleAndroidTest"
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
