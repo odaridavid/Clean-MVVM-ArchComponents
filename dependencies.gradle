@@ -4,10 +4,10 @@ ext {
     kotlinVersion = '1.5.10'
 
     // Android Core
-    compileSdk = 29
-    targetSdk = 29
+    compileSdk = 30
+    targetSdk = 30
     minSdk = 21
-    buildTools = "29.0.2"
+    buildTools = "30.0.2"
 
     // App Versioning
     versionCodeMajor = 2

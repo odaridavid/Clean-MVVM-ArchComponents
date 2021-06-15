@@ -8,8 +8,8 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-29.0.2
-    - android-29
+    - build-tools-30.0.2
+    - android-30
     - extra
     - "$ANDROID_TARGET"
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
