@@ -8,8 +8,8 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-29.0.2
-    - android-29
+    - build-tools-30.0.2
+    - android-30
     - extra
     - "$ANDROID_TARGET"
     - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
@@ -22,6 +22,7 @@ android:
 #    -in secrets.tar.enc -out secrets.tar -d
 #  - tar xvf secrets.tar
 script:
+  - yes | sdkmanager "platforms;android-30"
   - "./gradlew build jacocoTestReport assembleAndroidTest"
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-audio -no-window &
